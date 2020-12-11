@@ -13,7 +13,7 @@ namespace arduino {
 
 class RemoteSPI : public HardwareSPI{
   public:
-    RemoteSPI(Stream &stream){
+    RemoteSPI(Stream *stream){
         service = new HardwareService(stream);
     }
     
@@ -37,7 +37,7 @@ class RemoteSPI : public HardwareSPI{
         service->send(SpiTransfer);    
         service->send(count);   
         service->send(buf, count);   
-        return service->receive16();    
+        service->receive16();    
     }
 
     void usingInterrupt(int interruptNumber) {
@@ -55,9 +55,9 @@ class RemoteSPI : public HardwareSPI{
     void beginTransaction(SPISettings settings){
         service->send(SpiBeginTransaction);    
         //uint32_t clock, uint8_t bitOrder, uint8_t dataMode
-        service->send(settings.clock);    
-        service->send(settings.bitOrder);    
-        service->send(settings.dataMode);        
+        service->send((uint32_t)settings.getClockFreq());    
+        service->send((uint8_t)settings.getBitOrder());    
+        service->send((uint8_t)settings.getDataMode());        
         service->flush();
     }
 

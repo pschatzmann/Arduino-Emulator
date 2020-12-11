@@ -24,5 +24,4 @@
 #include "ArduinoAPI.h"
 #include "ArdStdio.h"
 #include "ArduinoLogger.h"
-
 #endif

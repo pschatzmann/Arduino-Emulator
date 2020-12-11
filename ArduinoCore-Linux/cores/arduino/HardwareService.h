@@ -23,6 +23,10 @@ enum HWCalls {
     I2cRequestFrom2,
     I2cOnReceive,
     I2cOnRequest,
+    I2cWrite,
+    I2cAvailable,
+    I2cRead,
+    I2cPeek,
     SpiTransfer,
     SpiTransfer16,
     SpiUsingInterrupt,
@@ -39,6 +43,10 @@ enum HWCalls {
     GpioAnalogRead,
     GpioAnalogReference,
     GpioAnalogWrite,
+    GpioTone,
+    GpioNoTone,
+    GpioPulseIn,
+    GpioPulseInLong,
     SerialWrite,
     SerialRead,
     SerialAvailable,
@@ -68,12 +76,12 @@ class HardwareService {
     HardwareService(){
     }
     
-    HardwareService(Stream &str){
-        setStream(str);
+    HardwareService(void *str){
+        setStream((Stream*)str);
     }
     
-    void setStream(Stream &str){
-        io = &str;
+    void setStream(Stream *str){
+        io = str;
     }
     
     void send(HWCalls call){
@@ -89,6 +97,10 @@ class HardwareService {
     }
 
     void send(uint32_t data){
+        io->write((uint8_t*)&data,sizeof(data));
+    }
+
+    void send(int data){
         io->write((uint8_t*)&data,sizeof(data));
     }
 
@@ -114,6 +126,18 @@ class HardwareService {
         return result;
     }
 
+    uint32_t receive32(){
+        uint16_t result;
+        io->readBytes((char*)&result, sizeof(uint32_t));
+        return result;
+    }
+    
+    uint64_t receive64(){
+        uint16_t result;
+        io->readBytes((char*)&result, sizeof(uint64_t));
+        return result;
+    }
+    
     uint8_t receive8(){
         uint8_t result;
         io->readBytes((char*)&result, sizeof(uint8_t));

@@ -43,6 +43,7 @@ enum HWCalls {
     SerialRead,
     SerialAvailable,
     SerialPeek,
+    SerialFlush,
     I2sSetup,
     I2sBegin3,
     I2sBegin2,
@@ -67,6 +68,10 @@ class HardwareService {
     HardwareService(){
     }
     
+    HardwareService(Stream &str){
+        setStream(str);
+    }
+    
     void setStream(Stream &str){
         io = &str;
     }
@@ -87,6 +92,10 @@ class HardwareService {
         io->write((uint8_t*)&data,sizeof(data));
     }
 
+    void send(int data){
+        io->write((uint8_t*)&data,sizeof(data));
+    }
+
     void send(bool data){
         io->write((uint8_t*)&data,sizeof(data));
     }
@@ -97,6 +106,10 @@ class HardwareService {
 
     void send(void *data, size_t len){
         io->write((uint8_t*)data, len);
+    }
+    
+    void flush() {
+        io->flush();
     }
     
     uint16_t receive16(){

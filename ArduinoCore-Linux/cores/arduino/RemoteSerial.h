@@ -17,7 +17,7 @@ class RemoteSerialImpl : public Stream {
   public:
     RemoteSerialImpl(Stream &stream, uint8_t no){
         this->no = no;
-        service = new HardwareService(stream);
+        service = new HardwareService(&stream);
     }
     
     virtual int available(){

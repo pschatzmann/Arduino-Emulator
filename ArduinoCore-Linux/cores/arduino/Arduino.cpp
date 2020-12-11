@@ -6,9 +6,11 @@
 
 #include "Arduino.h"
 #include "Common.h"
+#include "Stream.h"
 #include "PluggableUSB.h"
 #include "RemoteSerial.h"
 #include "Hardware.h"
+#include "HardwareSetup.h"
 #include "WiFi.h"
 #include "WiFiClient.h"
 #include "PluggableUSB.h"
@@ -16,6 +18,29 @@
 #include "ArduinoLogger.h"
 #include "ArdStdio.h"
 
+
+namespace arduino {
+// Support for logging
+ArduinoLogger Logger;
+
+// Global Instances
+StdioDevice Serial;
+WiFiClient wifi;
+HardwareImpl Hardware;
+HardwareSetupImpl HardwareSetup;
+
+WifiMock WiFi;
+
+RemoteSerialImpl RemoteSerial(wifi,0);
+RemoteSerialImpl RemoteSerial1(wifi,1);
+RemoteSerialImpl RemoteSerial2(wifi,2);
+
+//static PluggableUSB_ obj;
+PluggableUSB_::PluggableUSB_(){}
+
+}
+
+    
 // sleep ms milliseconds
 void delay(unsigned long ms){
     std::this_thread::sleep_for(std::chrono::milliseconds(ms));    
@@ -55,24 +80,34 @@ unsigned long micros(void){
     return now.time_since_epoch().count();
 }
 
-
-namespace arduino {
-
-// Support for logging
-ArduinoLogger Logger;
-
-// Global Instances
-StdioDevice Serial;
-WiFiClient wifi;
-HardwareImpl Hardware;
-WifiMock WiFi;
-
-RemoteSerialImpl RemoteSerial(wifi,0);
-RemoteSerialImpl RemoteSerial1(wifi,1);
-RemoteSerialImpl RemoteSerial2(wifi,2);
-
-//static PluggableUSB_ obj;
-PluggableUSB_::PluggableUSB_(){}
-
-    
+void pinMode(pin_size_t pinNumber, PinMode pinMode){
+    Hardware.gpio->pinMode(pinNumber,pinMode);
 }
+void digitalWrite(pin_size_t pinNumber, PinStatus status) {
+    Hardware.gpio->digitalWrite(pinNumber,status);    
+}
+PinStatus digitalRead(pin_size_t pinNumber) {
+    return Hardware.gpio->digitalRead(pinNumber);
+}
+int analogRead(pin_size_t pinNumber){
+    return Hardware.gpio->analogRead(pinNumber);    
+}
+void analogReference(uint8_t mode){
+    Hardware.gpio->analogReference(mode);       
+}
+void analogWrite(pin_size_t pinNumber, int value) {
+    Hardware.gpio->analogWrite(pinNumber,value);        
+}
+void tone(uint8_t pinNumber, unsigned int frequency, unsigned long duration) {
+    Hardware.gpio->tone(pinNumber,frequency,duration);            
+}
+void noTone(uint8_t pinNumber) {
+    Hardware.gpio->noTone(pinNumber);            
+}
+unsigned long pulseIn(uint8_t pinNumber, uint8_t state, unsigned long timeout){
+    return Hardware.gpio->pulseIn(pinNumber, state, timeout);                
+}
+unsigned long pulseInLong(uint8_t pinNumber, uint8_t state, unsigned long timeout){
+    return Hardware.gpio->pulseInLong(pinNumber, state, timeout);                
+}
+

@@ -2,11 +2,12 @@
 #define REMOTEI2C_H
 
 #include "HardwareI2C.h"
+#include "HardwareService.h"
 
 namespace arduino {
 
-void(*)(int) I2ConReceive;
-void(*)(void) I2ConRequest;
+//void(*)(int) I2ConReceive;
+//void(*)(void) I2ConRequest;
     
 
 class RemoteI2C : public HardwareI2C {
@@ -72,13 +73,13 @@ class RemoteI2C : public HardwareI2C {
         return service->receive8();   
     }
 
-    virtual void onReceive(void(*)(int)cb){
-        I2ConReceive = cb;
-    }
+    //virtual void onReceive(void(*)(int)cb){
+      //  I2ConReceive = cb;
+    //}
     
-    virtual void onRequest(void(*)(void)cb){
-        I2ConRequest = cb;    
-    }
+    //virtual void onRequest(void(*)(void)cb){
+      //  I2ConRequest = cb;    
+    //}
     
   protected:
     HardwareService *service;            

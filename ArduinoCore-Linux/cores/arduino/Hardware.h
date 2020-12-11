@@ -4,22 +4,21 @@
 namespace arduino {
 
 // forware declarations for references
-class HardwareI2C;
+class HardwareI2CEx;
 class HardwareSPI;
 class HardwareGPIO;
-class I2SClass;
+//class I2SClass;
     
 /**
  * Class which is used to represent the actual implementation which is used to drive the
  * specific interface
  **/
-class HardwareImpl {
-    public:
-        HardwareI2C *i2c;
+struct HardwareImpl {
+    public:    
+        HardwareI2CEx *i2c;
         HardwareSPI *spi;
         HardwareGPIO *gpio;
-        I2SClass *i2s;
-        
+        //I2SClass *i2s;        
 };
 
 extern HardwareImpl Hardware;

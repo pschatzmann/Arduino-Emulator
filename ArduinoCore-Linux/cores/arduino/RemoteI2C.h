@@ -1,18 +1,18 @@
 #ifndef REMOTEI2C_H
 #define REMOTEI2C_H
 
-#include "HardwareI2C.h"
+#include "HardwareI2CEx.h"
 #include "HardwareService.h"
+
 
 namespace arduino {
 
-void(*)(int) I2ConReceive;
-void(*)(void) I2ConRequest;
+// forware declaration of stream
+class Stream;
     
-
-class RemoteI2C : public HardwareI2C {
+class RemoteI2C : public HardwareI2CEx {
   public:
-    RemoteI2C(Stream &stream){
+    RemoteI2C(void *stream){
         service = new HardwareService(stream);
     }
     
@@ -73,12 +73,40 @@ class RemoteI2C : public HardwareI2C {
         return service->receive8();   
     }
 
-    virtual void onReceive(void(*)(int)cb){
-        I2ConReceive = cb;
-    }
+    //virtual void onReceive(void(*)(int)cb){
+      //  I2ConReceive = cb;
+    //}
     
-    virtual void onRequest(void(*)(void)cb){
-        I2ConRequest = cb;    
+    //virtual void onRequest(void(*)(void)cb){
+      //  I2ConRequest = cb;    
+    //}
+     virtual void onReceive(void(*)(int)) {
+
+     }
+     virtual void onRequest(void(*)(void)) {
+
+     }
+
+
+    size_t write(uint8_t c) {
+        service->send(I2cWrite);
+        service->send(c);
+        return service->receive16();   
+    }
+
+    int available(){
+        service->send(I2cAvailable);
+        return service->receive16();   
+    }
+
+    int read() {
+        service->send(I2cRead);
+        return service->receive16();   
+    }
+
+    int peek() {
+        service->send(I2cPeek);
+        return service->receive16();   
     }
     
   protected:

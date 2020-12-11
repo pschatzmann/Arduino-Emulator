@@ -39,6 +39,8 @@
 #include <Udp.h>
 #include <RingBufferExt.h>
 
+namespace arduino {
+
 class WiFiUDP : public UDP {
 private:
   int udp_server;
@@ -74,4 +76,5 @@ public:
   uint16_t remotePort();
 };
 
+}
 #endif /* _WIFIUDP_H_ */

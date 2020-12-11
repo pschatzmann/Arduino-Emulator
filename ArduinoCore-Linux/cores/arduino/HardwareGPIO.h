@@ -11,6 +11,8 @@ namespace arduino {
  **/
 class HardwareGPIO {
   public:
+    HardwareGPIO(){};
+    virtual ~HardwareGPIO(){};
     virtual void pinMode(pin_size_t pinNumber, PinMode pinMode) = 0;
     virtual void digitalWrite(pin_size_t pinNumber, PinStatus status) = 0;
     virtual PinStatus digitalRead(pin_size_t pinNumber) = 0;

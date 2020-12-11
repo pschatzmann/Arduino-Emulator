@@ -26,6 +26,9 @@
 #undef write
 #undef read
 
+namespace arduino {
+
+
 WiFiUDP::WiFiUDP()
 : udp_server(-1)
 , server_port(0)
@@ -280,4 +283,7 @@ IPAddress WiFiUDP::remoteIP(){
 
 uint16_t WiFiUDP::remotePort(){
   return remote_port;
+}
+    
+    
 }

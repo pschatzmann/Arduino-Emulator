@@ -8,7 +8,7 @@ namespace arduino {
 
 class RemoteGPIO : public HardwareGPIO {
   public:
-    RemoteGPIO(Stream stream){
+    RemoteGPIO(Stream *stream){
         service = new HardwareService(stream);
     }
     
@@ -19,7 +19,7 @@ class RemoteGPIO : public HardwareGPIO {
     void pinMode(pin_size_t pinNumber, PinMode pinMode){
         service->send(GpioPinMode);
         service->send(pinNumber);  
-        service->send((int16_t)pinMode
+        service->send((int16_t)pinMode);
         service->flush();
     }
 
@@ -54,11 +54,45 @@ class RemoteGPIO : public HardwareGPIO {
         service->send(value);    
         service->flush();
     }
+    
+    virtual void tone(uint8_t pinNumber, unsigned int frequency, unsigned long duration = 0) {
+        service->send(GpioTone);
+        service->send(pinNumber);
+        service->send(frequency);    
+        service->send(duration);    
+        service->flush();   
+    }
+
+    virtual void noTone(uint8_t pinNumber) {
+        service->send(GpioNoTone);
+        service->send(pinNumber);
+        service->flush();    
+    }
+    
+    virtual unsigned long pulseIn(uint8_t pinNumber, uint8_t state, unsigned long timeout = 1000000L) {
+        service->send(GpioPulseIn);
+        service->send(pinNumber);
+        service->send(state);
+        service->send(timeout);
+        return service->receive64();           
+    }
+    
+    virtual unsigned long pulseInLong(uint8_t pinNumber, uint8_t state, unsigned long timeout = 1000000L) {
+        service->send(GpioPulseInLong);
+        service->send(pinNumber);
+        service->send(state);
+        service->send(timeout);
+        return service->receive64();   
+    }
+ 
+    
   protected:
     HardwareService *service;            
     
 };
                       
-}     
+}   
+                      
+#endif
                       
               

@@ -7,17 +7,18 @@
 #include "Arduino.h"
 #include "Common.h"
 #include "PluggableUSB.h"
-#include "Serial.h"
 #include "RemoteSerial.h"
 #include "Hardware.h"
+#include "HardwareSetup.h"
 #include "WiFi.h"
 #include "WiFiClient.h"
 #include "PluggableUSB.h"
 #include "deprecated-avr-comp/avr/dtostrf.h"
 #include "ArduinoLogger.h"
+#include "ArdStdio.h"
 
 // sleep ms milliseconds
-void delay(unsigned ms){
+void delay(unsigned long ms){
     std::this_thread::sleep_for(std::chrono::milliseconds(ms));    
 }
 
@@ -32,6 +33,7 @@ char *dtostrf(double val, signed char width, unsigned char prec, char *sout){
     return sout;
 }
 
+// Returns the number of milliseconds passed since epich
 unsigned long millis() {
     using namespace std::chrono;
     // Get current time with precision of milliseconds
@@ -43,6 +45,7 @@ unsigned long millis() {
 
 }
 
+// Returns the micros of milliseconds passed since epich
 unsigned long micros(void){
     using namespace std::chrono;
     // Get current time with precision of milliseconds
@@ -54,19 +57,18 @@ unsigned long micros(void){
 }
 
 
-
-
 namespace arduino {
 
 // Support for logging
 ArduinoLogger Logger;
 
- 
 // Global Instances
+StdioDevice Serial;
 WiFiClient wifi;
 HardwareImpl Hardware;
+HardwareSetupImpl HardwareSetup;
+
 WifiMock WiFi;
-SerialDev Serial;
 
 RemoteSerialImpl RemoteSerial(wifi,0);
 RemoteSerialImpl RemoteSerial1(wifi,1);
