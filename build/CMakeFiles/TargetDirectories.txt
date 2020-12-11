@@ -1,3 +1,0 @@
-/home/xeus-cling/Arduino/Arduino-Emulator/build/CMakeFiles/rebuild_cache.dir
-/home/xeus-cling/Arduino/Arduino-Emulator/build/CMakeFiles/arduino_emulator.dir
-/home/xeus-cling/Arduino/Arduino-Emulator/build/CMakeFiles/edit_cache.dir
