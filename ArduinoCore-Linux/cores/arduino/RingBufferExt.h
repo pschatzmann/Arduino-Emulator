@@ -47,6 +47,10 @@ class RingBufferExt {
             return result;
         }
     
+        int read(char *str, int len){
+            return read((uint8_t *)str, len);
+        }
+    
         int read(uint8_t *str, int len){
             for (int j=0;j<len;j++){
                 int current = read();
@@ -80,6 +84,10 @@ class RingBufferExt {
                 } 
             }
             return result;
+        }
+
+        size_t write(char *str, int len) {
+            return write((uint8_t *)str,len);
         }
 
         size_t write(uint8_t *str, int len) {
