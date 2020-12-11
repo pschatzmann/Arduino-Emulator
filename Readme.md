@@ -16,3 +16,4 @@ I have a __first working prototype__ ready but naturally there is still a lot to
 - [Setup](01-Setup.ipynb)
 - [Introduction into some Basic Commands](02-BasicCommands.ipynb)
 - [The Network Stack](03-Network.ipynb)
+- [Using Pins](04-Pins.ipynb)
