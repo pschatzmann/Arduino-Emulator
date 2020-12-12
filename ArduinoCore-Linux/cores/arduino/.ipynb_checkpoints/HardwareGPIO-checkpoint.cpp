@@ -1,9 +1,12 @@
 
 #include "Common.h"
 #include "Hardware.h"
+#include "HardwareGPIO.h"
+#include "HardwareService.h"
 
 /**
- * We support different implementations for GPIO
+ * We support different implementations for GPIO. These are the public methods needed by
+ * Common.h
  **/
 namespace arduino {
 
@@ -30,5 +33,29 @@ void analogReference(uint8_t mode){
 void analogWrite(pin_size_t pinNumber, int value){
     Hardware.gpio->analogWrite(pinNumber, value);
 }
+    
+
+// Generates a square wave of the specified frequency (and 50% duty cycle) on a pin
+void tone(uint8_t pinNumber, unsigned int frequency, unsigned long duration = 0){
+    Hardware.gpio->tone(pinNumber, frequency, duration);
+    
+}
+
+// Stops the generation of a square wave triggered by tone() 
+void noTone(uint8_t pinNumber){
+    Hardware.gpio->noTone(pinNumber);    
+}
+    
+/// Reads a pulse (either HIGH or LOW) on a pin
+unsigned long pulseIn(uint8_t pinNumber, uint8_t state, unsigned long timeout = 1000000L){
+    return Hardware.gpio->pulseIn(pinNumber, state, timeout);    
+    
+}
+    
+/// Reads a pulse (either HIGH or LOW) on a pin
+unsigned long pulseInLong(uint8_t pinNumber, uint8_t state, unsigned long timeout = 1000000L){
+    return Hardware.gpio->pulseInLong(pinNumber, state, timeout);        
+}
+    
     
 }

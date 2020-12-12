@@ -17,8 +17,13 @@
 #ifndef Arduino_h
 #define Arduino_h
 
+#ifndef HOST
+#define HOST
+#endif
+
 #include "ArduinoAPI.h"
-#include "Serial.h"
-#include "WiFi.h"
+#include "ArdStdio.h"
+#include "ArduinoLogger.h"
+#include "HardwareSetup.h"
 
 #endif

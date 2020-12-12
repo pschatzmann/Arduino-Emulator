@@ -35,9 +35,10 @@
 #ifndef _WIFIUDP_H_
 #define _WIFIUDP_H_
 
-#include <Arduino.h>
+#include <IPAddress.h>
 #include <Udp.h>
 #include <RingBufferExt.h>
+#include "ArduinoLogger.h"
 
 namespace arduino {
 

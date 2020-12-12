@@ -15,13 +15,14 @@ class HardwareGPIO;
  **/
 struct HardwareImpl {
     public:    
+        HardwareGPIO *gpio;
         HardwareI2CEx *i2c;
         HardwareSPI *spi;
-        HardwareGPIO *gpio;
         //I2SClass *i2s;        
 };
 
 extern HardwareImpl Hardware;
+    
 
 }
 

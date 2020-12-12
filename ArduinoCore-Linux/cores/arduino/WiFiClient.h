@@ -8,7 +8,6 @@
 
 namespace arduino {
 
-const char *WIFICLIENT = "WiFiClient";
     
 class WiFiClient : public Client {
     public:
@@ -163,6 +162,7 @@ class WiFiClient : public Client {
         }
 
     protected:
+        const char *WIFICLIENT = "WiFiClient";
         SocketImpl sock;
         int bufferSize;
         RingBufferExt readBuffer;

@@ -17,71 +17,75 @@ class RemoteGPIO : public HardwareGPIO {
     }
     
     void pinMode(pin_size_t pinNumber, PinMode pinMode){
-        service->send(GpioPinMode);
-        service->send(pinNumber);  
-        service->send((int16_t)pinMode);
+        service->send((uint16_t)GpioPinMode);
+        service->send((int8_t)pinNumber);  
+        service->send((int8_t)pinMode);
         service->flush();
     }
 
     void digitalWrite(pin_size_t pinNumber, PinStatus status){
-        service->send(GpioDigitalWrite);
-        service->send(pinNumber);  
-        service->send((int16_t)status);  
+        service->send((uint16_t)GpioDigitalWrite);
+        service->send((uint8_t)pinNumber);  
+        service->send((uint8_t)status);  
         service->flush();
     }
 
     PinStatus digitalRead(pin_size_t pinNumber){
-        service->send(GpioDigitalRead);
-        service->send(pinNumber);  
-        return (PinStatus) service->receive16();
+        service->send((uint16_t)GpioDigitalRead);
+        service->send((uint8_t)pinNumber);  
+        service->flush();
+        return (PinStatus) service->receive8();
     }
 
     int analogRead(pin_size_t pinNumber){
-        service->send(GpioAnalogRead);
-        service->send(pinNumber);  
+        service->send((uint16_t)GpioAnalogRead);
+        service->send((uint8_t)pinNumber);  
+        service->flush();
         return service->receive16();   
     }
 
     void analogReference(uint8_t mode){
-        service->send(GpioAnalogReference);
+        service->send((uint16_t)GpioAnalogReference);
         service->send(mode);    
         service->flush();
     }
 
     void analogWrite(pin_size_t pinNumber, int value){
-        service->send(GpioAnalogWrite);
-        service->send(pinNumber);
+        service->send((uint16_t)GpioAnalogWrite);
+        service->send((uint8_t)pinNumber);  
         service->send(value);    
         service->flush();
     }
     
     virtual void tone(uint8_t pinNumber, unsigned int frequency, unsigned long duration = 0) {
-        service->send(GpioTone);
-        service->send(pinNumber);
+        service->send((uint16_t)GpioTone);
+        service->send((uint8_t)pinNumber);  
         service->send(frequency);    
         service->send(duration);    
         service->flush();   
     }
 
     virtual void noTone(uint8_t pinNumber) {
-        service->send(GpioNoTone);
-        service->send(pinNumber);
+        service->send((uint16_t)GpioNoTone);
+        service->send((uint8_t)pinNumber);  
         service->flush();    
     }
     
     virtual unsigned long pulseIn(uint8_t pinNumber, uint8_t state, unsigned long timeout = 1000000L) {
-        service->send(GpioPulseIn);
-        service->send(pinNumber);
+        service->send((uint16_t)GpioPulseIn);
+        service->send((uint8_t)pinNumber);  
         service->send(state);
         service->send(timeout);
+        service->flush();
         return service->receive64();           
     }
     
     virtual unsigned long pulseInLong(uint8_t pinNumber, uint8_t state, unsigned long timeout = 1000000L) {
-        service->send(GpioPulseInLong);
-        service->send(pinNumber);
+        service->send((uint16_t)GpioPulseInLong);
+        service->send((uint8_t)pinNumber);  
         service->send(state);
         service->send(timeout);
+        service->flush();
         return service->receive64();   
     }
  

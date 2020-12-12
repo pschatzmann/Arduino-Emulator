@@ -5,7 +5,8 @@
 #include "HardwareService.h"
 
 /**
- * We support different implementations for GPIO
+ * We support different implementations for GPIO. These are the implementations for the public
+ * methods defined by Common.h
  **/
 namespace arduino {
 

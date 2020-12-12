@@ -18,7 +18,7 @@ include_directories("${CMAKE_SOURCE_DIR}/ArduinoCore-API/api"
 file(GLOB HEADER_LIST CONFIGURE_DEPENDS "${PROJECT_SOURCE_DIR}/ArduinoCore-API/api/*.h")
 file(GLOB SRC_LIST CONFIGURE_DEPENDS "${PROJECT_SOURCE_DIR}/ArduinoCore-API/api/*.cpp" "${PROJECT_SOURCE_DIR}/ArduinoCore-Linux/cores/arduino/*.cpp")
 
-# Make an dynamic library 
+# Make an automatic library - will be static or dynamic based on user setting
 add_library(arduino_emulator SHARED ${SRC_LIST} ${HEADER_LIST})
 
 # All users of this library will need at least C++11

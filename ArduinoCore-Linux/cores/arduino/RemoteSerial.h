@@ -73,7 +73,7 @@ class RemoteSerialImpl : public Stream {
     virtual size_t write(uint8_t *str, size_t len){
         flush();
         service->send(SerialWrite);
-        service->send(len);
+        service->send((uint64_t)len);
         service->send(str, len);
         return service->receive16();
     }
