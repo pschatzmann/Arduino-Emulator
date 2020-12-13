@@ -23,14 +23,14 @@ class RemoteSerialImpl : public Stream {
     virtual void begin(unsigned long baudrate) {
         service->send(SerialBegin);
         service->send(no);
-        service->send(baudrate);
+        service->send((uint64_t)baudrate);
         service->flush();
     }
 
     virtual void begin(unsigned long baudrate, uint16_t config) {    
         service->send(SerialBegin);
         service->send(no);
-        service->send(baudrate);
+        service->send((uint64_t)baudrate);
         service->flush();
     }
 

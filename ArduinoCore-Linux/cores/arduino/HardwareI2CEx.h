@@ -16,8 +16,8 @@ class HardwareI2CEx : HardwareI2C {
     virtual void beginTransmission(uint8_t address);
     virtual uint8_t endTransmission(bool stopBit);
     virtual uint8_t endTransmission(void);
-    virtual uint8_t requestFrom(uint8_t address, size_t len, bool stopBit);
-    virtual uint8_t requestFrom(uint8_t address, size_t len);
+    virtual size_t requestFrom(uint8_t address, size_t len, bool stopBit);
+    virtual size_t requestFrom(uint8_t address, size_t len);
     virtual void onReceive(void(*)(int)) = 0;
     virtual void onRequest(void(*)(void)) = 0;
 };

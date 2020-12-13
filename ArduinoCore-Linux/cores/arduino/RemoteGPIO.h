@@ -61,7 +61,7 @@ class RemoteGPIO : public HardwareGPIO {
         service->send((uint16_t)GpioTone);
         service->send((uint8_t)pinNumber);  
         service->send(frequency);    
-        service->send(duration);    
+        service->send((uint64_t)duration);
         service->flush();   
     }
 
@@ -75,7 +75,7 @@ class RemoteGPIO : public HardwareGPIO {
         service->send((uint16_t)GpioPulseIn);
         service->send((uint8_t)pinNumber);  
         service->send(state);
-        service->send(timeout);
+        service->send((uint64_t)timeout);
         service->flush();
         return service->receive64();           
     }
@@ -84,7 +84,7 @@ class RemoteGPIO : public HardwareGPIO {
         service->send((uint16_t)GpioPulseInLong);
         service->send((uint8_t)pinNumber);  
         service->send(state);
-        service->send(timeout);
+        service->send((uint64_t)timeout);
         service->flush();
         return service->receive64();   
     }

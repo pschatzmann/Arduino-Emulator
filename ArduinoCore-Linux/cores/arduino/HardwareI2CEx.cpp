@@ -36,12 +36,12 @@ uint8_t HardwareI2CEx::endTransmission(void){
     return Hardware.i2c->endTransmission();
 }
 
-uint8_t HardwareI2CEx::requestFrom(uint8_t address, size_t len, bool stopBit){
+size_t HardwareI2CEx::requestFrom(uint8_t address, size_t len, bool stopBit){
     return Hardware.i2c->requestFrom(address,len,stopBit);
 
 }
     
-uint8_t HardwareI2CEx::requestFrom(uint8_t address, size_t len){
+size_t HardwareI2CEx::requestFrom(uint8_t address, size_t len){
     return Hardware.i2c->requestFrom(address,len);
 }
 
