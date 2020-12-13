@@ -17,23 +17,17 @@
 #include "deprecated-avr-comp/avr/dtostrf.h"
 #include "ArduinoLogger.h"
 #include "ArdStdio.h"
-
+#include "Serial.h"
 
 namespace arduino {
-// Support for logging
-ArduinoLogger Logger;
 
-// Global Instances
-StdioDevice Serial;
-WiFiClient wifi;
-HardwareImpl Hardware;
-HardwareSetupImpl HardwareSetup;
+ArduinoLogger Logger;  // Support for logging
+WifiMock WiFi;         // So that we can use the WiFi
+StdioDevice Serial;    // output to screen
+SerialImpl Serial1("/dev/ttyACM0");    // output to serial port
+HardwareImpl Hardware; // implementation for gpio, spi, i2c
+HardwareSetupImpl HardwareSetup; // setup for implementation
 
-WifiMock WiFi;
-
-RemoteSerialImpl RemoteSerial(wifi,0);
-RemoteSerialImpl RemoteSerial1(wifi,1);
-RemoteSerialImpl RemoteSerial2(wifi,2);
 
 //static PluggableUSB_ obj;
 PluggableUSB_::PluggableUSB_(){}

@@ -6,6 +6,7 @@
 
 #include "Arduino.h"
 #include "Common.h"
+#include "Stream.h"
 #include "PluggableUSB.h"
 #include "RemoteSerial.h"
 #include "Hardware.h"
@@ -16,7 +17,29 @@
 #include "deprecated-avr-comp/avr/dtostrf.h"
 #include "ArduinoLogger.h"
 #include "ArdStdio.h"
+#include "Serial.h"
 
+namespace arduino {
+
+ArduinoLogger Logger;  // Support for logging
+StdioDevice Serial;    // output to screen
+SerialImpl Serial1;    // output to serial port
+RemoteSerialImpl RemoteSerial(wifi,0);  // Serial port on remote device
+RemoteSerialImpl RemoteSerial1(wifi,1); // Serial port on remote device
+RemoteSerialImpl RemoteSerial2(wifi,2); // Serial port on remote device
+WiFiClient wifi;       // wifi client
+WifiMock WiFi;         // So that we can use the WiFi
+HardwareImpl Hardware; // implementation for gpio, spi, i2c
+HardwareSetupImpl HardwareSetup; // setup for implementation
+
+
+
+//static PluggableUSB_ obj;
+PluggableUSB_::PluggableUSB_(){}
+
+}
+
+    
 // sleep ms milliseconds
 void delay(unsigned long ms){
     std::this_thread::sleep_for(std::chrono::milliseconds(ms));    
@@ -56,26 +79,34 @@ unsigned long micros(void){
     return now.time_since_epoch().count();
 }
 
-
-namespace arduino {
-
-// Support for logging
-ArduinoLogger Logger;
-
-// Global Instances
-StdioDevice Serial;
-WiFiClient wifi;
-HardwareImpl Hardware;
-HardwareSetupImpl HardwareSetup;
-
-WifiMock WiFi;
-
-RemoteSerialImpl RemoteSerial(wifi,0);
-RemoteSerialImpl RemoteSerial1(wifi,1);
-RemoteSerialImpl RemoteSerial2(wifi,2);
-
-//static PluggableUSB_ obj;
-PluggableUSB_::PluggableUSB_(){}
-
-    
+void pinMode(pin_size_t pinNumber, PinMode pinMode){
+    Hardware.gpio->pinMode(pinNumber,pinMode);
 }
+void digitalWrite(pin_size_t pinNumber, PinStatus status) {
+    Hardware.gpio->digitalWrite(pinNumber,status);    
+}
+PinStatus digitalRead(pin_size_t pinNumber) {
+    return Hardware.gpio->digitalRead(pinNumber);
+}
+int analogRead(pin_size_t pinNumber){
+    return Hardware.gpio->analogRead(pinNumber);    
+}
+void analogReference(uint8_t mode){
+    Hardware.gpio->analogReference(mode);       
+}
+void analogWrite(pin_size_t pinNumber, int value) {
+    Hardware.gpio->analogWrite(pinNumber,value);        
+}
+void tone(uint8_t pinNumber, unsigned int frequency, unsigned long duration) {
+    Hardware.gpio->tone(pinNumber,frequency,duration);            
+}
+void noTone(uint8_t pinNumber) {
+    Hardware.gpio->noTone(pinNumber);            
+}
+unsigned long pulseIn(uint8_t pinNumber, uint8_t state, unsigned long timeout){
+    return Hardware.gpio->pulseIn(pinNumber, state, timeout);                
+}
+unsigned long pulseInLong(uint8_t pinNumber, uint8_t state, unsigned long timeout){
+    return Hardware.gpio->pulseInLong(pinNumber, state, timeout);                
+}
+

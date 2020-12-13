@@ -13,7 +13,7 @@ namespace arduino {
 
 class RemoteSPI : public HardwareSPI{
   public:
-    RemoteSPI(Stream &stream){
+    RemoteSPI(Stream *stream){
         service = new HardwareService(stream);
     }
     
@@ -22,21 +22,24 @@ class RemoteSPI : public HardwareSPI{
     }
 
     uint8_t transfer(uint8_t data) {
-        service->send(SpiTransfer);    
+        service->send(SpiTransfer8);    
         service->send(data);   
+        service->flush();
         return service->receive8();    
     }
 
     uint16_t transfer16(uint16_t data) {
         service->send(SpiTransfer16);    
         service->send(data);   
+        service->flush();
         return service->receive16();    
     }
 
     void transfer(void *buf, size_t count) {
         service->send(SpiTransfer);    
-        service->send(count);   
+        service->send((uint32_t)count);   
         service->send(buf, count);   
+        service->flush();
         service->receive16();    
     }
 

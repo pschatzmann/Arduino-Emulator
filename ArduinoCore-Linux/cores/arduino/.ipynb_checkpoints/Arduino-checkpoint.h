@@ -25,5 +25,7 @@
 #include "ArdStdio.h"
 #include "ArduinoLogger.h"
 #include "HardwareSetup.h"
+#include "Serial.h"
+#include "RemoteSerial.h"
 
 #endif

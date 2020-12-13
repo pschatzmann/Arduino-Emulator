@@ -17,5 +17,6 @@ I have a __first working prototype__ ready but naturally there is still a lot to
 - [Introduction into some Basic Commands](02-BasicCommands.ipynb)
 - [The Network Stack](03-Network.ipynb)
 - [Using Pins](04-Pins.ipynb)
+- [Using Serial](05-Serial.ipynb)
 
 If you would like to contribute to the missing pieces - any help is welcome...

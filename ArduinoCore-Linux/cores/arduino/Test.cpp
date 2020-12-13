@@ -3,7 +3,7 @@
 #include "WiFi.h"
 #include "WiFiClient.h"
 #include "WiFiUdpStream.h"
-
+#include "Serial.h"
 
 namespace arduino {
 /**
@@ -19,6 +19,11 @@ class Test {
         auto str = new WiFiUDPStream();
         delete str;
     }
+    void testSerialImpl() {
+        auto str = new SerialImpl();
+        delete str;
+    }
+
 };
     
 }

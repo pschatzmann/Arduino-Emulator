@@ -20,6 +20,26 @@ class RemoteSerialImpl : public Stream {
         service = new HardwareService(&stream);
     }
     
+    virtual void begin(unsigned long baudrate) {
+        service->send(SerialBegin);
+        service->send(no);
+        service->send(baudrate);
+        service->flush();
+    }
+
+    virtual void begin(unsigned long baudrate, uint16_t config) {    
+        service->send(SerialBegin);
+        service->send(no);
+        service->send(baudrate);
+        service->flush();
+    }
+
+    virtual void end() {
+        service->send(SerialEnd);
+        service->send(no);
+        service->flush();
+    }
+    
     virtual int available(){
         if (read_buffer.available()>0){
            return read_buffer.available();   
@@ -27,15 +47,14 @@ class RemoteSerialImpl : public Stream {
         // otherwise we get it from the remote system
         service->send(SerialAvailable);
         service->send(no);
+        service->flush();
         return service->receive16();                
     }
     
     virtual int read(){
         if (read_buffer.available()==0){
-            service->send(SerialRead);
-            service->send(no);
             uint8_t buffer[max_buffer_len];
-            int len = service->receive(buffer, max_buffer_len); 
+            int len = readBytes(buffer, max_buffer_len); 
             read_buffer.write(buffer,len);
         }
         if (read_buffer.available()==0){
@@ -44,13 +63,15 @@ class RemoteSerialImpl : public Stream {
         return read_buffer.read();      
     }
     
-    virtual size_t readBytes(char *buffer, size_t length){
+    virtual size_t readBytes(uint8_t *buffer, size_t length){
         if (read_buffer.available()>0){
-            return read_buffer.read((uint8_t*)buffer, length);
+            return read_buffer.read(buffer, length);
         }
         service->send(SerialRead);
         service->send(no);
-        int len = service->receive(buffer, 512);  
+        service->send(length);
+        service->flush();
+        int len = service->receive(buffer, length);  
         return len;
     }
 
@@ -59,7 +80,7 @@ class RemoteSerialImpl : public Stream {
             return read_buffer.peek();
         }
         service->send(SerialPeek);
-        service->send(no);
+        service->flush();
         return service->receive16();
     }
     
@@ -73,8 +94,10 @@ class RemoteSerialImpl : public Stream {
     virtual size_t write(uint8_t *str, size_t len){
         flush();
         service->send(SerialWrite);
+        service->send(no);
         service->send((uint64_t)len);
         service->send(str, len);
+        service->flush();
         return service->receive16();
     }
     
@@ -86,8 +109,8 @@ class RemoteSerialImpl : public Stream {
             write(buffer, available); 
         }
         service->send(SerialFlush);
+        service->send(no);
         service->flush();
-
     }
 
         
