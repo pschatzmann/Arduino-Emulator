@@ -2,15 +2,15 @@
 #include "ArduinoLogger.h"
 
 void attachInterrupt(pin_size_t interruptNumber, voidFuncPtr callback, PinStatus mode){
-    Logger.log(Error,"attachInterrupt","not supported");
+    Logger.error("attachInterrupt","not supported");
 }
 
 void attachInterruptParam(pin_size_t interruptNumber, voidFuncPtrParam callback, PinStatus mode, void* param){
-    Logger.log(Error,"attachInterruptParam","not supported");  
+    Logger.error("attachInterruptParam","not supported");  
 }
 
 void detachInterrupt(pin_size_t interruptNumber){
-    Logger.log(Error,"detachInterrupt","not supported");
+    Logger.error("detachInterrupt","not supported");
 }
 
 // to compile pluggable usb

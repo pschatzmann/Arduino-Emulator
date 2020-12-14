@@ -39,7 +39,7 @@ uint8_t SocketImpl::connected() {
         if (result!=0){
             char msg[50];
             sprintf(msg,"%d",result);
-            Logger.log(Error,SOCKET_IMPL,"getsockopt->",msg);
+            Logger.error(SOCKET_IMPL,"getsockopt->",msg);
         }    
         
        is_connected = (result == 0);
@@ -51,7 +51,7 @@ uint8_t SocketImpl::connected() {
 // opens a conection
 int SocketImpl::connect(const char* address, uint16_t port){
     if ((sock = ::socket(AF_INET, SOCK_STREAM, 0)) < 0) { 
-        Logger.log(Error,SOCKET_IMPL,"could not create socket");
+        Logger.error(SOCKET_IMPL,"could not create socket");
         return -1; 
     } 
 
@@ -60,23 +60,23 @@ int SocketImpl::connect(const char* address, uint16_t port){
 
     // Convert IPv4 and IPv6 addresses from text to binary form 
     if(::inet_pton(AF_INET, address, &serv_addr.sin_addr)<=0)  { 
-        Logger.log(Error,SOCKET_IMPL,"invalid address");
+        Logger.error(SOCKET_IMPL,"invalid address");
         return -2; 
     } 
 
     if (::connect(sock, (struct sockaddr *)&serv_addr, sizeof(serv_addr)) < 0) { 
-        Logger.log(Error,SOCKET_IMPL,"could not connect");
+        Logger.error(SOCKET_IMPL,"could not connect");
         return -3; 
     } 
 
     is_connected = true;
-    Logger.log(Info,SOCKET_IMPL,"connected!");
+    Logger.info(SOCKET_IMPL,"connected!");
     return 1;
 }
 
 // send the data via the socket - returns the number of characters written or -1=>Error
 size_t SocketImpl::write(const uint8_t* str, size_t len){
-    Logger.log(Debug,SOCKET_IMPL,"write");
+    Logger.debug(SOCKET_IMPL,"write");
     return ::send(sock , str , len , 0 ); 
 }
 
@@ -86,7 +86,7 @@ size_t SocketImpl::available() {
     ioctl(sock, FIONREAD, &bytes_available);
     char msg[50];
     sprintf(msg,"%d",bytes_available);
-    Logger.log(Debug,SOCKET_IMPL,"available->",msg);
+    Logger.debug(SOCKET_IMPL,"available->",msg);
     return bytes_available;
 }
 
@@ -95,33 +95,33 @@ size_t SocketImpl::read(uint8_t* buffer, size_t len){
     size_t result = ::recv(sock, buffer, len, MSG_DONTWAIT );
     char lenStr[80];
     sprintf(lenStr,"%ld -> %ld",len, result);
-    Logger.log(Debug,SOCKET_IMPL,"read->", lenStr);
+    Logger.debug(SOCKET_IMPL,"read->", lenStr);
     return result;
 }
 
 // peeks one character
 int SocketImpl::peek(){
-    Logger.log(Debug,SOCKET_IMPL,"peek");
+    Logger.debug(SOCKET_IMPL,"peek");
     char buf[1];
     int result = ::recv(sock, &buf, 1, MSG_PEEK | MSG_DONTWAIT);
     return result>0 ? buf[0] : -1;
 }
 
 void SocketImpl::close() {
-    Logger.log(Info,SOCKET_IMPL,"close");
+    Logger.info(SOCKET_IMPL,"close");
     ::close(sock);
 }
     
 // determines the IP Adress
 const char* SocketImpl::getIPAddress(){
-    Logger.log(Info,SOCKET_IMPL,"getIPAddress");
+    Logger.info(SOCKET_IMPL,"getIPAddress");
     const char* valid[] = {"eth0", "en0","en1",nullptr};
     return getIPAddress(valid);
 }
     
 // determines the IP Adress    
 const char* SocketImpl::getIPAddress(const char* validEntries[]){
-    Logger.log(Info,SOCKET_IMPL,"getIPAddress-1");
+    Logger.info(SOCKET_IMPL,"getIPAddress-1");
     struct ifaddrs *interfaces = NULL;
     struct ifaddrs *temp_addr = NULL;
     char* resultAddress = nullptr;

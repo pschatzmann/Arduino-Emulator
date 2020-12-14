@@ -78,7 +78,7 @@ class SerialImpl : public HardwareSerial {
 
         virtual void open(unsigned long baudrate) {
             if (!serial.openDevice(device, baudrate)){
-                Logger.log(Error,"SerialImpl","could not open",device);
+                Logger.error("SerialImpl","could not open",device);
             }
             is_open=true;
         }

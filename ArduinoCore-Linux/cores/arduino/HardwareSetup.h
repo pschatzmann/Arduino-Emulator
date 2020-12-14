@@ -80,7 +80,7 @@ class HardwareSetupImpl {
     
         void handShake(Stream* s) {
             while(true){
-                Logger.log(Info, "HardwareSetup","waiting for device...");
+                Logger.info( "HardwareSetup","waiting for device...");
                 try {
                     // we wait for the Arduino to send us the Arduino-Emulator string
                     if (s->available()>=16){
@@ -88,15 +88,15 @@ class HardwareSetupImpl {
                         int len = s->readBytes(buffer, 18);
                         buffer[len]=0;
                         if (strncmp(buffer, "Arduino-Emulator", 16)){
-                            Logger.log(Info, "WiFiUDPStream", "device found!");
+                            Logger.info( "WiFiUDPStream", "device found!");
                             break;
                         } else {
-                            Logger.log(Info, "WiFiUDPStream", "unknown command", buffer);                            
+                            Logger.info( "WiFiUDPStream", "unknown command", buffer);                            
                         }
                     }    
                     delay(10000);
                 } catch (const std::exception& e) { 
-                    Logger.log(Error,"WiFiUDPStream", e.what());
+                    Logger.error("WiFiUDPStream", e.what());
                 }
             }
         }

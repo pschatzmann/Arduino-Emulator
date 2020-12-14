@@ -18,11 +18,11 @@ class WiFiUDPStream : public WiFiUDP {
   public:
       // unknown target -> we wait for a hallo until we get one
       WiFiUDPStream() {
-          Logger.log(Debug,"WiFiUDPStream");
+          Logger.debug("WiFiUDPStream");
       }
     
       ~WiFiUDPStream() {
-          Logger.log(Debug,"~WiFiUDPStream");
+          Logger.debug("~WiFiUDPStream");
       }   
     
       // known target
@@ -59,15 +59,15 @@ class WiFiUDPStream : public WiFiUDP {
           if (this->available()==0){
             // we need to receive the next packet
             this->parsePacket();
-            Logger.log(Debug,"parsePacket");  
+            Logger.debug("parsePacket");  
           } else {
-            Logger.log(Debug,"no parsePacket()");
+            Logger.debug("no parsePacket()");
           }
           size_t result = read(values, len);
           
           char msg[50];
           sprintf(msg, "->len %ld",result);
-          Logger.log(Debug,msg);  
+          Logger.debug(msg);  
           
           
           return result;

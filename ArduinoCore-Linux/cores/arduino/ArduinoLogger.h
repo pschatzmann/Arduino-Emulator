@@ -5,16 +5,6 @@
 
 namespace arduino {
 
-/**
- * @brief Supported log levels
- * 
- */
-enum LogLevel { 
-    Debug,
-    Info, 
-    Warning, 
-    Error
-};
 
 /**
  * @brief A simple Logger that writes messages dependent on the log level
@@ -23,6 +13,18 @@ enum LogLevel {
 
 class ArduinoLogger {
     public:
+        /**
+         * @brief Supported log levels
+         * 
+         */
+        enum LogLevel { 
+            Debug,
+            Info, 
+            Warning, 
+            Error
+        };
+
+
         ArduinoLogger(){}
         ~ArduinoLogger(){}
         // activate the logging
@@ -35,6 +37,23 @@ class ArduinoLogger {
         virtual bool isLogging(){
             return log_stream_ptr!=nullptr;
         }
+
+        virtual void error(const char *str, const char* str1=nullptr, const char* str2=nullptr){
+            log(Error, str, str1, str2);
+        }
+            
+        virtual void info(const char *str, const char* str1=nullptr, const char* str2=nullptr){
+            log(Info, str, str1, str2);
+        }
+
+        virtual void warning(const char *str, const char* str1=nullptr, const char* str2=nullptr){
+            log(Warning, str, str1, str2);
+        }
+
+        virtual void debug(const char *str, const char* str1=nullptr, const char* str2=nullptr){
+            log(Debug, str, str1, str2);
+        }
+
 
         // write an message to the log
         virtual void log(LogLevel current_level, const char *str, const char* str1=nullptr, const char* str2=nullptr){
@@ -59,6 +78,7 @@ class ArduinoLogger {
         Stream *log_stream_ptr;
         LogLevel log_level;  
 
+
 };
 
 extern ArduinoLogger Logger;
@@ -69,7 +89,7 @@ extern ArduinoLogger Logger;
 static void log_e(const char* msg, int errorNo){
     char errorNoStr[10];
     sprintf(errorNoStr,"%d", errorNo);
-    Logger.log(Error, msg, errorNoStr);
+    Logger.error( msg, errorNoStr);
 }
     
 
