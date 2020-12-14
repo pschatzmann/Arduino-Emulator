@@ -567,6 +567,7 @@ class FTPFile : public Stream {
         for (int j=0;j<len;j++){
             count += write(data[j]);
         }
+        return count;
     }
 
     virtual  int read(){
