@@ -390,7 +390,7 @@ class FTPBasicAPI {
         FTPLogger::writeLog( LOG_DEBUG, "FTPBasicAPI::connect", buffer);          
         ok = client_ptr->connect(adr, port);
         if (ok && doCheckResult){
-            char* ok_result[] = {"220","200",nullptr};
+            const char* ok_result[] = {"220","200",nullptr};
             ok = checkResult(ok_result, "connect");
         }
         if (!ok){
@@ -587,7 +587,7 @@ class FTPFile : public Stream {
     virtual size_t size(){
         char msg[80];
         size_t size =  api_ptr->size(file_name);
-        sprintf(msg,"size: %d", size);
+        sprintf(msg,"size: %ld", size);
         FTPLogger::writeLog( LOG_DEBUG, "FTPFile", msg);
         return size;
     }
@@ -607,7 +607,7 @@ class FTPFile : public Stream {
 
     virtual  void close(){
         FTPLogger::writeLog( LOG_INFO, "FTPFile", "close");
-        char* ok[] = {"226", nullptr};
+        const char* ok[] = {"226", nullptr};
         api_ptr->checkResult(ok, "close", false);
         if (api_ptr->currentOperation()==WRITE_OP) {
             flush();

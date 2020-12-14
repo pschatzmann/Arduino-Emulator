@@ -3,6 +3,7 @@
  * Separate implementation class for the WIFI client to prevent import conflicts
  ***/
 
+#include <cstring>
 #include <sys/socket.h> 
 #include <sys/ioctl.h>
 #include <unistd.h>
@@ -13,7 +14,6 @@
 #include <ifaddrs.h>
 #include <netinet/in.h>
 #include <net/if.h>
-#include <cstring>
 
 #include "SocketImpl.h"
 #include "ArduinoLogger.h"
