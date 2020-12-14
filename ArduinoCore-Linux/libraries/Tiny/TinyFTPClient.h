@@ -171,11 +171,11 @@ class CStringFunctions {
 class FTPLoggerImpl {
   public:
 
-    void setFTPLogLevel(FTPLogLevel level){
+    void setLogLevel(FTPLogLevel level){
           min_log_level  = level;   
     }
 
-    FTPLogLevel getFTPLogLevel(){
+    FTPLogLevel getLogLevel(){
           return min_log_level;
     }
 
@@ -212,7 +212,7 @@ class FTPLoggerImpl {
     }
 
   protected:
-    FTPLogLevel min_log_level;
+    FTPLogLevel min_log_level = LOG_WARN;
     Stream *out_ptr; 
 };
 
@@ -411,12 +411,13 @@ class FTPBasicAPI {
     }
 
     const char *itoa(uint8_t value, char buffer[]){
-        sprintf(buffer,"%ud", value);
+        sprintf(buffer,"%u", value);
         return (const char*)buffer;
     }
 
     const char* toStr(IPAddress adr){
-        static char result[12];
+        static char result[20];
+        memset(result,0,20);
         char number[5];
         strcat(result,itoa(adr[0],number));
         strcat(result, ".");
