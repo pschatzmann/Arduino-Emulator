@@ -1,9 +1,11 @@
 #pragma once
 
+#include "Common.h"
 #include "RingBufferExt.h"
 #include "IPAddress.h"
 #include "Client.h"
 #include "SocketImpl.h"
+#include "ArduinoLogger.h"
 
 namespace arduino {
 
@@ -59,7 +61,7 @@ class EthernetClient : public Client {
     
         // opens a conection
         virtual int connect(const char* address, uint16_t port){
-            Logger.log(Info,WIFICLIENT,"connect");
+            Logger.info(WIFICLIENT,"connect");
             sock.connect(address, port);
             return 1;
         }
@@ -102,7 +104,7 @@ class EthernetClient : public Client {
 
         // flush write buffer
         virtual void flush() {
-            Logger.log(Debug,WIFICLIENT,"flush");
+            Logger.debug(WIFICLIENT,"flush");
 
             int flushSize = writeBuffer.available();
             if (flushSize>0){
@@ -114,7 +116,7 @@ class EthernetClient : public Client {
 
         // provides the available bytes from the read buffer or from the socket
         virtual int available() {
-            Logger.log(Debug,WIFICLIENT,"available");
+            Logger.debug(WIFICLIENT,"available");
             if (readBuffer.available()>0){
                 return readBuffer.available();
             }
@@ -129,7 +131,7 @@ class EthernetClient : public Client {
 
         // read via ring buffer
         virtual int read() {
-            Logger.log(Debug,WIFICLIENT,"read-1");
+            Logger.debug(WIFICLIENT,"read-1");
             if (readBuffer.available()==0){
                 uint8_t buffer[bufferSize];
                 int len = read((uint8_t*)buffer, bufferSize);
@@ -144,7 +146,7 @@ class EthernetClient : public Client {
     
         // direct read with timeout
         virtual int read(uint8_t* buffer, size_t len){
-            Logger.log(Debug,WIFICLIENT,"read");
+            Logger.debug(WIFICLIENT,"read");
             int result = 0;
             if (readBuffer.available()>0){
                 result = readBuffer.read(buffer, len);
@@ -158,14 +160,14 @@ class EthernetClient : public Client {
             }
             char lenStr[16];
             sprintf(lenStr,"%d",result);
-            Logger.log(Debug, WIFICLIENT,"read->",lenStr);
+            Logger.debug( WIFICLIENT,"read->",lenStr);
             
             return result;
         }
         
         // peeks one character
         virtual int peek(){
-            Logger.log(Debug,WIFICLIENT, "peek");
+            Logger.debug(WIFICLIENT, "peek");
             if (readBuffer.available()>0){
                 return readBuffer.peek();
             }
