@@ -29,7 +29,7 @@
  * 
  */
 
-
+#include <stdlib.h>
 #include "Stream.h"
 #include "IPAddress.h"
 
@@ -52,6 +52,7 @@ enum ObjectType { TypeFile, TypeDirectory, TypeUndefined };
 
 class FtpIpClient {
   public:
+    virtual ~FtpIpClient() = 0;
     virtual bool connect(IPAddress address, int port) = 0;
     virtual bool isConnected() = 0;
     virtual IPAddress localAddress() = 0;
@@ -386,7 +387,7 @@ class FTPBasicAPI {
     virtual bool connect(IPAddress adr, int port, FtpIpClient *client_ptr, bool doCheckResult=false){
         char buffer[80];
         bool ok = true;
-        sprintf(buffer,"connect %s:%d", adr.toString().c_str(), port);
+        sprintf(buffer,"connect %s:%d", toStr(adr), port);
         FTPLogger::writeLog( LOG_DEBUG, "FTPBasicAPI::connect", buffer);          
         ok = client_ptr->connect(adr, port);
         if (ok && doCheckResult){
@@ -398,6 +399,18 @@ class FTPBasicAPI {
         }
         return ok;
     }
+    const char* toStr(IPAddress adr){
+        static char result[12];
+        char number[5];
+        strcat(result,itoa(adr[0],number));
+        strcat(".");
+        strcat(result,itoa(adr[1],number));
+        strcat(".");
+        strcat(result,itoa(adr[2],number));
+        strcat(".");
+        strcat(result,itoa(adr[3],number));
+    }
+
     virtual bool cmd(const char* command, const char* par, const char* expected, bool wait_for_data=true){
         const char* expected_array[] = { expected, nullptr };
         return cmd(command, par, expected_array, wait_for_data);
@@ -758,7 +771,7 @@ class FTPClient {
         FtpIpClient *command;
         FtpIpClient *data; 
 
-    #ifdef ESP32 {
+    #ifdef ESP32 
         command = new FtpIpClientWifi();
         data = new FtpIpClientWifi();
         cleanup_clients = true;
