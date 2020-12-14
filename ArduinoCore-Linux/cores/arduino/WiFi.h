@@ -1,5 +1,5 @@
-#ifndef WIFI_H
-#define WIFI_H
+#pragma once
+
 #include "WiFiClient.h"
 
 /**
@@ -49,4 +49,3 @@ extern WifiMock WiFi;
 
 }
 
-#endif

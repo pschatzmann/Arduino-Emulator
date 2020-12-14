@@ -1,5 +1,4 @@
-#ifndef HARDWARE_H
-#define HARDWARE_H
+#pragma once
 
 namespace arduino {
 
@@ -26,4 +25,3 @@ extern HardwareImpl Hardware;
 
 }
 
-#endif

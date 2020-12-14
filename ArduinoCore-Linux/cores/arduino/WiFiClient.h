@@ -1,5 +1,4 @@
-#ifndef WIFICLIENT_H
-#define WIFICLIENT_H
+#pragma once
 
 #include "RingBufferExt.h"
 #include "IPAddress.h"
@@ -170,5 +169,3 @@ class WiFiClient : public Client {
 };
     
 }
-
-#endif

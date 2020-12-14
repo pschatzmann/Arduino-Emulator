@@ -1,5 +1,4 @@
-#ifndef __ARDLOGGER_H__
-#define __ARDLOGGER_H__
+#pragma once
 
 #include "Stream.h"
 
@@ -93,6 +92,3 @@ static void log_e(const char* msg, int errorNo){
 }
     
 
-
-
-#endif // __HttpLogger_H__

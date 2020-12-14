@@ -1,5 +1,4 @@
-#ifndef REMOTESPI_H
-#define REMOTESPI_H
+#pragma once
 
 #include "HardwareSPI.h"
 
@@ -95,5 +94,3 @@ class RemoteSPI : public HardwareSPI{
 };
     
 }
-
-#endif

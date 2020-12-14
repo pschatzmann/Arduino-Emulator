@@ -1,3 +1,4 @@
+#pragma once
 /*!
 \file    serialib.h
 \brief   Header file of the class serialib. This class is used for communication over a serial device.
@@ -12,10 +13,6 @@ DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
 FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 This is a licence-free software, it can be used by anyone who try to build a better world.
 */
-
-
-#ifndef SERIALIB_H
-#define SERIALIB_H
 
 
 
@@ -214,4 +211,3 @@ private:
     struct timeval      previousTime;
 };
 
-#endif // serialib_H

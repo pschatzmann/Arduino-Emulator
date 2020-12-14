@@ -1,5 +1,4 @@
-#ifndef WIFIUDPSTREAM_H
-#define WIFIUDPSTREAM_H
+#pragma once
 
 #include <string.h>
 #include <thread>         
@@ -88,5 +87,6 @@ class WiFiUDPStream : public WiFiUDP {
   
 
 }
-#endif
+
+
 

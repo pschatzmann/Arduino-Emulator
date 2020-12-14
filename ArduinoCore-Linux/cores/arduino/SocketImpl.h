@@ -1,5 +1,4 @@
-#ifndef SOCKETIMPL_H
-#define SOCKETIMPL_H
+#pragma once
 
 /**
  * Separate implementation class for the WIFI client to prevent import conflicts
@@ -41,4 +40,3 @@ class SocketImpl {
     
 }
 
-#endif

@@ -1,5 +1,4 @@
-#ifndef REMOTESERIAL_H
-#define REMOTESERIAL_H
+#pragma once
 
 #include "Stream.h"
 #include "HardwareService.h"
@@ -125,5 +124,3 @@ class RemoteSerialImpl : public Stream {
     
     
 }
-
-#endif

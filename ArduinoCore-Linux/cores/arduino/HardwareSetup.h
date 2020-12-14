@@ -1,5 +1,4 @@
-#ifndef HARDWARESETUP_H
-#define HARDWARESETUP_H
+#pragma once
 
 #include "Hardware.h"
 #include "RemoteI2C.h"
@@ -107,4 +106,3 @@ extern HardwareSetupImpl HardwareSetup;
 
 }
 
-#endif

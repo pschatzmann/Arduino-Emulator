@@ -1,5 +1,4 @@
-#ifndef SERIAL_H
-#define SERIAL_H
+#pragma once
 
 #include <iostream>
 #include <streambuf>
@@ -115,4 +114,3 @@ extern StdioDevice Serial;
     
 }
 
-#endif // __ALTETC_H__

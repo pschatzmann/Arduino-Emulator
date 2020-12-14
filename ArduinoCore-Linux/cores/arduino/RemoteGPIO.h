@@ -1,5 +1,4 @@
-#ifndef REMOTEGPIO_H
-#define REMOTEGPIO_H
+#pragma once
 
 #include "HardwareGPIO.h"
 #include "HardwareService.h"
@@ -97,6 +96,5 @@ class RemoteGPIO : public HardwareGPIO {
                       
 }   
                       
-#endif
                       
               

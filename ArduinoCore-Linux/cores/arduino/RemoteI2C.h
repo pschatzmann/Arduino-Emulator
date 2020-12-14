@@ -1,5 +1,4 @@
-#ifndef REMOTEI2C_H
-#define REMOTEI2C_H
+#pragma once
 
 #include "HardwareI2CEx.h"
 #include "HardwareService.h"
@@ -115,6 +114,4 @@ class RemoteI2C : public HardwareI2CEx {
 };
 
 }
-
-#endif
 

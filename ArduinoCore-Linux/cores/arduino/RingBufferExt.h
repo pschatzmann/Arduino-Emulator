@@ -1,5 +1,4 @@
-#ifndef __RINGBUFFER_H__
-#define __RINGBUFFER_H__
+#pragma once
 
 #include "stddef.h"
 #include "stdint.h"
@@ -111,4 +110,3 @@ class RingBufferExt {
 
 }
 
-#endif // __RINGBUFFER_H__

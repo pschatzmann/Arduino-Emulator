@@ -1,3 +1,4 @@
+#pragma once
 /*
  *  Udp.cpp: Library to send/receive UDP packets.
  *
@@ -32,8 +33,6 @@
  * bjoern@cs.stanford.edu 12/30/2008
  */
 
-#ifndef _WIFIUDP_H_
-#define _WIFIUDP_H_
 
 #include <IPAddress.h>
 #include <Udp.h>
@@ -78,4 +77,3 @@ public:
 };
 
 }
-#endif /* _WIFIUDP_H_ */

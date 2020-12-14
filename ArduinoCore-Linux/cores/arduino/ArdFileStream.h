@@ -1,5 +1,4 @@
-#ifndef SERIAL_H
-#define SERIAL_H
+#pragma once
 
 #include <iostream>
 #include <fstream>
@@ -97,4 +96,3 @@ class FileStream : public Stream {
     
 }
 
-#endif // __ALTETC_H__

@@ -1,5 +1,4 @@
-#ifndef HARDWAREI2CEX_H
-#define HARDWAREI2CEX_H
+#pragma once
 
 #include "HardwareI2C.h"
 
@@ -24,4 +23,3 @@ class HardwareI2CEx : HardwareI2C {
     
 }
 
-#endif

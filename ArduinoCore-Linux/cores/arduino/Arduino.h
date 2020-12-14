@@ -1,3 +1,5 @@
+#pragma once
+
 /*
   Arduino.h - Main include file for the Arduino SDK
   Copyright (c) 2005-2013 Arduino Team.  All right reserved.
@@ -14,9 +16,6 @@
   Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-#ifndef Arduino_h
-#define Arduino_h
-
 #ifndef HOST
 #define HOST
 #endif
@@ -28,4 +27,3 @@
 #include "Serial.h"
 #include "RemoteSerial.h"
 
-#endif

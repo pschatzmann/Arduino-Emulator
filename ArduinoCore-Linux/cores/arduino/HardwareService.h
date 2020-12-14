@@ -1,5 +1,4 @@
-#ifndef HARDWARESERVICE_H
-#define HARDWARESERVICE_H
+#pragma once
 
 #include "Stream.h"
 
@@ -221,5 +220,4 @@ class HardwareService {
 
 }
 
-#endif
 

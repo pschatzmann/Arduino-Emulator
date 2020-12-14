@@ -1,5 +1,4 @@
-#ifndef HARDWAREGPIO_H
-#define HARDWAREGPIO_H
+#pragma once
 
 #include "Common.h"      
 
@@ -28,4 +27,3 @@ class HardwareGPIO {
 
 }
 
-#endif
