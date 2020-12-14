@@ -13,7 +13,7 @@
 #include <ifaddrs.h>
 #include <netinet/in.h>
 #include <net/if.h>
-#include <string.h>
+#include <cstring>
 
 #include "SocketImpl.h"
 #include "ArduinoLogger.h"

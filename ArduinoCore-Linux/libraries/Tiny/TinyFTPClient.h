@@ -304,7 +304,7 @@ class FTPBasicAPI {
     virtual  bool abort(){
         if (current_operation!=NOP) {
             FTPLogger::writeLog( LOG_DEBUG, "FTPBasicAPI","abort");      
-            char* ok[] = {"225", "226",nullptr};
+            const char* ok[] = {"225", "226",nullptr};
             current_operation = NOP;
             return cmd("ABOR", nullptr, ok);
         }
@@ -427,7 +427,7 @@ class FTPBasicAPI {
 
     }
     
-    virtual bool checkResult(char* expected[], char* command, bool wait_for_data=true){
+    virtual bool checkResult(const char* expected[], const char* command, bool wait_for_data=true){
         // consume all result lines
         bool ok = false;
         result_reply[0] = '\0';

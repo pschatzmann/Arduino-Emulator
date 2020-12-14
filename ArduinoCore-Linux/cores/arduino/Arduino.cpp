@@ -1,9 +1,9 @@
+#include <cstring>
 #include <chrono> 
 #include <ctime>
 #include <stdio.h>
 #include <thread>
 #include <chrono>
-
 #include "Arduino.h"
 #include "Common.h"
 #include "Stream.h"

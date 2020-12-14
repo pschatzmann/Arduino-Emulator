@@ -60,7 +60,7 @@ class RemoteI2C : public HardwareI2CEx {
     virtual size_t requestFrom(uint8_t address, size_t len, bool stopBit){
         service->send(I2cRequestFrom3);
         service->send(address);
-        service->send(len);
+        service->send((uint64_t)len);
         service->send(stopBit);
         return service->receive8();
     }
@@ -68,7 +68,7 @@ class RemoteI2C : public HardwareI2CEx {
     virtual size_t requestFrom(uint8_t address, size_t len){
         service->send(I2cRequestFrom2);
         service->send(address);
-        service->send(len);
+        service->send((uint64_t)len);
         return service->receive8();   
     }
 

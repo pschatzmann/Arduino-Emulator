@@ -71,12 +71,12 @@ class WiFiClient : public Client {
         }
     
         virtual int print(const char* str=""){
-            int len = ::strlen(str);
+            int len = strlen(str);
             return write(str, len);
         }
 
         virtual int println(const char* str=""){
-            int len = ::strlen(str);
+            int len = strlen(str);
             int result = write(str, len);
             char eol[1];
             eol[0] = '\n';
