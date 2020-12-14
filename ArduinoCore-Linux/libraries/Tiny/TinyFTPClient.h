@@ -29,7 +29,7 @@
  * 
  */
 
-#include <stdlib.h>
+#include <itoa.h> // part of ArduinoCore-API
 #include "Stream.h"
 #include "IPAddress.h"
 
@@ -403,11 +403,11 @@ class FTPBasicAPI {
         static char result[12];
         char number[5];
         strcat(result,itoa(adr[0],number));
-        strcat(".");
+        strcat(result, ".");
         strcat(result,itoa(adr[1],number));
-        strcat(".");
+        strcat(result, ".");
         strcat(result,itoa(adr[2],number));
-        strcat(".");
+        strcat(result,".");
         strcat(result,itoa(adr[3],number));
     }
 
