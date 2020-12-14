@@ -402,13 +402,13 @@ class FTPBasicAPI {
     const char* toStr(IPAddress adr){
         static char result[12];
         char number[5];
-        strcat(result,itoa(adr[0],number));
+        strcat(result,itoa(adr[0],number,10));
         strcat(result, ".");
-        strcat(result,itoa(adr[1],number));
+        strcat(result,itoa(adr[1],number,10));
         strcat(result, ".");
-        strcat(result,itoa(adr[2],number));
+        strcat(result,itoa(adr[2],number,10));
         strcat(result,".");
-        strcat(result,itoa(adr[3],number));
+        strcat(result,itoa(adr[3],number,10));
     }
 
     virtual bool cmd(const char* command, const char* par, const char* expected, bool wait_for_data=true){
