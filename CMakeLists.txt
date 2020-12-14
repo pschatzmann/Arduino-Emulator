@@ -21,8 +21,8 @@ file(GLOB SRC_LIST CONFIGURE_DEPENDS "${PROJECT_SOURCE_DIR}/ArduinoCore-API/api/
 # Make an dynamic library 
 add_library(arduino_emulator SHARED ${SRC_LIST} ${HEADER_LIST})
 
-# All users of this library will need at least C++11
-target_compile_features(arduino_emulator PUBLIC cxx_std_11)
+# All users of this library will need at least C++17
+target_compile_features(arduino_emulator PUBLIC cxx_std_17)
 target_compile_options(arduino_emulator PRIVATE -Wno-nonportable-include-path)
 
 
