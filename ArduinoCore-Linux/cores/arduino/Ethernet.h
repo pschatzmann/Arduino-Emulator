@@ -1,3 +1,4 @@
+
 #pragma once
 
 #include "Common.h"
@@ -23,9 +24,8 @@ class EthernetImpl {
     
 };
     
-extern EthernetImpl Ethernet;
+inline EthernetImpl Ethernet;
 
-    
     
 class EthernetClient : public Client {
     public:
@@ -56,13 +56,18 @@ class EthernetClient : public Client {
                   String(ipAddress[1]) + String(".") +\
                   String(ipAddress[2]) + String(".") +\
                   String(ipAddress[3]) ;
+
             return connect(str.c_str(),port);  
         }
     
         // opens a conection
         virtual int connect(const char* address, uint16_t port){
             Logger.info(WIFICLIENT,"connect");
+            if (connectedFast()){
+                sock.close();
+            }
             sock.connect(address, port);
+            is_connected = true;
             return 1;
         }
 
@@ -180,11 +185,16 @@ class EthernetClient : public Client {
         }
 
     protected:
-        const char *WIFICLIENT = "WiFiClient";
+        const char *WIFICLIENT = "EthernetClient";
         SocketImpl sock;
         int bufferSize;
         RingBufferExt readBuffer;
         RingBufferExt writeBuffer;
+        bool is_connected;
+    
+        bool connectedFast() {
+            return is_connected;
+        }
 };
     
 

@@ -1,9 +1,6 @@
 #pragma once
 
 /**
-#pragma once
-
-/**
  * @file ArduinoFTPClient.h
  * @author Phil Schatzmann (phil.schatzmann@gmail.com)
  * @brief A simple FTP client for Arduino using Streams
@@ -60,7 +57,7 @@ class FtpIpClient {
   public:
     virtual ~FtpIpClient() {};
     virtual bool connect(IPAddress address, int port) = 0;
-    virtual bool isConnected() = 0;
+    virtual bool connected() = 0;
     virtual IPAddress localAddress() = 0;
     virtual Stream* stream() = 0;
     virtual void stop() = 0;
@@ -78,7 +75,7 @@ class IPConnectEthernet : public FtpIpClient {
       return Ethernet.localIP();
     }
 
-    virtual bool isConnected(){
+    virtual bool connected(){
       return client.connected();
     }
 
@@ -107,7 +104,7 @@ class FtpIpClientWifi : public FtpIpClient {
       return WiFi.localIP();
     }
 
-    virtual bool isConnected(){
+    virtual bool connected(){
       return client.available() || client.connected();
     }
 
@@ -171,16 +168,13 @@ class CStringFunctions {
 class FTPLoggerImpl {
   public:
 
-    void setFTPLogLevel(FTPLogLevel level){
+    void setLogger(Stream &out, FTPLogLevel level=LOG_INFO){
           min_log_level  = level;   
-    }
-
-    FTPLogLevel getFTPLogLevel(){
-          return min_log_level;
-    }
-
-    void setOutput(Stream &out){
           out_ptr = &out;
+    }
+
+    FTPLogLevel getLogLevel(){
+          return min_log_level;
     }
 
     void writeLog(FTPLogLevel level, const char* module, const char* msg=nullptr){
@@ -212,7 +206,7 @@ class FTPLoggerImpl {
     }
 
   protected:
-    FTPLogLevel min_log_level;
+    FTPLogLevel min_log_level = LOG_WARN;
     Stream *out_ptr; 
 };
 
@@ -263,7 +257,7 @@ class FTPBasicAPI {
         return cmd("QUIT", nullptr, ok_result, false);    
     }
 
-    virtual  bool isConnected(){
+    virtual  bool connected(){
         return is_open;
     }
 
@@ -395,28 +389,33 @@ class FTPBasicAPI {
 
   protected:
     virtual bool connect(IPAddress adr, int port, FtpIpClient *client_ptr, bool doCheckResult=false){
-        char buffer[80];
         bool ok = true;
-        sprintf(buffer,"connect %s:%d", toStr(adr), port);
-        FTPLogger.writeLog( LOG_DEBUG, "FTPBasicAPI::connect", buffer);          
+        char msg[80];
+        sprintf(msg,"connect %s:%d", toStr(adr), port);
+        FTPLogger.writeLog( LOG_DEBUG, "FTPBasicAPI::connect", msg);          
         ok = client_ptr->connect(adr, port);
+        if (!ok){
+            // wait for connection
+            ok = client_ptr->connected();
+        }
         if (ok && doCheckResult){
             const char* ok_result[] = {"220","200",nullptr};
             ok = checkResult(ok_result, "connect");
         }
         if (!ok){
-            FTPLogger.writeLog( LOG_ERROR, "FTPBasicAPI::connect", buffer);      
+            FTPLogger.writeLog( LOG_ERROR, "FTPBasicAPI::connect", msg);      
         }
         return ok;
     }
 
     const char *itoa(uint8_t value, char buffer[]){
-        sprintf(buffer,"%ud", value);
+        sprintf(buffer,"%u", value);
         return (const char*)buffer;
     }
 
     const char* toStr(IPAddress adr){
-        static char result[12];
+        static char result[20];
+        memset(result,0,20);
         char number[5];
         strcat(result,itoa(adr[0],number));
         strcat(result, ".");
@@ -449,7 +448,7 @@ class FTPBasicAPI {
     }
 
     virtual void checkClosed(FtpIpClient *client){
-        if (!client->isConnected()){
+        if (!client->connected()){
             FTPLogger.writeLog( LOG_DEBUG, "FTPBasicAPI","checkClosed -> client is closed"); 
             // mark the actual command as completed     
             current_operation = NOP;
@@ -803,12 +802,16 @@ class FTPClient {
     }
 
     // destructor to clean up memory
-     ~FTPClient(){
+    ~FTPClient(){
         if (cleanup_clients)   {
             delete command_ptr;
             delete data_ptr;
         } 
-     }
+    }
+    
+    virtual bool connected() {
+        return command_ptr->connected();
+    }
 
     // opens the ftp connection  
     virtual  bool begin(IPAddress remote_addr, const char* user="anonymous", const char* password=nullptr){

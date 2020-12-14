@@ -32,14 +32,14 @@ uint8_t SocketImpl::connected() {
     // if peek is working we are connected - if not we do further checks
     is_connected = result >= 0;
     if (!is_connected){
-        //int getsockopt(int sockfd, int level, int optname,void *optval, socklen_t *optlen);
         int error_code;
         socklen_t error_code_size;
+        //int getsockopt(int sockfd, int level, int optname,void *optval, socklen_t *optlen);
         int result = getsockopt(sock, SOL_SOCKET, SO_ERROR, &error_code, &error_code_size);
         if (result!=0){
             char msg[50];
             sprintf(msg,"%d",result);
-            Logger.error(SOCKET_IMPL,"getsockopt->",msg);
+            Logger.debug(SOCKET_IMPL,"getsockopt->",msg);
         }    
         
        is_connected = (result == 0);
