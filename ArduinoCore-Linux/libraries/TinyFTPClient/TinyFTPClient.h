@@ -168,7 +168,11 @@ class CStringFunctions {
 class FTPLoggerImpl {
   public:
 
+<<<<<<< HEAD:ArduinoCore-Linux/libraries/TinyFTPClient/TinyFTPClient.h
     void setLogger(Stream &out, FTPLogLevel level=LOG_INFO){
+=======
+    void setLogLevel(FTPLogLevel level){
+>>>>>>> 8c19a63185d64211089d35cede38cf847dc6c6c4:ArduinoCore-Linux/libraries/Tiny/TinyFTPClient.h
           min_log_level  = level;   
           out_ptr = &out;
     }
