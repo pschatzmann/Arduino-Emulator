@@ -1,4 +1,4 @@
-  #pragma once
+#pragma once
 
 /**
  * @file ArduinoFTPClient.h
@@ -29,7 +29,6 @@
  * 
  */
 
-#include <itoa.h> // part of ArduinoCore-API
 #include "Stream.h"
 #include "IPAddress.h"
 
@@ -299,16 +298,17 @@ class FTPBasicAPI {
     virtual  bool rmd(const char * dir){
         FTPLogger::writeLog( LOG_DEBUG, "FTPBasicAPI","rd");      
         return cmd("RMD", dir, "250");
-
     }
 
-    virtual  bool abort(){
+    virtual bool abort(){
+        bool result = false;
         if (current_operation!=NOP) {
             FTPLogger::writeLog( LOG_DEBUG, "FTPBasicAPI","abort");      
             const char* ok[] = {"225", "226",nullptr};
             current_operation = NOP;
-            return cmd("ABOR", nullptr, ok);
+            result = cmd("ABOR", nullptr, ok);
         }
+        return result;
     }
 
     virtual  Stream *read(const char* file_name ) {
@@ -399,16 +399,23 @@ class FTPBasicAPI {
         }
         return ok;
     }
+
+    const char *itoa(uint8_t value, char buffer[]){
+        sprintf(buffer,"%ud", value);
+        return (const char*)buffer;
+    }
+
     const char* toStr(IPAddress adr){
         static char result[12];
         char number[5];
-        strcat(result,itoa(adr[0],number,10));
+        strcat(result,itoa(adr[0],number));
         strcat(result, ".");
-        strcat(result,itoa(adr[1],number,10));
+        strcat(result,itoa(adr[1],number));
         strcat(result, ".");
-        strcat(result,itoa(adr[2],number,10));
+        strcat(result,itoa(adr[2],number));
         strcat(result,".");
-        strcat(result,itoa(adr[3],number,10));
+        strcat(result,itoa(adr[3],number));
+        return result;
     }
 
     virtual bool cmd(const char* command, const char* par, const char* expected, bool wait_for_data=true){
