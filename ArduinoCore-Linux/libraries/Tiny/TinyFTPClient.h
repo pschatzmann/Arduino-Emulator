@@ -51,7 +51,7 @@ enum ObjectType { TypeFile, TypeDirectory, TypeUndefined };
 
 class FtpIpClient {
   public:
-    virtual ~FtpIpClient() = 0;
+    virtual ~FtpIpClient() {};
     virtual bool connect(IPAddress address, int port) = 0;
     virtual bool isConnected() = 0;
     virtual IPAddress localAddress() = 0;
