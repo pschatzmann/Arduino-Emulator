@@ -233,11 +233,11 @@ class FTPBasicAPI {
 
         bool ok = connect( address, port, command_ptr, true);
         if (ok && username!=nullptr) {
-            char* ok_result[] = {"331","230","530", nullptr};
+            const char* ok_result[] = {"331","230","530", nullptr};
             ok = cmd("USER", username, ok_result);
         }
         if (ok && password!=nullptr) {
-            char* ok_result[] = {"230","202",nullptr};
+            const char* ok_result[] = {"230","202",nullptr};
             ok = cmd("PASS", password, ok_result);
         }
         if (ok) {
@@ -249,7 +249,7 @@ class FTPBasicAPI {
 
     virtual  bool quit(){
         FTPLogger::writeLog( LOG_DEBUG, "FTPBasicAPI", "quit");      
-        char* ok_result[] = {"221","226", nullptr};
+        const char* ok_result[] = {"221","226", nullptr};
         return cmd("QUIT", nullptr, ok_result, false);    
     }
 
@@ -314,7 +314,7 @@ class FTPBasicAPI {
         if (current_operation!=READ_OP) {
             FTPLogger::writeLog( LOG_DEBUG, "FTPBasicAPI", "read");      
             abort();
-            char* ok[] = {"150","125", nullptr};
+            const char* ok[] = {"150","125", nullptr};
             cmd("RETR", file_name, ok);
             current_operation = READ_OP;
         }
@@ -326,7 +326,7 @@ class FTPBasicAPI {
         if (current_operation!=WRITE_OP) {
             FTPLogger::writeLog( LOG_DEBUG, "FTPBasicAPI", "write");      
             abort();
-            char* ok_write[] = {"125", "150", nullptr};
+            const char* ok_write[] = {"125", "150", nullptr};
             cmd(mode == WRITE_APPEND_MODE ? "APPE": "STOR", file_name, ok_write);
             current_operation = WRITE_OP;
         }
@@ -337,7 +337,7 @@ class FTPBasicAPI {
     virtual  Stream * ls(char* file_name){
         FTPLogger::writeLog( LOG_DEBUG, "FTPBasicAPI", "ls");      
         abort();
-        char* ok[] = {"125", "150", nullptr};
+        const char* ok[] = {"125", "150", nullptr};
         cmd("NLST",file_name, ok);
         current_operation = LS_OP;
         return data_ptr->stream();
@@ -372,7 +372,7 @@ class FTPBasicAPI {
     }
     virtual ObjectType objectType(const char * file){
         FTPLogger::writeLog( LOG_DEBUG, "FTPBasicAPI","objectType"); 
-        char* ok_result[] = {"213","550", nullptr}; 
+        const char* ok_result[] = {"213","550", nullptr}; 
         ObjectType result =  TypeDirectory;   
         if (cmd("SIZE", file, ok_result)) {
             if (strncmp(result_reply,"213",3)==0){
@@ -398,12 +398,12 @@ class FTPBasicAPI {
         }
         return ok;
     }
-    virtual bool cmd(const char* command, const char* par, char* expected, bool wait_for_data=true){
-        char* expected_array[] = { expected, nullptr };
+    virtual bool cmd(const char* command, const char* par, const char* expected, bool wait_for_data=true){
+        const char* expected_array[] = { expected, nullptr };
         return cmd(command, par, expected_array, wait_for_data);
     }
 
-    virtual bool cmd(const char* command_str, const char* par, char* expected[], bool wait_for_data=true){
+    virtual bool cmd(const char* command_str, const char* par, const char* expected[], bool wait_for_data=true){
         char command_buffer[512];
         Stream *stream_ptr = command_ptr->stream();
         if (par==nullptr){

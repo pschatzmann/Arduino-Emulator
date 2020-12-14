@@ -68,7 +68,7 @@ class RemoteSerialImpl : public Stream {
         }
         service->send(SerialRead);
         service->send(no);
-        service->send(length);
+        service->send((uint64_t)length);
         service->flush();
         int len = service->receive(buffer, length);  
         return len;
