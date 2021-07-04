@@ -21,7 +21,7 @@ I have a __first working prototype__ ready but naturally there is still a lot to
 
 ## Using this Project as a library
 
-If you have an Arduino Sketch that you want to run e.g in Linux or OS/X you include this library with cmake. 
+If you have an Arduino Sketch that you want to run e.g in Linux or OS/X you can include this library with cmake. 
 Here is an [example cmake file](https://github.com/pschatzmann/Mozzi/blob/master/CMakeLists.txt) for a [Arduino Mozzi Sketch](https://sensorium.github.io/Mozzi/).
 
 
