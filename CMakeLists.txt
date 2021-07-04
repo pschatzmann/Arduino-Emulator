@@ -9,6 +9,7 @@ project(
   LANGUAGES CXX)
 
 add_definitions(-DHOST)
+option(BUILD_SHARED_LIBS "Build with shared libraries" ON)
 
 # Define the directories with the h files
 include_directories("${CMAKE_SOURCE_DIR}/ArduinoCore-API/api"
@@ -19,7 +20,11 @@ file(GLOB HEADER_LIST CONFIGURE_DEPENDS "${PROJECT_SOURCE_DIR}/ArduinoCore-API/a
 file(GLOB SRC_LIST CONFIGURE_DEPENDS "${PROJECT_SOURCE_DIR}/ArduinoCore-API/api/*.cpp" "${PROJECT_SOURCE_DIR}/ArduinoCore-Linux/cores/arduino/*.cpp")
 
 # Make an dynamic library 
-add_library(arduino_emulator SHARED ${SRC_LIST} ${HEADER_LIST})
+add_library(arduino_emulator ${SRC_LIST} ${HEADER_LIST})
+
+target_include_directories (arduino_emulator PUBLIC "${CMAKE_SOURCE_DIR}/ArduinoCore-API/api"
+    "${CMAKE_SOURCE_DIR}/ArduinoCore-Linux/cores/arduino" )
+
 
 # All users of this library will need at least C++17
 target_compile_features(arduino_emulator PUBLIC cxx_std_17)
