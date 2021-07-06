@@ -12,18 +12,31 @@ add_definitions(-DHOST)
 option(BUILD_SHARED_LIBS "Build with shared libraries" ON)
 
 # Define the directories with the h files
-include_directories("${PROJECT_SOURCE_DIR}/ArduinoCore-API/api"
-    "${PROJECT_SOURCE_DIR}/ArduinoCore-Linux/cores/arduino")
+include_directories("${CMAKE_CURRENT_SOURCE_DIR}/ArduinoCore-API/api"
+    "${CMAKE_CURRENT_SOURCE_DIR}/ArduinoCore-Linux/cores/arduino")
 
 # glob, but only for CMake 3.12 or later:
-file(GLOB HEADER_LIST CONFIGURE_DEPENDS "${PROJECT_SOURCE_DIR}/ArduinoCore-API/api/*.h")
-file(GLOB SRC_LIST CONFIGURE_DEPENDS "${PROJECT_SOURCE_DIR}/ArduinoCore-API/api/*.cpp" "${PROJECT_SOURCE_DIR}/ArduinoCore-Linux/cores/arduino/*.cpp")
+file(GLOB HEADER_LIST CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/ArduinoCore-API/api/*.h")
+file(GLOB SRC_LIST CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/ArduinoCore-API/api/*.cpp" "${CMAKE_CURRENT_SOURCE_DIR}/ArduinoCore-Linux/cores/arduino/*.cpp")
 
 # Make an dynamic library 
 add_library(arduino_emulator ${SRC_LIST} ${HEADER_LIST})
 
-target_include_directories (arduino_emulator PUBLIC "${PROJECT_SOURCE_DIR}/ArduinoCore-API/api"
-    "${PROJECT_SOURCE_DIR}/ArduinoCore-Linux/cores/arduino" )
+target_include_directories (arduino_emulator PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/ArduinoCore-API/api"
+    "${CMAKE_CURRENT_SOURCE_DIR}/ArduinoCore-Linux/cores/arduino" )
+
+
+# Install header files 
+install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/ArduinoCore-API/api/" # source directory
+    DESTINATION "include/arduino" # target directory
+    FILES_MATCHING # install only matched files
+    PATTERN "*.h" # select header files
+)
+install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/ArduinoCore-Linux/cores/arduino/" # source directory
+    DESTINATION "include/arduino" # target directory
+    FILES_MATCHING # install only matched files
+    PATTERN "*.h" # select header files
+)
 
 
 # All users of this library will need at least C++17
