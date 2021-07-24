@@ -12,21 +12,13 @@ I really wanted to have an interactive [Jupyter](https://jupyter.org/) environem
 
 I am using [xeus-cling](https://github.com/jupyter-xeus/xeus-cling) as a runtime environment to simulate an Arduino Development board and I have added the missing implementation using C or the C++ std library.
 
-The goal is finally to be able to provide different alternative implementations for accessing the pins
-- Using a Stream interface to communicate with an real Arduino Device (e.g. via udp)
-- Using some standard Linux userspace APIs for GPIO
-- Using wiringPI to be run on a Raspberry PI
-- Output to a file from where it can be analysed
+Here is a quick demo:
 
-I have a __first working prototype__ ready but naturally there is still a lot to do.
-
-### Content
 - [Setup](01-Setup.ipynb)
 - [Introduction into some Basic Commands](02-BasicCommands.ipynb)
 - [The Network Stack](03-Network.ipynb)
 - [Using Pins](04-Pins.ipynb)
 - [Using Serial](05-Serial.ipynb)
-
 
 
 ## Documentation
