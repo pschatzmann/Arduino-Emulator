@@ -29,7 +29,7 @@ Here is an [example cmake file](https://github.com/pschatzmann/arduino-audio-too
 
 ## Documentation
 
-- Here is the generated [Class documentation](https://pschatzmann.github.io/arduino-audio-tools/html/annotated.html). 
+- Here is the generated [Class documentation](https://pschatzmann.github.io/Arduino-Emulator/html/annotated.html). 
 
 
 ## Installation
