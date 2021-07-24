@@ -6,7 +6,7 @@
  */
 
 #ifdef DEFINE_MAIN
-int main (int argc, char *argv[]) { 
+int main () { 
     setup();
     while(true){
         loop();
