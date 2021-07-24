@@ -23,7 +23,7 @@ Here is a quick demo:
 
 ## Documentation
 
-Here is the generated [Class documentation](https://pschatzmann.github.io/Arduino-Emulator/html/annotated.html). 
+The generated [Class documentation](https://pschatzmann.github.io/Arduino-Emulator/html/annotated.html). 
 
 
 ## Installation
