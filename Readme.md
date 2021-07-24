@@ -27,3 +27,17 @@ If you have an Arduino Sketch that you want to run e.g in Linux or OS/X you can 
 Here is an [example cmake file](https://github.com/pschatzmann/arduino-audio-tools/blob/main/examples-desktop/generator/CMakeLists.txt) for a [Arduino Audio Sketch](https://github.com/pschatzmann/arduino-audio-tools/tree/main/examples-desktop/generator).
 
 
+## Documentation
+
+- Here is the generated [Class documentation](https://pschatzmann.github.io/arduino-audio-tools/html/annotated.html). 
+
+
+## Installation
+
+You can download the library as zip and call include Library -> zip library. Or you can git clone this project into the Arduino libraries folder e.g. with
+
+```
+cd  ~/Documents/Arduino/libraries
+git clone https://github.com/pschatzmann/Arduino-Emulator
+
+```
