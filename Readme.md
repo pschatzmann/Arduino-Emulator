@@ -10,7 +10,7 @@ The goal is finally to be able to provide different alternative implementations 
 - Using wiringPI to be run on a Raspberry PI
 - Output to a file from where it can be analysed
 
-I have a __first working prototype__ ready but naturally there is still a lot to do:
+I have a __first working prototype__ ready but naturally there is still a lot to do.
 
 ## Content
 - [Setup](01-Setup.ipynb)
@@ -23,8 +23,6 @@ I have a __first working prototype__ ready but naturally there is still a lot to
 
 If you have an Arduino Sketch that you want to run e.g in Linux or OS/X you can include this library with cmake. 
 Here is an [example cmake file](https://github.com/pschatzmann/Mozzi/blob/master/CMakeLists.txt) for a [Arduino Mozzi Sketch](https://sensorium.github.io/Mozzi/).
-
-
 
 
 If you would like to contribute to the missing pieces - any help is welcome...
