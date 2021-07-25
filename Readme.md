@@ -8,7 +8,7 @@ Here is an [example cmake file](https://github.com/pschatzmann/arduino-audio-too
 
 ## Jupyter
 
-I really wanted to have an interactive [Jupyter](https://jupyter.org/) environemnt in which I could play around with [Arduino](https://www.arduino.cc/) commands and when I discovered that Arduino provides a good starting point with their [ArduinoCore-API](https://github.com/arduino/ArduinoCore-API/tree/105276f8d81413391b14a3dc6c80180ee9e33d56) I decided to draft this prototype.
+I really wanted to have an interactive [Jupyter](https://jupyter.org/) environemnt in which I could play around with [Arduino](https://www.arduino.cc/) commands and when I discovered that Arduino provides a good starting point with their [ArduinoCore-API](https://github.com/arduino/ArduinoCore-API/tree/105276f8d81413391b14a3dc6c80180ee9e33d56) I decided to start this project.
 
 I am using [xeus-cling](https://github.com/jupyter-xeus/xeus-cling) as a runtime environment to simulate an Arduino Development board and I have added the missing implementation using C or the C++ std library.
 
@@ -26,12 +26,3 @@ Here is a quick demo:
 The generated [Class documentation](https://pschatzmann.github.io/Arduino-Emulator/html/annotated.html). 
 
 
-## Installation
-
-You can download the library as zip and call include Library -> zip library. Or you can git clone this project into the Arduino libraries folder e.g. with
-
-```
-cd  ~/Documents/Arduino/libraries
-git clone https://github.com/pschatzmann/Arduino-Emulator
-
-```
