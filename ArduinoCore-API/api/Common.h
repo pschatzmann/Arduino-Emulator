@@ -112,8 +112,8 @@ void attachInterrupt(pin_size_t interruptNumber, voidFuncPtr callback, PinStatus
 void attachInterruptParam(pin_size_t interruptNumber, voidFuncPtrParam callback, PinStatus mode, void* param);
 void detachInterrupt(pin_size_t interruptNumber);
 
-void setup(void);
-void loop(void);
+void setup(void)__attribute__((weak));
+void loop(void)__attribute__((weak));
 
 #ifdef __cplusplus
 } // extern "C"
