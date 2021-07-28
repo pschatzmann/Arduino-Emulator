@@ -27,7 +27,7 @@ namespace arduino {
 //================================================================================
 //  Low level API
 
-typedef struct __attribute__((packed))
+typedef struct __attribute__((packed)) USBSetupStruct
 {
   union {
     uint8_t bmRequestType;
