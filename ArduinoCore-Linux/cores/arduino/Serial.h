@@ -1,5 +1,7 @@
 #pragma once
 
+#ifndef NO_SERIALLIB
+
 #include "serialib.h"
 #include "HardwareSerial.h"
 
@@ -88,3 +90,5 @@ class SerialImpl : public HardwareSerial {
 extern SerialImpl Serial1; 
     
 } // namespace
+
+#endif

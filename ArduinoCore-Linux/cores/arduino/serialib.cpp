@@ -13,7 +13,7 @@ This is a licence-free software, it can be used by anyone who try to build a bet
  */
 
 #include "serialib.h"
-
+#ifndef NO_SERIALLIB
 
 
 //_____________________________________
@@ -951,3 +951,4 @@ unsigned long int timeOut::elapsedTime_ms()
     return sec*1000+usec/1000;
 }
 
+#endif
