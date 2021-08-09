@@ -19,11 +19,13 @@ class Test {
         auto str = new WiFiUDPStream();
         delete str;
     }
+    
+#if PROVIDE_SERIALLIB    
     void testSerialImpl() {
         auto str = new SerialImpl();
         delete str;
     }
-
+#endif
 };
     
 }

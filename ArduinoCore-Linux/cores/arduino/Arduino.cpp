@@ -24,9 +24,11 @@ namespace arduino {
 ArduinoLogger Logger;  // Support for logging
 WifiMock WiFi;         // So that we can use the WiFi
 StdioDevice Serial;    // output to screen
-SerialImpl Serial1("/dev/ttyACM0");    // output to serial port
 HardwareImpl Hardware; // implementation for gpio, spi, i2c
 HardwareSetupImpl HardwareSetup; // setup for implementation
+#if PROVIDE_SERIALLIB    
+SerialImpl Serial1("/dev/ttyACM0");    // output to serial port
+#endif
 
 
 //static PluggableUSB_ obj;

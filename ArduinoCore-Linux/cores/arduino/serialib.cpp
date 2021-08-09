@@ -12,8 +12,8 @@ FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN 
 This is a licence-free software, it can be used by anyone who try to build a better world.
  */
 
+#if PROVIDE_SERIALLIB
 #include "serialib.h"
-#ifndef NO_SERIALLIB
 
 
 //_____________________________________

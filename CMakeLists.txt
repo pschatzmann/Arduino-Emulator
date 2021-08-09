@@ -10,6 +10,7 @@ project(
 
 add_definitions(-DHOST)
 option(BUILD_SHARED_LIBS "Build with shared libraries" ON)
+option(PROVIDE_SERIALLIB "Serial Interface" OFF)
 
 # glob, but only for CMake 3.12 or later:
 file(GLOB HEADER_LIST CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/ArduinoCore-API/api/*.h")

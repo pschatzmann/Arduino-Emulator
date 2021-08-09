@@ -1,6 +1,6 @@
 #pragma once
 
-#ifndef NO_SERIALLIB
+#if PROVIDE_SERIALLIB
 
 #include "serialib.h"
 #include "HardwareSerial.h"

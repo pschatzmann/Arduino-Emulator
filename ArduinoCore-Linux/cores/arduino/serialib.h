@@ -14,7 +14,7 @@ FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN 
 This is a licence-free software, it can be used by anyone who try to build a better world.
 */
 
-#ifndef NO_SERIALLIB
+#if PROVIDE_SERIALLIB
 
 // Used for TimeOut operations
 #include <sys/time.h>
