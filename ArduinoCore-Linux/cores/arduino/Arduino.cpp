@@ -107,3 +107,7 @@ unsigned long pulseInLong(uint8_t pinNumber, uint8_t state, unsigned long timeou
     return Hardware.gpio->pulseInLong(pinNumber, state, timeout);                
 }
 
+void yield(){
+}
+
+
