@@ -89,9 +89,12 @@ public:
   bool open(const char *name, int flags) {
     this->filename = name;
     struct stat info;
-    if ((flags == O_RDONLY) && stat(name, &info) != 0)
+    int rc = stat(name, &info);
+    if ((flags == O_RDONLY) && rc == -1){
+      // if we want to read but the file does not exist we fail
       return false;
-    else if (info.st_mode & S_IFDIR) {
+    } else if (rc == 0 && info.st_mode & S_IFDIR) {
+      // file exists and it is a directory
       is_dir = true;
       size = 0;
 #ifdef USE_FILESYSTEM
