@@ -11,12 +11,14 @@
 #pragma once
 
 #include "Stream.h"
-#include <filesystem>
 #include <fstream>
 #include <iostream>
 #include <string>
 #include <sys/stat.h>
 #include <sys/types.h>
+#ifdef USE_FILESYSTEM
+#include <filesystem>
+#endif
 
 #define SD_SCK_MHZ(maxMhz) (1000000UL * (maxMhz))
 #define SPI_FULL_SPEED SD_SCK_MHZ(50)
@@ -92,8 +94,10 @@ public:
     else if (info.st_mode & S_IFDIR) {
       is_dir = true;
       size = 0;
+#ifdef USE_FILESYSTEM
       dir_path = std::filesystem::path(filename);
       iterator = std::filesystem::directory_iterator({dir_path});
+#endif
       return true;
     } else {
       is_dir = false;
@@ -132,10 +136,12 @@ public:
     return is_dir;
   }
   bool openNext(SdFile &dir, int flags = O_RDONLY) {
+  #ifdef USE_FILESYSTEM
     if (dir.isDir() && dir.iterator != end(dir.iterator)) {
       std::filesystem::directory_entry entry = *dir.iterator++;
       return open(entry.path().c_str(), flags);
     }
+  #endif
     return false;
   }
   int dirIndex() { return pos; }
@@ -144,8 +150,10 @@ protected:
   std::fstream file;
   size_t size = 0;
   bool is_dir;
-  std::filesystem::directory_iterator iterator;
-  std::filesystem::path dir_path;
   int pos = 0;
   std::string filename;
+#ifdef USE_FILESYSTEM
+  std::filesystem::directory_iterator iterator;
+  std::filesystem::path dir_path;
+#endif
 };
