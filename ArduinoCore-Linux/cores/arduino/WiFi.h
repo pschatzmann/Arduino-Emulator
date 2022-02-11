@@ -1,6 +1,7 @@
 #pragma once
 
 #include "WiFiClient.h"
+#include "WiFiClientSecure.h"
 
 /**
  * @brief We provide the WiFi class to simulate the Arduino WIFI. In in Linux

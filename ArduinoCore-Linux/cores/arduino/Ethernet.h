@@ -21,7 +21,6 @@ class EthernetImpl {
     
   protected:
     IPAddress adress;
-    
 };
     
 inline EthernetImpl Ethernet;
@@ -29,20 +28,29 @@ inline EthernetImpl Ethernet;
     
 class EthernetClient : public Client {
     public:
-        EthernetClient(int bufferSize=256, long timeout=2000){
+        EthernetClient(int bufferSize=256, long timeout=2000, SocketImpl *p_sock=nullptr){
             this->bufferSize = bufferSize;
             readBuffer = RingBufferExt(bufferSize);
             writeBuffer = RingBufferExt(bufferSize);
+            sock = p_sock;
+            if (sock==nullptr){
+                sock = new SocketImpl();
+            }
             setTimeout(timeout);
         }
+
+        ~EthernetClient(){
+            delete sock;
+        }
+
 
         // checks if we are connected - using a timeout
         virtual uint8_t connected() {
             long timeout = millis() + getTimeout();
-            uint8_t result = sock.connected();
+            uint8_t result = sock->connected();
             while (result<=0 && millis() < timeout){
                 delay(200);
-                result = sock.connected();
+                result = sock->connected();
             }
             return result;
         }
@@ -64,9 +72,9 @@ class EthernetClient : public Client {
         virtual int connect(const char* address, uint16_t port){
             Logger.info(WIFICLIENT,"connect");
             if (connectedFast()){
-                sock.close();
+                sock->close();
             }
-            sock.connect(address, port);
+            sock->connect(address, port);
             is_connected = true;
             return 1;
         }
@@ -90,7 +98,7 @@ class EthernetClient : public Client {
         // direct write - if we have anything in the buffer we write that out first
         virtual size_t write(const uint8_t* str, size_t len){
             flush();
-            return sock.write(str, len); 
+            return sock->write(str, len); 
         }
     
         virtual int print(const char* str=""){
@@ -115,7 +123,7 @@ class EthernetClient : public Client {
             if (flushSize>0){
                 uint8_t rbuffer[flushSize];
                 writeBuffer.read(rbuffer, flushSize);
-                sock.write(rbuffer, flushSize);
+                sock->write(rbuffer, flushSize);
             }
         }
 
@@ -126,10 +134,10 @@ class EthernetClient : public Client {
                 return readBuffer.available();
             }
             long timeout = millis() + getTimeout();
-            int result = sock.available();            
+            int result = sock->available();            
             while (result<=0 && millis() < timeout){
                 delay(200);
-                result = result = sock.available(); 
+                result = result = sock->available(); 
             }
             return result;
         }
@@ -157,10 +165,10 @@ class EthernetClient : public Client {
                 result = readBuffer.read(buffer, len);
             } else {            
                 long timeout = millis() + getTimeout();
-                result = sock.read(buffer, len);
+                result = sock->read(buffer, len);
                 while (result<=0 && millis() < timeout){
                     delay(200);
-                    result = sock.read(buffer, len);
+                    result = sock->read(buffer, len);
                 }
             }
             char lenStr[16];
@@ -176,17 +184,17 @@ class EthernetClient : public Client {
             if (readBuffer.available()>0){
                 return readBuffer.peek();
             }
-            return sock.peek();
+            return sock->peek();
         }
     
         // close the connection
         virtual void stop() {
-            sock.close();
+            sock->close();
         }
 
     protected:
         const char *WIFICLIENT = "EthernetClient";
-        SocketImpl sock;
+        SocketImpl *sock=nullptr;
         int bufferSize;
         RingBufferExt readBuffer;
         RingBufferExt writeBuffer;

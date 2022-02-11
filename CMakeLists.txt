@@ -8,6 +8,20 @@ project(
   DESCRIPTION "Arduino Emulator for Linux"
   LANGUAGES CXX)
 
+# Https takes quite some time and is not always neede
+option(BUILD_HTTPS "Https Support" ON)
+
+# Https support: Build with wolfssl 
+if(BUILD_HTTPS)
+    include(FetchContent)
+    FetchContent_Declare(wolfssl GIT_REPOSITORY "https://github.com/wolfSSL/wolfssl.git" GIT_TAG v5.1.1-stable )
+    FetchContent_GetProperties(wolfssl)
+    if(NOT wolfssl)
+        FetchContent_Populate(wolfssl)
+        add_subdirectory(${wolfssl_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR}/wolfssl)
+    endif()
+endif(BUILD_HTTPS)
+
 add_definitions(-DHOST)
 option(BUILD_SHARED_LIBS "Build with shared libraries" ON)
 option(PROVIDE_SERIALLIB "Serial Interface" OFF)
@@ -35,9 +49,11 @@ install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/ArduinoCore-Linux/cores/arduino/"
     PATTERN "*.h" # select header files
 )
 
-
 # All users of this library will need at least C++17
 target_compile_features(arduino_emulator PUBLIC cxx_std_17)
 target_compile_options(arduino_emulator PRIVATE -Wno-nonportable-include-path)
 
-
+if(BUILD_HTTPS)
+    # Add external libraries
+    target_link_libraries(arduino_emulator wolfssl)
+endif(BUILD_HTTPS)
