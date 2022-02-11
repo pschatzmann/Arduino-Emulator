@@ -1,9 +1,9 @@
 #pragma once
-#if BUILD_HTTPS
+#if BUILD_HTTPS==ON
 #include <wolfssl/ssl.h>
 
 namespace arduino {
-
+  
 #define SOCKET_IMPL_SEC "SocketImplSecure"
 
 /**
