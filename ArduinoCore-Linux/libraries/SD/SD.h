@@ -41,7 +41,7 @@
 #define O_READ O_RDONLY
 #define O_WRITE O_WRONLY
 #define FILE_READ ios::in
-#ifndef FILE_WRITE ios::out
+#define FILE_WRITE ios::out
 
 #define SS 0
 #endif
