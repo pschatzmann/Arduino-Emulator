@@ -40,8 +40,9 @@
 #define O_SYNC 0                  ///< Synchronized write I/O operations.
 #define O_READ O_RDONLY
 #define O_WRITE O_WRONLY
+#define FILE_READ ios::in
+#ifndef FILE_WRITE ios::out
 
-#ifndef SS
 #define SS 0
 #endif
 
@@ -70,10 +71,22 @@ public:
   }
   void initErrorHalt() { exit(0); }
 
-  bool exists(char *name) {
+  bool exists(const char *name) {
     struct stat info;
     return stat(name, &info) == 0;
   }
+
+  SDFile open(const char name, int flags){
+    SdFile file;
+    file.open(name, flags);
+    return file;
+  }
+
+  bool remove(const char *name){
+    return std::remove(name)==0;
+  }
+
+
 };
 
 /**
@@ -163,3 +176,5 @@ protected:
 };
 
 static  SdFat SD;
+typedef SdFile File;
+
