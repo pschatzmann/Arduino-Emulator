@@ -9,7 +9,7 @@ project(
   LANGUAGES CXX)
 
 # Https takes quite some time and is not always neede
-option(BUILD_HTTPS "Https Support" ON)
+option(BUILD_HTTPS "Https Support" OFF)
 
 # Https support: Build with wolfssl 
 if(BUILD_HTTPS)
