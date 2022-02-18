@@ -1,21 +1,23 @@
 /**
- * @file SdFat.h
+ * @file SD.h
  * @author Phil Schatzmann
- * @brief The most important functions of SdFat library implemented based on std 
+ * @brief The most important functions of SD library implemented based on std
  * @version 0.1
  * @date 2022-02-07
- * 
+ *
  * @copyright Copyright (c) 2022
- * 
+ *
  */
 #pragma once
 
-#include "Stream.h"
+#include <sys/stat.h>
+#include <sys/types.h>
+
 #include <fstream>
 #include <iostream>
 #include <string>
-#include <sys/stat.h>
-#include <sys/types.h>
+
+#include "Stream.h"
 #ifdef USE_FILESYSTEM
 #include <filesystem>
 #endif
@@ -29,20 +31,21 @@
 #define SPI_EIGHTH_SPEED SD_SCK_MHZ(1)
 #define SPI_SIXTEENTH_SPEED SD_SCK_HZ(500000)
 
-#define O_RDONLY ios::in          ///< Open for reading only.
-#define O_WRONLY ios::out         ///< Open for writing only.
-#define O_RDWR ios::in | ios::out ///< Open for reading and writing.
-#define O_AT_END ios::ate         ///< Open at EOF.
-#define O_APPEND ios::ate         ///< Set append mode.
-#define O_CREAT ios::trunc                 ///< Create file if it does not exist.
-#define O_TRUNC ios::trunc        ///< Truncate file to zero length.
-#define O_EXCL 0                  ///< Fail if the file exists.
-#define O_SYNC 0                  ///< Synchronized write I/O operations.
+#define O_RDONLY ios::in           ///< Open for reading only.
+#define O_WRONLY ios::out          ///< Open for writing only.
+#define O_RDWR ios::in | ios::out  ///< Open for reading and writing.
+#define O_AT_END ios::ate          ///< Open at EOF.
+#define O_APPEND ios::ate          ///< Set append mode.
+#define O_CREAT ios::trunc         ///< Create file if it does not exist.
+#define O_TRUNC ios::trunc         ///< Truncate file to zero length.
+#define O_EXCL 0                   ///< Fail if the file exists.
+#define O_SYNC 0                   ///< Synchronized write I/O operations.
 #define O_READ O_RDONLY
 #define O_WRITE O_WRONLY
 #define FILE_READ ios::in
 #define FILE_WRITE ios::out
 
+#ifndef SS
 #define SS 0
 #endif
 
@@ -58,47 +61,11 @@ class SdSpiConfig {
 };
 
 /**
- * @brief C++ std based emulatoion ofr SdFat
+ * @brief C++ std based emulatoion ofr File
  *
  */
-class SdFat {
-public:
-  bool begin(int cs = SS, int speed = 0) { return true; }
-  bool begin(SdSpiConfig &cfg) { return true; }
-  void errorHalt(const char *msg) {
-    Serial.println(msg);
-    exit(0);
-  }
-  void initErrorHalt() { exit(0); }
-
-  bool exists(const char *name) {
-    struct stat info;
-    return stat(name, &info) == 0;
-  }
-
-  SDFile open(const char name, int flags){
-    SdFile file;
-    file.open(name, flags);
-    return file;
-  }
-
-  bool remove(const char *name){
-    return std::remove(name)==0;
-  }
-
-  bool mkdir(const char *name){
-    // not implemented
-    return false;
-  }
-
-};
-
-/**
- * @brief C++ std based emulatoion ofr SdFile
- *
- */
-class SdFile : public Stream {
-public:
+class File : public Stream {
+ public:
   bool isOpen() {
     bool result = file.is_open();
     return result;
@@ -108,13 +75,13 @@ public:
     this->filename = name;
     struct stat info;
     int rc = stat(name, &info);
-    if ((flags == O_RDONLY) && rc == -1){
+    if ((flags == O_RDONLY) && rc == -1) {
       // if we want to read but the file does not exist we fail
       return false;
     } else if (rc == 0 && info.st_mode & S_IFDIR) {
       // file exists and it is a directory
       is_dir = true;
-      size = 0;
+      size_bytes = 0;
 #ifdef USE_FILESYSTEM
       dir_path = std::filesystem::path(filename);
       iterator = std::filesystem::directory_iterator({dir_path});
@@ -122,7 +89,7 @@ public:
       return true;
     } else {
       is_dir = false;
-      size = info.st_size;
+      size_bytes = info.st_size;
       file.open(filename.c_str(), flags);
       return isOpen();
     }
@@ -144,7 +111,7 @@ public:
     file.put(ch);
     return file.good() ? 1 : 0;
   }
-  int available() override { return size - file.tellg(); };
+  int available() override { return size_bytes - file.tellg(); };
   int availableForWrite() override { return 1024; }
   int read() override { return file.get(); }
   int peek() override { return file.peek(); }
@@ -156,20 +123,32 @@ public:
     pos = 0;
     return is_dir;
   }
-  bool openNext(SdFile &dir, int flags = O_RDONLY) {
-  #ifdef USE_FILESYSTEM
+  bool openNext(File &dir, int flags = O_RDONLY) {
+#ifdef USE_FILESYSTEM
     if (dir.isDir() && dir.iterator != end(dir.iterator)) {
       std::filesystem::directory_entry entry = *dir.iterator++;
       return open(entry.path().c_str(), flags);
     }
-  #endif
+#endif
     return false;
   }
   int dirIndex() { return pos; }
 
-protected:
+  size_t size() { return size_bytes; }
+
+  size_t position() { return file.tellg(); }
+  size_t seek(size_t pos) {
+    file.seekg(pos);
+    return pos;
+  }
+
+  operator boolean(){
+    return isOpen();
+  }
+
+ protected:
   std::fstream file;
-  size_t size = 0;
+  size_t size_bytes = 0;
   bool is_dir;
   int pos = 0;
   std::string filename;
@@ -179,6 +158,37 @@ protected:
 #endif
 };
 
-static  SdFat SD;
-typedef SdFile File;
+/**
+ * @brief C++ std based emulatoion ofr SdFat
+ *
+ */
+class SdFat {
+ public:
+  bool begin(int cs = SS, int speed = 0) { return true; }
+  bool begin(SdSpiConfig &cfg) { return true; }
+  void errorHalt(const char *msg) {
+    Serial.println(msg);
+    exit(0);
+  }
+  void initErrorHalt() { exit(0); }
 
+  bool exists(const char *name) {
+    struct stat info;
+    return stat(name, &info) == 0;
+  }
+
+  File open(const char *name, int flags) {
+    File file;
+    file.open(name, flags);
+    return file;
+  }
+
+  bool remove(const char *name) { return std::remove(name) == 0; }
+
+  bool mkdir(const char *name) {
+    // not implemented
+    return false;
+  }
+};
+
+static SdFat SD;
