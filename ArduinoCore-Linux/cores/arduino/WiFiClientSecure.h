@@ -1,5 +1,5 @@
 #pragma once
-#if BUILD_HTTPS==ON
+#if defined(USE_HTTPS)
 #include <wolfssl/ssl.h>
 
 namespace arduino {
