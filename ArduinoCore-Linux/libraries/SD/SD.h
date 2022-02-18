@@ -75,6 +75,7 @@ public:
     return stat(name, &info) == 0;
   }
 };
+
 /**
  * @brief C++ std based emulatoion ofr SdFile
  *
@@ -160,3 +161,5 @@ protected:
   std::filesystem::path dir_path;
 #endif
 };
+
+static  SdFat SD;
