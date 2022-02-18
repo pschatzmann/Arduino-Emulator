@@ -86,6 +86,10 @@ public:
     return std::remove(name)==0;
   }
 
+  bool mkdir(const char *name){
+    // not implemented
+    return false;
+  }
 
 };
 
