@@ -104,7 +104,7 @@ public:
       return true;
     } else {
       is_dir = false;
-      size = info.st_size;
+      size = rc!=-1 ? info.st_size: 0;
       file.open(filename.c_str(), flags);
       return isOpen();
     }

@@ -89,7 +89,7 @@ class File : public Stream {
       return true;
     } else {
       is_dir = false;
-      size_bytes = info.st_size;
+      size_bytes = rc != -1 ? info.st_size : 0;
       file.open(filename.c_str(), flags);
       return isOpen();
     }
@@ -142,9 +142,7 @@ class File : public Stream {
     return pos;
   }
 
-  operator boolean(){
-    return isOpen();
-  }
+  operator boolean() { return isOpen(); }
 
  protected:
   std::fstream file;
@@ -184,11 +182,7 @@ class SdFat {
   }
 
   bool remove(const char *name) { return std::remove(name) == 0; }
-
-  bool mkdir(const char *name) {
-    // not implemented
-    return false;
-  }
+  bool mkdir(const char *name) { return ::mkdir(name,0777) == 0; }
 };
 
 static SdFat SD;
