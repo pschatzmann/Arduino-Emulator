@@ -73,7 +73,6 @@ class File : public Stream {
 
   bool open(const char *name, int flags) {
     this->filename = name;
-    struct stat info;
     int rc = stat(name, &info);
     if ((flags == O_RDONLY) && rc == -1) {
       // if we want to read but the file does not exist we fail
@@ -134,7 +133,11 @@ class File : public Stream {
   }
   int dirIndex() { return pos; }
 
-  size_t size() { return size_bytes; }
+  size_t size() { 
+    int rc = stat(filename.c_str(), &info);
+    size_bytes = rc != -1 ? info.st_size : 0;
+    return size_bytes;
+  }
 
   size_t position() { return file.tellg(); }
   size_t seek(size_t pos) {
@@ -150,6 +153,8 @@ class File : public Stream {
   bool is_dir;
   int pos = 0;
   std::string filename;
+  struct stat info;
+
 #ifdef USE_FILESYSTEM
   std::filesystem::directory_iterator iterator;
   std::filesystem::path dir_path;
