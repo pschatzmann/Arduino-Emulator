@@ -14,7 +14,7 @@ namespace arduino {
 
 class RingBufferExt {
     public:
-        RingBufferExt(int size=512){
+        RingBufferExt(int size=1024){
             max_len = size;
             buffer = new char[size];
         }

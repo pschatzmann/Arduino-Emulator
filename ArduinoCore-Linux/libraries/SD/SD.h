@@ -99,9 +99,10 @@ class File : public Stream {
     return !isOpen();
   }
 
-  size_t readBytes(uint8_t *buffer, size_t length) override {
+  size_t readBytes(char *buffer, size_t length) override {
     return file.readsome((char *)buffer, length);
   }
+
   size_t write(const uint8_t *buffer, size_t size) override {
     file.write((const char *)buffer, size);
     return file.good() ? size : 0;
