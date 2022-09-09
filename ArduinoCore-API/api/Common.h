@@ -115,10 +115,10 @@ void detachInterrupt(pin_size_t interruptNumber);
 void setup(void)__attribute__((weak));
 void loop(void)__attribute__((weak));
 
-// WMath prototypes
-long random(long);
-long random(long, long);
-void randomSeed(unsigned long);
+// // WMath prototypes
+// long random(long);
+// long random(long, long);
+// void randomSeed(unsigned long);
 long map(long, long, long, long, long);
 
 #ifdef __cplusplus
