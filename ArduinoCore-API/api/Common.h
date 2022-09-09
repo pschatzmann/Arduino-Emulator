@@ -115,20 +115,6 @@ void detachInterrupt(pin_size_t interruptNumber);
 void setup(void)__attribute__((weak));
 void loop(void)__attribute__((weak));
 
-// // WMath prototypes
-// long random(long);
-// long random(long, long);
-// void randomSeed(unsigned long);
-
-long random(long max){
-  return rand() % max;
-}
-
-void randomSeed(unsigned seed){
-  srand(seed)
-}
-
-
 long map(long, long, long, long, long);
 
 #ifdef __cplusplus
@@ -163,6 +149,19 @@ long map(long, long, long, long, long);
 #endif
 
 #ifdef __cplusplus
+
+// // WMath prototypes
+// long random(long);
+// long random(long, long);
+// void randomSeed(unsigned long);
+
+long random(long max){
+  return rand() % max;
+}
+
+void randomSeed(unsigned seed){
+  srand(seed)
+}
 
 /* C++ prototypes */
 uint16_t makeWord(uint16_t w);
