@@ -115,6 +115,12 @@ void detachInterrupt(pin_size_t interruptNumber);
 void setup(void)__attribute__((weak));
 void loop(void)__attribute__((weak));
 
+// WMath prototypes
+long random(long);
+long random(long, long);
+void randomSeed(unsigned long);
+long map(long, long, long, long, long);
+
 #ifdef __cplusplus
 } // extern "C"
 #endif
@@ -160,10 +166,5 @@ unsigned long pulseInLong(uint8_t pin, uint8_t state, unsigned long timeout = 10
 void tone(uint8_t _pin, unsigned int frequency, unsigned long duration = 0);
 void noTone(uint8_t _pin);
 
-// WMath prototypes
-long random(long);
-long random(long, long);
-void randomSeed(unsigned long);
-long map(long, long, long, long, long);
 
 #endif // __cplusplus

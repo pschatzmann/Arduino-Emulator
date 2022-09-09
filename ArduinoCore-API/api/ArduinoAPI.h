@@ -46,10 +46,9 @@
 #include <string.h>
 #include <math.h>
 
+#ifdef __cplusplus
 // Misc Arduino core functions
 #include "Common.h"
-
-#ifdef __cplusplus
 // Compatibility layer for older code
 #include "Compat.h"
 #endif
