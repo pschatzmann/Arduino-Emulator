@@ -1,5 +1,6 @@
 #pragma once
 #include <stdint.h>
+#include <cstdlib>
 
 #ifdef __cplusplus
 extern "C"{
@@ -155,12 +156,12 @@ long map(long, long, long, long, long);
 // long random(long, long);
 // void randomSeed(unsigned long);
 
-long random(long max){
+static long random(long max){
   return rand() % max;
 }
 
-void randomSeed(unsigned seed){
-  srand(seed)
+static void randomSeed(unsigned seed){
+  srand(seed);
 }
 
 /* C++ prototypes */
