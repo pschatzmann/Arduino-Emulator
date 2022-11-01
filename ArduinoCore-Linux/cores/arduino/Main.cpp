@@ -5,11 +5,13 @@
  * 
  */
 
-#ifdef DEFINE_MAIN
-int main () { 
+__weak void setup() {}
+__weak void loop() {}
+
+__weak int main () { 
     setup();
     while(true){
         loop();
     }
 }	
-#endif
+
