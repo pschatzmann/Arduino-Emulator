@@ -89,7 +89,7 @@ class Print
     size_t println(const Printable&);
     size_t println(void);
 
-    void flush() { /* Empty implementation for backward compatibility */ }
+    virtual void flush() { /* Empty implementation for backward compatibility */ }
 };
 
 }
