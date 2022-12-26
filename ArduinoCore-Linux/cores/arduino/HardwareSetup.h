@@ -5,6 +5,7 @@
 #include "RemoteSPI.h"
 #include "RemoteGPIO.h"
 #include "WiFiUdpStream.h"
+#include <exception>
 
 //#include "RemoteI2S.h"
 
@@ -94,8 +95,8 @@ class HardwareSetupImpl {
                         }
                     }    
                     delay(10000);
-                } catch (const std::exception& e) { 
-                    Logger.error("WiFiUDPStream", e.what());
+                } catch (const std::exception &ex) { 
+                    Logger.error("WiFiUDPStream", ex.what());
                 }
             }
         }

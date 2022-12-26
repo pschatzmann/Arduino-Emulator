@@ -5,10 +5,10 @@
  * 
  */
 
-__weak void setup() {}
-__weak void loop() {}
+__attribute__((weak)) void setup() {}
+__attribute__((weak)) void loop() {}
 
-__weak int main () { 
+__attribute__((weak)) int main () { 
     setup();
     while(true){
         loop();
