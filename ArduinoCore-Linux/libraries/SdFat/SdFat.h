@@ -105,7 +105,7 @@ public:
     } else {
       is_dir = false;
       size = rc!=-1 ? info.st_size: 0;
-      file.open(filename.c_str(), flags);
+      file.open(filename.c_str(), (std::ios_base::openmode)flags);
       return isOpen();
     }
   }
