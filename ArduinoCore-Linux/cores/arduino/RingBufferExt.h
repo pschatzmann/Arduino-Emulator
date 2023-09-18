@@ -2,6 +2,8 @@
 
 #include "stddef.h"
 #include "stdint.h"
+#include "vector"
+
 
 namespace arduino {
 
@@ -16,12 +18,9 @@ class RingBufferExt {
     public:
         RingBufferExt(int size=1024){
             max_len = size;
-            buffer = new char[size];
+            buffer.resize(size);
         }
 
-        ~RingBufferExt(){
-            delete buffer;
-        }
 
         // available to read
         int available() {
@@ -100,7 +99,7 @@ class RingBufferExt {
         }
 
     protected:
-        char* buffer;
+        std::vector<char> buffer;
         int max_len;
         int actual_len = 0;
         int actual_read_pos = 0;

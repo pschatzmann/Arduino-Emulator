@@ -14,6 +14,10 @@
 #include <ifaddrs.h>
 #include <netinet/in.h>
 #include <net/if.h>
+#include <netdb.h>
+#include <sys/types.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
 
 #include "SocketImpl.h"
 #include "ArduinoLogger.h"
@@ -58,8 +62,14 @@ int SocketImpl::connect(const char* address, uint16_t port){
     serv_addr.sin_family = AF_INET; 
     serv_addr.sin_port = htons(port); 
 
+    const char* address_ip = address;
+    hostent *host_entry = gethostbyname(address); //find host information
+    if (host_entry!=nullptr){
+        address_ip = inet_ntoa(*((struct in_addr*) host_entry->h_addr_list[0])); //Convert into IP string
+    }
+
     // Convert IPv4 and IPv6 addresses from text to binary form 
-    if(::inet_pton(AF_INET, address, &serv_addr.sin_addr)<=0)  { 
+    if(::inet_pton(AF_INET, address_ip, &serv_addr.sin_addr)<=0)  { 
         Logger.error(SOCKET_IMPL,"invalid address");
         return -2; 
     } 

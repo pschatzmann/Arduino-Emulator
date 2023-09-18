@@ -39,8 +39,12 @@ class EthernetClient : public Client {
             setTimeout(timeout);
         }
 
+        EthernetClient(const EthernetClient&) = delete;
+
+
         ~EthernetClient(){
             delete sock;
+            sock = nullptr;
         }
 
 
@@ -137,7 +141,7 @@ class EthernetClient : public Client {
             int result = sock->available();            
             while (result<=0 && millis() < timeout){
                 delay(200);
-                result = result = sock->available(); 
+                result = sock->available(); 
             }
             return result;
         }
