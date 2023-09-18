@@ -148,47 +148,39 @@ class EthernetClient : public Client {
 
         // read via ring buffer
         virtual int read() {
-            Logger.debug(WIFICLIENT,"read-1");
-            if (readBuffer.available()==0){
-                uint8_t buffer[bufferSize];
-                int len = read((uint8_t*)buffer, bufferSize);
-                readBuffer.write(buffer, len);
+            int result = -1;
+            uint8_t c;
+            if (readBytes(&c,1)==1){
+                result = c;
             }
-            return readBuffer.read();
+            // Logger.debug(WIFICLIENT,"read-1");
+            // if (readBuffer.available()==0){
+            //     uint8_t buffer[bufferSize];
+            //     int len = read((uint8_t*)buffer, bufferSize);
+            //     readBuffer.write(buffer, len);
+            // }
+            // return readBuffer.read();
+            return result;;
         }
 
-        virtual int read(char* buffer, size_t len){
+        size_t readBytes(char* buffer, size_t len){
             return read((uint8_t* )buffer, len);
         }
-    
-        // direct read with timeout
-        virtual int read(uint8_t* buffer, size_t len){
-            Logger.debug(WIFICLIENT,"read");
-            int result = 0;
-            if (readBuffer.available()>0){
-                result = readBuffer.read(buffer, len);
-            } else {            
-                long timeout = millis() + getTimeout();
-                result = sock->read(buffer, len);
-                while (result<=0 && millis() < timeout){
-                    delay(200);
-                    result = sock->read(buffer, len);
-                }
-            }
-            char lenStr[16];
-            sprintf(lenStr,"%d",result);
-            Logger.debug( WIFICLIENT,"read->",lenStr);
-            
-            return result;
+
+        size_t readBytes(uint8_t* buffer, size_t len) override {
+            return read(buffer, len);
         }
+
+        // direct read with timeout
         
         // peeks one character
         virtual int peek(){
-            Logger.debug(WIFICLIENT, "peek");
-            if (readBuffer.available()>0){
-                return readBuffer.peek();
-            }
+            // Logger.debug(WIFICLIENT, "peek");
+            // if (readBuffer.available()>0){
+            //     return readBuffer.peek();
+            // }
             return sock->peek();
+            return -1;
         }
     
         // close the connection
@@ -204,6 +196,26 @@ class EthernetClient : public Client {
         RingBufferExt writeBuffer;
         bool is_connected;
     
+        int read(uint8_t* buffer, size_t len) override {
+            Logger.debug(WIFICLIENT,"read");
+            int result = 0;
+            // if (readBuffer.available()>0){
+            //     result = readBuffer.read(buffer, len);
+            // } else {            
+                long timeout = millis() + getTimeout();
+                result = sock->read(buffer, len);
+                while (result<=0 && millis() < timeout){
+                    delay(200);
+                    result = sock->read(buffer, len);
+                }
+            //}
+            char lenStr[16];
+            sprintf(lenStr,"%d",result);
+            Logger.debug( WIFICLIENT,"read->",lenStr);
+            
+            return result;
+        }
+
         bool connectedFast() {
             return is_connected;
         }
