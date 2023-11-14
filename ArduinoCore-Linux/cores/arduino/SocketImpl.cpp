@@ -143,6 +143,7 @@ char* defaultInterface() {
       }
     }
   }
+  return nullptr;
 }
 
 // determines the IP Adress
