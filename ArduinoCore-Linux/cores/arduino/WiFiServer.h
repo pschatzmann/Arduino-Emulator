@@ -1,9 +1,9 @@
-#ifndef wifiserver_h
-#define wifiserver_h
+#pragma once
 
 #include "WiFiClient.h"
 #include "Server.h"
 
+namespace arduino {
 
 class WiFiServer : public Server {
 private:
@@ -20,5 +20,6 @@ public:
   using Print::write;
 };
 
-#endif
+}
+
 
