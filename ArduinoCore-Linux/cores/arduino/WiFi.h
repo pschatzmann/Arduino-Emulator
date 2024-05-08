@@ -45,6 +45,8 @@ public:
     return mac;
   }
 
+  void setClientInsecure() {}
+
 protected:
   IPAddress adress;
   int mac = 0;

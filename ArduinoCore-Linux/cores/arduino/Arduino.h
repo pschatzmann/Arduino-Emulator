@@ -17,7 +17,7 @@
 */
 
 #ifndef HOST
-#define HOST
+#  define HOST
 #endif
 
 #include "ArduinoAPI.h"
@@ -27,3 +27,4 @@
 #include "Serial.h"
 #include "RemoteSerial.h"
 
+using namespace arduino;

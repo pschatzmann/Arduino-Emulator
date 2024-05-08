@@ -188,6 +188,8 @@ class EthernetClient : public Client {
             sock->close();
         }
 
+        void setInsecure(){}
+
     protected:
         const char *WIFICLIENT = "EthernetClient";
         SocketImpl *sock=nullptr;

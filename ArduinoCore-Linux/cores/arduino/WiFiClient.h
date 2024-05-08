@@ -4,6 +4,6 @@
 
 namespace arduino {
 
-typedef EthernetClient WiFiClient;
+using WiFiClient = EthernetClient;
     
 }
