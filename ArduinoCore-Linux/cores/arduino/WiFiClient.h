@@ -5,5 +5,6 @@
 namespace arduino {
 
 using WiFiClient = EthernetClient;
+using WiFiClientSecure = EthernetClient;
     
 }
