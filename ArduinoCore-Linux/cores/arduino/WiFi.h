@@ -2,6 +2,7 @@
 
 #include "WiFiClient.h"
 #include "WiFiClientSecure.h"
+#include "WiFiServer.h"
 
 /**
  * @brief We provide the WiFi class to simulate the Arduino WIFI. In in Linux
