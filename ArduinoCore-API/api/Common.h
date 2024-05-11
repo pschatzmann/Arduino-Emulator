@@ -160,6 +160,11 @@ static long random(long max){
   return rand() % max;
 }
 
+static long random(long min, long max){
+  long tmp = rand() % (max- min);
+  return tmp + min;
+}
+
 static void randomSeed(unsigned seed){
   srand(seed);
 }
