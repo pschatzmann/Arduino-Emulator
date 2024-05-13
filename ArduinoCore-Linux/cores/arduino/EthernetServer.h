@@ -18,8 +18,8 @@ class EthernetServer : public Server {
 
  public:
   EthernetServer(int port = 80) { _port = port; }
-  bool begin() { return begin(0); }
-  bool begin(int port) { return begin_(port); }
+  void begin() {  begin(0); }
+  void begin(int port) { begin_(port); }
   WiFiClient available(uint8_t* status = NULL) { return available_(); }
   virtual size_t write(uint8_t ch) { return write(&ch, 1); }
   virtual size_t write(const uint8_t* buf, size_t size) {
