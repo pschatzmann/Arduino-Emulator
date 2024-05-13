@@ -13,16 +13,6 @@
 
 namespace arduino {
 
-typedef enum {
-  WL_NO_SHIELD = 255,
-  WL_IDLE_STATUS = 0,
-  WL_NO_SSID_AVAIL,
-  WL_SCAN_COMPLETED,
-  WL_CONNECTED,
-  WL_CONNECT_FAILED,
-  WL_CONNECTION_LOST,
-  WL_DISCONNECTED
-} wl_status_t;
 
 class WifiMock {
 public:

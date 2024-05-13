@@ -3,31 +3,30 @@
  * Separate implementation class for the WIFI client to prevent import conflicts
  ***/
 
-#include <arpa/inet.h>
-#include <cstring>
-#include <fcntl.h>
-#include <sys/ioctl.h>
-#include <sys/socket.h>
-#include <unistd.h>
+#include "SocketImpl.h"
 
 #include <arpa/inet.h>
+#include <fcntl.h>
 #include <ifaddrs.h>
 #include <net/if.h>
 #include <netdb.h>
 #include <netinet/in.h>
+#include <sys/ioctl.h>
+#include <sys/socket.h>
 #include <sys/types.h>
+#include <unistd.h>
+
+#include <cstring>
 
 #include "ArduinoLogger.h"
-#include "SocketImpl.h"
 
 namespace arduino {
-
-SocketImpl::SocketImpl() {}
 
 const char *SOCKET_IMPL = "SocketImpl";
 
 // checks if we are connected
 uint8_t SocketImpl::connected() {
+  if (sock < 0) return false;
   char buf[2];
   int result = ::recv(sock, &buf, 1, MSG_PEEK | MSG_DONTWAIT);
   // if peek is working we are connected - if not we do further checks
@@ -62,11 +61,11 @@ int SocketImpl::connect(const char *address, uint16_t port) {
   serv_addr.sin_port = htons(port);
 
   const char *address_ip = address;
-  hostent *host_entry = gethostbyname(address); // find host information
+  hostent *host_entry = gethostbyname(address);  // find host information
   if (host_entry != nullptr) {
     address_ip =
         inet_ntoa(*((struct in_addr *)
-                        host_entry->h_addr_list[0])); // Convert into IP string
+                        host_entry->h_addr_list[0]));  // Convert into IP string
   }
 
   // Convert IPv4 and IPv6 addresses from text to binary form
@@ -124,7 +123,7 @@ void SocketImpl::close() {
   ::close(sock);
 }
 
-char* defaultInterface() {
+char *defaultInterface() {
   FILE *f;
   char line[100], *p, *c;
 
@@ -190,4 +189,4 @@ const char *SocketImpl::getIPAddress(const char *validEntries[]) {
   return resultAddress;
 }
 
-} // namespace arduino
+}  // namespace arduino
