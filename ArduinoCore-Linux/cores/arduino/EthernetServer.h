@@ -3,6 +3,7 @@
 #include <unistd.h>
 #include "Server.h"
 #include "Ethernet.h"
+#include <poll.h>
 
 namespace arduino {
 
@@ -15,6 +16,7 @@ class EthernetServer : public Server {
   int server_fd;
   struct sockaddr_in server_addr;
   int _status = wl_status_t::WL_DISCONNECTED;
+  bool is_blocking = false;
 
  public:
   EthernetServer(int port = 80) { _port = port; }
@@ -51,15 +53,15 @@ class EthernetServer : public Server {
     server_addr.sin_port = htons(_port);
 
     // bind socket to port
-    if (bind(server_fd, (struct sockaddr*)&server_addr, sizeof(server_addr)) <
+    if (::bind(server_fd, (struct sockaddr*)&server_addr, sizeof(server_addr)) <
         0) {
       // error("bind failed");
       _status = wl_status_t::WL_CONNECT_FAILED;
       return false;
     }
 
-    // listen for connections
-    if (listen(server_fd, 10) < 0) {
+    // listen for connections 
+    if (::listen(server_fd, 10) < 0) {
       // error("listen failed");
       _status = wl_status_t::WL_CONNECT_FAILED;
       return false;
@@ -68,12 +70,29 @@ class EthernetServer : public Server {
     return true;
   }
 
+  void setBlocking(bool flag){
+    is_blocking = flag;
+  }
+
   EthernetClient available_() {
     struct sockaddr_in client_addr;
     socklen_t client_addr_len = sizeof(client_addr);
     int client_fd;
 
-    // accept client connection
+    struct pollfd pfd;
+    pfd.fd = server_fd;
+    pfd.events = POLLIN;
+    int poll_rc = ::poll(&pfd, 1, 200);
+
+    // non blocking check if we have any request to accept
+    if (!is_blocking){
+      if (poll_rc <= 0 || !pfd.revents & POLLIN){
+        EthernetClient result;
+        return result;
+      }
+    }
+
+    // accept client connection (blocking call)
     if ((client_fd = ::accept(server_fd, (struct sockaddr*)&client_addr,
                             &client_addr_len)) < 0) {
       // perror("accept failed");
