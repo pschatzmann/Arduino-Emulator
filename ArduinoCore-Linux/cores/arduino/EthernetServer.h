@@ -20,6 +20,7 @@ class EthernetServer : public Server {
   EthernetServer(int port = 80) { _port = port; }
   void begin() {  begin(0); }
   void begin(int port) { begin_(port); }
+  WiFiClient accept() { return available_(); }
   WiFiClient available(uint8_t* status = NULL) { return available_(); }
   virtual size_t write(uint8_t ch) { return write(&ch, 1); }
   virtual size_t write(const uint8_t* buf, size_t size) {
@@ -73,8 +74,8 @@ class EthernetServer : public Server {
     int client_fd;
 
     // accept client connection
-    if ((client_fd = accept(server_fd, (struct sockaddr*)&client_addr,
-                            &client_addr_len)) >= 0) {
+    if ((client_fd = ::accept(server_fd, (struct sockaddr*)&client_addr,
+                            &client_addr_len)) < 0) {
       // perror("accept failed");
       EthernetClient result;
       return result;
