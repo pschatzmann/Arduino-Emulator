@@ -26,9 +26,6 @@ class ArduinoLogger {
 
         const char* LogLevelTxt[4] = {"Debug", "Info", "Warning", "Error"};
 
-
-        ArduinoLogger(){}
-        ~ArduinoLogger(){}
         // activate the logging
         virtual void setLogger(Stream& out, LogLevel level=Error){
             this->log_stream_ptr = &out;

@@ -137,7 +137,7 @@ char *defaultInterface() {
       if (strcmp(c, "00000000") == 0) {
         static char defaultInterface[20];
         strcpy(defaultInterface, p);
-        printf("Default interface is : %s \n", p);
+        Logger.info("Default network interface is ", p);
         return defaultInterface;
       }
     }
