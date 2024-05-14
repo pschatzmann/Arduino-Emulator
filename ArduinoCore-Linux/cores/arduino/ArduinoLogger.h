@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Stream.h"
+#include "ArdStdio.h"
 
 namespace arduino {
 
@@ -22,6 +23,8 @@ class ArduinoLogger {
             Warning, 
             Error
         };
+
+        const char* LogLevelTxt[4] = {"Debug", "Info", "Warning", "Error"};
 
 
         ArduinoLogger(){}
@@ -58,6 +61,9 @@ class ArduinoLogger {
         virtual void log(LogLevel current_level, const char *str, const char* str1=nullptr, const char* str2=nullptr){
             if (log_stream_ptr!=nullptr){
                 if (current_level >= log_level){
+                    log_stream_ptr->print("Emulator - ");
+                    log_stream_ptr->print((char*)LogLevelTxt[current_level]);
+                    log_stream_ptr->print(": ");
                     log_stream_ptr->print((char*)str);
                     if (str1!=nullptr){
                         log_stream_ptr->print(" ");
@@ -74,8 +80,8 @@ class ArduinoLogger {
         }
 
     protected:
-        Stream *log_stream_ptr;
-        LogLevel log_level;  
+        Stream *log_stream_ptr = &Serial;
+        LogLevel log_level = Warning;  
 
 
 };

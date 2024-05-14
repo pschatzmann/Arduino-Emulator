@@ -1,26 +1,30 @@
 #pragma once
 
-#include <unistd.h>
-#include "Server.h"
-#include "Ethernet.h"
 #include <poll.h>
+#include <unistd.h>
+
+#include "Ethernet.h"
+#include "Server.h"
 
 namespace arduino {
 
 /**
  * A minimal ethernet server
-*/
+ */
 class EthernetServer : public Server {
  private:
   uint16_t _port;
-  int server_fd;
+  int server_fd = 0;
   struct sockaddr_in server_addr;
   int _status = wl_status_t::WL_DISCONNECTED;
   bool is_blocking = false;
 
  public:
   EthernetServer(int port = 80) { _port = port; }
-  void begin() {  begin(0); }
+  ~EthernetServer() {
+    if (server_fd > 0) close(server_fd);
+  }
+  void begin() { begin(0); }
   void begin(int port) { begin_(port); }
   WiFiClient accept() { return available_(); }
   WiFiClient available(uint8_t* status = NULL) { return available_(); }
@@ -39,6 +43,7 @@ class EthernetServer : public Server {
  protected:
   bool begin_(int port = 0) {
     if (port > 0) _port = port;
+    _status = wl_status_t::WL_DISCONNECTED;
 
     // create server socket
     if ((server_fd = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
@@ -47,37 +52,47 @@ class EthernetServer : public Server {
       return false;
     }
 
+    // Reuse address after restart
+    int iSetOption = 1;
+    setsockopt(server_fd, SOL_SOCKET, SO_REUSEADDR, (char*)&iSetOption,
+        sizeof(iSetOption));
+
     // config socket
     server_addr.sin_family = AF_INET;
     server_addr.sin_addr.s_addr = INADDR_ANY;
     server_addr.sin_port = htons(_port);
 
     // bind socket to port
-    if (::bind(server_fd, (struct sockaddr*)&server_addr, sizeof(server_addr)) <
+    while (::bind(server_fd, (struct sockaddr*)&server_addr, sizeof(server_addr)) <
         0) {
       // error("bind failed");
-      _status = wl_status_t::WL_CONNECT_FAILED;
-      return false;
+      //_status = wl_status_t::WL_CONNECT_FAILED;
+      Logger.error("bind failed");
+      //return false;
+      delay(1000);
     }
 
-    // listen for connections 
+    // listen for connections
     if (::listen(server_fd, 10) < 0) {
       // error("listen failed");
       _status = wl_status_t::WL_CONNECT_FAILED;
+      Logger.error("listen failed");
       return false;
     }
 
     return true;
   }
 
-  void setBlocking(bool flag){
-    is_blocking = flag;
-  }
+  void setBlocking(bool flag) { is_blocking = flag; }
 
   EthernetClient available_() {
     struct sockaddr_in client_addr;
     socklen_t client_addr_len = sizeof(client_addr);
     int client_fd;
+
+    if (_status == wl_status_t::WL_CONNECT_FAILED) {
+      begin(_port);
+    }
 
     struct pollfd pfd;
     pfd.fd = server_fd;
@@ -85,8 +100,8 @@ class EthernetServer : public Server {
     int poll_rc = ::poll(&pfd, 1, 200);
 
     // non blocking check if we have any request to accept
-    if (!is_blocking){
-      if (poll_rc <= 0 || !pfd.revents & POLLIN){
+    if (!is_blocking) {
+      if (poll_rc <= 0 || !pfd.revents & POLLIN) {
         EthernetClient result;
         return result;
       }
@@ -94,12 +109,12 @@ class EthernetServer : public Server {
 
     // accept client connection (blocking call)
     if ((client_fd = ::accept(server_fd, (struct sockaddr*)&client_addr,
-                            &client_addr_len)) < 0) {
-      // perror("accept failed");
+                              &client_addr_len)) < 0) {
       EthernetClient result;
+      Logger.error("accept failed");
       return result;
     }
-    SocketImpl sock_impl(client_fd, (struct sockaddr_in*) &client_addr);
+    SocketImpl sock_impl(client_fd, (struct sockaddr_in*)&client_addr);
     EthernetClient result{sock_impl};
     return result;
   }
