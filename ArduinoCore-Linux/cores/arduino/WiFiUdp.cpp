@@ -28,7 +28,6 @@
 
 namespace arduino {
 
-
 WiFiUDP::WiFiUDP()
 : udp_server(-1)
 , server_port(0)
@@ -285,5 +284,11 @@ uint16_t WiFiUDP::remotePort(){
   return remote_port;
 }
     
-    
+///  e.g. used by UDP
+void WiFiUDP::log_e(const char* msg, int errorNo){
+    char errorStr[200];
+    snprintf(errorStr, 200, msg, errorNo);
+    Logger.error(errorStr);
+}
+ 
 }

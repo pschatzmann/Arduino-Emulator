@@ -87,11 +87,4 @@ extern ArduinoLogger Logger;
 
 }
 
-// // e.g. used by UDP
-static void log_e(const char* msg, int errorNo){
-    char errorNoStr[10];
-    sprintf(errorNoStr, msg, errorNo);
-    Logger.error( msg, errorNoStr);
-}
-    
 

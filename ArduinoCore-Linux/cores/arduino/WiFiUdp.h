@@ -51,6 +51,8 @@ private:
   char * tx_buffer;
   size_t tx_buffer_len;
   RingBufferExt * rx_buffer;
+  void log_e(const char* msg, int errorNo);
+
 public:
   WiFiUDP();
   ~WiFiUDP();
