@@ -54,7 +54,8 @@ class EthernetClient : public Client {
 
   // checks if we are connected - using a timeout
   virtual uint8_t connected() {
-    if (sock.connected()) return true;
+    if (!is_connected) return false; // connect has failed
+    if (sock.connected()) return true; // check socket
     long timeout = millis() + getTimeout();
     uint8_t result = sock.connected();
     while (result <= 0 && millis() < timeout) {
