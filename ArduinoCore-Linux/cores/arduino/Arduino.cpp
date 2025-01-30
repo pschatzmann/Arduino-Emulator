@@ -77,34 +77,63 @@ unsigned long micros(void){
 }
 
 void pinMode(pin_size_t pinNumber, PinMode pinMode){
-    Hardware.gpio->pinMode(pinNumber,pinMode);
+    if (Hardware.gpio != nullptr) {
+        Hardware.gpio->pinMode(pinNumber,pinMode);
+    }
 }
 void digitalWrite(pin_size_t pinNumber, PinStatus status) {
-    Hardware.gpio->digitalWrite(pinNumber,status);    
+    if (Hardware.gpio != nullptr) {
+        Hardware.gpio->digitalWrite(pinNumber,status);
+    }
 }
 PinStatus digitalRead(pin_size_t pinNumber) {
-    return Hardware.gpio->digitalRead(pinNumber);
+    if (Hardware.gpio != nullptr) {
+        return Hardware.gpio->digitalRead(pinNumber);
+    } else {
+        return HIGH; //sumulate input pullup
+    }
 }
 int analogRead(pin_size_t pinNumber){
-    return Hardware.gpio->analogRead(pinNumber);    
+    if (Hardware.gpio != nullptr) {
+        return Hardware.gpio->analogRead(pinNumber);
+    } else {
+        return 0;
+    }
+
 }
 void analogReference(uint8_t mode){
-    Hardware.gpio->analogReference(mode);       
+    if (Hardware.gpio != nullptr) {
+        Hardware.gpio->analogReference(mode);
+    }
 }
 void analogWrite(pin_size_t pinNumber, int value) {
-    Hardware.gpio->analogWrite(pinNumber,value);        
+    if (Hardware.gpio != nullptr) {
+        Hardware.gpio->analogWrite(pinNumber,value);
+    }
 }
 void tone(uint8_t pinNumber, unsigned int frequency, unsigned long duration) {
-    Hardware.gpio->tone(pinNumber,frequency,duration);            
+    if (Hardware.gpio != nullptr) {
+        Hardware.gpio->tone(pinNumber,frequency,duration);
+    }
 }
 void noTone(uint8_t pinNumber) {
-    Hardware.gpio->noTone(pinNumber);            
+    if (Hardware.gpio != nullptr) {
+        Hardware.gpio->noTone(pinNumber);
+    }
 }
 unsigned long pulseIn(uint8_t pinNumber, uint8_t state, unsigned long timeout){
-    return Hardware.gpio->pulseIn(pinNumber, state, timeout);                
+    if (Hardware.gpio != nullptr) {
+        return Hardware.gpio->pulseIn(pinNumber, state, timeout);
+    } else {
+        return 0;
+    }
 }
 unsigned long pulseInLong(uint8_t pinNumber, uint8_t state, unsigned long timeout){
-    return Hardware.gpio->pulseInLong(pinNumber, state, timeout);                
+    if (Hardware.gpio != nullptr) {
+        return Hardware.gpio->pulseInLong(pinNumber, state, timeout);
+    } else {
+        return 0;
+    }
 }
 
 void yield(){
