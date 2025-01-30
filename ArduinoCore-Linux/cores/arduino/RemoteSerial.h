@@ -101,12 +101,21 @@ class RemoteSerialImpl : public Stream {
     }
     
     void flush() {
+        #if defined(_MSC_VER)
+        int available;
+        while((available = write_buffer.available()) > 0){
+            uint8_t buffer[max_buffer_len];
+            write_buffer.read(buffer, min(available, max_buffer_len));
+            write(buffer, min(available, max_buffer_len));
+        }
+        #else
         int available = write_buffer.available();
         if (available>0){
             uint8_t buffer[available];
             write_buffer.read(buffer, available);
             write(buffer, available); 
         }
+        #endif
         service->send(SerialFlush);
         service->send(no);
         service->flush();
@@ -116,7 +125,11 @@ class RemoteSerialImpl : public Stream {
   protected:
     HardwareService *service;            
     uint8_t no;
+    #if defined(_MSC_VER)
+    static constexpr int max_buffer_len = 512; // MSVC does not support VLA
+    #else
     int max_buffer_len = 512;
+    #endif
     RingBufferExt write_buffer;
     RingBufferExt read_buffer;
     
