@@ -22,6 +22,8 @@ class StdioDevice : public Stream {
     ~StdioDevice(){
     }
 
+    operator bool() const { return true; } // For classic while(!Serial) { ... } pattern for USB ready wait
+
     virtual void begin(int speed){
         // nothing to be done
     }
