@@ -101,7 +101,7 @@ class EthernetServer : public Server {
 
     // non blocking check if we have any request to accept
     if (!is_blocking) {
-      if (poll_rc <= 0 || !pfd.revents & POLLIN) {
+      if (poll_rc <= 0 || !(pfd.revents & POLLIN)) {
         EthernetClient result;
         return result;
       }

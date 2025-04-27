@@ -53,7 +53,7 @@ class EthernetClient : public Client {
   //EthernetClient(const EthernetClient&) = delete;
 
   // checks if we are connected - using a timeout
-  virtual uint8_t connected() {
+  virtual uint8_t connected() override {
     if (!is_connected) return false; // connect has failed
     if (sock.connected()) return true; // check socket
     long timeout = millis() + getTimeout();
@@ -66,10 +66,10 @@ class EthernetClient : public Client {
   }
 
   // support conversion to bool
-  operator bool() { return connected(); }
+  operator bool() override { return connected(); }
 
   // opens a conection
-  virtual int connect(IPAddress ipAddress, uint16_t port) {
+  virtual int connect(IPAddress ipAddress, uint16_t port) override {
     String str = String(ipAddress[0]) + String(".") + String(ipAddress[1]) +
                  String(".") + String(ipAddress[2]) + String(".") +
                  String(ipAddress[3]);
@@ -78,7 +78,7 @@ class EthernetClient : public Client {
   }
 
   // opens a conection
-  virtual int connect(const char* address, uint16_t port) {
+  virtual int connect(const char* address, uint16_t port) override {
     Logger.info(WIFICLIENT, "connect");
     if (connectedFast()) {
       sock.close();
@@ -92,7 +92,7 @@ class EthernetClient : public Client {
 
   // writes an individual character into the buffer. We flush the buffer when it
   // is full
-  virtual size_t write(uint8_t c) {
+  virtual size_t write(uint8_t c) override {
     if (writeBuffer.availableToWrite() == 0) {
       flush();
     }
@@ -104,7 +104,7 @@ class EthernetClient : public Client {
   }
 
   // direct write - if we have anything in the buffer we write that out first
-  virtual size_t write(const uint8_t* str, size_t len) {
+  virtual size_t write(const uint8_t* str, size_t len) override{
     flush();
     return sock.write(str, len);
   }
@@ -124,7 +124,7 @@ class EthernetClient : public Client {
   }
 
   // flush write buffer
-  virtual void flush() {
+  virtual void flush() override {
     Logger.debug(WIFICLIENT, "flush");
 
     int flushSize = writeBuffer.available();
@@ -136,7 +136,7 @@ class EthernetClient : public Client {
   }
 
   // provides the available bytes from the read buffer or from the socket
-  virtual int available() {
+  virtual int available() override {
     Logger.debug(WIFICLIENT, "available");
     if (readBuffer.available() > 0) {
       return readBuffer.available();
@@ -151,7 +151,7 @@ class EthernetClient : public Client {
   }
 
   // read via ring buffer
-  virtual int read() {
+  virtual int read() override {
     int result = -1;
     uint8_t c;
     if (readBytes(&c, 1) == 1) {
@@ -168,7 +168,7 @@ class EthernetClient : public Client {
     ;
   }
 
-  size_t readBytes(char* buffer, size_t len) {
+  size_t readBytes(char* buffer, size_t len) override {
     return read((uint8_t*)buffer, len);
   }
 
@@ -179,7 +179,7 @@ class EthernetClient : public Client {
   // direct read with timeout
 
   // peeks one character
-  virtual int peek() {
+  virtual int peek() override {
     // Logger.debug(WIFICLIENT, "peek");
     // if (readBuffer.available()>0){
     //     return readBuffer.peek();
@@ -189,7 +189,7 @@ class EthernetClient : public Client {
   }
 
   // close the connection
-  virtual void stop() { sock.close(); }
+  virtual void stop() override { sock.close(); }
 
   void setInsecure() {}
 
