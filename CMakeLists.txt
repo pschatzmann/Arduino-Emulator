@@ -36,7 +36,8 @@ add_library(arduino_emulator ${SRC_LIST} ${HEADER_LIST})
 
 # Define the directories with the h files
 target_include_directories (arduino_emulator PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/ArduinoCore-API/api"
-    "${CMAKE_CURRENT_SOURCE_DIR}/ArduinoCore-Linux/cores/arduino" )
+    "${CMAKE_CURRENT_SOURCE_DIR}/ArduinoCore-Linux/cores/arduino"
+    "${CMAKE_CURRENT_SOURCE_DIR}/ArduinoCore-Linux/libraries" )
 
 # Install header files 
 install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/ArduinoCore-API/api/" # source directory
