@@ -48,6 +48,7 @@ class EthernetClient : public Client {
     writeBuffer = RingBufferExt(bufferSize);
     this->sock = sock;
     setTimeout(timeout);
+    is_connected = sock.connected();
   }
 
   //EthernetClient(const EthernetClient&) = delete;
@@ -199,7 +200,7 @@ class EthernetClient : public Client {
   int bufferSize = 256;
   RingBufferExt readBuffer;
   RingBufferExt writeBuffer;
-  bool is_connected;
+  bool is_connected = false;
 
   int read(uint8_t* buffer, size_t len) override {
     Logger.debug(WIFICLIENT, "read");
