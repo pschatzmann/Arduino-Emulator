@@ -12,7 +12,10 @@
 
 #include <sys/stat.h>
 #include <sys/types.h>
+#include <unistd.h>
 
+#include <cstdint>
+#include <filesystem>
 #include <fstream>
 #include <iostream>
 #include <string>
@@ -46,7 +49,7 @@
 #define FILE_WRITE ios::out
 
 #ifndef SS
-#define SS 0
+#define SS -1
 #endif
 
 using namespace std;
@@ -89,7 +92,7 @@ class File : public Stream {
     } else {
       is_dir = false;
       size_bytes = rc != -1 ? info.st_size : 0;
-      file.open(filename.c_str(), flags);
+      file.open(filename.c_str(), toMode(flags));
       return isOpen();
     }
   }
@@ -97,6 +100,10 @@ class File : public Stream {
   bool close() {
     file.close();
     return !isOpen();
+  }
+
+  size_t read(uint8_t *buffer, size_t length) {
+    return file.readsome((char *)buffer, length);
   }
 
   size_t readBytes(char *buffer, size_t length) override {
@@ -134,19 +141,30 @@ class File : public Stream {
   }
   int dirIndex() { return pos; }
 
-  size_t size() { 
+  File openNextFile() {
+    File next_file;
+    openNext(next_file, O_RDONLY);
+    return next_file;
+  }
+
+  size_t size() {
     int rc = stat(filename.c_str(), &info);
     size_bytes = rc != -1 ? info.st_size : 0;
     return size_bytes;
   }
 
   size_t position() { return file.tellg(); }
+
   size_t seek(size_t pos) {
     file.seekg(pos);
     return pos;
   }
 
-  operator boolean() { return isOpen(); }
+  operator bool() { return isOpen(); }
+
+  bool isDirectory() { return is_dir; }
+
+  const char *name() { return filename.c_str(); }
 
  protected:
   std::fstream file;
@@ -160,6 +178,21 @@ class File : public Stream {
   std::filesystem::directory_iterator iterator;
   std::filesystem::path dir_path;
 #endif
+
+  std::ios_base::openmode toMode(int flags) {
+    std::ios_base::openmode mode = std::ios_base::in;
+    if (flags & O_WRONLY) {
+      mode = std::ios_base::out;
+    } else if (flags & O_RDWR) {
+      mode = std::ios_base::in | std::ios_base::out;
+    }
+    if (flags & O_APPEND) {
+      mode |= std::ios_base::app;
+    } else if (flags & O_TRUNC) {
+      mode |= std::ios_base::trunc;
+    }
+    return mode;
+  }
 };
 
 /**
@@ -169,9 +202,11 @@ class File : public Stream {
 class SdFat {
  public:
   bool begin(int cs = SS, int speed = 0) { return true; }
+  
   bool begin(SdSpiConfig &cfg) { return true; }
+
   void errorHalt(const char *msg) {
-    Serial.println(msg);
+    puts(msg);
     exit(0);
   }
   void initErrorHalt() { exit(0); }
@@ -181,14 +216,28 @@ class SdFat {
     return stat(name, &info) == 0;
   }
 
-  File open(const char *name, int flags) {
+  File open(const char *name, int flags = O_READ) {
     File file;
     file.open(name, flags);
     return file;
   }
 
   bool remove(const char *name) { return std::remove(name) == 0; }
-  bool mkdir(const char *name) { return ::mkdir(name,0777) == 0; }
+  bool mkdir(const char *name) { return ::mkdir(name, 0777) == 0; }
+  bool rmdir(const char *path) {
+    int rc = ::rmdir(path);
+    return rc == 0;
+  }
+  uint64_t totalBytes() {
+    std::error_code ec;
+    const std::filesystem::space_info si = std::filesystem::space("/home", ec);
+    return si.capacity;  
+  }
+  uint64_t usedBytes() {
+    std::error_code ec;
+    const std::filesystem::space_info si = std::filesystem::space("/home", ec);
+    return si.capacity - si.available;  
+  }
 };
 
 static SdFat SD;
