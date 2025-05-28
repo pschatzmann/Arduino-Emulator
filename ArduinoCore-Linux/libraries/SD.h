@@ -180,18 +180,7 @@ class File : public Stream {
 #endif
 
   std::ios_base::openmode toMode(int flags) {
-    std::ios_base::openmode mode = std::ios_base::in;
-    if (flags & O_WRONLY) {
-      mode = std::ios_base::out;
-    } else if (flags & O_RDWR) {
-      mode = std::ios_base::in | std::ios_base::out;
-    }
-    if (flags & O_APPEND) {
-      mode |= std::ios_base::app;
-    } else if (flags & O_TRUNC) {
-      mode |= std::ios_base::trunc;
-    }
-    return mode;
+    return (std::ios_base::openmode) flags;
   }
 };
 
