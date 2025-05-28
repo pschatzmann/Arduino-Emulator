@@ -73,9 +73,9 @@ typedef void (*voidFuncPtrParam)(void*);
 #endif
 
 /* TODO: request for removal */
-typedef bool      boolean;
-typedef uint8_t   byte;
-typedef uint16_t  word;
+// typedef bool      boolean;
+// typedef uint8_t   byte;
+// typedef uint16_t  word;
 
 void init(void);
 void initVariant(void);
@@ -171,7 +171,7 @@ static void randomSeed(unsigned seed){
 
 /* C++ prototypes */
 uint16_t makeWord(uint16_t w);
-uint16_t makeWord(byte h, byte l);
+uint16_t makeWord(uint8_t h, uint8_t l);
 
 #define word(...) makeWord(__VA_ARGS__)
 

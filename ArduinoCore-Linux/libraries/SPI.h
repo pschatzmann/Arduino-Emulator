@@ -2,7 +2,7 @@
 class SPIClass {
  public:
   bool begin() { return true; }
-  bool begin(int SCK, int MISO, int MOSI, int SS) { return true; }
+  bool begin(int sck, int miso, int mosi, int ss) { return true; }
 };
 
 static SPIClass SPI;
