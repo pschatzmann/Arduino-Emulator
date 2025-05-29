@@ -70,6 +70,8 @@ class SdSpiConfig {
 class File : public Stream {
  public:
   bool isOpen() {
+    if (filename == "") return false;
+    if (is_dir) return true;
     bool result = file.is_open();
     return result;
   }
@@ -85,8 +87,12 @@ class File : public Stream {
       is_dir = true;
       size_bytes = 0;
 #ifdef USE_FILESYSTEM
-      dir_path = std::filesystem::path(filename);
-      iterator = std::filesystem::directory_iterator({dir_path});
+      // prevent authorization exceptions
+      try {
+        dir_path = std::filesystem::path(filename);
+        iterator = std::filesystem::directory_iterator({dir_path});
+      } catch (...) {
+      }
 #endif
       return true;
     } else {
@@ -131,10 +137,17 @@ class File : public Stream {
     return is_dir;
   }
   bool openNext(File &dir, int flags = O_RDONLY) {
+    if (!*this) return false;
+
+    // if (pos == 0) {
+    //   dir_path = std::filesystem::path(filename);
+    //   iterator = std::filesystem::directory_iterator({dir_path});
+    // }
+    // pos++;
 #ifdef USE_FILESYSTEM
-    if (dir.isDir() && dir.iterator != end(dir.iterator)) {
-      std::filesystem::directory_entry entry = *dir.iterator++;
-      return open(entry.path().c_str(), flags);
+    if (iterator != end(iterator)) {
+      std::filesystem::directory_entry entry = *iterator++;
+      return dir.open(entry.path().c_str(), flags);
     }
 #endif
     return false;
@@ -169,9 +182,9 @@ class File : public Stream {
  protected:
   std::fstream file;
   size_t size_bytes = 0;
-  bool is_dir;
+  bool is_dir = false;
   int pos = 0;
-  std::string filename;
+  std::string filename = "";
   struct stat info;
 
 #ifdef USE_FILESYSTEM
@@ -180,7 +193,7 @@ class File : public Stream {
 #endif
 
   std::ios_base::openmode toMode(int flags) {
-    return (std::ios_base::openmode) flags;
+    return (std::ios_base::openmode)flags;
   }
 };
 
@@ -191,7 +204,7 @@ class File : public Stream {
 class SdFat {
  public:
   bool begin(int cs = SS, int speed = 0) { return true; }
-  
+
   bool begin(SdSpiConfig &cfg) { return true; }
 
   void errorHalt(const char *msg) {
@@ -220,12 +233,12 @@ class SdFat {
   uint64_t totalBytes() {
     std::error_code ec;
     const std::filesystem::space_info si = std::filesystem::space("/home", ec);
-    return si.capacity;  
+    return si.capacity;
   }
   uint64_t usedBytes() {
     std::error_code ec;
     const std::filesystem::space_info si = std::filesystem::space("/home", ec);
-    return si.capacity - si.available;  
+    return si.capacity - si.available;
   }
 };
 
