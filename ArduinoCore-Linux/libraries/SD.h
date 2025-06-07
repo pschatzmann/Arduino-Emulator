@@ -170,7 +170,7 @@ class File : public Stream {
 
   bool seek(size_t pos) {
     file.seekg(pos);
-    return file.goodbit;
+    return file ? true : false;
   }
 
   operator bool() { return isOpen(); }
