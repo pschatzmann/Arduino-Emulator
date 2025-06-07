@@ -168,9 +168,9 @@ class File : public Stream {
 
   size_t position() { return file.tellg(); }
 
-  size_t seek(size_t pos) {
+  bool seek(size_t pos) {
     file.seekg(pos);
-    return pos;
+    return file.goodbit;
   }
 
   operator bool() { return isOpen(); }
