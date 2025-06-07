@@ -218,6 +218,8 @@ class SdFat {
 
   bool begin(SdSpiConfig &cfg) { return true; }
 
+  void end() {}
+
   void errorHalt(const char *msg) {
     puts(msg);
     exit(0);
