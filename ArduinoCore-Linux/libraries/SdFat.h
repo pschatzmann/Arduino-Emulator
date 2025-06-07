@@ -74,6 +74,7 @@ public:
     struct stat info;
     return stat(name, &info) == 0;
   }
+  void end(){}
 };
 /**
  * @brief C++ std based emulatoion ofr SdFile

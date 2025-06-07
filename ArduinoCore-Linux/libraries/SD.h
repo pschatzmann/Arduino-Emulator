@@ -179,6 +179,17 @@ class File : public Stream {
 
   const char *name() { return filename.c_str(); }
 
+  void rewindDirectory() {
+    if (!is_dir) return;
+#ifdef USE_FILESYSTEM
+    try {
+      iterator = std::filesystem::directory_iterator(dir_path);
+    } catch (...) {
+      // Handle errors silently
+    }
+#endif
+  }
+
  protected:
   std::fstream file;
   size_t size_bytes = 0;
