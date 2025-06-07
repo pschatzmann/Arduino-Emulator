@@ -243,3 +243,4 @@ class SdFat {
 };
 
 static SdFat SD;
+using SDClass = SdFat;

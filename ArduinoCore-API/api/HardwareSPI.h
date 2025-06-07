@@ -125,6 +125,6 @@ class HardwareSPI
 };
 
 // Alias SPIClass to HardwareSPI since it's already the defacto standard for SPI classe name
-typedef HardwareSPI SPIClass;
+using SPIClass = HardwareSPI;
 
 }
