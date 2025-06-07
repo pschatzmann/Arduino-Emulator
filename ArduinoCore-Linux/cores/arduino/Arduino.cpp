@@ -55,13 +55,18 @@ char *dtostrf(double val, signed char width, unsigned char prec, char *sout){
 
 // Returns the number of milliseconds passed since epich
 unsigned long millis() {
+    static uint64_t start = 0;
     using namespace std::chrono;
     // Get current time with precision of milliseconds
     auto now = time_point_cast<milliseconds>(system_clock::now());
     // sys_milliseconds is type time_point<system_clock, milliseconds>
     using sys_milliseconds = decltype(now);
     // Convert time_point to signed integral type
-    return now.time_since_epoch().count();
+    auto result = now.time_since_epoch().count();
+    if (start == 0) {
+        start = result;
+    }
+    return result - start;
 
 }
 
