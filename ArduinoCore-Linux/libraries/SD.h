@@ -109,11 +109,12 @@ class File : public Stream {
   }
 
   size_t read(uint8_t *buffer, size_t length) {
-    return file.readsome((char *)buffer, length);
+    return readBytes((char *)buffer, length);
   }
 
   size_t readBytes(char *buffer, size_t length) override {
-    return file.readsome((char *)buffer, length);
+    file.read(buffer, length);
+    return static_cast<size_t>(file.gcount());
   }
 
   size_t write(const uint8_t *buffer, size_t size) override {
