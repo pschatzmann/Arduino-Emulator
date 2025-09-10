@@ -20,6 +20,10 @@
 #  define HOST
 #endif
 
+#if defined(_MSC_VER) && !defined(M_PI) && !defined(_USE_MATH_DEFINES)
+#define _USE_MATH_DEFINES // to provide const like M_PI via <math.h>
+#endif
+
 #include "ArduinoAPI.h"
 #include "ArdStdio.h"
 #include "ArduinoLogger.h"
