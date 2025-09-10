@@ -44,6 +44,11 @@
 #include <stdint.h>
 #include <stdbool.h>
 #include <string.h>
+
+#if defined(_MSC_VER) && !defined(M_PI) && !defined(_USE_MATH_DEFINES)
+#define _USE_MATH_DEFINES
+#endif
+
 #include <math.h>
 
 #ifdef __cplusplus
