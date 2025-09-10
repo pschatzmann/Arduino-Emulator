@@ -10,8 +10,14 @@
 #include "PluggableUSB.h"
 #include "RemoteSerial.h"
 #include "Hardware.h"
-#if defined(PROVIDE_HARDWARE_AS_WIFI)
+#if defined(PROVIDE_HARDWARE_SETUP_SKIP)
+// Not available for Windows / MSVC
+#else
 #include "HardwareSetup.h"
+#endif
+#if defined(PROVIDE_HARDWARE_WIFI_SKIP)
+// Not available for Windows / MSVC
+#else
 #include "WiFi.h"
 #include "WiFiClient.h"
 #endif
@@ -26,8 +32,12 @@ namespace arduino {
 ArduinoLogger Logger;  // Support for logging
 StdioDevice Serial;    // output to screen
 HardwareImpl Hardware; // implementation for gpio, spi, i2c
-#if defined(PROVIDE_HARDWARE_AS_WIFI)
+#if defined(PROVIDE_HARDWARE_WIFI_SKIP)
+#else
 WifiMock WiFi;         // So that we can use the WiFi
+#endif
+#if defined(PROVIDE_HARDWARE_SETUP_SKIP)
+#else
 HardwareSetupImpl HardwareSetup; // setup for implementation
 #endif
 #if PROVIDE_SERIALLIB    
