@@ -10,9 +10,11 @@
 #include "PluggableUSB.h"
 #include "RemoteSerial.h"
 #include "Hardware.h"
+#if defined(PROVIDE_HARDWARE_AS_WIFI)
 #include "HardwareSetup.h"
 #include "WiFi.h"
 #include "WiFiClient.h"
+#endif
 #include "PluggableUSB.h"
 #include "deprecated-avr-comp/avr/dtostrf.h"
 #include "ArduinoLogger.h"
@@ -22,10 +24,12 @@
 namespace arduino {
 
 ArduinoLogger Logger;  // Support for logging
-WifiMock WiFi;         // So that we can use the WiFi
 StdioDevice Serial;    // output to screen
 HardwareImpl Hardware; // implementation for gpio, spi, i2c
+#if defined(PROVIDE_HARDWARE_AS_WIFI)
+WifiMock WiFi;         // So that we can use the WiFi
 HardwareSetupImpl HardwareSetup; // setup for implementation
+#endif
 #if PROVIDE_SERIALLIB    
 SerialImpl Serial1("/dev/ttyACM0");    // output to serial port
 #endif

@@ -16,8 +16,8 @@
 #include "WiFiUdp.h"
 //#include <lwip/sockets.h>
 //#include <lwip/netdb.h>
-#include <sys/socket.h> 
-#include <netdb.h>
+////#include <sys/socket.h> 
+////#include <netdb.h>
 #include <fcntl.h>
 #include <unistd.h>
 
