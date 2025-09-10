@@ -20,6 +20,22 @@
 #  define HOST
 #endif
 
+#if defined(_MSC_VER) && !defined(M_PI) && !defined(_USE_MATH_DEFINES)
+#define _USE_MATH_DEFINES // to provide const like M_PI via <math.h>
+#endif
+
+#if defined(_MSC_VER)
+// Not available under MSVC
+#define __attribute__(x) // nothing
+#define __builtin_constant_p(x) (0) // non-constant
+#endif
+
+#if defined(_MSC_VER)
+// Temporary unsupported under Win/MSVC
+#define PROVIDE_HARDWARE_SETUP_SKIP
+#define PROVIDE_HARDWARE_WIFI_SKIP
+#endif
+
 #include "ArduinoAPI.h"
 #include "ArdStdio.h"
 #include "ArduinoLogger.h"

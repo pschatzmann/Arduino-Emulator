@@ -13,47 +13,73 @@ namespace arduino {
 //HardwareSPI::~HardwareSPI() {}
 
 uint8_t HardwareSPI::transfer(uint8_t data) {
-    return Hardware.spi->transfer(data);
+    if (Hardware.spi != nullptr) {
+        return Hardware.spi->transfer(data);
+    } else {
+        return 0;
+    }
 }
 
 uint16_t HardwareSPI::transfer16(uint16_t data) {
-    return Hardware.spi->transfer16(data);
+    if (Hardware.spi != nullptr) {
+        return Hardware.spi->transfer16(data);
+    } else {
+        return 0;
+    }
 }
 
 void HardwareSPI::transfer(void *data, size_t count) {
-    Hardware.spi->transfer(data, count);
+    if (Hardware.spi != nullptr) {
+        Hardware.spi->transfer(data, count);
+    }
 }
 
 void HardwareSPI::usingInterrupt(int interruptNumber) {
-    Hardware.spi->usingInterrupt(interruptNumber);
+    if (Hardware.spi != nullptr) {
+        Hardware.spi->usingInterrupt(interruptNumber);
+    }
 }
 
 void HardwareSPI::notUsingInterrupt(int interruptNumber){
-    Hardware.spi->notUsingInterrupt(interruptNumber);
+    if (Hardware.spi != nullptr) {
+        Hardware.spi->notUsingInterrupt(interruptNumber);
+    }
 }
 
 void HardwareSPI::beginTransaction(SPISettings settings){
-    Hardware.spi->beginTransaction(settings);
+    if (Hardware.spi != nullptr) {
+        Hardware.spi->beginTransaction(settings);
+    }
 }
 
 void HardwareSPI::endTransaction(void){
-    Hardware.spi->endTransaction();
+    if (Hardware.spi != nullptr) {
+        Hardware.spi->endTransaction();
+    }
 }
 
 void HardwareSPI::attachInterrupt() {
-    Hardware.spi->attachInterrupt();
+    if (Hardware.spi != nullptr) {
+        Hardware.spi->attachInterrupt();
+    }
 }
 
 void HardwareSPI::detachInterrupt(){
-    Hardware.spi->detachInterrupt();
+    if (Hardware.spi != nullptr) {
+        Hardware.spi->detachInterrupt();
+    }
 }
 
 void HardwareSPI::begin() {
-    Hardware.spi->begin();
+    if (Hardware.spi != nullptr) {
+        Hardware.spi->begin();
+    }
 }
 
 void HardwareSPI::end() {
-    Hardware.spi->end();
+    if (Hardware.spi != nullptr) {
+        Hardware.spi->end();
+    }
 }
     
 }

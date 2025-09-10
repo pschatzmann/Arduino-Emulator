@@ -9,40 +9,65 @@ namespace arduino {
 
 
 void HardwareI2CEx::begin() {
-    Hardware.i2c->begin();
+    if (Hardware.i2c != nullptr) {
+        Hardware.i2c->begin();
+    }
 }
     
 void HardwareI2CEx::begin(uint8_t address) {
-    Hardware.i2c->begin(address);
+    if (Hardware.i2c != nullptr) {
+        Hardware.i2c->begin(address);
+    }
 }
     
 void HardwareI2CEx::end(){
-    Hardware.i2c->end();
+    if (Hardware.i2c != nullptr) {
+        Hardware.i2c->end();
+    }
 }
 
 void HardwareI2CEx::setClock(uint32_t freq){
-    Hardware.i2c->setClock(freq);
+    if (Hardware.i2c != nullptr) {
+        Hardware.i2c->setClock(freq);
+    }
 }
 
 void HardwareI2CEx::beginTransmission(uint8_t address){
-    Hardware.i2c->beginTransmission(address);
+    if (Hardware.i2c != nullptr) {
+        Hardware.i2c->beginTransmission(address);
+    }
 }
     
 uint8_t HardwareI2CEx::endTransmission(bool stopBit){
-    return Hardware.i2c->endTransmission(stopBit);
+    if (Hardware.i2c != nullptr) {
+        return Hardware.i2c->endTransmission(stopBit);
+    } else {
+        return 0;
+    }
 }
     
 uint8_t HardwareI2CEx::endTransmission(void){
-    return Hardware.i2c->endTransmission();
+    if (Hardware.i2c != nullptr) {
+        return Hardware.i2c->endTransmission();
+    } else {
+        return 0;
+    }
 }
 
 size_t HardwareI2CEx::requestFrom(uint8_t address, size_t len, bool stopBit){
-    return Hardware.i2c->requestFrom(address,len,stopBit);
-
+    if (Hardware.i2c != nullptr) {
+        return Hardware.i2c->requestFrom(address,len,stopBit);
+    } else {
+        return 0;
+    }
 }
     
 size_t HardwareI2CEx::requestFrom(uint8_t address, size_t len){
-    return Hardware.i2c->requestFrom(address,len);
+    if (Hardware.i2c != nullptr) {
+        return Hardware.i2c->requestFrom(address,len);
+    } else {
+        return 0;
+    }
 }
 
 

@@ -21,7 +21,9 @@ class StdioDevice : public Stream {
         
     ~StdioDevice(){
     }
-    
+
+    operator bool() const { return true; } // For classic while(!Serial) { ... } pattern for USB ready wait
+
     virtual void begin(int speed){
         // nothing to be done
     }
@@ -36,13 +38,13 @@ class StdioDevice : public Stream {
         if (auto_flush) flush();
     }
     
-    virtual void print(int str){
-        std::cout << str;
+    virtual void print(int val, int radix = DEC){
+        if (radix == DEC) { std::cout << val; } else { Stream::print(val, radix); }
         if (auto_flush) flush();
     }
     
-    virtual void println(int str){
-        std::cout << str << "\n";
+    virtual void println(int val, int radix = DEC){
+        if (radix == DEC) { std::cout << val << "\n"; } else { Stream::println(val, radix); }
         if (auto_flush) flush();
     }
     
