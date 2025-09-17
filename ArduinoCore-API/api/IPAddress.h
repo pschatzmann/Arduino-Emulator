@@ -72,6 +72,8 @@ public:
 
     virtual size_t printTo(Print& p) const;
 
+    String toString(bool includeZone = false) const;
+
     friend class UDP;
     friend class Client;
     friend class Server;
