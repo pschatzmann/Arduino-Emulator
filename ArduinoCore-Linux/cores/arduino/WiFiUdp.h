@@ -2,13 +2,14 @@
 /*
  *  Udp.cpp: Library to send/receive UDP packets.
  *
- * NOTE: UDP is fast, but has some important limitations (thanks to Warren Gray for mentioning these)
- * 1) UDP does not guarantee the order in which assembled UDP packets are received. This
- * might not happen often in practice, but in larger network topologies, a UDP
- * packet can be received out of sequence.
- * 2) UDP does not guard against lost packets - so packets *can* disappear without the sender being
- * aware of it. Again, this may not be a concern in practice on small local networks.
- * For more information, see http://www.cafeaulait.org/course/week12/35.html
+ * NOTE: UDP is fast, but has some important limitations (thanks to Warren Gray
+ * for mentioning these) 1) UDP does not guarantee the order in which assembled
+ * UDP packets are received. This might not happen often in practice, but in
+ * larger network topologies, a UDP packet can be received out of sequence. 2)
+ * UDP does not guard against lost packets - so packets *can* disappear without
+ * the sender being aware of it. Again, this may not be a concern in practice on
+ * small local networks. For more information, see
+ * http://www.cafeaulait.org/course/week12/35.html
  *
  * MIT License:
  * Copyright (c) 2008 Bjoern Hartmann
@@ -33,27 +34,27 @@
  * bjoern@cs.stanford.edu 12/30/2008
  */
 
-
 #include <IPAddress.h>
-#include <Udp.h>
 #include <RingBufferExt.h>
+#include <Udp.h>
+
 #include "ArduinoLogger.h"
 
 namespace arduino {
 
 class WiFiUDP : public UDP {
-private:
+ private:
   int udp_server;
   IPAddress multicast_ip;
   IPAddress remote_ip;
   uint16_t server_port;
   uint16_t remote_port;
-  char * tx_buffer;
+  char* tx_buffer;
   size_t tx_buffer_len;
-  RingBufferExt * rx_buffer;
+  RingBufferExt* rx_buffer;
   void log_e(const char* msg, int errorNo);
 
-public:
+ public:
   WiFiUDP();
   ~WiFiUDP();
   uint8_t begin(IPAddress a, uint16_t p);
@@ -63,10 +64,10 @@ public:
   int beginMulticastPacket();
   int beginPacket();
   int beginPacket(IPAddress ip, uint16_t port);
-  int beginPacket(const char *host, uint16_t port);
+  int beginPacket(const char* host, uint16_t port);
   int endPacket();
   size_t write(uint8_t);
-  size_t write(const uint8_t *buffer, size_t size);
+  size_t write(const uint8_t* buffer, size_t size);
   int parsePacket();
   int available();
   int read();
@@ -78,4 +79,4 @@ public:
   uint16_t remotePort();
 };
 
-}
+}  // namespace arduino
