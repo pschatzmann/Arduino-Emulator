@@ -81,13 +81,16 @@ class EthernetClient : public Client {
     String str = String(ipAddress[0]) + String(".") + String(ipAddress[1]) +
                  String(".") + String(ipAddress[2]) + String(".") +
                  String(ipAddress[3]);
-
+    this->address = ipAddress;
+    this->port = port;
     return connect(str.c_str(), port);
   }
 
   // opens a conection
   virtual int connect(const char* address, uint16_t port) override {
     Logger.info(WIFICLIENT, "connect");
+    this->address.fromString(address);
+    this->port = port;
     if (connectedFast()) {
       sock.close();
     }
@@ -203,6 +206,10 @@ class EthernetClient : public Client {
 
   int fd() { return sock.fd(); }
 
+  uint16_t remotePort() { return port; }
+  
+  IPAddress remoteIP() { return address; }
+
  protected:
   const char* WIFICLIENT = "EthernetClient";
   SocketImpl sock;
@@ -210,6 +217,8 @@ class EthernetClient : public Client {
   RingBufferExt readBuffer;
   RingBufferExt writeBuffer;
   bool is_connected = false;
+  IPAddress address{0, 0, 0, 0};
+  uint16_t port = 0;
 
   int read(uint8_t* buffer, size_t len) override {
     Logger.debug(WIFICLIENT, "read");
