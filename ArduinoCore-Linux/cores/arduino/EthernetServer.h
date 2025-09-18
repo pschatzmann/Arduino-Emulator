@@ -21,11 +21,13 @@ class EthernetServer : public Server {
 
  public:
   EthernetServer(int port = 80) { _port = port; }
-  ~EthernetServer() {
-    if (server_fd > 0) close(server_fd);
-  }
+  ~EthernetServer() { stop(); }
   void begin() { begin(0); }
   void begin(int port) { begin_(port); }
+  void stop() {
+    if (server_fd > 0) close(server_fd);
+    server_fd = 0;
+  }
   WiFiClient accept() { return available_(); }
   WiFiClient available(uint8_t* status = NULL) { return available_(); }
   virtual size_t write(uint8_t ch) { return write(&ch, 1); }
@@ -55,7 +57,7 @@ class EthernetServer : public Server {
     // Reuse address after restart
     int iSetOption = 1;
     setsockopt(server_fd, SOL_SOCKET, SO_REUSEADDR, (char*)&iSetOption,
-        sizeof(iSetOption));
+               sizeof(iSetOption));
 
     // config socket
     server_addr.sin_family = AF_INET;
@@ -63,12 +65,12 @@ class EthernetServer : public Server {
     server_addr.sin_port = htons(_port);
 
     // bind socket to port
-    while (::bind(server_fd, (struct sockaddr*)&server_addr, sizeof(server_addr)) <
-        0) {
+    while (::bind(server_fd, (struct sockaddr*)&server_addr,
+                  sizeof(server_addr)) < 0) {
       // error("bind failed");
       //_status = wl_status_t::WL_CONNECT_FAILED;
       Logger.error("bind failed");
-      //return false;
+      // return false;
       delay(1000);
     }
 
