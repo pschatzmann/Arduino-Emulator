@@ -35,6 +35,8 @@ class SocketImpl {
   // determines the IP Adress
   const char* getIPAddress(const char* validEntries[]);
 
+  int fd() { return sock; }
+
  protected:
   bool is_connected = false;
   int sock = -1, valread;

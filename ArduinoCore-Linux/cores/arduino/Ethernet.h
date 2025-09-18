@@ -194,6 +194,8 @@ class EthernetClient : public Client {
 
   void setInsecure() {}
 
+  int fd() { return sock.fd(); }
+
  protected:
   const char* WIFICLIENT = "EthernetClient";
   SocketImpl sock;
