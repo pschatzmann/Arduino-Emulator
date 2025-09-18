@@ -38,16 +38,23 @@ inline EthernetImpl Ethernet;
 class EthernetClient : public Client {
  public:
   EthernetClient() {
+    setTimeout(2000);
     readBuffer = RingBufferExt(bufferSize);
     writeBuffer = RingBufferExt(bufferSize);
-    setTimeout(2000);
   }
   EthernetClient(SocketImpl sock, int bufferSize = 256, long timeout = 2000) {
+    setTimeout(timeout);
     this->bufferSize = bufferSize;
     readBuffer = RingBufferExt(bufferSize);
     writeBuffer = RingBufferExt(bufferSize);
     this->sock = sock;
-    setTimeout(timeout);
+    is_connected = sock.connected();
+  }
+  EthernetClient(int socket){
+    setTimeout(2000);
+    readBuffer = RingBufferExt(bufferSize);
+    writeBuffer = RingBufferExt(bufferSize);
+    sock = SocketImpl(socket);
     is_connected = sock.connected();
   }
 

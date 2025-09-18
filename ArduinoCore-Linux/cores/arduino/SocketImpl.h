@@ -4,12 +4,18 @@
  * Separate implementation class for the WIFI client to prevent import conflicts
  ***/
 #include <netinet/in.h>
+#include <string.h>
 
 namespace arduino {
 
 class SocketImpl {
  public:
   SocketImpl() = default;
+  SocketImpl(int socket) {
+    sock = socket;
+    is_connected = true;
+    memset(&serv_addr, 0, sizeof(serv_addr));
+  };
   SocketImpl(int socket, struct sockaddr_in* address) {
     sock = socket;
     is_connected = true;
