@@ -210,6 +210,11 @@ class EthernetClient : public Client {
   
   IPAddress remoteIP() { return address; }
 
+  void setCACert(const char* cert) {
+    Logger.error(WIFICLIENT, "setCACert not supported");
+  }
+
+
  protected:
   const char* WIFICLIENT = "EthernetClient";
   SocketImpl sock;
