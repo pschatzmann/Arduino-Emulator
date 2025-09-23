@@ -13,6 +13,7 @@
 
 namespace arduino {
 
+enum wifi_ps_type_t { WIFI_PS_NONE, WIFI_PS_MIN_MODEM, WIFI_PS_MAX_MODEM};
 
 class WifiMock {
 public:
@@ -29,8 +30,9 @@ public:
     return adress;
   }
 
-  void setSleep(bool){
-  }
+  void setSleep(bool){}
+
+  void setSleep(wifi_ps_type_t) {}
 
   int macAddress() {
     return mac;
