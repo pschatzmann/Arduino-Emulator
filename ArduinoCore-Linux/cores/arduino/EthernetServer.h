@@ -5,12 +5,14 @@
 
 #include "Ethernet.h"
 #include "Server.h"
+#include "SignalHandler.h"
 
 namespace arduino {
 
 /**
  * A minimal ethernet server
  */
+
 class EthernetServer : public Server {
  private:
   uint16_t _port;
@@ -18,15 +20,55 @@ class EthernetServer : public Server {
   struct sockaddr_in server_addr;
   int _status = wl_status_t::WL_DISCONNECTED;
   bool is_blocking = false;
+  static std::vector<EthernetServer*>& active_servers() {
+    static std::vector<EthernetServer*> servers;
+    return servers;
+  }
+  static void cleanupAll(int sig) {
+    for (auto* server : active_servers()) {
+      if (server && server->server_fd > 0) {
+        shutdown(server->server_fd, SHUT_RDWR);
+        close(server->server_fd);
+        server->server_fd = 0;
+      }
+    }
+  }
 
  public:
-  EthernetServer(int port = 80) { _port = port; }
-  ~EthernetServer() { stop(); }
+  EthernetServer(int port = 80) {
+    _port = port;
+    // Register signal handler only once
+    static bool signal_registered = false;
+    if (!signal_registered) {
+      SignalHandler::registerHandler(SIGINT, cleanupAll);
+      SignalHandler::registerHandler(SIGTERM, cleanupAll);
+      signal_registered = true;
+    }
+  }
+
+  ~EthernetServer() {
+    stop();
+    // Remove from active servers list
+    auto& servers = active_servers();
+    auto it = std::find(servers.begin(), servers.end(), this);
+    if (it != servers.end()) {
+      servers.erase(it);
+    }
+  }
   void begin() { begin(0); }
   void begin(int port) { begin_(port); }
   void stop() {
-    if (server_fd > 0) close(server_fd);
+    if (server_fd > 0) {
+      // Set SO_LINGER to force immediate close
+      struct linger linger_opt = {1, 0};
+      setsockopt(server_fd, SOL_SOCKET, SO_LINGER, &linger_opt,
+                 sizeof(linger_opt));
+
+      shutdown(server_fd, SHUT_RDWR);
+      close(server_fd);
+    }
     server_fd = 0;
+    _status = wl_status_t::WL_DISCONNECTED;
   }
   WiFiClient accept() { return available_(); }
   WiFiClient available(uint8_t* status = NULL) { return available_(); }
@@ -59,6 +101,10 @@ class EthernetServer : public Server {
     setsockopt(server_fd, SOL_SOCKET, SO_REUSEADDR, (char*)&iSetOption,
                sizeof(iSetOption));
 
+    // Set SO_REUSEPORT for better port reuse
+    setsockopt(server_fd, SOL_SOCKET, SO_REUSEPORT, (char*)&iSetOption,
+               sizeof(iSetOption));
+
     // config socket
     server_addr.sin_family = AF_INET;
     server_addr.sin_addr.s_addr = INADDR_ANY;
@@ -82,6 +128,9 @@ class EthernetServer : public Server {
       return false;
     }
 
+    // Add to active servers list for signal handling
+    active_servers().push_back(this);
+    _status = wl_status_t::WL_CONNECTED;
     return true;
   }
 

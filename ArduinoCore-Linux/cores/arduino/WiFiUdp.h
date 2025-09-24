@@ -37,10 +37,11 @@
 #include <IPAddress.h>
 #include <RingBufferExt.h>
 #include <Udp.h>
-
+#include "SignalHandler.h"
 #include "ArduinoLogger.h"
 
 namespace arduino {
+
 
 class WiFiUDP : public UDP {
  private:
@@ -54,9 +55,29 @@ class WiFiUDP : public UDP {
   RingBufferExt* rx_buffer;
   void log_e(const char* msg, int errorNo);
 
+  static std::vector<WiFiUDP*>& active_udp() {
+    static std::vector<WiFiUDP*> udp_list;
+    return udp_list;
+  }
+  static void cleanupAll(int sig) {
+    for (auto* udp : active_udp()) {
+      if (udp) {
+        udp->stop();
+      }
+    }
+  }
+
  public:
   WiFiUDP();
   ~WiFiUDP();
+  void registerCleanup() {
+    static bool signal_registered = false;
+    if (!signal_registered) {
+      SignalHandler::registerHandler(SIGINT, cleanupAll);
+      SignalHandler::registerHandler(SIGTERM, cleanupAll);
+      signal_registered = true;
+    }
+  }
   uint8_t begin(IPAddress a, uint16_t p);
   uint8_t begin(uint16_t p);
   uint8_t beginMulticast(IPAddress a, uint16_t p);

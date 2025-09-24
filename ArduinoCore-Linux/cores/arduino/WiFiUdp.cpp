@@ -33,9 +33,20 @@ WiFiUDP::WiFiUDP()
       remote_port(0),
       tx_buffer(0),
       tx_buffer_len(0),
-      rx_buffer(0) {}
+      rx_buffer(0) {
+  registerCleanup();
+  active_udp().push_back(this);
+}
 
-WiFiUDP::~WiFiUDP() { stop(); }
+WiFiUDP::~WiFiUDP() {
+  stop();
+
+  auto &udp_list = active_udp();
+  auto it = std::find(udp_list.begin(), udp_list.end(), this);
+  if (it != udp_list.end()) {
+    udp_list.erase(it);
+  }
+}
 
 uint8_t WiFiUDP::begin(IPAddress address, uint16_t port) {
   stop();

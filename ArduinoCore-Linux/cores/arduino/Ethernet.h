@@ -36,11 +36,25 @@ class EthernetImpl {
 inline EthernetImpl Ethernet;
 
 class EthernetClient : public Client {
+ private:
+  static std::vector<EthernetClient*>& active_clients() {
+    static std::vector<EthernetClient*> clients;
+    return clients;
+  }
+  static void cleanupAll(int sig) {
+    for (auto* client : active_clients()) {
+      if (client) {
+        client->stop();
+      }
+    }
+  }
  public:
   EthernetClient() {
     setTimeout(2000);
     readBuffer = RingBufferExt(bufferSize);
     writeBuffer = RingBufferExt(bufferSize);
+    registerCleanup();
+    active_clients().push_back(this);
   }
   EthernetClient(SocketImpl sock, int bufferSize = 256, long timeout = 2000) {
     setTimeout(timeout);
@@ -49,6 +63,8 @@ class EthernetClient : public Client {
     writeBuffer = RingBufferExt(bufferSize);
     this->sock = sock;
     is_connected = sock.connected();
+    registerCleanup();
+    active_clients().push_back(this);
   }
   EthernetClient(int socket){
     setTimeout(2000);
@@ -56,6 +72,26 @@ class EthernetClient : public Client {
     writeBuffer = RingBufferExt(bufferSize);
     sock = SocketImpl(socket);
     is_connected = sock.connected();
+    registerCleanup();
+    active_clients().push_back(this);
+  }
+
+  ~EthernetClient() {
+    auto& clients = active_clients();
+    auto it = std::find(clients.begin(), clients.end(), this);
+    if (it != clients.end()) {
+      clients.erase(it);
+    }
+  }
+
+ private:
+  void registerCleanup() {
+    static bool signal_registered = false;
+    if (!signal_registered) {
+      SignalHandler::registerHandler(SIGINT, cleanupAll);
+      SignalHandler::registerHandler(SIGTERM, cleanupAll);
+      signal_registered = true;
+    }
   }
 
   //EthernetClient(const EthernetClient&) = delete;
