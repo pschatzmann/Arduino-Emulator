@@ -70,14 +70,6 @@ class WiFiUDP : public UDP {
  public:
   WiFiUDP();
   ~WiFiUDP();
-  void registerCleanup() {
-    static bool signal_registered = false;
-    if (!signal_registered) {
-      SignalHandler::registerHandler(SIGINT, cleanupAll);
-      SignalHandler::registerHandler(SIGTERM, cleanupAll);
-      signal_registered = true;
-    }
-  }
   uint8_t begin(IPAddress a, uint16_t p);
   uint8_t begin(uint16_t p);
   uint8_t beginMulticast(IPAddress a, uint16_t p);
@@ -98,6 +90,17 @@ class WiFiUDP : public UDP {
   void flush();
   IPAddress remoteIP();
   uint16_t remotePort();
+  
+protected:
+  void registerCleanup() {
+    static bool signal_registered = false;
+    if (!signal_registered) {
+      SignalHandler::registerHandler(SIGINT, cleanupAll);
+      SignalHandler::registerHandler(SIGTERM, cleanupAll);
+      signal_registered = true;
+    }
+  }
+
 };
 
 }  // namespace arduino

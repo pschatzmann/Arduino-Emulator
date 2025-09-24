@@ -84,16 +84,6 @@ class EthernetClient : public Client {
     }
   }
 
- private:
-  void registerCleanup() {
-    static bool signal_registered = false;
-    if (!signal_registered) {
-      SignalHandler::registerHandler(SIGINT, cleanupAll);
-      SignalHandler::registerHandler(SIGTERM, cleanupAll);
-      signal_registered = true;
-    }
-  }
-
   //EthernetClient(const EthernetClient&) = delete;
 
   // checks if we are connected - using a timeout
@@ -260,6 +250,15 @@ class EthernetClient : public Client {
   bool is_connected = false;
   IPAddress address{0, 0, 0, 0};
   uint16_t port = 0;
+
+  void registerCleanup() {
+    static bool signal_registered = false;
+    if (!signal_registered) {
+      SignalHandler::registerHandler(SIGINT, cleanupAll);
+      SignalHandler::registerHandler(SIGTERM, cleanupAll);
+      signal_registered = true;
+    }
+  }
 
   int read(uint8_t* buffer, size_t len) override {
     Logger.debug(WIFICLIENT, "read");
