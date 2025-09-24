@@ -38,6 +38,8 @@
 #include <Stream.h>
 #include <IPAddress.h>
 
+namespace arduino {
+
 class UDP: public Stream {
 
     public:
@@ -92,4 +94,6 @@ class UDP: public Stream {
             return addr.raw_address();
         }
 };
+
+}
 
