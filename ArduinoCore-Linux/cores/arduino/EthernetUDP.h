@@ -43,7 +43,7 @@
 namespace arduino {
 
 
-class WiFiUDP : public UDP {
+class EthernetUDP : public UDP {
  private:
   int udp_server;
   IPAddress multicast_ip;
@@ -55,8 +55,8 @@ class WiFiUDP : public UDP {
   RingBufferExt* rx_buffer;
   void log_e(const char* msg, int errorNo);
 
-  static std::vector<WiFiUDP*>& active_udp() {
-    static std::vector<WiFiUDP*> udp_list;
+  static std::vector<EthernetUDP*>& active_udp() {
+    static std::vector<EthernetUDP*> udp_list;
     return udp_list;
   }
   static void cleanupAll(int sig) {
@@ -68,8 +68,8 @@ class WiFiUDP : public UDP {
   }
 
  public:
-  WiFiUDP();
-  ~WiFiUDP();
+  EthernetUDP();
+  ~EthernetUDP();
   uint8_t begin(IPAddress a, uint16_t p);
   uint8_t begin(uint16_t p);
   uint8_t beginMulticast(IPAddress a, uint16_t p);

@@ -3,7 +3,7 @@
 #include <string.h>
 #include <thread>         
 #include "ArduinoAPI.h"
-#include "WiFiUdp.h"
+#include "WiFiUDP.h"
 #include "IPAddress.h"
 #include "ArduinoLogger.h"
 
