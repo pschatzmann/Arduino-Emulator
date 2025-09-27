@@ -86,7 +86,7 @@ int Stream::peekNextDigit(LookaheadMode lookahead, bool detectDecimal)
 // Public Methods
 //////////////////////////////////////////////////////////////
 
-void Stream::setTimeout(unsigned long timeout)  // sets the maximum number of milliseconds to wait
+void Stream::setTimeout(size_t timeout)  // sets the maximum number of milliseconds to wait
 {
   _timeout = timeout;
 }
