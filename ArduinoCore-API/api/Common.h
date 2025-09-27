@@ -72,10 +72,14 @@ typedef void (*voidFuncPtrParam)(void*);
 #define bit(b) (1UL << (b))
 #endif
 
+#ifdef SKIP_LEGACY_TYPES
 /* TODO: request for removal */
-// typedef bool      boolean;
-// typedef uint8_t   byte;
-// typedef uint16_t  word;
+#else
+// Keep these legacy types as they expected to be defined by Arduino.h and may be used by user code
+typedef bool      boolean;
+typedef uint8_t   byte;
+typedef uint16_t  word;
+#endif
 
 void init(void);
 void initVariant(void);
