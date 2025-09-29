@@ -96,16 +96,16 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacearduino.html">arduino</a> {</div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
 <div class="foldopen" id="foldopen00019" data-start="{" data-end="};">
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno"><a class="line" href="classarduino_1_1_hardware_setup_impl.html">   19</a></span><span class="keyword">class </span><a class="code hl_class" href="classarduino_1_1_hardware_setup_impl.html">HardwareSetupImpl</a> {</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno"><a class="line" href="classarduino_1_1_hardware_setup_remote_class.html">   19</a></span><span class="keyword">class </span><a class="code hl_class" href="classarduino_1_1_hardware_setup_remote_class.html">HardwareSetupRemoteClass</a> {</div>
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>  <span class="keyword">public</span>:</div>
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    <span class="comment">// as a default we use udp</span></div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    <a class="code hl_class" href="classarduino_1_1_hardware_setup_impl.html">HardwareSetupImpl</a>(<span class="keywordtype">int</span> port=7000){</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    <a class="code hl_class" href="classarduino_1_1_hardware_setup_remote_class.html">HardwareSetupRemoteClass</a>(<span class="keywordtype">int</span> port=7000){</div>
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>        this-&gt;port = port;</div>
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>        default_stream = <span class="keyword">new</span> <a class="code hl_class" href="classarduino_1_1_wi_fi_u_d_p_stream.html">WiFiUDPStream</a>();</div>
 <div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>        default_stream-&gt;begin(port);</div>
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    }</div>
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    </div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    <a class="code hl_class" href="classarduino_1_1_hardware_setup_impl.html">~HardwareSetupImpl</a>(){</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    <a class="code hl_class" href="classarduino_1_1_hardware_setup_remote_class.html">~HardwareSetupRemoteClass</a>(){</div>
 <div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>        cleanup();</div>
 <div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    }</div>
 <div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
@@ -184,11 +184,11 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>};</div>
 </div>
 <div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span> </div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span><span class="keyword">extern</span> <a class="code hl_class" href="classarduino_1_1_hardware_setup_impl.html">HardwareSetupImpl</a> HardwareSetup;</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span><span class="keyword">extern</span> <a class="code hl_class" href="classarduino_1_1_hardware_setup_remote_class.html">HardwareSetupRemoteClass</a> HardwareSetup;</div>
 <div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span> </div>
 <div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>}</div>
 <div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span> </div>
-<div class="ttc" id="aclassarduino_1_1_hardware_setup_impl_html"><div class="ttname"><a href="classarduino_1_1_hardware_setup_impl.html">arduino::HardwareSetupImpl</a></div><div class="ttdef"><b>Definition</b> HardwareSetup.h:19</div></div>
+<div class="ttc" id="aclassarduino_1_1_hardware_setup_remote_class_html"><div class="ttname"><a href="classarduino_1_1_hardware_setup_remote_class.html">arduino::HardwareSetupRemoteClass</a></div><div class="ttdef"><b>Definition</b> HardwareSetup.h:19</div></div>
 <div class="ttc" id="aclassarduino_1_1_i_p_address_html"><div class="ttname"><a href="classarduino_1_1_i_p_address.html">arduino::IPAddress</a></div><div class="ttdef"><b>Definition</b> IPAddress.h:35</div></div>
 <div class="ttc" id="aclassarduino_1_1_remote_g_p_i_o_html"><div class="ttname"><a href="classarduino_1_1_remote_g_p_i_o.html">arduino::RemoteGPIO</a></div><div class="ttdef"><b>Definition</b> RemoteGPIO.h:8</div></div>
 <div class="ttc" id="aclassarduino_1_1_remote_i2_c_html"><div class="ttname"><a href="classarduino_1_1_remote_i2_c.html">arduino::RemoteI2C</a></div><div class="ttdef"><b>Definition</b> RemoteI2C.h:12</div></div>
