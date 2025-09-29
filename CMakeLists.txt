@@ -15,7 +15,7 @@ option(USE_RPI "Raspberry Pi Support" OFF)
 # Https support: Build with wolfssl 
 if(USE_HTTPS)
     include(FetchContent)
-    FetchContent_Declare(wolfssl GIT_REPOSITORY "https://github.com/wolfSSL/wolfssl.git" GIT_TAG v5.1.1-stable )
+    FetchContent_Declare(wolfssl GIT_REPOSITORY "https://github.com/wolfSSL/wolfssl.git" GIT_TAG v5.8.2-stable )
     FetchContent_GetProperties(wolfssl)
     if(NOT wolfssl)
         FetchContent_Populate(wolfssl)

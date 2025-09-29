@@ -38,15 +38,14 @@ Here is a quick demo:
 
 ## Supported Defines
 
-You can activate/deactivate some functionality with the helpo f the following defines:
+You can activate/deactivate some functionality with the help of the following defines:
 
 - __USE_RPI__: activates support for Rasperry PI
-- __USE_HTTPS__: provide https support
+- __USE_HTTPS__: provide https support using wolfSSL
 - __SKIP_HARDWARE_SETUP__: deactivate all GPIO/SPI/I2C implementations
 - __SKIP_HARDWARE_WIFI__: deactivate WiFi
 
 ## Documentation
 
 The generated [Class documentation](https://pschatzmann.github.io/Arduino-Emulator/html/annotated.html). 
-
 
