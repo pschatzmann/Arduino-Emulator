@@ -26,6 +26,12 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
+      - name: Create link to String.h
+        run: echo '#include "WString.h"' > ArduinoCore-API/api/String.h
+
+      - name: Create link to String.cpp
+        run: echo '#include "WString.cpp"' > ArduinoCore-API/api/String.cpp
+
       # See: https://github.com/arduino/cpp-test-action/blob/main/README.md
       - uses: arduino/cpp-test-action@main
         with:
