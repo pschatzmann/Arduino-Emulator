@@ -40,7 +40,7 @@ class HardwareI2C_RPI : public HardwareI2C {
   int available() override;
   int read() override;
   int peek() override;
-  void flush() override;
+  void flush() override { fsync(i2c_fd);}
 
  private:
   int i2c_fd = -1;
