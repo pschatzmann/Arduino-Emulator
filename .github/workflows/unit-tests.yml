@@ -37,7 +37,7 @@ jobs:
 
       - name: Relax some warings
         # run: echo 'add_compile_options(-Wno-unused-function)' >> ArduinoCore-API/test/CMakeLists.txt
-        run: echo 'add_compile_options(-Wno-error)' >> ArduinoCore-API/test/CMakeLists.txt
+        run: echo 'add_compile_options(-Wno-error=all)' >> ArduinoCore-API/test/CMakeLists.txt
         
 
       # See: https://github.com/arduino/cpp-test-action/blob/main/README.md
