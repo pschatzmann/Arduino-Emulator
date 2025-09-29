@@ -1,6 +1,7 @@
 #ifdef USE_RPI
 
 #include "HardwareSPI_RPI.h"
+#include "ArduinoLogger.h"
 
 #include <fcntl.h>
 #include <linux/spi/spidev.h>
@@ -63,10 +64,10 @@ void HardwareSPI_RPI::transfer(void* buf, size_t count) {
   ioctl(spi_fd, SPI_IOC_MESSAGE(1), &tr);
 }
 void HardwareSPI_RPI::usingInterrupt(int interruptNumber) {
-  Logger.error("HardwareSPI_RPI: usingInterrupt not implemented\n");
+  Logger.error("HardwareSPI_RPI: usingInterrupt not implemented");
 }
 void HardwareSPI_RPI::notUsingInterrupt(int interruptNumber) {
-  Logger.error("HardwareSPI_RPI: notUsingInterrupt not implemented\n");
+  Logger.error("HardwareSPI_RPI: notUsingInterrupt not implemented");
 }
 void HardwareSPI_RPI::beginTransaction(SPISettings settings) {
   spi_mode = settings.getDataMode();
@@ -78,10 +79,10 @@ void HardwareSPI_RPI::beginTransaction(SPISettings settings) {
 }
 void HardwareSPI_RPI::endTransaction(void) {}
 void HardwareSPI_RPI::attachInterrupt() {
-  Logger.error("HardwareSPI_RPI: attachInterrupt not implemented\n");
+  Logger.error("HardwareSPI_RPI: attachInterrupt not implemented");
 }
 void HardwareSPI_RPI::detachInterrupt() {
-  Logger.error("HardwareSPI_RPI: detachInterrupt not implemented\n");
+  Logger.error("HardwareSPI_RPI: detachInterrupt not implemented");
 }
 
 }  // namespace arduino
