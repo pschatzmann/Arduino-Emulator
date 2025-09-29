@@ -17,7 +17,7 @@ class HardwareI2C_RPI : public HardwareI2C {
       Logger.error("HardwareI2C_RPI: Failed to open /dev/i2c-1");
     }
   }
-  ~HardwareI2C_RPI() override {
+  ~HardwareI2C_RPI() {
     Hardware.i2c = nullptr;
     end();
   }
