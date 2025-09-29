@@ -4,7 +4,7 @@
 
 namespace arduino {
 
-class HardwareI2CEx : HardwareI2C {
+class HardwareI2CEx : public HardwareI2C {
   public:
     HardwareI2CEx(){}
     virtual ~HardwareI2CEx(){};
