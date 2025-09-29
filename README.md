@@ -45,6 +45,17 @@ You can activate/deactivate some functionality with the help of the following de
 - __SKIP_HARDWARE_SETUP__: deactivate all GPIO/SPI/I2C implementations
 - __SKIP_HARDWARE_WIFI__: deactivate WiFi
 
+## Build instructions
+
+```Bash
+mkdir build
+cd build
+cmake -DUSE_RPI=OFF -DUSE_HTTPS=OFF -DCMAKE_BUILD_TYPE=Debug ..
+make
+```
+
+Adjust the cmake parameters dependent on your requirements.
+
 ## Documentation
 
 The generated [Class documentation](https://pschatzmann.github.io/Arduino-Emulator/html/annotated.html). 
