@@ -1,3 +1,5 @@
+#include "Arduino.h"
+
 int LED_BUILTIN = 13; // Define the built-in LED pin (usually pin 13 on Arduino boards)
 
 void setup() {
