@@ -1,6 +1,8 @@
 #pragma once
 #ifdef USE_RPI
 
+#include <fcntl.h>   // for O_RDWR
+#include <unistd.h>  // for open(), close(), etc.
 #include <vector>
 #include "Hardware.h"
 #include "HardwareI2C.h"
