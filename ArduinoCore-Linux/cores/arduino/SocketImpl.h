@@ -41,6 +41,8 @@ class SocketImpl {
   // determines the IP Adress
   const char* getIPAddress(const char* validEntries[]);
 
+  virtual void setCACert(const char* cert)  {}
+  virtual void setInsecure() {}
   int fd() { return sock; }
 
  protected:

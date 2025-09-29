@@ -1,2 +1,10 @@
 
-add_subdirectory("rasperry_pi")
+add_subdirectory("hallo-world")
+
+if(USE_HTTPS)
+    add_subdirectory("wifi-secure")
+endif(USE_HTTPS)
+
+if (USE_RPI)
+    add_subdirectory("raspberry_pi")
+endif(USE_RPI)

@@ -2,15 +2,12 @@
 cmake_minimum_required(VERSION 3.11...3.19)
 
 # Project name and a few useful settings. Other commands can pick up the results
-project(
-  arduino_emulator
-  VERSION 0.1
-  DESCRIPTION "Arduino Emulator for Linux"
-  LANGUAGES CXX)
+project(arduino_emulator VERSION 0.1 DESCRIPTION "Arduino Emulator for Linux" LANGUAGES CXX)
 
 # Https takes quite some time and is not always neede
 option(USE_HTTPS "Https Support" OFF)
 option(USE_RPI "Raspberry Pi Support" OFF)
+option(BUILD_SHARED_LIBS "Build with shared libraries" ON)
 
 # Https support: Build with wolfssl 
 if(USE_HTTPS)
@@ -21,12 +18,10 @@ if(USE_HTTPS)
         FetchContent_Populate(wolfssl)
         add_subdirectory(${wolfssl_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR}/wolfssl)
     endif()
-    add_definitions(-DUSE_HTTPS)
+    add_definitions(-DUSE_HTTPS -DWOLFSSL_CUSTOM_CONFIG)
 endif(USE_HTTPS)
 
 add_definitions(-DHOST)
-option(BUILD_SHARED_LIBS "Build with shared libraries" ON)
-option(PROVIDE_SERIALLIB "Serial Interface" OFF)
 
 # glob, but only for CMake 3.12 or later:
 file(GLOB HEADER_LIST CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/ArduinoCore-API/api/*.h")
@@ -59,8 +54,9 @@ install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/ArduinoCore-Linux/cores/arduino/"
 # All users of this library will need at least C++17
 target_compile_features(arduino_emulator PUBLIC cxx_std_17)
 target_compile_options(arduino_emulator PRIVATE -Wno-nonportable-include-path)
+
 if (USE_RPI)
-  target_compile_options(arduino_emulator PUBLIC -DUSE_RPI)
+    target_compile_options(arduino_emulator PUBLIC -DUSE_RPI)
 endif(USE_RPI)
 
 if(USE_HTTPS)
@@ -68,6 +64,5 @@ if(USE_HTTPS)
     target_link_libraries(arduino_emulator wolfssl)
 endif(USE_HTTPS)
 
-if (USE_RPI)
-  add_subdirectory("examples")
-endif(USE_RPI)
+# build examples
+add_subdirectory("examples")
