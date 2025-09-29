@@ -9,11 +9,11 @@ project(
   LANGUAGES CXX)
 
 # Https takes quite some time and is not always neede
-option(BUILD_HTTPS "Https Support" OFF)
+option(USE_HTTPS "Https Support" OFF)
 option(USE_RPI "Raspberry Pi Support" OFF)
 
 # Https support: Build with wolfssl 
-if(BUILD_HTTPS)
+if(USE_HTTPS)
     include(FetchContent)
     FetchContent_Declare(wolfssl GIT_REPOSITORY "https://github.com/wolfSSL/wolfssl.git" GIT_TAG v5.1.1-stable )
     FetchContent_GetProperties(wolfssl)
@@ -22,7 +22,7 @@ if(BUILD_HTTPS)
         add_subdirectory(${wolfssl_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR}/wolfssl)
     endif()
     add_definitions(-DUSE_HTTPS)
-endif(BUILD_HTTPS)
+endif(USE_HTTPS)
 
 add_definitions(-DHOST)
 option(BUILD_SHARED_LIBS "Build with shared libraries" ON)
@@ -63,10 +63,10 @@ if (USE_RPI)
   target_compile_options(arduino_emulator PUBLIC -DUSE_RPI)
 endif(USE_RPI)
 
-if(BUILD_HTTPS)
+if(USE_HTTPS)
     # Add external libraries
     target_link_libraries(arduino_emulator wolfssl)
-endif(BUILD_HTTPS)
+endif(USE_HTTPS)
 
 if (USE_RPI)
   add_subdirectory("examples")
