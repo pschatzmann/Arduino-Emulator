@@ -25,6 +25,7 @@ class HardwareSetupRPI {
    * @brief Initializes hardware pointers to Raspberry Pi interfaces.
    */
   void begin() {
+    Logger.info("Using Raspberry Pi hardware interfaces");
     hardware.gpio = &gpio;
     hardware.i2c = &i2c;
     hardware.spi = &spi;
