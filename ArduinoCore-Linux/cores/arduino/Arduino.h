@@ -43,4 +43,6 @@
 #include "Serial.h"
 #include "RemoteSerial.h"
 
+extern HardwareImpl Hardware; // implementation for gpio, spi, i2c
+
 using namespace arduino;

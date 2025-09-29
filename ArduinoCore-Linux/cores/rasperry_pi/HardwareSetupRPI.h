@@ -1,9 +1,9 @@
 
 #ifdef USE_RPI
+#include "Arduino.h" // for Hardware; 
 #include "HardwareGPIO_RPI.h"
 #include "HardwareI2C_RPI.h"
 #include "HardwareSPI_RPI.h"
-
 
 /**
  * @class HardwareSetupRPI
@@ -26,19 +26,23 @@ class HardwareSetupRPI {
    */
   void begin() {
     Logger.info("Using Raspberry Pi hardware interfaces");
-    hardware.gpio = &gpio;
-    hardware.i2c = &i2c;
-    hardware.spi = &spi;
+    Hardware.gpio = &gpio;
+    Hardware.i2c = &i2c;
+    Hardware.spi = &spi;
   }
 
   /**
    * @brief Resets hardware pointers to nullptr.
    */
   void end() {
-    hardware.gpio = nullptr;
-    hardware.i2c = nullptr;
-    hardware.spi = nullptr;
+    Hardware.gpio = nullptr;
+    Hardware.i2c = nullptr;
+    Hardware.spi = nullptr;
   }
+
+  HardwareGPIO_RPI& get_gpio() { return gpio; }
+  HardwareI2C_RPI& get_i2c() { return i2c; }
+  HardwareSPI_RPI& get_spi() { return spi; }
 
  protected:
   /** GPIO interface for Raspberry Pi */
@@ -47,14 +51,13 @@ class HardwareSetupRPI {
   HardwareI2C_RPI i2c;
   /** SPI interface for Raspberry Pi */
   HardwareSPI_RPI spi;
-  /** Hardware interface struct */
-  Hardware hardware;
 };
 
 /**
  * @brief Global instance for Raspberry Pi hardware setup.
  *
- * Use this object to access and initialize GPIO, I2C, and SPI interfaces on Raspberry Pi.
+ * Use this object to access and initialize GPIO, I2C, and SPI interfaces on
+ * Raspberry Pi.
  */
 static HardwareSetupRPI RPI;
 
