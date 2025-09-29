@@ -12,6 +12,7 @@ namespace arduino {
 #define SOCKET_IMPL_SEC "SocketImplSecure"
 
 static int wolf_ssl_counter = 0;
+static WOLFSSL_CTX* wolf_ctx = nullptr;
 
 /**
  * @brief SSL Socket using wolf ssl
@@ -19,13 +20,13 @@ static int wolf_ssl_counter = 0;
 class SocketImplSecure : public SocketImpl {
  public:
   SocketImplSecure() {
-    if (wolf_ssl_counter++ == 0 || ctx == nullptr) {
+    if (wolf_ssl_counter++ == 0 || wolf_ctx == nullptr) {
       wolfSSL_Init();
-      if ((ctx = wolfSSL_CTX_new(wolfTLSv1_3_client_method())) == NULL) {
+      if ((wolf_ctx = wolfSSL_CTX_new(wolfTLSv1_3_client_method())) == NULL) {
         Logger.error(SOCKET_IMPL_SEC, "wolfSSL_CTX_new error.");
       }
     }
-    if ((ssl = wolfSSL_new(ctx)) == NULL) {
+    if ((ssl = wolfSSL_new(wolf_ctx)) == NULL) {
       Logger.error(SOCKET_IMPL_SEC, "wolfSSL_new error.");
     }
   }
@@ -35,9 +36,9 @@ class SocketImplSecure : public SocketImpl {
       wolfSSL_free(ssl);
       ssl = nullptr;
     }
-    if (--wolf_ssl_counter == 0 && ctx) {
-      wolfSSL_CTX_free(ctx);
-      ctx = nullptr;
+    if (--wolf_ssl_counter == 0 && wolf_ctx) {
+      wolfSSL_CTX_free(wolf_ctx);
+      wolf_ctx = nullptr;
       wolfSSL_Cleanup();
     }
   }
@@ -47,11 +48,59 @@ class SocketImplSecure : public SocketImpl {
     if (ssl == nullptr) {
       wolfSSL_set_fd(ssl, sock);
     }
-    size_t result = ::wolfSSL_read(ssl, buffer, len);
+    int result = ::wolfSSL_read(ssl, buffer, len);
+
     char lenStr[80];
-    sprintf(lenStr, "%ld -> %ld", len, result);
-    Logger.debug(SOCKET_IMPL_SEC, "read->", lenStr);
+    sprintf(lenStr, "%ld -> %d", len, result);
+    if (result < 0) {
+      Logger.error(SOCKET_IMPL_SEC, "read->", lenStr);
+      return 0;
+    } else {
+      Logger.debug(SOCKET_IMPL_SEC, "read->", lenStr);
+    }
     return result;
+  }
+
+  int connect(const char* address, uint16_t port) override {
+    // Create socket
+    sock = ::socket(AF_INET, SOCK_STREAM, 0);
+    if (sock < 0) {
+      Logger.error(SOCKET_IMPL_SEC, "Socket creation failed");
+      return -1;
+    }
+
+    // Setup server address
+    memset(&serv_addr, 0, sizeof(serv_addr));
+    serv_addr.sin_family = AF_INET;
+    serv_addr.sin_port = htons(port);
+    if (::inet_pton(AF_INET, address, &serv_addr.sin_addr) <= 0) {
+      Logger.error(SOCKET_IMPL_SEC, "Invalid address", address);
+      ::close(sock);
+      sock = -1;
+      return -1;
+    }
+
+    // Connect to server
+    if (::connect(sock, (struct sockaddr*)&serv_addr, sizeof(serv_addr)) < 0) {
+      Logger.error(SOCKET_IMPL_SEC, "Connection failed");
+      ::close(sock);
+      sock = -1;
+      return -1;
+    }
+
+    // Set SSL file descriptor
+    wolfSSL_set_fd(ssl, sock);
+
+    // Perform SSL handshake
+    if (wolfSSL_connect(ssl) != SSL_SUCCESS) {
+      Logger.error(SOCKET_IMPL_SEC, "SSL handshake failed");
+      ::close(sock);
+      sock = -1;
+      return -1;
+    }
+
+    is_connected = true;
+    return 1;
   }
 
   // send the data via the socket - returns the number of characters written or
@@ -66,23 +115,23 @@ class SocketImplSecure : public SocketImpl {
   }
 
   void setCACert(const char* cert) override {
-    if (ctx == nullptr) return;
+    if (wolf_ctx == nullptr) return;
     // Load CA certificate from a PEM string
-    int ret = wolfSSL_CTX_load_verify_buffer(
-        ctx, (const unsigned char*)cert, strlen(cert), WOLFSSL_FILETYPE_PEM);
+    int ret =
+        wolfSSL_CTX_load_verify_buffer(wolf_ctx, (const unsigned char*)cert,
+                                       strlen(cert), WOLFSSL_FILETYPE_PEM);
     if (ret != SSL_SUCCESS) {
       Logger.error(SOCKET_IMPL_SEC, "Failed to load CA certificate");
     }
   }
 
   void setInsecure() {
-    if (ctx == nullptr) return;
+    if (wolf_ctx == nullptr) return;
     // Disable certificate verification
-    wolfSSL_CTX_set_verify(ctx, SSL_VERIFY_NONE, nullptr);
+    wolfSSL_CTX_set_verify(wolf_ctx, SSL_VERIFY_NONE, nullptr);
   }
 
  protected:
-  WOLFSSL_CTX* ctx = nullptr;
   WOLFSSL* ssl = nullptr;
 };
 
