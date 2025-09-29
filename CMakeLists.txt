@@ -10,7 +10,7 @@ project(
 
 # Https takes quite some time and is not always neede
 option(BUILD_HTTPS "Https Support" OFF)
-option(USE_RPI "Raspberry Pi Support" OFF)
+option(USE_RPI "Raspberry Pi Support" ON)
 
 # Https support: Build with wolfssl 
 if(BUILD_HTTPS)

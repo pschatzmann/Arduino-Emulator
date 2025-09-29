@@ -10,7 +10,6 @@ namespace arduino {
 
 class HardwareSPI_RPI : public HardwareSPI {
  public:
-  HardwareI2C_RPI();
   HardwareSPI_RPI(const char* device = "/dev/spidev0.0");
   ~HardwareSPI_RPI() override;
 
