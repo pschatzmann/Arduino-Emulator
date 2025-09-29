@@ -13,7 +13,21 @@
 
 namespace arduino {
 
+HardwareSPI_RPI::HardwareSPI_RPI() {
+  spi_fd = -1;
+  begin();
+}
+
 HardwareSPI_RPI::HardwareSPI_RPI(const char* device) {
+  spi_fd = -1;
+  this->device = device;
+  begin();
+}
+
+HardwareSPI_RPI::~HardwareSPI_RPI() {
+  end()
+}
+void HardwareSPI_RPI::begin() {
   spi_fd = open(device, O_RDWR);
   if (spi_fd < 0) {
     perror("HardwareSPI_RPI: Failed to open SPI device");
@@ -22,9 +36,7 @@ HardwareSPI_RPI::HardwareSPI_RPI(const char* device) {
   ioctl(spi_fd, SPI_IOC_WR_BITS_PER_WORD, &spi_bits);
   ioctl(spi_fd, SPI_IOC_WR_MAX_SPEED_HZ, &spi_speed);
 }
-HardwareSPI_RPI::~HardwareSPI_RPI() {
-  if (spi_fd >= 0) close(spi_fd);
-}
+
 void HardwareSPI_RPI::end() {
   if (spi_fd >= 0) close(spi_fd);
   spi_fd = -1;
