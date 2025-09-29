@@ -38,10 +38,6 @@ WifiMock WiFi;         // So that we can use the WiFi
 #endif
 
 #if !defined(SKIP_HARDWARE_SETUP)
-#ifdef USE_RPI
-static HardwareGPIO_RPI RPI_GPIO;
-static HardwareI2C_RPI RPI_I2c;
-#endif
 HardwareSetupRemoteClass HardwareSetup; // setup for implementation
 #endif
 
