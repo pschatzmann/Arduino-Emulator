@@ -39,9 +39,11 @@ class WiFiUDPStream : public WiFiUDP {
       }
           
       void stop(){
-          endPacket();
-          WiFiUDP::stop();
-          active = false;
+          if (active){
+            endPacket();
+            WiFiUDP::stop();
+            active = false;
+          }
       }
     
       bool targetDefined() {
@@ -77,16 +79,15 @@ class WiFiUDPStream : public WiFiUDP {
       }
   
   protected:
-      bool active;
-      IPAddress target_adress;
-      int port;
+      bool active = false;
+      IPAddress target_adress{0,0,0,0};
+      int port = 0;
     
 };
     
 // Define a global function which will be used to start a thread 
   
-
-}
+} // namespace arduino
 
 
 

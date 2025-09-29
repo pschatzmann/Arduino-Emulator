@@ -13,6 +13,15 @@ We provide some alternative implementations:
 - Communicates changes to/from a Microcontroller using UDP
 - Rasperry PI 
 
+## Rasperry PI
+
+You can run this emulator on an Rasperry PI by making sure that the USE_RPI cmake option is set to ON.
+
+You also need to
+
+- install libgpiod-dev (sudo apt install libgpiod-dev)
+- activate SPI and I2C with raspi-config
+
 
 ## Jupyter
 
