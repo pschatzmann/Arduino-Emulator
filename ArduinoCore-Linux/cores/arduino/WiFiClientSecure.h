@@ -1,6 +1,7 @@
 #pragma once
 #if defined(USE_HTTPS)
 #include <wolfssl/ssl.h>
+#include "Ethernet.h"
 
 namespace arduino {
   
@@ -56,7 +57,7 @@ protected:
 class WiFiClientSecure : public EthernetClient {
 public:
   WiFiClientSecure(int bufferSize = 256, long timeout = 2000)
-      : EthernetClient(bufferSize, timeout, new SocketImplSecure()) {}
+      : EthernetClient(SocketImplSecure { }, bufferSize, timeout) {}
 };
 
 } // namespace arduino
