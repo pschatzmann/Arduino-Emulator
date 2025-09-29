@@ -5,6 +5,14 @@
 If you have an Arduino Sketch that you want to run e.g in Linux or OS/X you can include this library with cmake. 
 Here is an [example cmake file](https://github.com/pschatzmann/arduino-audio-tools/blob/main/examples/examples-desktop/generator/CMakeLists.txt) for a [Arduino Audio Sketch](https://github.com/pschatzmann/arduino-audio-tools/tree/main/examples/examples-desktop/generator)).
 
+## GPIO/SPI/I2C
+
+We provide some alternative implementations:
+
+- Dummy Implementatin which does nothing
+- Transmit updates to a Microcontroller using UDP
+- Rasperry PI 
+
 
 ## Jupyter
 

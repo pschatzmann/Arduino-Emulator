@@ -16,16 +16,16 @@ namespace arduino {
  * Class which is used to configure the actual Hardware APIs
  */
 
-class HardwareSetupImpl {
+class HardwareSetupRemoteClass {
   public:
     // as a default we use udp
-    HardwareSetupImpl(int port=7000){
+    HardwareSetupRemoteClass(int port=7000){
         this->port = port;
         default_stream = new WiFiUDPStream();
         default_stream->begin(port);
     }
     
-    ~HardwareSetupImpl(){
+    ~HardwareSetupRemoteClass(){
         cleanup();
     }
 
@@ -103,7 +103,7 @@ class HardwareSetupImpl {
 
 };
 
-extern HardwareSetupImpl HardwareSetup;
+extern HardwareSetupRemoteClass HardwareSetup;
 
 }
 
