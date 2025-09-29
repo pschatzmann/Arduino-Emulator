@@ -10,6 +10,7 @@ project(
 
 # Https takes quite some time and is not always neede
 option(BUILD_HTTPS "Https Support" OFF)
+option(USE_RPI "Raspberry Pi Support" OFF)
 
 # Https support: Build with wolfssl 
 if(BUILD_HTTPS)
@@ -29,7 +30,10 @@ option(PROVIDE_SERIALLIB "Serial Interface" OFF)
 
 # glob, but only for CMake 3.12 or later:
 file(GLOB HEADER_LIST CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/ArduinoCore-API/api/*.h")
-file(GLOB SRC_LIST CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/ArduinoCore-API/api/*.cpp" "${CMAKE_CURRENT_SOURCE_DIR}/ArduinoCore-Linux/cores/arduino/*.cpp")
+file(GLOB SRC_LIST CONFIGURE_DEPENDS 
+    "${CMAKE_CURRENT_SOURCE_DIR}/ArduinoCore-API/api/*.cpp" 
+    "${CMAKE_CURRENT_SOURCE_DIR}/ArduinoCore-Linux/cores/arduino/*.cpp" 
+    "${CMAKE_CURRENT_SOURCE_DIR}/ArduinoCore-Linux/cores/rasperry_pi/*.cpp")
 
 # Make an dynamic library 
 add_library(arduino_emulator ${SRC_LIST} ${HEADER_LIST})
@@ -37,6 +41,7 @@ add_library(arduino_emulator ${SRC_LIST} ${HEADER_LIST})
 # Define the directories with the h files
 target_include_directories (arduino_emulator PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/ArduinoCore-API/api"
     "${CMAKE_CURRENT_SOURCE_DIR}/ArduinoCore-Linux/cores/arduino"
+    "${CMAKE_CURRENT_SOURCE_DIR}/ArduinoCore-Linux/cores/rasperry_pi"
     "${CMAKE_CURRENT_SOURCE_DIR}/ArduinoCore-Linux/libraries" )
 
 # Install header files 
@@ -54,8 +59,15 @@ install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/ArduinoCore-Linux/cores/arduino/"
 # All users of this library will need at least C++17
 target_compile_features(arduino_emulator PUBLIC cxx_std_17)
 target_compile_options(arduino_emulator PRIVATE -Wno-nonportable-include-path)
+if (USE_RPI)
+  target_compile_options(arduino_emulator PUBLIC -DUSE_RPI)
+endif(USE_RPI)
 
 if(BUILD_HTTPS)
     # Add external libraries
     target_link_libraries(arduino_emulator wolfssl)
 endif(BUILD_HTTPS)
+
+if (USE_RPI)
+  add_subdirectory("examples")
+endif(USE_RPI)
