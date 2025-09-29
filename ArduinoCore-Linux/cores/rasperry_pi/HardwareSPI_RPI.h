@@ -10,7 +10,7 @@ namespace arduino {
 
 class HardwareSPI_RPI : public HardwareSPI {
  public:
-  HardwareSPI_RPI();
+  HardwareSPI_RPI(const char* device = "/dev/spidev0.0");
   ~HardwareSPI_RPI() override;
 
   uint8_t transfer(uint8_t data) override;
