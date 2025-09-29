@@ -19,6 +19,15 @@ void HardwareI2C_RPI::begin(uint8_t address) {
   }
 }
 
+void HardwareI2C_RPI::begin() {
+  if (i2c_fd < 0) {
+    i2c_fd = open(i2c_device, O_RDWR);
+    if (i2c_fd < 0) {
+      Logger.error("HardwareI2C_RPI: Failed to open I2C device");
+    }
+  }
+}
+
 void HardwareI2C_RPI::end() {
   if (i2c_fd >= 0) {
     close(i2c_fd);
