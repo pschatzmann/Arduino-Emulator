@@ -1,4 +1,4 @@
-#ifdef RPI
+#ifdef USE_RPI
 
 #include "HardwareSPI_RPI.h"
 
@@ -86,4 +86,4 @@ void HardwareSPI_RPI::detachInterrupt() {
 
 }  // namespace arduino
 
-#endif  // RPI
+#endif  // USE_RPI

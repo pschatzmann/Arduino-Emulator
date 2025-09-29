@@ -1,5 +1,5 @@
 #pragma once
-#ifdef RPI
+#ifdef USE_RPI
 
 #include <vector>
 #include "Hardware.h"

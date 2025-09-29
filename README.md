@@ -28,6 +28,14 @@ Here is a quick demo:
 - [Using Pins](04-Pins.ipynb)
 - [Using Serial](05-Serial.ipynb)
 
+## Supported Defines
+
+You can activate/deactivate some functionality with the helpo f the following defines:
+
+- USE_RPI: activates support for Rasperry PI
+- USE_HTTPS: provide https support
+- SKIP_HARDWARE_SETUP: deactivate GPIO/SPI/I2C implementations
+- SKIP_HARDWARE_WIFI: deactivate WiFi
 
 ## Documentation
 

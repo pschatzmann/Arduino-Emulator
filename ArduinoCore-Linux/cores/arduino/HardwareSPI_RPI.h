@@ -1,5 +1,5 @@
 #pragma once
-#ifdef RPI
+#ifdef USE_RPI
 #include <inttypes.h>
 
 #include "Common.h"
@@ -40,4 +40,4 @@ class HardwareSPI_RPI : public HardwareSPI {
 
 }  // namespace arduino
 
-#endif  // RPI
+#endif  // USE_RPI

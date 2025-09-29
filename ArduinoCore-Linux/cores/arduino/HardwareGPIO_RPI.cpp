@@ -1,5 +1,5 @@
 
-#ifdef RPI
+#ifdef USE_RPI
 
 #include <gpiod.h>
 #include <map>

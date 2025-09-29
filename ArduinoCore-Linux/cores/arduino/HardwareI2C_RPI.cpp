@@ -1,4 +1,4 @@
-#ifdef RPI
+#ifdef USE_RPI
 
 #include "HardwareI2C_RPI.h"
 #include <fcntl.h>
