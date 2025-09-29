@@ -1,6 +1,6 @@
 
 #ifdef USE_RPI
-#include "Arduino.h" // for Hardware; 
+#include "Hardware.h" // for Hardware; 
 #include "HardwareGPIO_RPI.h"
 #include "HardwareI2C_RPI.h"
 #include "HardwareSPI_RPI.h"
