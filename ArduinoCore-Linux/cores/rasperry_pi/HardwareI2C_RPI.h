@@ -30,7 +30,7 @@ class HardwareI2C_RPI : public HardwareI2C {
   void setClock(uint32_t freq) override;
   void beginTransmission(uint8_t address) override;
   uint8_t endTransmission(bool stopBit) override;
-  uint8_t endTransmission(void) { endTransmission(false);};
+  uint8_t endTransmission(void) { return endTransmission(true);};
   size_t requestFrom(uint8_t address, size_t len, bool stopBit) override;
   size_t requestFrom(uint8_t address, size_t len) override;
   void onReceive(void (*)(int)) override;
