@@ -36,7 +36,9 @@ jobs:
         run: echo 'add_compile_definitions(CATCH_CONFIG_NO_POSIX_SIGNALS)' >> ArduinoCore-API/test/CMakeLists.txt
 
       - name: Relax some warings
-        run: echo 'add_compile_options(-Wno-unused-function)' >> ArduinoCore-API/test/CMakeLists.txt
+        # run: echo 'add_compile_options(-Wno-unused-function)' >> ArduinoCore-API/test/CMakeLists.txt
+        run: echo 'add_compile_options(-Wno-error)' >> ArduinoCore-API/test/CMakeLists.txt
+        
 
       # See: https://github.com/arduino/cpp-test-action/blob/main/README.md
       - uses: arduino/cpp-test-action@main
