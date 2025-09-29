@@ -7,4 +7,4 @@ set(DCMAKE_CXX_FLAGS "-Werror")
 add_executable(blink blink.cpp)
 
 target_compile_definitions(blink PUBLIC -DUSE_RPI)
-target_link_libraries(blink arduino_emulator)
+target_link_libraries(blink arduino_emulator gpiod)
