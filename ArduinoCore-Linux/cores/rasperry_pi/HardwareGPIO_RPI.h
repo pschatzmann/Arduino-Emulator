@@ -25,7 +25,7 @@ class HardwareGPIO_RPI : public HardwareGPIO {
 
  private:
   int m_analogReference = 0;  // Default to AR_DEFAULT
-  std::map<pin_size_t, uint32_t freq> gpio_frequencies;
+  std::map<pin_size_t, uint32_t> gpio_frequencies;
   static const int pwm_pins[] = {12, 13, 18, 19};
 };
 
