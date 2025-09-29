@@ -22,11 +22,11 @@ You can also use [xeus-cling](https://github.com/jupyter-xeus/xeus-cling) as a r
 
 Here is a quick demo:
 
-- [Setup](01-Setup.ipynb)
-- [Introduction into some Basic Commands](02-BasicCommands.ipynb)
-- [The Network Stack](03-Network.ipynb)
-- [Using Pins](04-Pins.ipynb)
-- [Using Serial](05-Serial.ipynb)
+- [Setup](examples/jupyter/01-Setup.ipynb)
+- [Introduction into some Basic Commands](examples/jupyter/02-BasicCommands.ipynb)
+- [The Network Stack](examples/jupyter/03-Network.ipynb)
+- [Using Pins](examples/jupyter/04-Pins.ipynb)
+- [Using Serial](examples/jupyter/05-Serial.ipynb)
 
 ## Supported Defines
 
