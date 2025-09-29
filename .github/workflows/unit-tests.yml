@@ -32,6 +32,9 @@ jobs:
       - name: Create link to String.cpp
         run: echo '#include "WString.cpp"' > ArduinoCore-API/api/String.cpp
 
+      - name: Fix catch lib issues
+        run: echo 'add_compile_definitions(CATCH_CONFIG_NO_POSIX_SIGNALS)' >> ArduinoCore-API/test/CMakeLists.txt
+
       # See: https://github.com/arduino/cpp-test-action/blob/main/README.md
       - uses: arduino/cpp-test-action@main
         with:
