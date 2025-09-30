@@ -39,13 +39,13 @@ void HardwareI2C_RPI::setClock(uint32_t freq) {
   i2c_clock = freq;
   // Changing I2C clock at runtime is not supported via /dev/i2c-1
   // Usually set via device tree overlays or raspi-config
-  Logger.warn("HardwareI2C_RPI", "setClock not implemented on Linux I2C");
+  Logger.warning("HardwareI2C_RPI", "setClock not implemented on Linux I2C");
 }
 
 void HardwareI2C_RPI::beginTransmission(uint8_t address) {
   current_address = address;
   if (ioctl(i2c_fd, I2C_SLAVE, address) < 0) {
-    perror("HardwareI2C_RPI: Failed to set I2C address");
+    Logger.error("HardwareI2C_RPI: Failed to set I2C address");
   }
 }
 
@@ -88,7 +88,7 @@ size_t HardwareI2C_RPI::requestFrom(uint8_t address, size_t len, bool stopBit) {
   ssize_t r = ::read(i2c_fd, i2c_rx_buffer.data(), len);
   i2c_rx_pos = 0;
   if (r < 0) {
-    perror("HardwareI2C_RPI: Failed to read");
+    Logger.error("HardwareI2C_RPI: Failed to read");
     i2c_rx_buffer.clear();
     return 0;
   }
