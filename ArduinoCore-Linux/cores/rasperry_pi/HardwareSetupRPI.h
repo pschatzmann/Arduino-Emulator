@@ -5,6 +5,8 @@
 #include "HardwareI2C_RPI.h"
 #include "HardwareSPI_RPI.h"
 
+namespace arduino {
+
 /**
  * @class HardwareSetupRPI
  * @brief Sets up hardware interfaces for Raspberry Pi (GPIO, I2C, SPI).
@@ -60,5 +62,7 @@ class HardwareSetupRPI {
  * Raspberry Pi.
  */
 static HardwareSetupRPI RPI;
+
+}  // namespace arduino
 
 #endif
