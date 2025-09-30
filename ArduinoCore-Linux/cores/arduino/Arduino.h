@@ -32,15 +32,15 @@
 
 #if defined(_MSC_VER)
 // Temporary unsupported under Win/MSVC
-#define PROVIDE_HARDWARE_SETUP_SKIP
-#define PROVIDE_HARDWARE_WIFI_SKIP
+#define SKIP_HARDWARE_SETUP
+#define SKIP_HARDWARE_WIFI
 #endif
 
 #include "ArduinoAPI.h"
 #include "ArdStdio.h"
-#include "ArduinoLogger.h"
-#include "HardwareSetup.h"
 #include "Serial.h"
+#include "ArduinoLogger.h"
 #include "RemoteSerial.h"
+#include "HardwareSetup.h"
 
 using namespace arduino;

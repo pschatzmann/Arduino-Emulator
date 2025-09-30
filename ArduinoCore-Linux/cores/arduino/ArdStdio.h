@@ -28,58 +28,72 @@ class StdioDevice : public Stream {
         // nothing to be done
     }
     
-    virtual void print(const char* str){
+    virtual size_t print(const char* str){
         std::cout << str;
         if (auto_flush) flush();
+        return strlen(str);
     }
     
-    virtual void println(const char* str=""){
+    virtual size_t println(const char* str=""){
         std::cout << str << "\n";
         if (auto_flush) flush();
+        return strlen(str) + 1;
     }
     
-    virtual void print(int val, int radix = DEC){
-        if (radix == DEC) { std::cout << val; } else { Stream::print(val, radix); }
+    virtual size_t print(int val, int radix = DEC){
+        size_t result = Stream::print(val, radix); 
         if (auto_flush) flush();
+        return result;
     }
     
-    virtual void println(int val, int radix = DEC){
-        if (radix == DEC) { std::cout << val << "\n"; } else { Stream::println(val, radix); }
+    virtual size_t println(int val, int radix = DEC){
+        size_t result = Stream::println(val, radix); 
         if (auto_flush) flush();
+        return result;
     }
     
-    virtual void println(String &str){
-        println(str.c_str());
+    virtual size_t println(String &str){
+        return println(str.c_str());
     }
 
-    virtual void print(String &str){
-        print(str.c_str());
+    virtual size_t print(String &str){
+        return print(str.c_str());
     }
     
     
-    virtual void println(Printable &p){
-        p.printTo(*this);
+    virtual size_t println(Printable &p){
+        size_t result = p.printTo(*this);
         std::cout << "\n";
         if (auto_flush) flush();
+        return result + 1;
     }
 
-    virtual void print(Printable &p){
-        p.printTo(*this);
+    virtual size_t print(Printable &p){
+        auto result = p.printTo(*this);
         if (auto_flush) flush();
+        return result;
     }
     
     virtual void flush() {
         std::cout.flush();
     }
     
-    virtual void write(const char* str, int len) {
+    virtual size_t write(const char* str, size_t len) {
         std::cout.write(str, len);
         if (auto_flush) flush();
+        return len;
     }
 
-    virtual void write(uint8_t* str, int len) {
+    virtual size_t write(uint8_t* str, size_t len) {
         std::cout.write((const char*)str, len);
         if (auto_flush) flush();
+        return len;
+
+    }
+    size_t write(const uint8_t* str, size_t len) override {
+        std::cout.write((const char*)str, len);
+        if (auto_flush) flush();
+        return len;
     }
     
     virtual size_t write(int32_t value){
@@ -88,7 +102,7 @@ class StdioDevice : public Stream {
         return 1;
     }
     
-    virtual size_t write(uint8_t value){
+    size_t write(uint8_t value) override {
         std::cout.put(value);    
         if (auto_flush) flush();
         return 1;

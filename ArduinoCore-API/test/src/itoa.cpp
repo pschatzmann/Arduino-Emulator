@@ -1,12 +1,14 @@
 /*
  * Copyright (c) 2020 Arduino.  All rights reserved.
+ *
+ * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
 /**************************************************************************************
  * INCLUDE
  **************************************************************************************/
 
-#include <itoa.h>
+#include <api/itoa.h>
 
 #include <string>
 #include <stdexcept>
@@ -27,24 +29,36 @@ std::string radixToFmtString(int const radix)
 
 char * itoa(int value, char * str, int radix)
 {
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
   sprintf(str, radixToFmtString(radix).c_str(), value);
+#pragma GCC diagnostic pop
   return str;
 }
 
 char * ltoa(long value, char * str, int radix)
 {
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
   sprintf(str, radixToFmtString(radix).c_str(), value);
+#pragma GCC diagnostic pop
   return str;
 }
 
 char * utoa(unsigned value, char *str, int radix)
 {
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
   sprintf(str, radixToFmtString(radix).c_str(), value);
+#pragma GCC diagnostic pop
   return str;
 }
 
 char * ultoa(unsigned long value, char * str, int radix)
 {
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
   sprintf(str, radixToFmtString(radix).c_str(), value);
+#pragma GCC diagnostic pop
   return str;
 }

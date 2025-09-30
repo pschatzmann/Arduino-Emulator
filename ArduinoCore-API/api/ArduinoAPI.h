@@ -9,7 +9,7 @@
 
   This library is distributed in the hope that it will be useful,
   but WITHOUT ANY WARRANTY; without even the implied warranty of
-  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
   Lesser General Public License for more details.
 
   You should have received a copy of the GNU Lesser General Public
@@ -20,8 +20,8 @@
 #ifndef ARDUINO_API_H
 #define ARDUINO_API_H
 
-// version 1.2.0
-#define ARDUINO_API_VERSION 10200
+// version 1.5.2
+#define ARDUINO_API_VERSION 10502
 
 #include "Binary.h"
 
@@ -32,7 +32,7 @@
 #include "Printable.h"
 #include "PluggableUSB.h"
 #include "Server.h"
-#include "WString.h"
+#include "String.h"
 #include "Stream.h"
 #include "Udp.h"
 #include "USBAPI.h"
@@ -46,9 +46,10 @@
 #include <string.h>
 #include <math.h>
 
-#ifdef __cplusplus
 // Misc Arduino core functions
 #include "Common.h"
+
+#ifdef __cplusplus
 // Compatibility layer for older code
 #include "Compat.h"
 #endif

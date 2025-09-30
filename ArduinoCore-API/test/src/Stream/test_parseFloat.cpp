@@ -1,14 +1,23 @@
 /*
  * Copyright (c) 2020 Arduino.  All rights reserved.
+ *
+ * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
 /**************************************************************************************
  * INCLUDE
  **************************************************************************************/
 
-#include <catch.hpp>
+#include <catch2/catch_test_macros.hpp>
+#include <catch2/catch_approx.hpp>
+
+using namespace Catch;
 
 #include <StreamMock.h>
+
+#include <float.h>
+
+using namespace arduino;
 
 /**************************************************************************************
  * TEST CODE
@@ -42,6 +51,16 @@ TEST_CASE ("Testing parseFloat(LookaheadMode lookahead = SKIP_ALL, char ignore =
   {
     mock << "\r\n\t 12.34";
     REQUIRE(mock.parseFloat() == 12.34f);
+  }
+  WHEN ("A float is provided with too many digits after the decimal point")
+  {
+    mock << "3.1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679821480865132823066470938446095505822317253594081284811174502841027019385211055596446229489549303819644288109756659334461284756482337867831652712019091456485669234603486104543266482133936072602491412737245870064";
+    REQUIRE(mock.parseFloat() == Approx(3.141592654f));
+  }
+  WHEN ("A float is larger than LONG_MAX")
+  {
+    mock << "602200000000000000000000.00";
+    REQUIRE(mock.parseFloat() == Approx(6.022e23f));
   }
 }
 

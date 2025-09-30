@@ -1,4 +1,5 @@
 /*
+  Print.h - Base class that provides print() and println()
   Copyright (c) 2016 Arduino LLC.  All right reserved.
 
   This library is free software; you can redistribute it and/or
@@ -8,8 +9,8 @@
 
   This library is distributed in the hope that it will be useful,
   but WITHOUT ANY WARRANTY; without even the implied warranty of
-  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-  See the GNU Lesser General Public License for more details.
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+  Lesser General Public License for more details.
 
   You should have received a copy of the GNU Lesser General Public
   License along with this library; if not, write to the Free Software
@@ -21,7 +22,7 @@
 #include <inttypes.h>
 #include <stdio.h> // for size_t
 
-#include "WString.h"
+#include "String.h"
 #include "Printable.h"
 
 #define DEC 10
@@ -49,7 +50,8 @@ class Print
     virtual size_t write(uint8_t) = 0;
     size_t write(const char *str) {
       if (str == NULL) return 0;
-      return write((const uint8_t *)str, ::strlen(str));
+      int len = strlen(str);
+      return write((const uint8_t *)str, len);
     }
     virtual size_t write(const uint8_t *buffer, size_t size);
     size_t write(const char *buffer, size_t size) {
@@ -57,7 +59,7 @@ class Print
     }
 
     // default to zero, meaning "a single write may block"
-    // should be overriden by subclasses with buffering
+    // should be overridden by subclasses with buffering
     virtual int availableForWrite() { return 0; }
 
     size_t print(const __FlashStringHelper *);
@@ -93,4 +95,4 @@ class Print
 };
 
 }
-using namespace arduino;
+using arduino::Print;

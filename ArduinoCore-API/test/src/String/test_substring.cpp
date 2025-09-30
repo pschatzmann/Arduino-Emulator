@@ -1,14 +1,18 @@
 /*
  * Copyright (c) 2020 Arduino.  All rights reserved.
+ *
+ * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
 /**************************************************************************************
  * INCLUDE
  **************************************************************************************/
 
-#include <catch.hpp>
+#include <catch2/catch_test_macros.hpp>
 
-#include <String.h>
+#include <api/String.h>
+
+#include "StringPrinter.h"
 
 /**************************************************************************************
  * TEST CODE
@@ -26,13 +30,13 @@ TEST_CASE ("Testing String::substring(unsigned int, unsigned int)", "[String-sub
   {
     arduino::String str1("Hello");
     arduino::String str2("ello");
-    REQUIRE(str2.compareTo(str1.substring(1,9)) == 0);
+    REQUIRE(str2 == str1.substring(1,9));
   }
 
   WHEN ("left higher than right")
   {
     arduino::String str1("Hello");
     arduino::String str2("ello");
-    REQUIRE(str2.compareTo(str1.substring(9,1)) == 0);
+    REQUIRE(str2 == str1.substring(9,1));
   }
 }

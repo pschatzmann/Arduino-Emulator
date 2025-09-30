@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: LGPL-2.1-or-later
+
 ##########################################################################
 
 cmake_minimum_required(VERSION 2.8)
@@ -6,11 +8,20 @@ cmake_minimum_required(VERSION 2.8)
 
 project(test-ArduinoCore-API)
 
+Include(FetchContent)
+
+FetchContent_Declare(
+  Catch2
+  GIT_REPOSITORY https://github.com/catchorg/Catch2.git
+  GIT_TAG        v3.4.0
+)
+
+FetchContent_MakeAvailable(Catch2)
+
 ##########################################################################
 
-include_directories(../api)
+include_directories(..)
 include_directories(include)
-include_directories(external/catch/v2.13.1/include)
 
 ##########################################################################
 
@@ -25,16 +36,31 @@ set(TEST_TARGET ${CMAKE_PROJECT_NAME})
 ##########################################################################
 
 set(TEST_SRCS
+  src/CanMsg/test_CanMsg.cpp
+  src/CanMsg/test_CanMsg_CopyCtor.cpp
+  src/CanMsg/test_CanExtendedId.cpp
+  src/CanMsg/test_CanStandardId.cpp
+  src/CanMsg/test_isExtendedId.cpp
+  src/CanMsg/test_isStandardId.cpp
+  src/CanMsg/test_operator_assignment.cpp
+  src/CanMsg/test_printTo.cpp
+  src/CanMsgRingbuffer/test_available.cpp
   src/Common/test_makeWord.cpp
   src/Common/test_map.cpp
   src/Common/test_max.cpp
   src/Common/test_min.cpp
+  src/IPAddress/test_toString.cpp
   src/IPAddress/test_fromString.cpp
+  src/IPAddress/test_fromString6.cpp
   src/IPAddress/test_IPAddress.cpp
+  src/IPAddress/test_IPAddress6.cpp
   src/IPAddress/test_operator_assignment.cpp
   src/IPAddress/test_operator_comparison.cpp
+  src/IPAddress/test_operator_comparison6.cpp
   src/IPAddress/test_operator_parentheses.cpp
+  src/IPAddress/test_operator_parentheses6.cpp
   src/IPAddress/test_printTo.cpp
+  src/IPAddress/test_printTo6.cpp
   src/Print/test_clearWriteError.cpp
   src/Print/test_getWriteError.cpp
   src/Print/test_print.cpp
@@ -66,6 +92,7 @@ set(TEST_SRCS
   src/String/test_indexOf.cpp
   src/String/test_lastIndexOf.cpp
   src/String/test_length.cpp
+  src/String/test_move.cpp
   src/String/test_remove.cpp
   src/String/test_replace.cpp
   src/String/test_String.cpp
@@ -75,6 +102,7 @@ set(TEST_SRCS
   src/String/test_toLowerCase.cpp
   src/String/test_toUpperCase.cpp
   src/String/test_trim.cpp
+  src/WCharacter/test_isAscii.cpp
   src/WCharacter/test_isControl.cpp
   src/WCharacter/test_isDigit.cpp
   src/WCharacter/test_isHexadecimalDigit.cpp
@@ -83,9 +111,12 @@ set(TEST_SRCS
   src/WCharacter/test_isSpace.cpp
   src/WCharacter/test_isUpperCase.cpp
   src/WCharacter/test_isWhitespace.cpp
+  src/WCharacter/test_toAscii.cpp
 )
 
 set(TEST_DUT_SRCS
+  ../api/CanMsg.cpp
+  ../api/CanMsgRingbuffer.cpp
   ../api/Common.cpp
   ../api/IPAddress.cpp
   ../api/String.cpp
@@ -96,7 +127,6 @@ set(TEST_DUT_SRCS
 ##########################################################################
 
 set(TEST_TARGET_SRCS
-  src/main.cpp
   src/dtostrf.cpp
   src/itoa.cpp
   src/MillisFake.cpp
@@ -112,8 +142,8 @@ add_compile_definitions(HOST)
 add_compile_options(-Wall -Wextra -Wpedantic -Werror)
 add_compile_options(-Wno-cast-function-type)
 
-set(CMAKE_C_FLAGS   ${CMAKE_C_FLAGS}   "--coverage")
-set(CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS} "--coverage -Wno-deprecated-copy")
+set(CMAKE_C_FLAGS   "${CMAKE_C_FLAGS} --coverage")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --coverage -Wno-deprecated-copy")
 
 ##########################################################################
 
@@ -121,6 +151,8 @@ add_executable(
   ${TEST_TARGET}
   ${TEST_TARGET_SRCS}
 )
+
+target_link_libraries( ${TEST_TARGET} Catch2WithMain )
 
 ##########################################################################
 

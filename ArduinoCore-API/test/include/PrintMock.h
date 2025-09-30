@@ -1,5 +1,7 @@
 /*
  * Copyright (c) 2020 Arduino.  All rights reserved.
+ *
+ * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
 #ifndef PRINT_MOCK_H_
@@ -11,7 +13,7 @@
 
 #include <string>
 
-#include <Print.h>
+#include <api/Print.h>
 
 /**************************************************************************************
  * CLASS DECLARATION

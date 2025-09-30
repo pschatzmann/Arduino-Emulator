@@ -86,7 +86,7 @@ int Stream::peekNextDigit(LookaheadMode lookahead, bool detectDecimal)
 // Public Methods
 //////////////////////////////////////////////////////////////
 
-void Stream::setTimeout(size_t timeout)  // sets the maximum number of milliseconds to wait
+void Stream::setTimeout(unsigned long timeout)  // sets the maximum number of milliseconds to wait
 {
   _timeout = timeout;
 }
@@ -94,7 +94,7 @@ void Stream::setTimeout(size_t timeout)  // sets the maximum number of milliseco
  // find returns true if the target string is found
 bool  Stream::find(const char *target)
 {
-  return findUntil(target, ::strlen(target), NULL, 0);
+  return findUntil(target, strlen(target), NULL, 0);
 }
 
 // reads data from the stream until the target string of given length is found
@@ -107,7 +107,7 @@ bool Stream::find(const char *target, size_t length)
 // as find but search ends if the terminator string is found
 bool  Stream::findUntil(const char *target, const char *terminator)
 {
-  return findUntil(target, ::strlen(target), terminator, strlen(terminator));
+  return findUntil(target, strlen(target), terminator, strlen(terminator));
 }
 
 // reads data from the stream until the target string of the given length is found
@@ -162,9 +162,9 @@ float Stream::parseFloat(LookaheadMode lookahead, char ignore)
 {
   bool isNegative = false;
   bool isFraction = false;
-  long value = 0;
+  double value = 0.0;
   int c;
-  float fraction = 1.0;
+  double fraction = 1.0;
 
   c = peekNextDigit(lookahead, true);
     // ignore non numeric leading characters
@@ -179,9 +179,12 @@ float Stream::parseFloat(LookaheadMode lookahead, char ignore)
     else if (c == '.')
       isFraction = true;
     else if(c >= '0' && c <= '9')  {      // is c a digit?
-      value = value * 10 + c - '0';
-      if(isFraction)
-         fraction *= 0.1;
+      if(isFraction) {
+        fraction *= 0.1;
+        value = value + fraction * (c - '0');
+      } else {
+        value = value * 10 + c - '0';
+      }
     }
     read();  // consume the character we got with peek
     c = timedPeek();
@@ -190,10 +193,8 @@ float Stream::parseFloat(LookaheadMode lookahead, char ignore)
 
   if(isNegative)
     value = -value;
-  if(isFraction)
-    return value * fraction;
-  else
-    return value;
+
+  return value;
 }
 
 // read characters from stream into buffer

@@ -2,34 +2,33 @@
 cmake_minimum_required(VERSION 3.11...3.19)
 
 # Project name and a few useful settings. Other commands can pick up the results
-project(
-  arduino_emulator
-  VERSION 0.1
-  DESCRIPTION "Arduino Emulator for Linux"
-  LANGUAGES CXX)
+project(arduino_emulator VERSION 0.1 DESCRIPTION "Arduino Emulator for Linux" LANGUAGES CXX)
 
 # Https takes quite some time and is not always neede
-option(BUILD_HTTPS "Https Support" OFF)
+option(USE_HTTPS "Https Support" OFF)
+option(USE_RPI "Raspberry Pi Support" OFF)
+option(BUILD_SHARED_LIBS "Build with shared libraries" ON)
 
 # Https support: Build with wolfssl 
-if(BUILD_HTTPS)
+if(USE_HTTPS)
     include(FetchContent)
-    FetchContent_Declare(wolfssl GIT_REPOSITORY "https://github.com/wolfSSL/wolfssl.git" GIT_TAG v5.1.1-stable )
+    FetchContent_Declare(wolfssl GIT_REPOSITORY "https://github.com/wolfSSL/wolfssl.git" GIT_TAG v5.8.2-stable )
     FetchContent_GetProperties(wolfssl)
     if(NOT wolfssl)
         FetchContent_Populate(wolfssl)
         add_subdirectory(${wolfssl_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR}/wolfssl)
     endif()
-    add_definitions(-DUSE_HTTPS)
-endif(BUILD_HTTPS)
+    add_definitions(-DUSE_HTTPS -DDEBUG_WOLFSSL)
+endif(USE_HTTPS)
 
 add_definitions(-DHOST)
-option(BUILD_SHARED_LIBS "Build with shared libraries" ON)
-option(PROVIDE_SERIALLIB "Serial Interface" OFF)
 
 # glob, but only for CMake 3.12 or later:
 file(GLOB HEADER_LIST CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/ArduinoCore-API/api/*.h")
-file(GLOB SRC_LIST CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/ArduinoCore-API/api/*.cpp" "${CMAKE_CURRENT_SOURCE_DIR}/ArduinoCore-Linux/cores/arduino/*.cpp")
+file(GLOB SRC_LIST CONFIGURE_DEPENDS 
+    "${CMAKE_CURRENT_SOURCE_DIR}/ArduinoCore-API/api/*.cpp" 
+    "${CMAKE_CURRENT_SOURCE_DIR}/ArduinoCore-Linux/cores/arduino/*.cpp" 
+    "${CMAKE_CURRENT_SOURCE_DIR}/ArduinoCore-Linux/cores/rasperry_pi/*.cpp")
 
 # Make an dynamic library 
 add_library(arduino_emulator ${SRC_LIST} ${HEADER_LIST})
@@ -37,6 +36,7 @@ add_library(arduino_emulator ${SRC_LIST} ${HEADER_LIST})
 # Define the directories with the h files
 target_include_directories (arduino_emulator PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/ArduinoCore-API/api"
     "${CMAKE_CURRENT_SOURCE_DIR}/ArduinoCore-Linux/cores/arduino"
+    "${CMAKE_CURRENT_SOURCE_DIR}/ArduinoCore-Linux/cores/rasperry_pi"
     "${CMAKE_CURRENT_SOURCE_DIR}/ArduinoCore-Linux/libraries" )
 
 # Install header files 
@@ -55,7 +55,14 @@ install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/ArduinoCore-Linux/cores/arduino/"
 target_compile_features(arduino_emulator PUBLIC cxx_std_17)
 target_compile_options(arduino_emulator PRIVATE -Wno-nonportable-include-path)
 
-if(BUILD_HTTPS)
+if (USE_RPI)
+    target_compile_options(arduino_emulator PUBLIC -DUSE_RPI)
+endif(USE_RPI)
+
+if(USE_HTTPS)
     # Add external libraries
     target_link_libraries(arduino_emulator wolfssl)
-endif(BUILD_HTTPS)
+endif(USE_HTTPS)
+
+# build examples
+add_subdirectory("examples")

@@ -1,14 +1,18 @@
 /*
  * Copyright (c) 2020 Arduino.  All rights reserved.
+ *
+ * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
 /**************************************************************************************
  * INCLUDE
  **************************************************************************************/
 
-#include <catch.hpp>
+#include <catch2/catch_test_macros.hpp>
 
-#include <String.h>
+#include <api/String.h>
+
+#include "StringPrinter.h"
 
 /**************************************************************************************
  * TEST CODE
@@ -20,10 +24,34 @@ TEST_CASE ("Testing String::equals(const String &) with exit status PASS", "[Str
   REQUIRE(str1.equals(str2) == 1);
 }
 
+TEST_CASE ("Testing String::operator==(const String &) with exit status PASS", "[String-equals-01]")
+{
+  arduino::String str1("Hello"), str2("Hello");
+  REQUIRE(str1 == str2);
+}
+
+TEST_CASE ("Testing String::operator!=(const String &) with exit status FAIL", "[String-equals-01]")
+{
+  arduino::String str1("Hello"), str2("Hello");
+  REQUIRE_FALSE(str1 != str2);
+}
+
 TEST_CASE ("Testing String::equals(const String &) with exit status FAIL", "[String-equals-02]")
 {
   arduino::String str1("Hello"), str2("World");
   REQUIRE(str1.equals(str2) == 0);
+}
+
+TEST_CASE ("Testing String::operator==(const String &) with exit status FAIL", "[String-equals-02]")
+{
+  arduino::String str1("Hello"), str2("World");
+  REQUIRE_FALSE(str1 == str2);
+}
+
+TEST_CASE ("Testing String::operator !=(const String &) with exit status PASS", "[String-equals-02]")
+{
+  arduino::String str1("Hello"), str2("World");
+  REQUIRE(str1 != str2);
 }
 
 TEST_CASE ("Testing String::equals(const char *) with exit status PASS", "[String-equals-03]")
@@ -32,10 +60,34 @@ TEST_CASE ("Testing String::equals(const char *) with exit status PASS", "[Strin
   REQUIRE(str1.equals("Hello") == 1);
 }
 
+TEST_CASE ("Testing String::operator ==(const char *) with exit status PASS", "[String-equals-03]")
+{
+  arduino::String str1("Hello");
+  REQUIRE(str1 == "Hello");
+}
+
+TEST_CASE ("Testing String::operator !=(const char *) with exit status FAIL", "[String-equals-03]")
+{
+  arduino::String str1("Hello");
+  REQUIRE_FALSE(str1 != "Hello");
+}
+
 TEST_CASE ("Testing String::equals(const char *) with exit status FAIL", "[String-equals-04]")
 {
   arduino::String str1("Hello");
   REQUIRE(str1.equals("World") == 0);
+}
+
+TEST_CASE ("Testing String::operator ==(const char *) with exit status FAIL", "[String-equals-04]")
+{
+  arduino::String str1("Hello");
+  REQUIRE_FALSE(str1 == "World");
+}
+
+TEST_CASE ("Testing String::operator !=(const char *) with exit status PASS", "[String-equals-04]")
+{
+  arduino::String str1("Hello");
+  REQUIRE(str1 != "World");
 }
 
 TEST_CASE ("Testing String::equalsIgnoreCase(const String &) PASS with NON-empty string", "[String-equalsIgnoreCase-05]")

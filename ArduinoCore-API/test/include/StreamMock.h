@@ -1,5 +1,7 @@
 /*
  * Copyright (c) 2020 Arduino.  All rights reserved.
+ *
+ * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
 #ifndef STREAM_MOCK_H_
@@ -11,7 +13,7 @@
 
 #include <deque>
 
-#include <Stream.h>
+#include <api/Stream.h>
 
 /**************************************************************************************
  * CLASS DECLARATION

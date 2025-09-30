@@ -13,7 +13,7 @@ namespace arduino {
     
 class Test {
     void testHardwareSetup() {
-        HardwareSetup.stop();
+        HardwareSetup.end();
     }
     void testWiFiUDPStream() {
         auto str = new WiFiUDPStream();

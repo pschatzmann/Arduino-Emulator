@@ -165,7 +165,7 @@ class EthernetServer : public Server {
       Logger.error("accept failed");
       return result;
     }
-    SocketImpl sock_impl(client_fd, (struct sockaddr_in*)&client_addr);
+    SocketImpl* sock_impl = new SocketImpl(client_fd, (struct sockaddr_in*)&client_addr);
     EthernetClient result{sock_impl};
     return result;
   }

@@ -1,6 +1,10 @@
 
 #pragma once
 
+#include <arpa/inet.h>  // for inet_pton
+#include <netdb.h>      // for gethostbyname, struct hostent
+#include <unistd.h>     // for close
+
 #include "ArduinoLogger.h"
 #include "Client.h"
 #include "Common.h"
@@ -48,53 +52,57 @@ class EthernetClient : public Client {
       }
     }
   }
+
  public:
   EthernetClient() {
     setTimeout(2000);
+    p_sock = new SocketImpl();
     readBuffer = RingBufferExt(bufferSize);
     writeBuffer = RingBufferExt(bufferSize);
     registerCleanup();
     active_clients().push_back(this);
   }
-  EthernetClient(SocketImpl sock, int bufferSize = 256, long timeout = 2000) {
+  EthernetClient(SocketImpl* sock, int bufferSize = 256, long timeout = 2000) {
     setTimeout(timeout);
     this->bufferSize = bufferSize;
     readBuffer = RingBufferExt(bufferSize);
     writeBuffer = RingBufferExt(bufferSize);
-    this->sock = sock;
-    is_connected = sock.connected();
+    p_sock = sock;
+    is_connected = p_sock->connected();
     registerCleanup();
     active_clients().push_back(this);
   }
-  EthernetClient(int socket){
+  EthernetClient(int socket) {
     setTimeout(2000);
     readBuffer = RingBufferExt(bufferSize);
     writeBuffer = RingBufferExt(bufferSize);
-    sock = SocketImpl(socket);
-    is_connected = sock.connected();
+    p_sock = new SocketImpl(socket);
+    is_connected = p_sock->connected();
     registerCleanup();
     active_clients().push_back(this);
   }
 
-  ~EthernetClient() {
+  virtual ~EthernetClient() {
     auto& clients = active_clients();
     auto it = std::find(clients.begin(), clients.end(), this);
     if (it != clients.end()) {
       clients.erase(it);
     }
+    if (p_sock) {
+      delete p_sock;
+      p_sock = nullptr;
+    }
   }
-
-  //EthernetClient(const EthernetClient&) = delete;
 
   // checks if we are connected - using a timeout
   virtual uint8_t connected() override {
-    if (!is_connected) return false; // connect has failed
-    if (sock.connected()) return true; // check socket
+    if (!is_connected) return false;       // connect has failed
+    if (p_sock->connected()) return true;  // check socket
     long timeout = millis() + getTimeout();
-    uint8_t result = sock.connected();
+    uint8_t result = p_sock->connected();
     while (result <= 0 && millis() < timeout) {
       delay(200);
-      result = sock.connected();
+      result = p_sock->connected();
     }
     return result;
   }
@@ -112,15 +120,23 @@ class EthernetClient : public Client {
     return connect(str.c_str(), port);
   }
 
-  // opens a conection
+
+  // opens a connection
   virtual int connect(const char* address, uint16_t port) override {
     Logger.info(WIFICLIENT, "connect");
-    this->address.fromString(address);
     this->port = port;
     if (connectedFast()) {
-      sock.close();
+      p_sock->close();
     }
-    sock.connect(address, port);
+    IPAddress adr = resolveAddress(address, port);
+    if (adr == IPAddress(0, 0, 0, 0)) {
+      is_connected = false;
+      return 0;
+    }
+    // performs the actual connection
+    String str = adr.toString();
+    Logger.info("Connecting to ", str.c_str());
+    p_sock->connect(str.c_str(), port);
     is_connected = true;
     return 1;
   }
@@ -141,9 +157,9 @@ class EthernetClient : public Client {
   }
 
   // direct write - if we have anything in the buffer we write that out first
-  virtual size_t write(const uint8_t* str, size_t len) override{
+  virtual size_t write(const uint8_t* str, size_t len) override {
     flush();
-    return sock.write(str, len);
+    return p_sock->write(str, len);
   }
 
   virtual int print(const char* str = "") {
@@ -168,7 +184,7 @@ class EthernetClient : public Client {
     if (flushSize > 0) {
       uint8_t rbuffer[flushSize];
       writeBuffer.read(rbuffer, flushSize);
-      sock.write(rbuffer, flushSize);
+      p_sock->write(rbuffer, flushSize);
     }
   }
 
@@ -179,10 +195,10 @@ class EthernetClient : public Client {
       return readBuffer.available();
     }
     long timeout = millis() + getTimeout();
-    int result = sock.available();
+    int result = p_sock->available();
     while (result <= 0 && millis() < timeout) {
       delay(200);
-      result = sock.available();
+      result = p_sock->available();
     }
     return result;
   }
@@ -194,62 +210,66 @@ class EthernetClient : public Client {
     if (readBytes(&c, 1) == 1) {
       result = c;
     }
-    // Logger.debug(WIFICLIENT,"read-1");
-    // if (readBuffer.available()==0){
-    //     uint8_t buffer[bufferSize];
-    //     int len = read((uint8_t*)buffer, bufferSize);
-    //     readBuffer.write(buffer, len);
-    // }
-    // return readBuffer.read();
     return result;
-    ;
   }
 
-  size_t readBytes(char* buffer, size_t len) override {
+  virtual size_t readBytes(char* buffer, size_t len)  {
     return read((uint8_t*)buffer, len);
   }
 
-  size_t readBytes(uint8_t* buffer, size_t len) override {
+  virtual size_t readBytes(uint8_t* buffer, size_t len) {
     return read(buffer, len);
   }
 
-  // direct read with timeout
-
   // peeks one character
   virtual int peek() override {
-    // Logger.debug(WIFICLIENT, "peek");
-    // if (readBuffer.available()>0){
-    //     return readBuffer.peek();
-    // }
-    return sock.peek();
+    return p_sock->peek();
     return -1;
   }
 
   // close the connection
-  virtual void stop() override { sock.close(); }
+  virtual void stop() override { p_sock->close(); }
 
-  void setInsecure() {}
+  virtual void setInsecure() {}
 
-  int fd() { return sock.fd(); }
+  int fd() { return p_sock->fd(); }
 
   uint16_t remotePort() { return port; }
-  
+
   IPAddress remoteIP() { return address; }
 
-  void setCACert(const char* cert) {
+  virtual void setCACert(const char* cert) {
     Logger.error(WIFICLIENT, "setCACert not supported");
   }
 
-
  protected:
   const char* WIFICLIENT = "EthernetClient";
-  SocketImpl sock;
+  SocketImpl* p_sock = nullptr;
   int bufferSize = 256;
   RingBufferExt readBuffer;
   RingBufferExt writeBuffer;
   bool is_connected = false;
   IPAddress address{0, 0, 0, 0};
   uint16_t port = 0;
+
+  // resolves the address and returns sockaddr_in
+  IPAddress resolveAddress(const char* address, uint16_t port) {
+    struct sockaddr_in serv_addr4;
+    memset(&serv_addr4, 0, sizeof(serv_addr4));
+    serv_addr4.sin_family = AF_INET;
+    serv_addr4.sin_port = htons(port);
+    if (::inet_pton(AF_INET, address, &serv_addr4.sin_addr) <= 0) {
+      // Not an IP, try to resolve hostname
+      struct hostent* he = ::gethostbyname(address);
+      if (he == nullptr || he->h_addr_list[0] == nullptr) {
+        Logger.error(WIFICLIENT, "Hostname resolution failed");
+        serv_addr4.sin_addr.s_addr = 0;
+      } else {
+        memcpy(&serv_addr4.sin_addr, he->h_addr_list[0], he->h_length);
+      }
+    }
+    return IPAddress(serv_addr4.sin_addr.s_addr);
+  }
 
   void registerCleanup() {
     static bool signal_registered = false;
@@ -263,14 +283,11 @@ class EthernetClient : public Client {
   int read(uint8_t* buffer, size_t len) override {
     Logger.debug(WIFICLIENT, "read");
     int result = 0;
-    // if (readBuffer.available()>0){
-    //     result = readBuffer.read(buffer, len);
-    // } else {
     long timeout = millis() + getTimeout();
-    result = sock.read(buffer, len);
+    result = p_sock->read(buffer, len);
     while (result <= 0 && millis() < timeout) {
       delay(200);
-      result = sock.read(buffer, len);
+      result = p_sock->read(buffer, len);
     }
     //}
     char lenStr[16];

@@ -1,5 +1,7 @@
 /*
  * Copyright (c) 2020 Arduino.  All rights reserved.
+ *
+ * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
 #ifndef MILLIS_FAKE_H_
@@ -9,7 +11,7 @@
  * INCLUDE
  **************************************************************************************/
 
-#include <Common.h>
+#include <api/Common.h>
 
 /**************************************************************************************
  * FUNCTION DECLARATION
