@@ -8,6 +8,16 @@
 
 namespace arduino {
 
+/**
+ * @class HardwareSPI_RPI
+ * @brief Implementation of SPI communication for Raspberry Pi using Linux SPI device interface.
+ *
+ * This class provides an interface to the SPI bus on Raspberry Pi platforms by accessing
+ * the Linux device (e.g., /dev/spidev0.0). It inherits from HardwareSPI and implements all
+ * required methods for SPI communication, including data transfer, transaction management, and configuration.
+ *
+ * @note This class is only available when USE_RPI is defined.
+ */
 class HardwareSPI_RPI : public HardwareSPI {
  public:
   HardwareSPI_RPI(const char* device = "/dev/spidev0.0");

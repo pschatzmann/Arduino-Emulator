@@ -10,6 +10,16 @@
 
 namespace arduino {
 
+/**
+ * @class HardwareI2C_RPI
+ * @brief Implementation of I2C communication for Raspberry Pi using Linux I2C device interface.
+ *
+ * This class provides an interface to the I2C bus on Raspberry Pi platforms by accessing
+ * the Linux device (e.g., /dev/i2c-1). It inherits from HardwareI2C and implements all
+ * required methods for I2C communication, including transmission, reception, and configuration.
+ *
+ * @note This class is only available when USE_RPI is defined.
+ */
 class HardwareI2C_RPI : public HardwareI2C {
  public:
   HardwareI2C_RPI(const char* device = "/dev/i2c-1") {

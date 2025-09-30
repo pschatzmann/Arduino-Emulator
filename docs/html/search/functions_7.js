@@ -1,5 +1,10 @@
 var searchData=
 [
-  ['pulsein_0',['pulseIn',['../namespacearduino.html#a768a0ccb3697a5299ef14dabcc7fb87b',1,'arduino']]],
-  ['pulseinlong_1',['pulseInLong',['../namespacearduino.html#aceca51c450e43ab422560d41149e3a5a',1,'arduino']]]
+  ['inittimer_0',['initTimer',['../classtime_out.html#a88b4caef4ce7bfc42b73a61589c098e8',1,'timeOut']]],
+  ['iscts_1',['isCTS',['../classserialib.html#aca544a6f8dfa33f8e771713646768215',1,'serialib']]],
+  ['isdcd_2',['isDCD',['../classserialib.html#a5f451a5eea7c8c1bdcff684ba131d6ff',1,'serialib']]],
+  ['isdsr_3',['isDSR',['../classserialib.html#a3f1f0894543dfb17955de50157965dd7',1,'serialib']]],
+  ['isdtr_4',['isDTR',['../classserialib.html#a4ec78286be81602bf1df44a4eb8372a8',1,'serialib']]],
+  ['isri_5',['isRI',['../classserialib.html#a605d8a8015fadb5db5521350aefe084e',1,'serialib']]],
+  ['isrts_6',['isRTS',['../classserialib.html#ab2b121af07fb732f82668f6a14e93cfb',1,'serialib']]]
 ];

@@ -72,7 +72,7 @@ $(function() {
   <div class="headertitle"><div class="title">An Arduino C++ Emulator Library </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="md__r_e_a_d_m_e"></a> </p>
+<div class="textblock"><p><a class="anchor" id="md__r_e_a_d_m_e"></a> <a href="../../actions/workflows/c-cpp-cmake.yml"><img src="../../actions/workflows/c-cpp-cmake.yml/badge.svg" alt="Linux build" style="pointer-events: none;" class="inline"/></a> <a href="../../actions/workflows/unit-tests.yml"><img src="../../actions/workflows/unit-tests.yml/badge.svg" alt="Unit tests" style="pointer-events: none;" class="inline"/></a></p>
 <h1><a class="anchor" id="autotoc_md1"></a>
 Using this Project as a library</h1>
 <p>If you have an Arduino Sketch that you want to run e.g in Linux, OS/X or Windows you can include this library with cmake. Here is an <a href="https://github.com/pschatzmann/arduino-audio-tools/blob/main/examples/examples-desktop/generator/CMakeLists.txt">example cmake file</a> for a <a href="https://github.com/pschatzmann/arduino-audio-tools/tree/main/examples/examples-desktop/generator">Arduino Audio Sketch</a>).</p>
@@ -85,27 +85,43 @@ GPIO/SPI/I2C</h1>
 <li>Rasperry PI</li>
 </ul>
 <h1><a class="anchor" id="autotoc_md3"></a>
+Rasperry PI</h1>
+<p>You can run this emulator on an Rasperry PI</p>
+<ul>
+<li>make sure that the -DUSE_RPI cmake option is set to ON</li>
+<li>install libgpiod-dev (sudo apt install libgpiod-dev)</li>
+<li>activate SPI and I2C with raspi-config</li>
+</ul>
+<h1><a class="anchor" id="autotoc_md4"></a>
 Jupyter</h1>
-<p>I really wanted to have an interactive <a href="https://jupyter.org/">Jupyter</a> environemnt in which I could play around with <a href="https://www.arduino.cc/">Arduino</a> commands and when I discovered that Arduino provides a good starting point with their <a href="https://github.com/arduino/ArduinoCore-API/tree/105276f8d81413391b14a3dc6c80180ee9e33d56">ArduinoCore-API</a> I decided to start this project.</p>
+<p>I initially really wanted to have an interactive <a href="https://jupyter.org/">Jupyter</a> environemnt in which I could play around with <a href="https://www.arduino.cc/">Arduino</a> commands and when I discovered that Arduino provides a good starting point with their <a href="https://github.com/arduino/ArduinoCore-API/tree/105276f8d81413391b14a3dc6c80180ee9e33d56">ArduinoCore-API</a> I decided to start this project.</p>
 <p>You can also use <a href="https://github.com/jupyter-xeus/xeus-cling">xeus-cling</a> as a runtime environment to simulate an Arduino Development board and I have added the missing implementation using C or the C++ std library.</p>
 <p>Here is a quick demo:</p>
 <ul>
-<li><a href="01-Setup.ipynb">Setup</a></li>
-<li><a href="02-BasicCommands.ipynb">Introduction into some Basic Commands</a></li>
-<li><a href="03-Network.ipynb">The Network Stack</a></li>
-<li><a href="04-Pins.ipynb">Using Pins</a></li>
-<li><a href="05-Serial.ipynb">Using Serial</a></li>
-</ul>
-<h1><a class="anchor" id="autotoc_md4"></a>
-Supported Defines</h1>
-<p>You can activate/deactivate some functionality with the helpo f the following defines:</p>
-<ul>
-<li>USE_RPI: activates support for Rasperry PI</li>
-<li>USE_HTTPS: provide https support</li>
-<li>SKIP_HARDWARE_SETUP: deactivate GPIO/SPI/I2C implementations</li>
-<li>SKIP_HARDWARE_WIFI: deactivate WiFi</li>
+<li><a href="examples/jupyter/01-Setup.ipynb">Setup</a></li>
+<li><a href="examples/jupyter/02-BasicCommands.ipynb">Introduction into some Basic Commands</a></li>
+<li><a href="examples/jupyter/03-Network.ipynb">The Network Stack</a></li>
+<li><a href="examples/jupyter/04-Pins.ipynb">Using Pins</a></li>
+<li><a href="examples/jupyter/05-Serial.ipynb">Using Serial</a></li>
 </ul>
 <h1><a class="anchor" id="autotoc_md5"></a>
+Supported Defines</h1>
+<p>You can activate/deactivate some functionality with the help of the following defines:</p>
+<ul>
+<li><b>USE_RPI</b>: activates support for Rasperry PI</li>
+<li><b>USE_HTTPS</b>: provide https support using wolfSSL</li>
+<li><b>SKIP_HARDWARE_SETUP</b>: deactivate all GPIO/SPI/I2C implementations</li>
+<li><b>SKIP_HARDWARE_WIFI</b>: deactivate WiFi</li>
+</ul>
+<h1><a class="anchor" id="autotoc_md6"></a>
+Build instructions</h1>
+<p>Execute the following commends in the root of the Arduino-Emulator:</p>
+<div class="fragment"><div class="line">mkdir build</div>
+<div class="line">cd build</div>
+<div class="line">cmake -DUSE_RPI=OFF -DUSE_HTTPS=OFF -DCMAKE_BUILD_TYPE=Debug ..</div>
+<div class="line">make</div>
+</div><!-- fragment --><p>Adjust the cmake parameters dependent on your requirements.</p>
+<h1><a class="anchor" id="autotoc_md7"></a>
 Documentation</h1>
 <p>The generated <a href="https://pschatzmann.github.io/Arduino-Emulator/html/annotated.html">Class documentation</a>. </p>
 </div></div><!-- PageDoc -->

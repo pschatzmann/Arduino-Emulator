@@ -1,6 +1,4 @@
 var searchData=
 [
-  ['cleardtr_0',['clearDTR',['../classserialib.html#adf49bff6401d3101b41fb52e98309635',1,'serialib']]],
-  ['clearrts_1',['clearRTS',['../classserialib.html#ab0b5882339240002fccf7701f5321e0a',1,'serialib']]],
-  ['closedevice_2',['closeDevice',['../classserialib.html#a8a1c8803c8df1a19222d6006328534b8',1,'serialib']]]
+  ['begin_0',['begin',['../classarduino_1_1_hardware_c_a_n.html#a784fbdde8524fa2e2d332a882ed03b5e',1,'arduino::HardwareCAN::begin()'],['../classarduino_1_1_hardware_setup_r_p_i.html#a3080424aa128838dcee72d74481499c0',1,'arduino::HardwareSetupRPI::begin()']]]
 ];

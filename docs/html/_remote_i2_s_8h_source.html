@@ -92,9 +92,9 @@ $(document).ready(function() { init_codefold(0); });
 <div class="foldopen" id="foldopen00014" data-start="{" data-end="};">
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno"><a class="line" href="classarduino_1_1_remote_i2_s.html">   14</a></span><span class="keyword">class </span><a class="code hl_class" href="classarduino_1_1_remote_i2_s.html">RemoteI2S</a> : <span class="keyword">public</span> <a class="code hl_class" href="class_i2_s_class.html">I2SClass</a> {</div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>  <span class="keyword">public</span>:</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    <a class="code hl_class" href="classarduino_1_1_remote_i2_s.html">RemoteI2S</a>(<a class="code hl_class" href="classarduino_1_1_stream.html">Stream</a> &amp;stream){</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>        service = <span class="keyword">new</span> <a class="code hl_class" href="classarduino_1_1_hardware_service.html">HardwareService</a>(stream);</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>        buffer = <span class="keyword">new</span> <a class="code hl_struct" href="structarduino_1_1____container____.html">uint8_t</a>[buffer_size];</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    <a class="code hl_class" href="classarduino_1_1_remote_i2_s.html">RemoteI2S</a>(<a class="code hl_class" href="classarduino_1_1_stream.html">Stream</a> &amp;<a class="code hl_class" href="classarduino_1_1_d_m_a_buffer.html">stream</a>){</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>        service = <span class="keyword">new</span> <a class="code hl_class" href="classarduino_1_1_hardware_service.html">HardwareService</a>(<a class="code hl_class" href="classarduino_1_1_d_m_a_buffer.html">stream</a>);</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>        buffer = <span class="keyword">new</span> <a class="code hl_class" href="classarduino_1_1_d_m_a_buffer.html">uint8_t</a>[buffer_size];</div>
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>        buffer_pos = 0;</div>
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    }</div>
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
@@ -104,30 +104,30 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    }</div>
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    <span class="comment">// the device index and pins must map to the &quot;COM&quot; pads in Table 6-1 of the datasheet </span></div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    <span class="keywordtype">void</span> setup(<a class="code hl_struct" href="structarduino_1_1____container____.html">uint8_t</a> <a class="code hl_struct" href="structarduino_1_1____container____.html">deviceIndex</a>, <a class="code hl_struct" href="structarduino_1_1____container____.html">uint8_t</a> <a class="code hl_struct" href="structarduino_1_1____container____.html">clockGenerator</a>, <a class="code hl_struct" href="structarduino_1_1____container____.html">uint8_t</a> <a class="code hl_struct" href="structarduino_1_1____container____.html">sdPin</a>, <a class="code hl_struct" href="structarduino_1_1____container____.html">uint8_t</a> <a class="code hl_struct" href="structarduino_1_1____container____.html">sckPin</a>, <a class="code hl_struct" href="structarduino_1_1____container____.html">uint8_t</a> <a class="code hl_struct" href="structarduino_1_1____container____.html">fsPin</a>){</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    <span class="keywordtype">void</span> setup(<a class="code hl_class" href="classarduino_1_1_d_m_a_buffer.html">uint8_t</a> <a class="code hl_class" href="classarduino_1_1_d_m_a_buffer.html">deviceIndex</a>, <a class="code hl_class" href="classarduino_1_1_d_m_a_buffer.html">uint8_t</a> <a class="code hl_class" href="classarduino_1_1_d_m_a_buffer.html">clockGenerator</a>, <a class="code hl_class" href="classarduino_1_1_d_m_a_buffer.html">uint8_t</a> <a class="code hl_class" href="classarduino_1_1_d_m_a_buffer.html">sdPin</a>, <a class="code hl_class" href="classarduino_1_1_d_m_a_buffer.html">uint8_t</a> <a class="code hl_class" href="classarduino_1_1_d_m_a_buffer.html">sckPin</a>, <a class="code hl_class" href="classarduino_1_1_d_m_a_buffer.html">uint8_t</a> <a class="code hl_class" href="classarduino_1_1_d_m_a_buffer.html">fsPin</a>){</div>
 <div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>        service.send(I2sSetup);</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>        service.send(<a class="code hl_struct" href="structarduino_1_1____container____.html">deviceIndex</a>);</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>        service.send(<a class="code hl_struct" href="structarduino_1_1____container____.html">clockGenerator</a>);</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>        service.send(<a class="code hl_struct" href="structarduino_1_1____container____.html">sdPin</a>);</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>        service.send(<a class="code hl_struct" href="structarduino_1_1____container____.html">sckPin</a>);</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>        service.send(<a class="code hl_struct" href="structarduino_1_1____container____.html">fsPin</a>);</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>        service.send(<a class="code hl_class" href="classarduino_1_1_d_m_a_buffer.html">deviceIndex</a>);</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>        service.send(<a class="code hl_class" href="classarduino_1_1_d_m_a_buffer.html">clockGenerator</a>);</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>        service.send(<a class="code hl_class" href="classarduino_1_1_d_m_a_buffer.html">sdPin</a>);</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>        service.send(<a class="code hl_class" href="classarduino_1_1_d_m_a_buffer.html">sckPin</a>);</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>        service.send(<a class="code hl_class" href="classarduino_1_1_d_m_a_buffer.html">fsPin</a>);</div>
 <div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>        service.flush();</div>
 <div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    }</div>
 <div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    <span class="comment">// the SCK and FS pins are driven as outputs using the sample rate</span></div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    <span class="keywordtype">int</span> begin(<span class="keywordtype">int</span> <a class="code hl_struct" href="structarduino_1_1____container____.html">mode</a>, <span class="keywordtype">long</span> <a class="code hl_struct" href="structarduino_1_1____container____.html">sampleRate</a>, <span class="keywordtype">int</span> <a class="code hl_struct" href="structarduino_1_1____container____.html">bitsPerSample</a>){</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    <span class="keywordtype">int</span> begin(<span class="keywordtype">int</span> <a class="code hl_class" href="classarduino_1_1_d_m_a_buffer.html">mode</a>, <span class="keywordtype">long</span> <a class="code hl_class" href="classarduino_1_1_d_m_a_buffer.html">sampleRate</a>, <span class="keywordtype">int</span> <a class="code hl_class" href="classarduino_1_1_d_m_a_buffer.html">bitsPerSample</a>){</div>
 <div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>        service.send(I2sBegin3);</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>        service.send(<a class="code hl_struct" href="structarduino_1_1____container____.html">mode</a>);</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        service.send(<a class="code hl_struct" href="structarduino_1_1____container____.html">sampleRate</a>);</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>        service.send(<a class="code hl_struct" href="structarduino_1_1____container____.html">bitsPerSample</a>);</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>        service.send(<a class="code hl_class" href="classarduino_1_1_d_m_a_buffer.html">mode</a>);</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        service.send(<a class="code hl_class" href="classarduino_1_1_d_m_a_buffer.html">sampleRate</a>);</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>        service.send(<a class="code hl_class" href="classarduino_1_1_d_m_a_buffer.html">bitsPerSample</a>);</div>
 <div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>        service.flush();</div>
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    }</div>
 <div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span> </div>
 <div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    <span class="comment">// the SCK and FS pins are inputs, other side controls sample rate</span></div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    <span class="keywordtype">int</span> begin(<span class="keywordtype">int</span> <a class="code hl_struct" href="structarduino_1_1____container____.html">mode</a>, <span class="keywordtype">int</span> <a class="code hl_struct" href="structarduino_1_1____container____.html">bitsPerSample</a>){</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    <span class="keywordtype">int</span> begin(<span class="keywordtype">int</span> <a class="code hl_class" href="classarduino_1_1_d_m_a_buffer.html">mode</a>, <span class="keywordtype">int</span> <a class="code hl_class" href="classarduino_1_1_d_m_a_buffer.html">bitsPerSample</a>){</div>
 <div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>        service.send(I2sBegin2);</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>        service.send(<a class="code hl_struct" href="structarduino_1_1____container____.html">mode</a>);</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>        service.send(<a class="code hl_struct" href="structarduino_1_1____container____.html">bitsPerSample</a>);</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>        service.send(<a class="code hl_class" href="classarduino_1_1_d_m_a_buffer.html">mode</a>);</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>        service.send(<a class="code hl_class" href="classarduino_1_1_d_m_a_buffer.html">bitsPerSample</a>);</div>
 <div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>        service.flush();</div>
 <div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    }</div>
 <div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
@@ -139,7 +139,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    <span class="comment">// from Stream</span></div>
 <div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    <span class="keyword">virtual</span> <span class="keywordtype">int</span> available(){</div>
 <div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>        <span class="comment">// check buffer first</span></div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>        <span class="keywordflow">if</span> (buffer_pos&gt;0 <a class="code hl_struct" href="structarduino_1_1____container____.html">and</a> buffer_pos&lt;buffer_max_read){</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>        <span class="keywordflow">if</span> (buffer_pos&gt;0 <a class="code hl_class" href="classarduino_1_1_d_m_a_buffer.html">and</a> buffer_pos&lt;buffer_max_read){</div>
 <div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>            <span class="keywordflow">return</span> buffer_max_read - buffer_pos;</div>
 <div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>        }</div>
 <div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>        service-&gt;send(I2sAvailable);  </div>
@@ -147,7 +147,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    }</div>
 <div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span> </div>
 <div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    <span class="keyword">virtual</span> <span class="keywordtype">int</span> read(){</div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>        <span class="keywordtype">int</span> result = -1;</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>        <span class="keywordtype">int</span> <a class="code hl_class" href="classarduino_1_1_d_m_a_buffer.html">result</a> = -1;</div>
 <div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>        <span class="comment">// if buffer has been used we re-fill it</span></div>
 <div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>        <span class="keywordflow">if</span> (buffer_pos==buffer_max_read){</div>
 <div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>            buffer_max_read = read(buffer, buffer_size);</div>
@@ -155,16 +155,16 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>        }  </div>
 <div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>        <span class="comment">// if we have some data we provide it as result</span></div>
 <div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>        <span class="keywordflow">if</span> (buffer_pos&lt;buffer_max_read){</div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>            result = buffer[buffer_pos];</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>            <a class="code hl_class" href="classarduino_1_1_d_m_a_buffer.html">result</a> = buffer[buffer_pos];</div>
 <div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>        }</div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>        <span class="keywordflow">return</span> result;</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>        <span class="keywordflow">return</span> <a class="code hl_class" href="classarduino_1_1_d_m_a_buffer.html">result</a>;</div>
 <div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>    }</div>
 <div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    </div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>    <span class="keyword">virtual</span> <span class="keywordtype">int</span> read(<a class="code hl_struct" href="structarduino_1_1____container____.html">uint8_t</a> *data, <span class="keywordtype">int</span> len){</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>    <span class="keyword">virtual</span> <span class="keywordtype">int</span> read(<a class="code hl_class" href="classarduino_1_1_d_m_a_buffer.html">uint8_t</a> *data, <span class="keywordtype">int</span> len){</div>
 <div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>        service-&gt;send(I2sRead);  </div>
 <div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>        service-&gt;send(len);</div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>        <span class="keywordtype">int</span> result = service-&gt;read(data, len);</div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>        <span class="keywordflow">return</span> result;</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>        <span class="keywordtype">int</span> <a class="code hl_class" href="classarduino_1_1_d_m_a_buffer.html">result</a> = service-&gt;read(data, len);</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>        <span class="keywordflow">return</span> <a class="code hl_class" href="classarduino_1_1_d_m_a_buffer.html">result</a>;</div>
 <div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>    }</div>
 <div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>    </div>
 <div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>    <span class="keyword">virtual</span> <span class="keywordtype">int</span> peek(){</div>
@@ -187,33 +187,33 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>    }</div>
 <div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span> </div>
 <div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>    <span class="comment">// from Print</span></div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>    <span class="keyword">virtual</span> <span class="keywordtype">size_t</span> write(<a class="code hl_struct" href="structarduino_1_1____container____.html">uint8_t</a> data){</div>
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>        <span class="keywordflow">if</span> (buffer_pos + <span class="keyword">sizeof</span>(data) &gt;= <a class="code hl_struct" href="structarduino_1_1____container____.html">buffer_len</a>-1){</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>    <span class="keyword">virtual</span> <span class="keywordtype">size_t</span> write(<a class="code hl_class" href="classarduino_1_1_d_m_a_buffer.html">uint8_t</a> data){</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>        <span class="keywordflow">if</span> (buffer_pos + <span class="keyword">sizeof</span>(data) &gt;= <a class="code hl_class" href="classarduino_1_1_d_m_a_buffer.html">buffer_len</a>-1){</div>
 <div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>            flush();</div>
 <div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>        }</div>
 <div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>        buffer[buffer_pos] = data;</div>
 <div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>        buffer_pos++;</div>
 <div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>    }</div>
 <div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span> </div>
-<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>    <span class="keywordtype">size_t</span> write(<a class="code hl_struct" href="structarduino_1_1____container____.html">int16_t</a> data){</div>
-<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>        <span class="keywordflow">if</span> (buffer_pos + <span class="keyword">sizeof</span>(data) &gt;= <a class="code hl_struct" href="structarduino_1_1____container____.html">buffer_len</a>-1){</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>    <span class="keywordtype">size_t</span> write(<a class="code hl_class" href="classarduino_1_1_d_m_a_buffer.html">int16_t</a> data){</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>        <span class="keywordflow">if</span> (buffer_pos + <span class="keyword">sizeof</span>(data) &gt;= <a class="code hl_class" href="classarduino_1_1_d_m_a_buffer.html">buffer_len</a>-1){</div>
 <div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>            flush();</div>
 <div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>        }</div>
-<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>        <a class="code hl_struct" href="structarduino_1_1____container____.html">int16_t</a> *<a class="code hl_struct" href="structarduino_1_1____container____.html">pt</a> = &amp;buffer[buffer_pos];</div>
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>        *<a class="code hl_struct" href="structarduino_1_1____container____.html">pt</a> = data;</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>        <a class="code hl_class" href="classarduino_1_1_d_m_a_buffer.html">int16_t</a> *<a class="code hl_class" href="classarduino_1_1_d_m_a_buffer.html">pt</a> = &amp;buffer[buffer_pos];</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>        *<a class="code hl_class" href="classarduino_1_1_d_m_a_buffer.html">pt</a> = data;</div>
 <div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>        buffer_pos+=2;</div>
 <div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>    }</div>
 <div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span> </div>
-<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>    <span class="keywordtype">size_t</span> write(<a class="code hl_struct" href="structarduino_1_1____container____.html">int32_t</a> data){</div>
-<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>        <span class="keywordflow">if</span> (buffer_pos + <span class="keyword">sizeof</span>(data) &gt;= <a class="code hl_struct" href="structarduino_1_1____container____.html">buffer_len</a>-1){</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>    <span class="keywordtype">size_t</span> write(<a class="code hl_class" href="classarduino_1_1_d_m_a_buffer.html">int32_t</a> data){</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>        <span class="keywordflow">if</span> (buffer_pos + <span class="keyword">sizeof</span>(data) &gt;= <a class="code hl_class" href="classarduino_1_1_d_m_a_buffer.html">buffer_len</a>-1){</div>
 <div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>            flush();</div>
 <div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>        }</div>
-<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>        <a class="code hl_struct" href="structarduino_1_1____container____.html">int32_t</a> *<a class="code hl_struct" href="structarduino_1_1____container____.html">pt</a> = &amp;buffer[buffer_pos];</div>
-<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>        *<a class="code hl_struct" href="structarduino_1_1____container____.html">pt</a> = data;</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>        <a class="code hl_class" href="classarduino_1_1_d_m_a_buffer.html">int32_t</a> *<a class="code hl_class" href="classarduino_1_1_d_m_a_buffer.html">pt</a> = &amp;buffer[buffer_pos];</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>        *<a class="code hl_class" href="classarduino_1_1_d_m_a_buffer.html">pt</a> = data;</div>
 <div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>        buffer_pos+=4;</div>
 <div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>    }</div>
 <div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span> </div>
-<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>    <span class="keyword">virtual</span> <span class="keywordtype">size_t</span> write(<span class="keyword">const</span> <a class="code hl_struct" href="structarduino_1_1____container____.html">uint8_t</a> *buffer, <span class="keywordtype">size_t</span> size){</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>    <span class="keyword">virtual</span> <span class="keywordtype">size_t</span> write(<span class="keyword">const</span> <a class="code hl_class" href="classarduino_1_1_d_m_a_buffer.html">uint8_t</a> *buffer, <span class="keywordtype">size_t</span> size){</div>
 <div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>        service-&gt;send(I2sWrite);      </div>
 <div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>        service.send(size);</div>
 <div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>        service.send(buffer);</div>
@@ -243,7 +243,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>    <span class="keywordtype">void</span> setBufferSize(<span class="keywordtype">int</span> bufferSize){</div>
 <div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>        this-&gt;buffer_size = bufferSize;</div>
 <div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>        <span class="keyword">delete</span>[] buffer;</div>
-<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>        buffer = <span class="keyword">new</span> <a class="code hl_struct" href="structarduino_1_1____container____.html">uint8_t</a>[buffer_size];</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>        buffer = <span class="keyword">new</span> <a class="code hl_class" href="classarduino_1_1_d_m_a_buffer.html">uint8_t</a>[buffer_size];</div>
 <div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>        <span class="comment">// expand buffer on target as well</span></div>
 <div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>        service-&gt;send(I2sSetBufferSize);      </div>
 <div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>        service.send(bufferSize);</div>
@@ -252,7 +252,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>    </div>
 <div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>  <span class="keyword">protected</span>:</div>
 <div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>      <span class="keywordtype">int</span> buffer_size = 256;</div>
-<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>      <a class="code hl_struct" href="structarduino_1_1____container____.html">uint8_t</a> *buffer;</div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>      <a class="code hl_class" href="classarduino_1_1_d_m_a_buffer.html">uint8_t</a> *buffer;</div>
 <div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>      <span class="keywordtype">int</span> buffer_pos;</div>
 <div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>      <span class="keywordtype">int</span> buffer_max_read;</div>
 <div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>  </div>
@@ -264,11 +264,11 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span> </div>
 <div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span><span class="preprocessor">#endif</span></div>
 <div class="ttc" id="aclass_i2_s_class_html"><div class="ttname"><a href="class_i2_s_class.html">I2SClass</a></div><div class="ttdef"><b>Definition</b> I2S.h:28</div></div>
+<div class="ttc" id="aclassarduino_1_1_d_m_a_buffer_html"><div class="ttname"><a href="classarduino_1_1_d_m_a_buffer.html">arduino::DMABuffer</a></div><div class="ttdef"><b>Definition</b> DMAPool.h:103</div></div>
 <div class="ttc" id="aclassarduino_1_1_hardware_service_html"><div class="ttname"><a href="classarduino_1_1_hardware_service.html">arduino::HardwareService</a></div><div class="ttdef"><b>Definition</b> HardwareService.h:76</div></div>
 <div class="ttc" id="aclassarduino_1_1_remote_i2_s_html"><div class="ttname"><a href="classarduino_1_1_remote_i2_s.html">arduino::RemoteI2S</a></div><div class="ttdef"><b>Definition</b> RemoteI2S.h:14</div></div>
 <div class="ttc" id="aclassarduino_1_1_stream_html"><div class="ttname"><a href="classarduino_1_1_stream.html">arduino::Stream</a></div><div class="ttdef"><b>Definition</b> Stream.h:51</div></div>
-<div class="ttc" id="anamespacearduino_html"><div class="ttname"><a href="namespacearduino.html">arduino</a></div><div class="ttdoc">We provide the WiFi class to simulate the Arduino WIFI. In in Linux we can expect that networking is ...</div><div class="ttdef"><b>Definition</b> Client.h:25</div></div>
-<div class="ttc" id="astructarduino_1_1____container_____html"><div class="ttname"><a href="structarduino_1_1____container____.html">arduino::__container__</a></div><div class="ttdef"><b>Definition</b> Interrupts.h:15</div></div>
+<div class="ttc" id="anamespacearduino_html"><div class="ttname"><a href="namespacearduino.html">arduino</a></div><div class="ttdoc">We provide the WiFi class to simulate the Arduino WIFI. In in Linux we can expect that networking is ...</div><div class="ttdef"><b>Definition</b> CanMsg.cpp:31</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

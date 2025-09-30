@@ -7,10 +7,17 @@ namespace arduino {
 
 /**
  * @class HardwareGPIO_RPI
- * @brief GPIO hardware abstraction for Raspberry Pi.
+ * @brief GPIO hardware abstraction for Raspberry Pi in the Arduino emulator.
  *
- * Provides methods to control and read GPIO pins, analog and PWM functions, and timing on Raspberry Pi.
- * Inherits from HardwareGPIO and implements all required Arduino-style GPIO functions for the emulator.
+ * This class implements the Arduino-style GPIO interface for Raspberry Pi platforms, allowing
+ * digital and analog I/O, PWM, and timing functions to be used in a manner compatible with Arduino code.
+ * It provides methods to configure pin modes, read and write digital/analog values, generate PWM signals,
+ * and perform timing operations such as pulse measurement and tone generation.
+ *
+ * The class inherits from HardwareGPIO and is intended for use within the emulator when running on
+ * Raspberry Pi hardware. It manages pin state, analog reference, and PWM frequency settings for supported pins.
+ *
+ * @note This class is only available when USE_RPI is defined.
  */
 class HardwareGPIO_RPI : public HardwareGPIO {
  public:
