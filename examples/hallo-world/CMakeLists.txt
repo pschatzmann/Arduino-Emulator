@@ -8,3 +8,7 @@ set_source_files_properties(hallo-world.ino PROPERTIES LANGUAGE CXX)
 add_executable(hallo-world hallo-world.ino)
 target_compile_options(hallo-world PRIVATE -x c++)
 target_link_libraries(hallo-world arduino_emulator)
+
+if(USE_RPI)
+    target_link_libraries(hallo-world gpiod)
+endif(USE_RPI)
