@@ -35,6 +35,7 @@ class HardwareSPI_RPI : public HardwareSPI {
   const char* device = "/dev/spidev0.0";
   uint32_t spi_speed = 500000;  // Default to 500kHz
   uint8_t spi_mode = 0;         // Default to SPI mode 0
+  uint8_t spi_bits = 8;         // Default to 8 bits per word
 };
 
 }  // namespace arduino
