@@ -23,13 +23,18 @@ HardwareSPI_RPI::~HardwareSPI_RPI() {
   end();
 }
 void HardwareSPI_RPI::begin() {
+  Logger.warning("Activating Rasperry PI: SPI");
   spi_fd = open(device, O_RDWR);
   if (spi_fd < 0) {
     Logger.error("HardwareSPI_RPI: Failed to open SPI device");
+    is_open = false;
+    return;
   }
   ioctl(spi_fd, SPI_IOC_WR_MODE, &spi_mode);
   ioctl(spi_fd, SPI_IOC_WR_BITS_PER_WORD, &spi_bits);
   ioctl(spi_fd, SPI_IOC_WR_MAX_SPEED_HZ, &spi_speed);
+  is_open = true;
+  return;
 }
 
 void HardwareSPI_RPI::end() {

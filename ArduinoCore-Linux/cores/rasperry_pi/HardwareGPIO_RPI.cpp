@@ -14,9 +14,12 @@ static std::map<pin_size_t, gpiod_line*> gpio_lines;
 static gpiod_chip* gpio_chip = nullptr;
 
 HardwareGPIO_RPI::HardwareGPIO_RPI() {
+  Logger.warning("Activating Rasperry PI: GPIO");
   gpio_chip = gpiod_chip_open_by_name("gpiochip0");
   if (!gpio_chip) {
     Logger.error("HardwareGPIO_RPI", "Failed to open gpiochip0");
+  } else {
+    is_open = true;
   }
 }
 

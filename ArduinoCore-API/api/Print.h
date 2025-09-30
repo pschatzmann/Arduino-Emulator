@@ -50,7 +50,8 @@ class Print
     virtual size_t write(uint8_t) = 0;
     size_t write(const char *str) {
       if (str == NULL) return 0;
-      return write((const uint8_t *)str, strlen(str));
+      int len = strlen(str);
+      return write((const uint8_t *)str, len);
     }
     virtual size_t write(const uint8_t *buffer, size_t size);
     size_t write(const char *buffer, size_t size) {

@@ -1,4 +1,5 @@
 
+#pragma once
 #ifdef USE_RPI
 #include "Hardware.h" // for Hardware; 
 #include "HardwareGPIO_RPI.h"
@@ -26,11 +27,12 @@ class HardwareSetupRPI {
   /**
    * @brief Initializes hardware pointers to Raspberry Pi interfaces.
    */
-  void begin() {
+  bool begin() {
     Logger.info("Using Raspberry Pi hardware interfaces");
     Hardware.gpio = &gpio;
     Hardware.i2c = &i2c;
     Hardware.spi = &spi;
+    return gpio && i2c && spi;
   }
 
   /**

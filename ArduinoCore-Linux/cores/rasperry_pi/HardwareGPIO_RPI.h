@@ -91,6 +91,8 @@ class HardwareGPIO_RPI : public HardwareGPIO {
    */
   void analogWriteFrequency(uint8_t pin, uint32_t freq);
 
+  operator bool() { return is_open; }
+
  private:
   /** Analog reference mode (default AR_DEFAULT) */
   int m_analogReference = 0;
@@ -98,6 +100,7 @@ class HardwareGPIO_RPI : public HardwareGPIO {
   std::map<pin_size_t, uint32_t> gpio_frequencies;
   /** PWM-capable pins on Raspberry Pi */
   int pwm_pins[4] = {12, 13, 18, 19};
+  bool is_open = false;
 };
 
 }  // namespace arduino

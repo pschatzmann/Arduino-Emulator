@@ -16,14 +16,21 @@ void HardwareI2C_RPI::begin(uint8_t address) {
   current_address = address;
   if (ioctl(i2c_fd, I2C_SLAVE, address) < 0) {
     Logger.error("HardwareI2C_RPI: Failed to set I2C address");
+    is_open = false;
+  } else {
+    is_open = true;
   }
 }
 
 void HardwareI2C_RPI::begin() {
+  Logger.warning("Activating Rasperry PI: I2C");
   if (i2c_fd < 0) {
     i2c_fd = open(i2c_device, O_RDWR);
     if (i2c_fd < 0) {
       Logger.error("HardwareI2C_RPI: Failed to open I2C device");
+      is_open = false;
+    } else {
+      is_open = true;
     }
   }
 }

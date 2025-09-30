@@ -37,6 +37,8 @@ class HardwareI2C_RPI : public HardwareI2C {
   int peek() override;
   void flush() override { fsync(i2c_fd);}
 
+  operator bool() { return is_open; }
+
  private:
   int i2c_fd = -1;
   uint8_t current_address = 0;
@@ -45,6 +47,7 @@ class HardwareI2C_RPI : public HardwareI2C {
   std::vector<uint8_t> i2c_tx_buffer;
   int i2c_rx_pos = 0;
   const char* i2c_device;
+  bool is_open = false;
 };
 
 }  // namespace arduino

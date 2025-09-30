@@ -38,11 +38,9 @@
 
 #include "ArduinoAPI.h"
 #include "ArdStdio.h"
-#include "ArduinoLogger.h"
 #include "Serial.h"
+#include "ArduinoLogger.h"
 #include "RemoteSerial.h"
 #include "HardwareSetup.h"
-#ifdef USE_RPI
-#  include "HardwareSetupRPI.h"
-#endif
+
 using namespace arduino;
