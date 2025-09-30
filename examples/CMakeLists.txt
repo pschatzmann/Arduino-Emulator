@@ -6,5 +6,5 @@ if(USE_HTTPS)
 endif(USE_HTTPS)
 
 if (USE_RPI)
-    add_subdirectory("raspberry_pi")
+    add_subdirectory("raspberry-pi")
 endif(USE_RPI)
