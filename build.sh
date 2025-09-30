@@ -7,7 +7,12 @@ then
     rm -r ./build
     cmake -S ../Arduino-Emulator -B ./build -DUSE_HTTPS=ON 
     make -C ./build clean
-    make -C ./build 
+    if make -C ./build; then
+        echo "Build completed successfully!"
+    else
+        echo "Build failed!"
+        exit 1
+    fi
 else
     echo "Rebuild not necessary..."
 fi
