@@ -50,6 +50,8 @@ You can activate/deactivate some functionality with the help of the following de
 
 ## Build instructions
 
+Execute the following commends in the root of the Arduino-Emulator:
+
 ```Bash
 mkdir build
 cd build
