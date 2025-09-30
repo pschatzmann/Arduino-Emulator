@@ -57,6 +57,7 @@ target_compile_options(arduino_emulator PRIVATE -Wno-nonportable-include-path)
 
 if (USE_RPI)
     target_compile_options(arduino_emulator PUBLIC -DUSE_RPI)
+    link_libraries(gpiod)
 endif(USE_RPI)
 
 if(USE_HTTPS)
