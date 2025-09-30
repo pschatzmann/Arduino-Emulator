@@ -51,14 +51,14 @@ class SocketImplSecure : public SocketImpl {
     }
     int result = ::wolfSSL_read(ssl, buffer, len);
 
+    if (result < 0) {
+      result = 0;
+    }
+    // 
     char lenStr[80];
     sprintf(lenStr, "%ld -> %d", len, result);
-    if (result < 0) {
-      Logger.error(SOCKET_IMPL_SEC, "read->", lenStr);
-      return 0;
-    } else {
-      Logger.debug(SOCKET_IMPL_SEC, "read->", lenStr);
-    }
+    Logger.debug(SOCKET_IMPL_SEC, "read->", lenStr);
+
     return result;
   }
 
