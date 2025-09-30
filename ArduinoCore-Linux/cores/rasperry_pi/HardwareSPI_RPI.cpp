@@ -79,9 +79,10 @@ void HardwareSPI_RPI::notUsingInterrupt(int interruptNumber) {
 void HardwareSPI_RPI::beginTransaction(SPISettings settings) {
   spi_mode = settings.getDataMode();
   spi_speed = settings.getClockFreq();
-  spi_bits = settings.getBitOrder();
+  BitOrder order = settings.getBitOrder();
+  uint8_t lsb_first = (order == LSBFIRST) ? 1 : 0;
   ioctl(spi_fd, SPI_IOC_WR_MODE, &spi_mode);
-  ioctl(spi_fd, SPI_IOC_WR_BITS_PER_WORD, &spi_bits);
+  ioctl(spi_fd, SPI_IOC_WR_LSB_FIRST, &lsb_first);
   ioctl(spi_fd, SPI_IOC_WR_MAX_SPEED_HZ, &spi_speed);
 }
 void HardwareSPI_RPI::endTransaction(void) {}

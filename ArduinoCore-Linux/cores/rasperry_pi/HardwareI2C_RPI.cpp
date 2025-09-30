@@ -39,6 +39,7 @@ void HardwareI2C_RPI::setClock(uint32_t freq) {
   i2c_clock = freq;
   // Changing I2C clock at runtime is not supported via /dev/i2c-1
   // Usually set via device tree overlays or raspi-config
+  Logger.warn("HardwareI2C_RPI", "setClock not implemented on Linux I2C");
 }
 
 void HardwareI2C_RPI::beginTransmission(uint8_t address) {

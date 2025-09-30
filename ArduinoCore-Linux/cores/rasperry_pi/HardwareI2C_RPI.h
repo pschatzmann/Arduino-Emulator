@@ -13,15 +13,10 @@ namespace arduino {
 class HardwareI2C_RPI : public HardwareI2C {
  public:
   HardwareI2C_RPI(const char* device = "/dev/i2c-1") {
-    Hardware.i2c = this;
     i2c_device = device;
-    i2c_fd = open(device, O_RDWR);
-    if (i2c_fd < 0) {
-      Logger.error("HardwareI2C_RPI: Failed to open /dev/i2c-1");
-    }
+    begin();
   }
   ~HardwareI2C_RPI() {
-    Hardware.i2c = nullptr;
     end();
   }
   void begin() override;
