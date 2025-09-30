@@ -7,7 +7,7 @@
 #include <WiFi.h>
 const char *ssid = "your-ssid";          // your network SSID (name of wifi network)
 const char *password = "your-password";  // your network password
-const char *server = "www.google.com";  // Server URL
+const char *server = "www.pschatzmann.ch";  // Server URL
 NetworkClientSecure client;
 
 void setup() {
@@ -40,7 +40,7 @@ void setup() {
   } else {
     Serial.println("Connected to server!");
     // Make a HTTP request:
-    client.println("GET https://www.howsmyssl.com/a/check HTTP/1.0");
+    client.println("GET https://www.pschatzmann.ch/ HTTP/1.0");
     client.println("Host: www.howsmyssl.com");
     client.println("Connection: close");
     client.println();
