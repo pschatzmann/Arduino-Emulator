@@ -1,6 +1,25 @@
+/*
+  Common.h - Common definitions for Arduino core
+  Copyright (c) 2017 Arduino LLC. All right reserved.
+
+  This library is free software; you can redistribute it and/or
+  modify it under the terms of the GNU Lesser General Public
+  License as published by the Free Software Foundation; either
+  version 2.1 of the License, or (at your option) any later version.
+
+  This library is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+  Lesser General Public License for more details.
+
+  You should have received a copy of the GNU Lesser General Public
+  License along with this library; if not, write to the Free Software
+  Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
+*/
+
 #pragma once
 #include <stdint.h>
-#include <cstdlib>
+#include <stdbool.h>
 
 #ifdef __cplusplus
 extern "C"{
@@ -17,10 +36,11 @@ typedef enum {
 } PinStatus;
 
 typedef enum {
-  INPUT           = 0x0,
-  OUTPUT          = 0x1,
-  INPUT_PULLUP    = 0x2,
-  INPUT_PULLDOWN  = 0x3,
+  INPUT            = 0x0,
+  OUTPUT           = 0x1,
+  INPUT_PULLUP     = 0x2,
+  INPUT_PULLDOWN   = 0x3,
+  OUTPUT_OPENDRAIN = 0x4,
 } PinMode;
 
 typedef enum {
@@ -66,20 +86,16 @@ typedef void (*voidFuncPtrParam)(void*);
 #define bitSet(value, bit) ((value) |= (1UL << (bit)))
 #define bitClear(value, bit) ((value) &= ~(1UL << (bit)))
 #define bitToggle(value, bit) ((value) ^= (1UL << (bit)))
-#define bitWrite(value, bit, bitvalue) (bitvalue ? bitSet(value, bit) : bitClear(value, bit))
+#define bitWrite(value, bit, bitvalue) ((bitvalue) ? bitSet((value), (bit)) : bitClear((value), (bit)))
 
 #ifndef bit
 #define bit(b) (1UL << (b))
 #endif
 
-#ifdef SKIP_LEGACY_TYPES
 /* TODO: request for removal */
-#else
-// Keep these legacy types as they expected to be defined by Arduino.h and may be used by user code
 typedef bool      boolean;
 typedef uint8_t   byte;
 typedef uint16_t  word;
-#endif
 
 void init(void);
 void initVariant(void);
@@ -90,7 +106,7 @@ int atexit(void (*func)()) __attribute__((weak));
 int main() __attribute__((weak));
 
 #ifdef EXTENDED_PIN_MODE
-// Platforms who wnat to declare more than 256 pins need to define EXTENDED_PIN_MODE globally
+// Platforms who want to declare more than 256 pins need to define EXTENDED_PIN_MODE globally
 typedef uint32_t pin_size_t;
 #else
 typedef uint8_t pin_size_t;
@@ -117,10 +133,8 @@ void attachInterrupt(pin_size_t interruptNumber, voidFuncPtr callback, PinStatus
 void attachInterruptParam(pin_size_t interruptNumber, voidFuncPtrParam callback, PinStatus mode, void* param);
 void detachInterrupt(pin_size_t interruptNumber);
 
-void setup(void)__attribute__((weak));
-void loop(void)__attribute__((weak));
-
-long map(long, long, long, long, long);
+void setup(void);
+void loop(void);
 
 #ifdef __cplusplus
 } // extern "C"
@@ -155,27 +169,9 @@ long map(long, long, long, long, long);
 
 #ifdef __cplusplus
 
-// // WMath prototypes
-// long random(long);
-// long random(long, long);
-// void randomSeed(unsigned long);
-
-static long random(long max){
-  return rand() % max;
-}
-
-static long random(long min, long max){
-  long tmp = rand() % (max- min);
-  return tmp + min;
-}
-
-static void randomSeed(unsigned seed){
-  srand(seed);
-}
-
 /* C++ prototypes */
 uint16_t makeWord(uint16_t w);
-uint16_t makeWord(uint8_t h, uint8_t l);
+uint16_t makeWord(byte h, byte l);
 
 #define word(...) makeWord(__VA_ARGS__)
 
@@ -185,5 +181,10 @@ unsigned long pulseInLong(uint8_t pin, uint8_t state, unsigned long timeout = 10
 void tone(uint8_t _pin, unsigned int frequency, unsigned long duration = 0);
 void noTone(uint8_t _pin);
 
+// WMath prototypes
+long random(long);
+long random(long, long);
+void randomSeed(unsigned long);
+long map(long, long, long, long, long);
 
 #endif // __cplusplus

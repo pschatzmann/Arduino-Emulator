@@ -1,18 +1,22 @@
 /*
  * Copyright (c) 2020 Arduino.  All rights reserved.
+ *
+ * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
 /**************************************************************************************
  * INCLUDE
  **************************************************************************************/
 
-#include <catch.hpp>
+#include <catch2/catch_test_macros.hpp>
 
 #include <StreamMock.h>
 
 /**************************************************************************************
  * TEST CODE
  **************************************************************************************/
+
+using namespace arduino;
 
 TEST_CASE ("Testing parseInt(LookaheadMode lookahead = SKIP_ALL, char ignore = NO_IGNORE_CHAR)", "[Stream-parseInt-01]")
 {

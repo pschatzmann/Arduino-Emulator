@@ -213,11 +213,11 @@ class EthernetClient : public Client {
     return result;
   }
 
-  size_t readBytes(char* buffer, size_t len) override {
+  virtual size_t readBytes(char* buffer, size_t len)  {
     return read((uint8_t*)buffer, len);
   }
 
-  size_t readBytes(uint8_t* buffer, size_t len) override {
+  virtual size_t readBytes(uint8_t* buffer, size_t len) {
     return read(buffer, len);
   }
 

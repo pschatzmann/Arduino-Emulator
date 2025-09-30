@@ -1,14 +1,18 @@
 /*
  * Copyright (c) 2020 Arduino.  All rights reserved.
+ *
+ * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
 /**************************************************************************************
  * INCLUDE
  **************************************************************************************/
 
-#include <catch.hpp>
+#include <catch2/catch_test_macros.hpp>
 
-#include <String.h>
+#include <api/String.h>
+
+#include "StringPrinter.h"
 
 /**************************************************************************************
  * TEST CODE
@@ -25,13 +29,13 @@ TEST_CASE ("Testing String::compareTo(const String &)", "[String-compareTo-01]")
   WHEN ("str2 is empty")
   {
     arduino::String str1("Hello"), str2;
-    REQUIRE(str1.compareTo(str2) == strcmp(str1.c_str(), str2.c_str()));
+    REQUIRE(str1.compareTo(str2) > 0);
   }
 
   WHEN ("str1 is empty")
   {
     arduino::String str1, str2("Hello");
-    REQUIRE(str1.compareTo(str2) == strcmp(str1.c_str(), str2.c_str()));
+    REQUIRE(str1.compareTo(str2) < 0);
   }
 }
 
@@ -45,14 +49,14 @@ TEST_CASE ("Testing String::compareTo(const char *)", "[String-compareTo-02]")
 
   WHEN ("Passed string is empty")
   {
-    arduino::String str1("Hello"), str2("");
-    REQUIRE(str1.compareTo("") == strcmp(str1.c_str(), str2.c_str()));
+    arduino::String str("Hello");
+    REQUIRE(str.compareTo("") > 0);
   }
 
   WHEN ("Passed string is compared with empty string")
   {
-    arduino::String str1, str2("Hello");
-    REQUIRE(str1.compareTo("Hello") == strcmp(str1.c_str(), str2.c_str()));
+    arduino::String str;
+    REQUIRE(str.compareTo("") == 0);
   }
 }
 
@@ -62,8 +66,8 @@ TEST_CASE ("Testing String::compareTo(const char *) with empty buffer", "[String
   {
     char *buffer = NULL;
 
-    arduino::String str1("Hello");
-    REQUIRE(str1.compareTo(buffer) != 0);
+    arduino::String str("Hello");
+    REQUIRE(str.compareTo(buffer) != 0);
   }
 
   WHEN ("First string does NOT have a valid buffer")
@@ -71,8 +75,8 @@ TEST_CASE ("Testing String::compareTo(const char *) with empty buffer", "[String
     char *buffer1 = NULL;
     char *buffer2 = NULL;
 
-    arduino::String str1(buffer1);
-    REQUIRE(str1.compareTo(buffer2) == 0);
+    arduino::String str(buffer1);
+    REQUIRE(str.compareTo(buffer2) == 0);
   }
 }
 

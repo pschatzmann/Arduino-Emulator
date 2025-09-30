@@ -29,7 +29,6 @@
 
 namespace arduino {
 
-ArduinoLogger Logger;  // Support for logging
 StdioDevice Serial;    // output to screen
 HardwareImpl Hardware; // implementation for gpio, spi, i2c
 

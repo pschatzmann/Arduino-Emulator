@@ -26,15 +26,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Create link to String.h
-        run: echo '#include "WString.h"' > ArduinoCore-API/api/String.h
-
-      - name: Create link to String.cpp
-        run: echo '#include "WString.cpp"' > ArduinoCore-API/api/String.cpp
-
-      - name: Fix catch lib issues
-        run: echo 'add_compile_definitions(CATCH_CONFIG_NO_POSIX_SIGNALS)' >> ArduinoCore-API/test/CMakeLists.txt
-
       - name: Relax some warings
         # run: echo 'add_compile_options(-Wno-unused-function)' >> ArduinoCore-API/test/CMakeLists.txt
         # run: echo 'add_compile_options(-Wno-error=all)' >> ArduinoCore-API/test/CMakeLists.txt

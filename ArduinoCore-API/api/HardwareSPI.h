@@ -1,4 +1,5 @@
 /*
+  HardwareSPI.h - Hardware SPI interface for Arduino
   Copyright (c) 2018 Arduino LLC.  All right reserved.
 
   This library is free software; you can redistribute it and/or
@@ -8,8 +9,8 @@
 
   This library is distributed in the hope that it will be useful,
   but WITHOUT ANY WARRANTY; without even the implied warranty of
-  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-  See the GNU Lesser General Public License for more details.
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+  Lesser General Public License for more details.
 
   You should have received a copy of the GNU Lesser General Public
   License along with this library; if not, write to the Free Software
@@ -33,33 +34,42 @@ typedef enum {
   SPI_MODE3 = 3,
 } SPIMode;
 
+// Platforms should define SPI_HAS_PERIPHERAL_MODE if SPI peripheral
+// mode is supported, to allow applications to check whether peripheral
+// mode is available or not.
+typedef enum {
+  SPI_CONTROLLER = 0,
+  SPI_PERIPHERAL = 1,
+} SPIBusMode;
+
 
 class SPISettings {
   public:
-  SPISettings(uint32_t clock, BitOrder bitOrder, SPIMode dataMode) {
+  SPISettings(uint32_t clock, BitOrder bitOrder, SPIMode dataMode, SPIBusMode busMode = SPI_CONTROLLER) {
     if (__builtin_constant_p(clock)) {
-      init_AlwaysInline(clock, bitOrder, dataMode);
+      init_AlwaysInline(clock, bitOrder, dataMode, busMode);
     } else {
-      init_MightInline(clock, bitOrder, dataMode);
+      init_MightInline(clock, bitOrder, dataMode, busMode);
     }
   }
 
-  SPISettings(uint32_t clock, BitOrder bitOrder, int dataMode) {
+  SPISettings(uint32_t clock, BitOrder bitOrder, int dataMode, SPIBusMode busMode = SPI_CONTROLLER) {
     if (__builtin_constant_p(clock)) {
-      init_AlwaysInline(clock, bitOrder, (SPIMode)dataMode);
+      init_AlwaysInline(clock, bitOrder, (SPIMode)dataMode, busMode);
     } else {
-      init_MightInline(clock, bitOrder, (SPIMode)dataMode);
+      init_MightInline(clock, bitOrder, (SPIMode)dataMode, busMode);
     }
   }
 
   // Default speed set to 4MHz, SPI mode set to MODE 0 and Bit order set to MSB first.
-  SPISettings() { init_AlwaysInline(4000000, MSBFIRST, SPI_MODE0); }
+  SPISettings() { init_AlwaysInline(4000000, MSBFIRST, SPI_MODE0, SPI_CONTROLLER); }
 
   bool operator==(const SPISettings& rhs) const
   {
     if ((this->clockFreq == rhs.clockFreq) &&
         (this->bitOrder == rhs.bitOrder) &&
-        (this->dataMode == rhs.dataMode)) {
+        (this->dataMode == rhs.dataMode) &&
+        (this->busMode == rhs.busMode)) {
       return true;
     }
     return false;
@@ -79,22 +89,27 @@ class SPISettings {
   BitOrder getBitOrder() const {
     return (bitOrder);
   }
+  SPIBusMode getBusMode() const {
+    return busMode;
+  }
 
   private:
-  void init_MightInline(uint32_t clock, BitOrder bitOrder, SPIMode dataMode) {
-    init_AlwaysInline(clock, bitOrder, dataMode);
+  void init_MightInline(uint32_t clock, BitOrder bitOrder, SPIMode dataMode, SPIBusMode busMode) {
+    init_AlwaysInline(clock, bitOrder, dataMode, busMode);
   }
 
   // Core developer MUST use an helper function in beginTransaction() to use this data
-  void init_AlwaysInline(uint32_t clock, BitOrder bitOrder, SPIMode dataMode) __attribute__((__always_inline__)) {
+  void init_AlwaysInline(uint32_t clock, BitOrder bitOrder, SPIMode dataMode, SPIBusMode busMode) __attribute__((__always_inline__)) {
     this->clockFreq = clock;
     this->dataMode = dataMode;
     this->bitOrder = bitOrder;
+    this->busMode = busMode;
   }
 
   uint32_t clockFreq;
   SPIMode dataMode;
   BitOrder bitOrder;
+  SPIBusMode busMode;
 
   friend class HardwareSPI;
 };
@@ -123,5 +138,8 @@ class HardwareSPI
     virtual void begin() = 0;
     virtual void end() = 0;
 };
+
+// Alias SPIClass to HardwareSPI since it's already the defacto standard for SPI class name
+typedef HardwareSPI SPIClass;
 
 }

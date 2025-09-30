@@ -77,6 +77,6 @@ class ArduinoLogger {
   LogLevel log_level = Warning;
 };
 
-extern ArduinoLogger Logger;
+static ArduinoLogger Logger;
 
 }  // namespace arduino

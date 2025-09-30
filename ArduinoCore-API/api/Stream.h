@@ -24,7 +24,7 @@
 #include <inttypes.h>
 #include "Print.h"
 
-// compatability macros for testing
+// compatibility macros for testing
 /*
 #define   getInt()            parseInt()
 #define   getInt(ignore)      parseInt(ignore)
@@ -50,8 +50,8 @@ enum LookaheadMode{
 class Stream : public Print
 {
   protected:
-    size_t _timeout;      // number of milliseconds to wait for the next char before aborting timed read
-    size_t _startMillis;  // used for timeout measurement
+    unsigned long _timeout;      // number of milliseconds to wait for the next char before aborting timed read
+    unsigned long _startMillis;  // used for timeout measurement
     int timedRead();    // private method to read stream with timeout
     int timedPeek();    // private method to peek stream with timeout
     int peekNextDigit(LookaheadMode lookahead, bool detectDecimal); // returns the next numeric digit in the stream or -1 if timeout
@@ -62,12 +62,11 @@ class Stream : public Print
     virtual int peek() = 0;
 
     Stream() {_timeout=1000;}
-    ~Stream() {}
 
 // parsing methods
 
-  virtual void setTimeout(size_t timeout);  // sets maximum milliseconds to wait for stream data, default is 1 second
-  virtual size_t getTimeout(void) { return _timeout; }
+  void setTimeout(unsigned long timeout);  // sets maximum milliseconds to wait for stream data, default is 1 second
+  unsigned long getTimeout(void) { return _timeout; }
   
   bool find(const char *target);   // reads data from the stream until the target string is found
   bool find(const uint8_t *target) { return find ((const char *)target); }
@@ -95,8 +94,8 @@ class Stream : public Print
   float parseFloat(LookaheadMode lookahead = SKIP_ALL, char ignore = NO_IGNORE_CHAR);
   // float version of parseInt
 
-  virtual size_t readBytes( char *buffer, size_t length); // read chars from stream into buffer
-  virtual size_t readBytes( uint8_t *buffer, size_t length) { return readBytes((char *)buffer, length); }
+  size_t readBytes( char *buffer, size_t length); // read chars from stream into buffer
+  size_t readBytes( uint8_t *buffer, size_t length) { return readBytes((char *)buffer, length); }
   // terminates if length characters have been read or timeout (see setTimeout)
   // returns the number of characters placed in the buffer (0 means no valid data found)
 
@@ -130,3 +129,5 @@ class Stream : public Print
 #undef NO_IGNORE_CHAR
 
 }
+
+using arduino::Stream;

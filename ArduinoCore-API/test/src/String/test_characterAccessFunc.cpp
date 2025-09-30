@@ -1,14 +1,18 @@
 /*
  * Copyright (c) 2020 Arduino.  All rights reserved.
+ *
+ * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
 /**************************************************************************************
  * INCLUDE
  **************************************************************************************/
 
-#include <catch.hpp>
+#include <catch2/catch_test_macros.hpp>
 
-#include <String.h>
+#include <api/String.h>
+
+#include "StringPrinter.h"
 
 /**************************************************************************************
  * TEST CODE
@@ -24,7 +28,7 @@ TEST_CASE ("Testing String::setCharAt(unsigned int, char )", "[String-setCharAt-
 {
   arduino::String str1("Hello");
   str1.setCharAt(1, 'a');
-  REQUIRE(str1.compareTo("Hallo") == 0);
+  REQUIRE(str1 == "Hallo");
 }
 
 TEST_CASE ("Testing String::getBytes(unsigned char, unsigned int, unsigned int)", "[String-getBytes-02]")
@@ -43,21 +47,22 @@ TEST_CASE ("Testing String::getBytes(unsigned char, unsigned int, unsigned int)"
 
   WHEN("Valid operation") {
     arduino::String str("Hello");
-    unsigned char buf[2];
+    unsigned char buf[3];
     str.getBytes(buf, 5, 3);
     REQUIRE(buf[0] == 'l');
     REQUIRE(buf[1] == 'o');
+    REQUIRE(buf[2] == '\0');
   }
 }
 
-TEST_CASE ("Testing & String::operator[]", "[String-&operator[]-03]")
+TEST_CASE ("Testing & String::operator[]", "[String-&operator subscript-03]")
 {
   arduino::String str("Hello");
   str[0] = 'M';
   REQUIRE(str == "Mello");
 }
 
-TEST_CASE ("Testing & String::operator[] with invalid buffer", "[String-&operator[]-04]")
+TEST_CASE ("Testing & String::operator[] with invalid buffer", "[String-&operator subscript-04]")
 {
   char *buffer = NULL;
   arduino::String str(buffer);
