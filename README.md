@@ -1,5 +1,8 @@
 # An Arduino C++ Emulator Library
 
+[![Linux build](../../actions/workflows/c-cpp-cmake.yml/badge.svg)](../../actions/workflows/c-cpp-cmake.yml)
+[![Unit tests](../../actions/workflows/unit-tests.yml/badge.svg)](../../actions/workflows/unit-tests.yml)
+
 ## Using this Project as a library
 
 If you have an Arduino Sketch that you want to run e.g in Linux, OS/X or Windows you can include this library with cmake. 
