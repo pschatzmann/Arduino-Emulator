@@ -62,6 +62,7 @@ void setup() {
 
     client.stop();
   }
+  Serial.println("\nConnection closed.");
 }
 
 void loop() {

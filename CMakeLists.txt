@@ -18,7 +18,7 @@ if(USE_HTTPS)
         FetchContent_Populate(wolfssl)
         add_subdirectory(${wolfssl_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR}/wolfssl)
     endif()
-    add_definitions(-DUSE_HTTPS -DWOLFSSL_CUSTOM_CONFIG)
+    add_definitions(-DUSE_HTTPS -DDEBUG_WOLFSSL)
 endif(USE_HTTPS)
 
 add_definitions(-DHOST)

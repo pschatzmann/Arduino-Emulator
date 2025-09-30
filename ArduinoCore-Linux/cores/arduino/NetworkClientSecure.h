@@ -15,14 +15,15 @@ static int wolf_ssl_counter = 0;
 static WOLFSSL_CTX* wolf_ctx = nullptr;
 
 /**
- * @brief SSL Socket using wolf ssl
+ * @brief SSL Socket using wolf ssl. For error codes see
+ * https://wolfssl.jp/docs-3/wolfssl-manual/appendix-c
  */
 class SocketImplSecure : public SocketImpl {
  public:
   SocketImplSecure() {
     if (wolf_ssl_counter++ == 0 || wolf_ctx == nullptr) {
       wolfSSL_Init();
-      if ((wolf_ctx = wolfSSL_CTX_new(wolfTLSv1_3_client_method())) == NULL) {
+      if ((wolf_ctx = wolfSSL_CTX_new(wolfTLS_client_method())) == NULL) {
         Logger.error(SOCKET_IMPL_SEC, "wolfSSL_CTX_new error.");
       }
     }
@@ -91,9 +92,19 @@ class SocketImplSecure : public SocketImpl {
     // Set SSL file descriptor
     wolfSSL_set_fd(ssl, sock);
 
+    // Set SNI (Server Name Indication) if needed
+    wolfSSL_UseSNI(ssl, WOLFSSL_SNI_HOST_NAME, address, strlen(address));
+
     // Perform SSL handshake
-    if (wolfSSL_connect(ssl) != SSL_SUCCESS) {
-      Logger.error(SOCKET_IMPL_SEC, "SSL handshake failed");
+    int rc = wolfSSL_connect(ssl);
+    if (rc != SSL_SUCCESS) {
+      int err = wolfSSL_get_error(ssl, rc);
+      const char* errStr = wolfSSL_ERR_reason_error_string(err);
+      char msg[160];
+      snprintf(msg, sizeof(msg),
+               "SSL handshake failed, error code: %d reason: %s", err,
+               errStr ? errStr : "unknown");
+      Logger.error(SOCKET_IMPL_SEC, msg);
       ::close(sock);
       sock = -1;
       return -1;
@@ -126,13 +137,17 @@ class SocketImplSecure : public SocketImpl {
   }
 
   void setInsecure() {
+    is_insecure = true;
     if (wolf_ctx == nullptr) return;
-    // Disable certificate verification
+    // Disable certificate verification on context
     wolfSSL_CTX_set_verify(wolf_ctx, SSL_VERIFY_NONE, nullptr);
+    // Also disable on SSL object if already created
+    if (ssl) wolfSSL_set_verify(ssl, SSL_VERIFY_NONE, nullptr);
   }
 
  protected:
   WOLFSSL* ssl = nullptr;
+  bool is_insecure = false;
 };
 
 /**
