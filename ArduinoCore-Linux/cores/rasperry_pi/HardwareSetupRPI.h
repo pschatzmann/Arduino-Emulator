@@ -5,6 +5,7 @@
 #include "HardwareGPIO_RPI.h"
 #include "HardwareI2C_RPI.h"
 #include "HardwareSPI_RPI.h"
+#include "FileStream.h"
 
 namespace arduino {
 
