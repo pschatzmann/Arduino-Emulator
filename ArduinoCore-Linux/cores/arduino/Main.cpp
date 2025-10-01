@@ -18,7 +18,7 @@ void hardwareSetup(){
     HardwareSetupRemote.begin();
 #  endif
 #  if (defined(USE_RPI))
-    HardwareSetupRPI.begin();
+    RPI.begin();
 #  endif
 #endif
 }
