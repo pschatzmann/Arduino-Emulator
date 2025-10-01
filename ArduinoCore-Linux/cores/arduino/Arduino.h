@@ -34,7 +34,7 @@
 #endif
 
 #include "Serial.h"
-#include "ArdStdio.h"
+#include "StdioDevice.h"
 #include "ArduinoLogger.h"
 #include "ArduinoAPI.h"
 #include "RemoteSerial.h"

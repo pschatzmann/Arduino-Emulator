@@ -1,6 +1,6 @@
 #pragma once
 
-#if PROVIDE_SERIALLIB
+#if USE_SERIALLIB
 
 #include "serialib.h"
 #include "HardwareSerial.h"
@@ -87,7 +87,6 @@ class SerialImpl : public HardwareSerial {
 
 };
     
-extern SerialImpl Serial1; 
     
 } // namespace
 

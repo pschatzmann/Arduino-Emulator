@@ -1,6 +1,6 @@
 #pragma once
 
-#include "ArdStdio.h"
+#include "StdioDevice.h"
 #include "Stream.h"
 
 namespace arduino {

@@ -9,7 +9,6 @@ namespace arduino {
 /**
  * @brief We use the SerialDef class to be able to provide Serail, Serial1 and Serial2 outside of the
  * Arduino environment;  
- * 
  */
 class FileStream : public Stream {
   public:
@@ -91,8 +90,18 @@ class FileStream : public Stream {
   protected:
     std::fstream out;
     std::fstream in;
-
 };
-    
+
+/**
+ * @brief Global Serial1 instance for secondary serial communication.
+ *
+ * This object provides access to the /dev/ttyACM0 device, typically used for USB serial or secondary UART on Linux systems.
+ * Use this instance in your sketches to perform serial communication, similar to the standard Arduino Serial1 object.
+ * Example:
+ *   Serial1.begin(9600);
+ *   Serial1.println("Hello from Serial1");
+ */
+static FileStream Serial1("/dev/ttyACM0");
+ 
 }
 

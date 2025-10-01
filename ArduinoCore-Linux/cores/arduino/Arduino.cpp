@@ -24,18 +24,13 @@
 #include "PluggableUSB.h"
 #include "deprecated-avr-comp/avr/dtostrf.h"
 #include "ArduinoLogger.h"
-#include "ArdStdio.h"
+#include "StdioDevice.h"
 #include "Serial.h"
 
 namespace arduino {
 
 #if !defined(SKIP_HARDWARE_WIFI)
 WifiMock WiFi;         // So that we can use the WiFi
-#endif
-
-
-#if PROVIDE_SERIALLIB    
-SerialImpl Serial1("/dev/ttyACM0");    // output to serial port
 #endif
 
 

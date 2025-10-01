@@ -67,6 +67,7 @@ static HardwareSetupRPI RPI;
 static auto& Wire = *Hardware.i2c;
 static auto& SPI = *Hardware.spi;
 
+
 /**
  * @brief Second hardware serial port for Raspberry Pi.
  *
@@ -76,7 +77,8 @@ static auto& SPI = *Hardware.spi;
  *   Serial2.begin(9600);
  *   Serial2.println("Hello from Serial2");
  */
-static SerialImpl Serial2("/dev/serial0");
+static FileStream Serial2("/dev/serial0");
+
 
 }  // namespace arduino
 
