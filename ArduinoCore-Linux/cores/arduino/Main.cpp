@@ -1,8 +1,5 @@
 #include "Arduino.h"
-#include "HardwareSetupRemote.h"
-#if (defined(USE_RPI))
-#  include "HardwareSetupRPI.h"
-#endif
+#include "HardwareSetup.h"
 
 /**
  * @brief arduino main - this might be needed so we generate the function if DEFINE_MAIN is defined 

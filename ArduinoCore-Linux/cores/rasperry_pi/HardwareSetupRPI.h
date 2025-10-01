@@ -68,7 +68,6 @@ static HardwareSetupRPI RPI;
 static auto& Wire = *Hardware.i2c;
 static auto& SPI = *Hardware.spi;
 
-
 /**
  * @brief Second hardware serial port for Raspberry Pi.
  *

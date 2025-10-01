@@ -38,6 +38,6 @@
 #include "ArduinoLogger.h"
 #include "ArduinoAPI.h"
 #include "RemoteSerial.h"
-#include "HardwareSetupRemote.h"
+#include "HardwareSetup.h"
 
 using namespace arduino;
