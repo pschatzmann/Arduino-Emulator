@@ -25,6 +25,11 @@ class HardwareGPIO_RPI : public HardwareGPIO {
    * @brief Constructor for HardwareGPIO_RPI.
    */
   HardwareGPIO_RPI() = default;
+
+  /**
+   * @brief Constructor for HardwareGPIO_RPI with custom device name.
+   * @param devName Name of the GPIO chip device (e.g., "gpiochip0").
+   */
   HardwareGPIO_RPI(const char* devName) : device_name(devName) {}
 
   /**
@@ -32,6 +37,12 @@ class HardwareGPIO_RPI : public HardwareGPIO {
    */
   ~HardwareGPIO_RPI();
 
+  /**
+   * @brief Initialize the GPIO hardware interface for Raspberry Pi.
+   *
+   * Opens the GPIO chip device and prepares the class for GPIO operations.
+   * Should be called before using any GPIO functions.
+   */
   void begin();
 
   /**
@@ -104,11 +115,8 @@ class HardwareGPIO_RPI : public HardwareGPIO {
   operator bool() { return is_open; }
 
  private:
-  /** Analog reference mode (default AR_DEFAULT) */
   int m_analogReference = 0;
-  /** Map of pin numbers to their PWM frequencies */
   std::map<pin_size_t, uint32_t> gpio_frequencies;
-  /** PWM-capable pins on Raspberry Pi */
   int pwm_pins[4] = {12, 13, 18, 19};
   bool is_open = false;
   const char* device_name = "gpiochip0";

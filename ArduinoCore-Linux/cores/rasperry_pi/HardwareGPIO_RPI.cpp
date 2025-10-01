@@ -13,7 +13,7 @@ namespace arduino {
 static std::map<pin_size_t, gpiod_line*> gpio_lines;
 static gpiod_chip* gpio_chip = nullptr;
 
-HardwareGPIO_RPI::begin() {
+void HardwareGPIO_RPI::begin() {
   Logger.warning("Activating Rasperry PI: GPIO");
   gpio_chip = gpiod_chip_open_by_name(device_name);
   if (!gpio_chip) {
