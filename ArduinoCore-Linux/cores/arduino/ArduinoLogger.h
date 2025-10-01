@@ -12,6 +12,8 @@ namespace arduino {
 
 class ArduinoLogger {
  public:
+  ArduinoLogger() = default;
+
   /**
    * @brief Supported log levels
    *

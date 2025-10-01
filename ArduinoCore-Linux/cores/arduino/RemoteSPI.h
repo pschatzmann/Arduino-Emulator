@@ -35,7 +35,9 @@ class RemoteSPI : public HardwareSPI {
     service.send((uint32_t)count);
     service.send(buf, count);
     service.flush();
-    service.receive16();
+    for (int j=0; j<count; j++) {
+      ((uint8_t*)buf)[j] = service.receive8();
+    }
   }
 
   void usingInterrupt(int interruptNumber) {

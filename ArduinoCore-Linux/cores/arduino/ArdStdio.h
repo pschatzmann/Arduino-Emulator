@@ -126,7 +126,7 @@ class StdioDevice : public Stream {
 
 };
 
-extern StdioDevice Serial;    
+static StdioDevice Serial;    
     
 }
 

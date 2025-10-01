@@ -1,5 +1,6 @@
 
 add_subdirectory("hallo-world")
+add_subdirectory("remote-api")
 
 if(USE_HTTPS)
     add_subdirectory("wifi-secure")

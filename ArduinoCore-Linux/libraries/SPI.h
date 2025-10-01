@@ -30,5 +30,3 @@ class SPIClass : public HardwareSPI {
   void end() override {}
 };
 
-static SPIClass SPI;
-static SPIClass SPI1;

@@ -1,6 +1,6 @@
 
 #pragma once
-#ifdef USE_RPI
+#if defined(USE_RPI) && !defined(SKIP_HARDWARE_SETUP)
 #include "Hardware.h" // for Hardware; 
 #include "HardwareGPIO_RPI.h"
 #include "HardwareI2C_RPI.h"
@@ -17,7 +17,7 @@ class HardwareSetupRPI {
   /**
    * @brief Constructor. Initializes hardware interfaces.
    */
-  HardwareSetupRPI() { begin(); }
+  HardwareSetupRPI() = default;
 
   /**
    * @brief Destructor. Cleans up hardware interfaces.
@@ -64,6 +64,19 @@ class HardwareSetupRPI {
  * Raspberry Pi.
  */
 static HardwareSetupRPI RPI;
+static auto& Wire = *Hardware.i2c;
+static auto& SPI = *Hardware.spi;
+
+/**
+ * @brief Second hardware serial port for Raspberry Pi.
+ *
+ * Serial2 provides access to the Raspberry Pi's primary UART device (usually /dev/serial0).
+ * This can be used for serial communication with external devices, similar to Serial1/Serial2 on Arduino boards.
+ * Example usage:
+ *   Serial2.begin(9600);
+ *   Serial2.println("Hello from Serial2");
+ */
+static SerialImpl Serial2("/dev/serial0");
 
 }  // namespace arduino
 

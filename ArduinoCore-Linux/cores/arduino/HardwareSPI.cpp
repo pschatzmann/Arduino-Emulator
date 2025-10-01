@@ -8,10 +8,6 @@
 
 namespace arduino {
 
-//HardwareSPI::HardwareSPI() {}
-
-//HardwareSPI::~HardwareSPI() {}
-
 uint8_t HardwareSPI::transfer(uint8_t data) {
     if (Hardware.spi != nullptr) {
         return Hardware.spi->transfer(data);
@@ -81,5 +77,6 @@ void HardwareSPI::end() {
         Hardware.spi->end();
     }
 }
+
     
 }

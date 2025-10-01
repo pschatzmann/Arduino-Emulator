@@ -16,13 +16,7 @@ namespace arduino {
 class WiFiUDPStream : public WiFiUDP {
   public:
       // unknown target -> we wait for a hallo until we get one
-      WiFiUDPStream() {
-          Logger.debug("WiFiUDPStream");
-      }
-    
-      ~WiFiUDPStream() {
-          Logger.debug("~WiFiUDPStream");
-      }   
+      WiFiUDPStream() = default;
     
       // known target
       WiFiUDPStream(IPAddress targetAdress, int port){

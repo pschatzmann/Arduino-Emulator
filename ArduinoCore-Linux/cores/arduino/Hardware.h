@@ -12,13 +12,12 @@ class HardwareGPIO;
  * drive the specific interface
  **/
 struct HardwareImpl {
- public:
-  HardwareImpl() {}
+  HardwareImpl() = default;
   HardwareGPIO* gpio = nullptr;
   HardwareI2C* i2c = nullptr;
   HardwareSPI* spi = nullptr;
 };
 
-extern HardwareImpl Hardware;
+static HardwareImpl Hardware;
 
 }  // namespace arduino

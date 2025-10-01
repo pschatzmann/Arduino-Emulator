@@ -28,19 +28,16 @@
 // Not available under MSVC
 #define __attribute__(x) // nothing
 #define __builtin_constant_p(x) (0) // non-constant
-#endif
-
-#if defined(_MSC_VER)
 // Temporary unsupported under Win/MSVC
 #define SKIP_HARDWARE_SETUP
 #define SKIP_HARDWARE_WIFI
 #endif
 
-#include "ArduinoAPI.h"
-#include "ArdStdio.h"
 #include "Serial.h"
+#include "ArdStdio.h"
 #include "ArduinoLogger.h"
+#include "ArduinoAPI.h"
 #include "RemoteSerial.h"
-#include "HardwareSetup.h"
+#include "HardwareSetupRemote.h"
 
 using namespace arduino;

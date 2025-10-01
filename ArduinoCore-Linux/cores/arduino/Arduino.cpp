@@ -11,7 +11,7 @@
 #include "RemoteSerial.h"
 #include "Hardware.h"
 #if !defined(SKIP_HARDWARE_SETUP)
-#  include "HardwareSetup.h"
+#  include "HardwareSetupRemote.h"
 #endif
 #if !defined(SKIP_HARDWARE_WIFI)
 #  include "WiFi.h"
@@ -29,15 +29,8 @@
 
 namespace arduino {
 
-StdioDevice Serial;    // output to screen
-HardwareImpl Hardware; // implementation for gpio, spi, i2c
-
 #if !defined(SKIP_HARDWARE_WIFI)
 WifiMock WiFi;         // So that we can use the WiFi
-#endif
-
-#if !defined(SKIP_HARDWARE_SETUP)
-HardwareSetupRemoteClass HardwareSetup; // setup for implementation
 #endif
 
 
