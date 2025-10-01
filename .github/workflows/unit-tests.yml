@@ -1,6 +1,9 @@
 name: Unit Tests
 
 on:
+  workflow_dispatch:
+    # allow manual launch
+
   pull_request:
     # Only run workflow if a file in these paths is modified
     paths:
