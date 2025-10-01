@@ -16,7 +16,6 @@ namespace arduino {
 HardwareSPI_RPI::HardwareSPI_RPI(const char* device) {
   spi_fd = -1;
   this->device = device;
-  begin();
 }
 
 HardwareSPI_RPI::~HardwareSPI_RPI() {

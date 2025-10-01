@@ -24,7 +24,6 @@ class HardwareI2C_RPI : public HardwareI2C {
  public:
   HardwareI2C_RPI(const char* device = "/dev/i2c-1") {
     i2c_device = device;
-    begin();
   }
   ~HardwareI2C_RPI() {
     end();

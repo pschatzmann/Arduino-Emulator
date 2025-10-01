@@ -24,12 +24,15 @@ class HardwareGPIO_RPI : public HardwareGPIO {
   /**
    * @brief Constructor for HardwareGPIO_RPI.
    */
-  HardwareGPIO_RPI();
+  HardwareGPIO_RPI() = default;
+  HardwareGPIO_RPI(const char* devName) : device_name(devName) {}
 
   /**
    * @brief Destructor for HardwareGPIO_RPI.
    */
   ~HardwareGPIO_RPI();
+
+  void begin();
 
   /**
    * @brief Set the mode of a GPIO pin (INPUT, OUTPUT, etc).
@@ -108,6 +111,7 @@ class HardwareGPIO_RPI : public HardwareGPIO {
   /** PWM-capable pins on Raspberry Pi */
   int pwm_pins[4] = {12, 13, 18, 19};
   bool is_open = false;
+  const char* device_name = "gpiochip0"
 };
 
 }  // namespace arduino

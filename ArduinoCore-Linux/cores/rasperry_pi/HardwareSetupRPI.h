@@ -30,6 +30,9 @@ class HardwareSetupRPI {
    */
   bool begin() {
     Logger.info("Using Raspberry Pi hardware interfaces");
+    gpio.begin();
+    i2c.begin();
+    spi.begin();
     Hardware.gpio = &gpio;
     Hardware.i2c = &i2c;
     Hardware.spi = &spi;
