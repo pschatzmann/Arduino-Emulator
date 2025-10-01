@@ -111,7 +111,7 @@ class HardwareGPIO_RPI : public HardwareGPIO {
   /** PWM-capable pins on Raspberry Pi */
   int pwm_pins[4] = {12, 13, 18, 19};
   bool is_open = false;
-  const char* device_name = "gpiochip0"
+  const char* device_name = "gpiochip0";
 };
 
 }  // namespace arduino
