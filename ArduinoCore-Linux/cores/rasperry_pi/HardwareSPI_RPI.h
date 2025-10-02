@@ -2,9 +2,9 @@
 #ifdef USE_RPI
 #include <inttypes.h>
 
-#include "Common.h"
-#include "HardwareSPI.h"
-#include "Stream.h"
+#include "api/Common.h"
+#include "api/HardwareSPI.h"
+#include "api/Stream.h"
 
 namespace arduino {
 

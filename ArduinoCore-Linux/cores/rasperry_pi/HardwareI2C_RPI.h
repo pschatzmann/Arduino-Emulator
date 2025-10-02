@@ -5,7 +5,7 @@
 #include <unistd.h>  // for open(), close(), etc.
 #include <vector>
 #include "Hardware.h"
-#include "HardwareI2C.h"
+#include "api/HardwareI2C.h"
 #include "ArduinoLogger.h"
 
 namespace arduino {
