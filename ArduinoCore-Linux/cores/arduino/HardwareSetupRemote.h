@@ -10,6 +10,12 @@
 #include "WiFiUdpStream.h"
 
 namespace arduino {
+#if !defined(SKIP_HARDWARE_SETUP)
+#if !defined(USE_RPI)
+static RemoteI2C Wire;
+static RemoteSPI SPI;
+#endif
+#endif
 
 /**
  * Class which is used to configure the actual Hardware APIs
@@ -42,6 +48,10 @@ class HardwareSetupRemoteClass {
     spi.setStream(s);
     gpio.setStream(s);
 
+    // setup global objects
+    SPI = spi;
+    Wire = i2c;
+
     if (doHandShake) {
       handShake(s);
     }
@@ -57,13 +67,14 @@ class HardwareSetupRemoteClass {
   void begin() {
     if (p_stream == nullptr) {
       default_stream.begin(port);
-      handShake(&default_stream);
       IPAddress ip = default_stream.remoteIP();
-      int port = default_stream.remotePort();
-      default_stream.setTarget(ip, port);
+      int remote_port = default_stream.remotePort();
+      default_stream.setTarget(ip, remote_port);
       default_stream.write((const uint8_t*)"OK", 2);
       default_stream.flush();
-      p_stream = &default_stream;
+      begin(&default_stream, true);
+    } else {
+      begin(p_stream, true);
     }
   }
 
@@ -114,9 +125,5 @@ class HardwareSetupRemoteClass {
 
 #if !defined(SKIP_HARDWARE_SETUP)
 static HardwareSetupRemoteClass HardwareSetupRemote{7000};
-#if !defined(USE_RPI)
-static auto& Wire = *Hardware.i2c;
-static auto& SPI = *Hardware.spi;
-#endif
 #endif
 }  // namespace arduino
