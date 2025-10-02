@@ -5,9 +5,9 @@
 #include <thread>
 #include <chrono>
 #include "Arduino.h"
-#include "Common.h"
-#include "Stream.h"
-#include "PluggableUSB.h"
+#include "api/Common.h"
+#include "api/Stream.h"
+#include "api/PluggableUSB.h"
 #include "RemoteSerial.h"
 #include "Hardware.h"
 #if !defined(SKIP_HARDWARE_SETUP)
@@ -21,8 +21,8 @@
 #  include "HardwareGPIO_RPI.h"
 #  include "HardwareI2C_RPI.h"
 #endif
-#include "PluggableUSB.h"
-#include "deprecated-avr-comp/avr/dtostrf.h"
+#include "api/PluggableUSB.h"
+#include "api/deprecated-avr-comp/avr/dtostrf.h"
 #include "ArduinoLogger.h"
 #include "StdioDevice.h"
 #include "Serial.h"

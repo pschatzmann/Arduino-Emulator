@@ -6,9 +6,9 @@
 #include <unistd.h>     // for close
 
 #include "ArduinoLogger.h"
-#include "Client.h"
-#include "Common.h"
-#include "IPAddress.h"
+#include "api/Client.h"
+#include "api/Common.h"
+#include "api/IPAddress.h"
 #include "RingBufferExt.h"
 #include "SocketImpl.h"
 

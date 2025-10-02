@@ -2,9 +2,9 @@
 
 #include <string.h>
 #include <thread>         
-#include "ArduinoAPI.h"
+#include "api/ArduinoAPI.h"
+#include "api/IPAddress.h"
 #include "WiFiUDP.h"
-#include "IPAddress.h"
 #include "ArduinoLogger.h"
 
 namespace arduino {

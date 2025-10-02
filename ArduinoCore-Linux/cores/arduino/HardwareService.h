@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Stream.h"
+#include "api/Stream.h"
 
 namespace arduino {
 

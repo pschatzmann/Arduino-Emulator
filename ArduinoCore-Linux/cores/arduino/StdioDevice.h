@@ -2,8 +2,8 @@
 
 #include <iostream>
 #include <streambuf>
-#include "Stream.h"
-#include "Printable.h"
+#include "api/Stream.h"
+#include "api/Printable.h"
 
 namespace arduino {
 

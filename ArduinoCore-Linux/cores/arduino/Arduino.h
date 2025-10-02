@@ -36,7 +36,7 @@
 #include "Serial.h"
 #include "StdioDevice.h"
 #include "ArduinoLogger.h"
-#include "ArduinoAPI.h"
+#include "api/ArduinoAPI.h"
 #include "RemoteSerial.h"
 #include "HardwareSetup.h"
 
