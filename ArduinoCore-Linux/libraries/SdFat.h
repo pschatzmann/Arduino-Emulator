@@ -116,7 +116,7 @@ public:
     return !isOpen();
   }
 
-  size_t readBytes(uint8_t *buffer, size_t length) override {
+  size_t readBytes(uint8_t *buffer, size_t length) {
     return file.readsome((char *)buffer, length);
   }
   size_t write(const uint8_t *buffer, size_t size) override {
