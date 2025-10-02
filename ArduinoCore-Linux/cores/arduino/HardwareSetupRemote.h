@@ -46,9 +46,11 @@ class HardwareSetupRemoteClass {
     spi.setStream(s);
     gpio.setStream(s);
 
+  #if !defined(SKIP_HARDWARE_SETUP) && !defined(USE_RPI)
     // setup global objects
     SPI = spi;
     Wire = i2c;
+  #endif
 
     if (doHandShake) {
       handShake(s);
