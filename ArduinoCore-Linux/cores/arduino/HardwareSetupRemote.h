@@ -10,11 +10,9 @@
 #include "WiFiUdpStream.h"
 
 namespace arduino {
-#if !defined(SKIP_HARDWARE_SETUP)
-#if !defined(USE_RPI)
+#if !defined(SKIP_HARDWARE_SETUP) && !defined(USE_RPI)
 static RemoteI2C Wire;
 static RemoteSPI SPI;
-#endif
 #endif
 
 /**
