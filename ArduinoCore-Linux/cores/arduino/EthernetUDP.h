@@ -34,9 +34,9 @@
  * bjoern@cs.stanford.edu 12/30/2008
  */
 
-#include <IPAddress.h>
+#include <api/IPAddress.h>
+#include <api/Udp.h>
 #include <RingBufferExt.h>
-#include <Udp.h>
 #include "SignalHandler.h"
 #include "ArduinoLogger.h"
 

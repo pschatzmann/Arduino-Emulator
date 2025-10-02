@@ -1,7 +1,7 @@
 #pragma once
 
 #include "StdioDevice.h"
-#include "Stream.h"
+#include "api/Stream.h"
 
 namespace arduino {
 

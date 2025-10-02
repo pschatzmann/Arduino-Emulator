@@ -4,7 +4,7 @@
 #include <unistd.h>
 
 #include "Ethernet.h"
-#include "Server.h"
+#include "api/Server.h"
 #include "SignalHandler.h"
 
 namespace arduino {

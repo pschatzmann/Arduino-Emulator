@@ -21,7 +21,7 @@
 
 #include <stdint.h>
 #include "Printable.h"
-#include "WString.h"
+#include "String.h"
 
 #define IPADDRESS_V4_BYTES_INDEX 12
 #define IPADDRESS_V4_DWORD_INDEX 3

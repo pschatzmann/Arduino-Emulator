@@ -34,10 +34,13 @@ file(GLOB SRC_LIST CONFIGURE_DEPENDS
 add_library(arduino_emulator ${SRC_LIST} ${HEADER_LIST})
 
 # Define the directories with the h files
-target_include_directories (arduino_emulator PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/ArduinoCore-API/api"
+target_include_directories (arduino_emulator PUBLIC 
+    "${CMAKE_CURRENT_SOURCE_DIR}/ArduinoCore-API"
     "${CMAKE_CURRENT_SOURCE_DIR}/ArduinoCore-Linux/cores/arduino"
     "${CMAKE_CURRENT_SOURCE_DIR}/ArduinoCore-Linux/cores/rasperry_pi"
-    "${CMAKE_CURRENT_SOURCE_DIR}/ArduinoCore-Linux/libraries" )
+    "${CMAKE_CURRENT_SOURCE_DIR}/ArduinoCore-Linux/libraries" 
+    "${CMAKE_CURRENT_SOURCE_DIR}/ArduinoCore-API/api/deprecated"
+    )   
 
 # Install header files 
 install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/ArduinoCore-API/api/" # source directory

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "HardwareSPI.h"
+#include "api/HardwareSPI.h"
 
 /**
  * We virtualize the hardware and send the requests and replys over
