@@ -66,12 +66,12 @@ Adjust the cmake parameters dependent on your requirements.
 
 ## Documentation
 
-The generated [Class documentation](https://pschatzmann.github.io/Arduino-Emulator/html/annotated.html). 
+- [Class documentation](https://pschatzmann.github.io/Arduino-Emulator/html/annotated.html). 
+- You can find further information in the [Wiki](https://github.com/pschatzmann/Arduino-Emulator/wiki)
 
 ## Usage notes
 
 ### Case-insensitive file systems (Windows, OSX, WSL)
 
-To avoid conflicts between system `string.h` and Arduino’s string library `String.h`, 
-just do not put `(include)/api` to include path. Put `(include)` and `(include)/api/deprecated` instead.
+To avoid conflicts between system `string.h` and Arduino’s string library `String.h`, just do not put `(include)/api` to include path. Put `(include)` and `(include)/api/deprecated` instead.
 This usual way to resolve this conflict in all Arduino cores.
