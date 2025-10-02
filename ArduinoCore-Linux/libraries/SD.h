@@ -112,7 +112,7 @@ class File : public Stream {
     return readBytes((char *)buffer, length);
   }
 
-  size_t readBytes(char *buffer, size_t length) override {
+  size_t readBytes(char *buffer, size_t length) {
     file.read(buffer, length);
     return static_cast<size_t>(file.gcount());
   }
