@@ -74,7 +74,7 @@ class StdioDevice : public Stream {
         return result;
     }
     
-    virtual void flush() {
+    void flush() override {
         std::cout.flush();
     }
     
@@ -108,20 +108,20 @@ class StdioDevice : public Stream {
         return 1;
     }
     
-    virtual int available() {
+    int available() override {
         return std::cin.rdbuf()->in_avail();
     };
     
-    virtual int read() {
+    int read() override {
         return std::cin.get();
     } 
     
-    virtual int peek() {
+    int peek() override {
         return std::cin.peek();
     }
 
   protected:
-    bool auto_flush;
+    bool auto_flush = true;
    
 
 };
