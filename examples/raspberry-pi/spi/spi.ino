@@ -1,6 +1,5 @@
 /// Example for using SPI on Raspberry Pi
 #include "Arduino.h"
-#include "HardwareSetupRPI.h" // Activate RPI Hardware
 #include "SPI.h"
 
 SPISettings settings(1000000, MSBFIRST, SPI_MODE0); // 1 MHz, MSB first, Mode 0

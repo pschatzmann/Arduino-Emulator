@@ -1,5 +1,6 @@
 #pragma once
 #include "HardwareSPI.h"
+#include "HardwareSetup.h"
 
 // this usually needs PIN_CS defined
 #define PIN_CS -1
