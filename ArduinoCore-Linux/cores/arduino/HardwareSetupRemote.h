@@ -67,12 +67,13 @@ class HardwareSetupRemoteClass {
   void begin() {
     if (p_stream == nullptr) {
       default_stream.begin(port);
+      handShake(&default_stream);
       IPAddress ip = default_stream.remoteIP();
       int remote_port = default_stream.remotePort();
       default_stream.setTarget(ip, remote_port);
       default_stream.write((const uint8_t*)"OK", 2);
       default_stream.flush();
-      begin(&default_stream, true);
+      begin(&default_stream, false);
     } else {
       begin(p_stream, true);
     }
