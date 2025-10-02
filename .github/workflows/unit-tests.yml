@@ -25,6 +25,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
+        with:
+          submodules: 'true'
 
       - name: Relax some warings
         # run: echo 'add_compile_options(-Wno-unused-function)' >> ArduinoCore-API/test/CMakeLists.txt
