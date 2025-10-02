@@ -9,6 +9,9 @@
 
 namespace arduino {
 
+static HardwareI2C_RPI Wire;
+static HardwareSPI_RPI SPI;;
+
 /**
  * @class HardwareSetupRPI
  * @brief Sets up hardware interfaces for Raspberry Pi (GPIO, I2C, SPI).
@@ -33,9 +36,13 @@ class HardwareSetupRPI {
     gpio.begin();
     i2c.begin();
     spi.begin();
+    // setup hardware pointers
     Hardware.gpio = &gpio;
     Hardware.i2c = &i2c;
     Hardware.spi = &spi;
+    // setup global instances
+    Wire = HardwareSetupRPI::get_i2c();
+    SPI = HardwareSetupRPI::get_spi();
     return gpio && i2c && spi;
   }
 
@@ -68,8 +75,6 @@ class HardwareSetupRPI {
  * Raspberry Pi.
  */
 static HardwareSetupRPI RPI;
-static auto& Wire = *Hardware.i2c;
-static auto& SPI = *Hardware.spi;
 
 /**
  * @brief Second hardware serial port for Raspberry Pi.
