@@ -54,6 +54,8 @@ You can activate/deactivate some functionality with the help of the following de
 Execute the following commends in the root of the Arduino-Emulator:
 
 ```Bash
+git clone --recurse-submodules https://github.com/pschatzmann/Arduino-Emulator
+cd Arduino-Emulator
 mkdir build
 cd build
 cmake -DUSE_RPI=OFF -DUSE_HTTPS=OFF -DCMAKE_BUILD_TYPE=Debug ..
