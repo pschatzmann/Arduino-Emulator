@@ -44,7 +44,7 @@ target_include_directories (arduino_emulator PUBLIC
 
 # Install header files 
 install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/ArduinoCore-API/api/" # source directory
-    DESTINATION "include/arduino" # target directory
+    DESTINATION "include/arduino/api" # target directory
     FILES_MATCHING # install only matched files
     PATTERN "*.h" # select header files
 )
