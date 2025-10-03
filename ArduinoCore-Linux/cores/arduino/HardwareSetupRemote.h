@@ -14,21 +14,40 @@
 namespace arduino {
 
 /**
- * Class which is used to configure the actual Hardware APIs
+ * @class HardwareSetupRemote
+ * @brief Configures and manages remote hardware interfaces for Arduino emulation.
+ *
+ * This class is responsible for setting up and managing remote hardware APIs such as I2C, SPI, and GPIO
+ * over a network or stream interface. It provides mechanisms to assign protocol handlers to a communication
+ * stream, perform handshakes with remote devices, and manage the lifecycle of hardware connections.
+ *
+ * Key features:
+ * - Supports initialization via a stream or UDP port.
+ * - Assigns remote protocol handlers (I2C, SPI, GPIO) to the provided stream.
+ * - Optionally sets up global protocol objects for use throughout the application.
+ * - Performs handshake with remote devices to ensure connectivity.
+ * - Provides accessors for the underlying protocol handler objects.
+ * - Manages cleanup and resource release on shutdown.
+ *
+ * Usage:
+ *   - Create an instance and call begin() with the desired configuration.
+ *   - Use getI2C(), getSPI(), and getGPIO() to access protocol handlers.
+ *   - Call end() to release resources when done.
+ *
  */
 
-class HardwareSetupRemoteClass : public I2CSource,
+class HardwareSetupRemote : public I2CSource,
                                  public SPISource,
                                  public GPIOSource {
  public:
   /// default constructor: you need to call begin() afterwards
-  HardwareSetupRemoteClass() = default;
+  HardwareSetupRemote() = default;
 
   /// HardwareSetup uses the indicated stream
-  HardwareSetupRemoteClass(Stream& stream) { begin(&stream, false); }
+  HardwareSetupRemote(Stream& stream) { begin(&stream, false); }
 
   /// HardwareSetup that uses udp
-  HardwareSetupRemoteClass(int port) { this->port = port; }
+  HardwareSetupRemote(int port) { this->port = port; }
 
   /// assigns the different protocols to the stream
   bool begin(Stream* s, bool asDefault = true, bool doHandShake = true) {
@@ -123,7 +142,7 @@ class HardwareSetupRemoteClass : public I2CSource,
 };
 
 #if !defined(SKIP_HARDWARE_SETUP)
-static HardwareSetupRemoteClass Remote{7000};
+static HardwareSetupRemote Remote{7000};
 #endif
 
 }  // namespace arduino

@@ -5,7 +5,7 @@
 namespace arduino {
 
 /**
- * We virtualize the hardware and send the requests and replys over
+ * @brief We virtualize the hardware and send the requests and replys over
  * a stream.
  *
  **/
@@ -68,9 +68,28 @@ enum HWCalls {
 };
 
 /**
- * Stream over which we tunnel the SPI, I2C, I2S and GPIO messages. Since most
- * embedded divices are little endian we communicate in little endian!
- **/
+ * @class HardwareService
+ * @brief Provides a virtualized hardware communication service for SPI, I2C, I2S, and GPIO over a stream.
+ *
+ * This class encapsulates the logic to tunnel hardware protocol messages (SPI, I2C, I2S, GPIO, Serial, etc.)
+ * over a generic stream interface. It handles serialization and deserialization of protocol calls and data,
+ * ensuring correct endianness (little endian by default for embedded devices). The class provides methods
+ * to send and receive various data types, manage the underlying stream, and perform byte-swapping as needed.
+ *
+ * Key features:
+ * - Tunnels hardware protocol messages over a stream (e.g., network, serial).
+ * - Supports sending and receiving multiple data types with correct endianness.
+ * - Provides blocking read with timeout for reliable communication.
+ * - Handles byte order conversion for cross-platform compatibility.
+ * - Can be used as a base for remote hardware emulation or proxying.
+ *
+ * Usage:
+ *   - Set the stream using setStream().
+ *   - Use send() methods to transmit protocol calls and data.
+ *   - Use receive methods to read responses from the remote hardware.
+ *   - Use flush() to ensure all data is sent.
+ *
+ */
 
 class HardwareService {
  public:
