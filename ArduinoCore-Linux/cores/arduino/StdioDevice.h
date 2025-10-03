@@ -8,9 +8,20 @@
 namespace arduino {
 
 /**
- * @brief We use the SerialDef class to be able to provide Serail, Serial1 and
- * Serial2 outside of the Arduino environment;
+ * @class StdioDevice
+ * @brief Provides a Stream interface for standard input/output operations outside the Arduino environment.
  *
+ * This class implements the Arduino Stream interface using standard C++ streams (std::cout and std::cin),
+ * allowing code that expects Arduino Serial-like objects to work in non-Arduino environments. It supports
+ * printing, reading, and flushing, and can be used to provide Serial, Serial1, and Serial2 objects for
+ * desktop or emulated environments. The class supports auto-flushing after each print/write operation.
+ *
+ * Key features:
+ * - Implements print, println, and write methods for various data types.
+ * - Supports auto-flush to ensure output is immediately visible.
+ * - Provides input methods compatible with Arduino's Stream interface.
+ * - Can be used as a drop-in replacement for Serial in non-Arduino builds.
+ * - Designed for use in emulators or desktop testing of Arduino code.
  */
 class StdioDevice : public Stream {
  public:

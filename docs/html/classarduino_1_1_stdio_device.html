@@ -81,7 +81,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>We use the SerialDef class to be able to provide Serail, Serial1 and Serial2 outside of the Arduino environment;.  
+<p>Provides a <a class="el" href="classarduino_1_1_stream.html">Stream</a> interface for standard input/output operations outside the Arduino environment.  
  <a href="classarduino_1_1_stdio_device.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_stdio_device_8h_source.html">StdioDevice.h</a>&gt;</code></p>
@@ -348,7 +348,15 @@ Additional Inherited Members</h2></td></tr>
 <tr class="separator:ad4c57909d9181be38d19c61d6ff827ff inherit pro_methods_classarduino_1_1_print"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>We use the SerialDef class to be able to provide Serail, Serial1 and Serial2 outside of the Arduino environment;. </p>
+<div class="textblock"><p>Provides a <a class="el" href="classarduino_1_1_stream.html">Stream</a> interface for standard input/output operations outside the Arduino environment. </p>
+<p>This class implements the Arduino <a class="el" href="classarduino_1_1_stream.html">Stream</a> interface using standard C++ streams (std::cout and std::cin), allowing code that expects Arduino Serial-like objects to work in non-Arduino environments. It supports printing, reading, and flushing, and can be used to provide Serial, Serial1, and Serial2 objects for desktop or emulated environments. The class supports auto-flushing after each print/write operation.</p>
+<p>Key features:</p><ul>
+<li>Implements print, println, and write methods for various data types.</li>
+<li>Supports auto-flush to ensure output is immediately visible.</li>
+<li>Provides input methods compatible with Arduino's <a class="el" href="classarduino_1_1_stream.html">Stream</a> interface.</li>
+<li>Can be used as a drop-in replacement for Serial in non-Arduino builds.</li>
+<li>Designed for use in emulators or desktop testing of Arduino code. </li>
+</ul>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="aeb3810964d05ffaf89f280908172e455" name="aeb3810964d05ffaf89f280908172e455"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aeb3810964d05ffaf89f280908172e455">&#9670;&#160;</a></span>available()</h2>
