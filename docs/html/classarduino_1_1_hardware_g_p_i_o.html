@@ -73,6 +73,9 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
+<p>Abstract base class for GPIO (General Purpose Input/Output) functions.  
+ <a href="classarduino_1_1_hardware_g_p_i_o.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="_hardware_g_p_i_o_8h_source.html">HardwareGPIO.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for arduino::HardwareGPIO:</div>
@@ -88,40 +91,506 @@ Inheritance diagram for arduino::HardwareGPIO:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ac93235fd6bdd93a8c91b1f802b191fec"><td class="memItemLeft" align="right" valign="top"><a id="ac93235fd6bdd93a8c91b1f802b191fec"></a>
-virtual int&#160;</td><td class="memItemRight" valign="bottom"><b>analogRead</b> (pin_size_t pinNumber)=0</td></tr>
+<tr class="memitem:ac93235fd6bdd93a8c91b1f802b191fec"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classarduino_1_1_hardware_g_p_i_o.html#ac93235fd6bdd93a8c91b1f802b191fec">analogRead</a> (pin_size_t pinNumber)=0</td></tr>
+<tr class="memdesc:ac93235fd6bdd93a8c91b1f802b191fec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read the value from the specified analog pin.  <a href="classarduino_1_1_hardware_g_p_i_o.html#ac93235fd6bdd93a8c91b1f802b191fec">More...</a><br /></td></tr>
 <tr class="separator:ac93235fd6bdd93a8c91b1f802b191fec"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0d3948955f19991e75845dfae0ad63e3"><td class="memItemLeft" align="right" valign="top"><a id="a0d3948955f19991e75845dfae0ad63e3"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>analogReference</b> (uint8_t mode)=0</td></tr>
+<tr class="memitem:a0d3948955f19991e75845dfae0ad63e3"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classarduino_1_1_hardware_g_p_i_o.html#a0d3948955f19991e75845dfae0ad63e3">analogReference</a> (uint8_t mode)=0</td></tr>
+<tr class="memdesc:a0d3948955f19991e75845dfae0ad63e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configure the reference voltage used for analog input.  <a href="classarduino_1_1_hardware_g_p_i_o.html#a0d3948955f19991e75845dfae0ad63e3">More...</a><br /></td></tr>
 <tr class="separator:a0d3948955f19991e75845dfae0ad63e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7ab72b9424d3114395bfce59713c1302"><td class="memItemLeft" align="right" valign="top"><a id="a7ab72b9424d3114395bfce59713c1302"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>analogWrite</b> (pin_size_t pinNumber, int value)=0</td></tr>
+<tr class="memitem:a7ab72b9424d3114395bfce59713c1302"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classarduino_1_1_hardware_g_p_i_o.html#a7ab72b9424d3114395bfce59713c1302">analogWrite</a> (pin_size_t pinNumber, int value)=0</td></tr>
+<tr class="memdesc:a7ab72b9424d3114395bfce59713c1302"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write an analog value (PWM wave) to a pin.  <a href="classarduino_1_1_hardware_g_p_i_o.html#a7ab72b9424d3114395bfce59713c1302">More...</a><br /></td></tr>
 <tr class="separator:a7ab72b9424d3114395bfce59713c1302"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a408e951f42d9f765cd89c39fe84c8886"><td class="memItemLeft" align="right" valign="top"><a id="a408e951f42d9f765cd89c39fe84c8886"></a>
-virtual PinStatus&#160;</td><td class="memItemRight" valign="bottom"><b>digitalRead</b> (pin_size_t pinNumber)=0</td></tr>
+<tr class="memitem:a408e951f42d9f765cd89c39fe84c8886"><td class="memItemLeft" align="right" valign="top">virtual PinStatus&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classarduino_1_1_hardware_g_p_i_o.html#a408e951f42d9f765cd89c39fe84c8886">digitalRead</a> (pin_size_t pinNumber)=0</td></tr>
+<tr class="memdesc:a408e951f42d9f765cd89c39fe84c8886"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read the value from a specified digital pin.  <a href="classarduino_1_1_hardware_g_p_i_o.html#a408e951f42d9f765cd89c39fe84c8886">More...</a><br /></td></tr>
 <tr class="separator:a408e951f42d9f765cd89c39fe84c8886"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af3608f342505f3885292b318a79bb587"><td class="memItemLeft" align="right" valign="top"><a id="af3608f342505f3885292b318a79bb587"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>digitalWrite</b> (pin_size_t pinNumber, PinStatus status)=0</td></tr>
+<tr class="memitem:af3608f342505f3885292b318a79bb587"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classarduino_1_1_hardware_g_p_i_o.html#af3608f342505f3885292b318a79bb587">digitalWrite</a> (pin_size_t pinNumber, PinStatus status)=0</td></tr>
+<tr class="memdesc:af3608f342505f3885292b318a79bb587"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write a HIGH or LOW value to a digital pin.  <a href="classarduino_1_1_hardware_g_p_i_o.html#af3608f342505f3885292b318a79bb587">More...</a><br /></td></tr>
 <tr class="separator:af3608f342505f3885292b318a79bb587"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a67e41cd03e01988d9d3cdb31833ee57b"><td class="memItemLeft" align="right" valign="top"><a id="a67e41cd03e01988d9d3cdb31833ee57b"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>noTone</b> (uint8_t _pin)=0</td></tr>
+<tr class="memitem:a67e41cd03e01988d9d3cdb31833ee57b"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classarduino_1_1_hardware_g_p_i_o.html#a67e41cd03e01988d9d3cdb31833ee57b">noTone</a> (uint8_t _pin)=0</td></tr>
+<tr class="memdesc:a67e41cd03e01988d9d3cdb31833ee57b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stop the generation of a square wave triggered by <a class="el" href="classarduino_1_1_hardware_g_p_i_o.html#a9af7c209aa41bc66819441981994cbda" title="Generate a square wave of the specified frequency on a pin.">tone()</a>  <a href="classarduino_1_1_hardware_g_p_i_o.html#a67e41cd03e01988d9d3cdb31833ee57b">More...</a><br /></td></tr>
 <tr class="separator:a67e41cd03e01988d9d3cdb31833ee57b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9544ab8bc08731c991cd8f328de7fa4c"><td class="memItemLeft" align="right" valign="top"><a id="a9544ab8bc08731c991cd8f328de7fa4c"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>pinMode</b> (pin_size_t pinNumber, PinMode pinMode)=0</td></tr>
+<tr class="memitem:a9544ab8bc08731c991cd8f328de7fa4c"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classarduino_1_1_hardware_g_p_i_o.html#a9544ab8bc08731c991cd8f328de7fa4c">pinMode</a> (pin_size_t pinNumber, PinMode pinMode)=0</td></tr>
+<tr class="memdesc:a9544ab8bc08731c991cd8f328de7fa4c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configure the specified pin to behave as an input or output.  <a href="classarduino_1_1_hardware_g_p_i_o.html#a9544ab8bc08731c991cd8f328de7fa4c">More...</a><br /></td></tr>
 <tr class="separator:a9544ab8bc08731c991cd8f328de7fa4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a86a07fbfa28a31d8eb75deed3417091e"><td class="memItemLeft" align="right" valign="top"><a id="a86a07fbfa28a31d8eb75deed3417091e"></a>
-virtual unsigned long&#160;</td><td class="memItemRight" valign="bottom"><b>pulseIn</b> (uint8_t pin, uint8_t state, unsigned long timeout=1000000L)=0</td></tr>
+<tr class="memitem:a86a07fbfa28a31d8eb75deed3417091e"><td class="memItemLeft" align="right" valign="top">virtual unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classarduino_1_1_hardware_g_p_i_o.html#a86a07fbfa28a31d8eb75deed3417091e">pulseIn</a> (uint8_t pin, uint8_t state, unsigned long timeout=1000000L)=0</td></tr>
+<tr class="memdesc:a86a07fbfa28a31d8eb75deed3417091e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read a pulse (HIGH or LOW) on a pin.  <a href="classarduino_1_1_hardware_g_p_i_o.html#a86a07fbfa28a31d8eb75deed3417091e">More...</a><br /></td></tr>
 <tr class="separator:a86a07fbfa28a31d8eb75deed3417091e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae2b49910e4af368da04d2dc2beb07aeb"><td class="memItemLeft" align="right" valign="top"><a id="ae2b49910e4af368da04d2dc2beb07aeb"></a>
-virtual unsigned long&#160;</td><td class="memItemRight" valign="bottom"><b>pulseInLong</b> (uint8_t pin, uint8_t state, unsigned long timeout=1000000L)=0</td></tr>
+<tr class="memitem:ae2b49910e4af368da04d2dc2beb07aeb"><td class="memItemLeft" align="right" valign="top">virtual unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classarduino_1_1_hardware_g_p_i_o.html#ae2b49910e4af368da04d2dc2beb07aeb">pulseInLong</a> (uint8_t pin, uint8_t state, unsigned long timeout=1000000L)=0</td></tr>
+<tr class="memdesc:ae2b49910e4af368da04d2dc2beb07aeb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Alternative to <a class="el" href="classarduino_1_1_hardware_g_p_i_o.html#a86a07fbfa28a31d8eb75deed3417091e" title="Read a pulse (HIGH or LOW) on a pin.">pulseIn()</a> which is better at handling long pulses.  <a href="classarduino_1_1_hardware_g_p_i_o.html#ae2b49910e4af368da04d2dc2beb07aeb">More...</a><br /></td></tr>
 <tr class="separator:ae2b49910e4af368da04d2dc2beb07aeb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9af7c209aa41bc66819441981994cbda"><td class="memItemLeft" align="right" valign="top"><a id="a9af7c209aa41bc66819441981994cbda"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>tone</b> (uint8_t _pin, unsigned int frequency, unsigned long duration=0)=0</td></tr>
+<tr class="memitem:a9af7c209aa41bc66819441981994cbda"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classarduino_1_1_hardware_g_p_i_o.html#a9af7c209aa41bc66819441981994cbda">tone</a> (uint8_t _pin, unsigned int frequency, unsigned long duration=0)=0</td></tr>
+<tr class="memdesc:a9af7c209aa41bc66819441981994cbda"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate a square wave of the specified frequency on a pin.  <a href="classarduino_1_1_hardware_g_p_i_o.html#a9af7c209aa41bc66819441981994cbda">More...</a><br /></td></tr>
 <tr class="separator:a9af7c209aa41bc66819441981994cbda"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Abstract base class for GPIO functions </p>
-</div><hr/>The documentation for this class was generated from the following file:<ul>
+<div class="textblock"><p>Abstract base class for GPIO (General Purpose Input/Output) functions. </p>
+<p><a class="el" href="classarduino_1_1_hardware_g_p_i_o.html" title="Abstract base class for GPIO (General Purpose Input/Output) functions.">HardwareGPIO</a> defines the interface for hardware abstraction of GPIO operations across different platforms and microcontrollers. This class provides a unified API for digital and analog I/O operations that can be implemented by platform-specific classes.</p>
+<p>The class supports:</p><ul>
+<li>Digital pin operations (pinMode, digitalWrite, digitalRead)</li>
+<li>Analog operations (analogRead, analogWrite, analogReference)</li>
+<li>PWM and tone generation (analogWrite, tone, noTone)</li>
+<li>Pulse measurement (pulseIn, pulseInLong)</li>
+</ul>
+<p>Platform-specific implementations should inherit from this class and provide concrete implementations for all pure virtual methods. Examples include <a class="el" href="classarduino_1_1_hardware_g_p_i_o___r_p_i.html" title="GPIO hardware abstraction for Raspberry Pi in the Arduino emulator.">HardwareGPIO_RPI</a> for Raspberry Pi, or similar classes for other platforms.</p>
+<dl class="section note"><dt>Note</dt><dd>All methods in this class are pure virtual and must be implemented by derived classes to provide platform-specific functionality.</dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classarduino_1_1_hardware_g_p_i_o___r_p_i.html" title="GPIO hardware abstraction for Raspberry Pi in the Arduino emulator.">HardwareGPIO_RPI</a> </dd>
+<dd>
+PinMode </dd>
+<dd>
+PinStatus </dd></dl>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="ac93235fd6bdd93a8c91b1f802b191fec"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac93235fd6bdd93a8c91b1f802b191fec">&#9670;&nbsp;</a></span>analogRead()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual int arduino::HardwareGPIO::analogRead </td>
+          <td>(</td>
+          <td class="paramtype">pin_size_t&#160;</td>
+          <td class="paramname"><em>pinNumber</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Read the value from the specified analog pin. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pinNumber</td><td>The analog pin to read from (A0, A1, etc.) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The analog reading on the pin (0-1023 for 10-bit ADC) </dd></dl>
+
+<p>Implemented in <a class="el" href="classarduino_1_1_hardware_g_p_i_o___r_p_i.html#aaf71da48d37d74033983c013f051d40e">arduino::HardwareGPIO_RPI</a>, <a class="el" href="classarduino_1_1_remote_g_p_i_o.html#ae8e6dbd8a3b1059b4dd13e0949b623bf">arduino::RemoteGPIO</a>, and <a class="el" href="classarduino_1_1_g_p_i_o_wrapper.html#a07ca4e15b7f8427964d9c4f91b7ca091">arduino::GPIOWrapper</a>.</p>
+
+</div>
+</div>
+<a id="a0d3948955f19991e75845dfae0ad63e3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0d3948955f19991e75845dfae0ad63e3">&#9670;&nbsp;</a></span>analogReference()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void arduino::HardwareGPIO::analogReference </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>mode</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Configure the reference voltage used for analog input. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">mode</td><td>The reference type (DEFAULT, INTERNAL, EXTERNAL, etc.) </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implemented in <a class="el" href="classarduino_1_1_hardware_g_p_i_o___r_p_i.html#af398d975b8103b60ad2263e4f341a0e4">arduino::HardwareGPIO_RPI</a>, <a class="el" href="classarduino_1_1_remote_g_p_i_o.html#a3c09a33755589d3731ebe950b38d04e4">arduino::RemoteGPIO</a>, and <a class="el" href="classarduino_1_1_g_p_i_o_wrapper.html#af2fa37727fa092d979506698f8d53ac2">arduino::GPIOWrapper</a>.</p>
+
+</div>
+</div>
+<a id="a7ab72b9424d3114395bfce59713c1302"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7ab72b9424d3114395bfce59713c1302">&#9670;&nbsp;</a></span>analogWrite()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void arduino::HardwareGPIO::analogWrite </td>
+          <td>(</td>
+          <td class="paramtype">pin_size_t&#160;</td>
+          <td class="paramname"><em>pinNumber</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>value</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Write an analog value (PWM wave) to a pin. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pinNumber</td><td>The pin to write to </td></tr>
+    <tr><td class="paramname">value</td><td>The duty cycle (0-255 for 8-bit PWM) </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implemented in <a class="el" href="classarduino_1_1_hardware_g_p_i_o___r_p_i.html#a2a9a12ecf779e1cfbb961a05cc79e71d">arduino::HardwareGPIO_RPI</a>, <a class="el" href="classarduino_1_1_remote_g_p_i_o.html#a0ea1bc0fa85e00f118b877f49c608bcc">arduino::RemoteGPIO</a>, and <a class="el" href="classarduino_1_1_g_p_i_o_wrapper.html#aae31378a69ce59e97dee2d87f81f6cfe">arduino::GPIOWrapper</a>.</p>
+
+</div>
+</div>
+<a id="a408e951f42d9f765cd89c39fe84c8886"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a408e951f42d9f765cd89c39fe84c8886">&#9670;&nbsp;</a></span>digitalRead()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual PinStatus arduino::HardwareGPIO::digitalRead </td>
+          <td>(</td>
+          <td class="paramtype">pin_size_t&#160;</td>
+          <td class="paramname"><em>pinNumber</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Read the value from a specified digital pin. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pinNumber</td><td>The pin number to read from </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>HIGH or LOW </dd></dl>
+
+<p>Implemented in <a class="el" href="classarduino_1_1_hardware_g_p_i_o___r_p_i.html#abaf2b8e0d8f46d059b850d4df5b0a863">arduino::HardwareGPIO_RPI</a>, <a class="el" href="classarduino_1_1_remote_g_p_i_o.html#ad69e6552972f07584fa2c4c1d232badc">arduino::RemoteGPIO</a>, and <a class="el" href="classarduino_1_1_g_p_i_o_wrapper.html#a38c123198ff08bafe60d37050baa574e">arduino::GPIOWrapper</a>.</p>
+
+</div>
+</div>
+<a id="af3608f342505f3885292b318a79bb587"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af3608f342505f3885292b318a79bb587">&#9670;&nbsp;</a></span>digitalWrite()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void arduino::HardwareGPIO::digitalWrite </td>
+          <td>(</td>
+          <td class="paramtype">pin_size_t&#160;</td>
+          <td class="paramname"><em>pinNumber</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">PinStatus&#160;</td>
+          <td class="paramname"><em>status</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Write a HIGH or LOW value to a digital pin. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pinNumber</td><td>The pin number to write to </td></tr>
+    <tr><td class="paramname">status</td><td>The value to write (HIGH or LOW) </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implemented in <a class="el" href="classarduino_1_1_hardware_g_p_i_o___r_p_i.html#afb392ff358590dea32dd1d3e2198efd1">arduino::HardwareGPIO_RPI</a>, <a class="el" href="classarduino_1_1_remote_g_p_i_o.html#a6a05b7f35716a1981e732121d1e1d26e">arduino::RemoteGPIO</a>, and <a class="el" href="classarduino_1_1_g_p_i_o_wrapper.html#a01ef49d52dfec84e3fa6375dd79da90d">arduino::GPIOWrapper</a>.</p>
+
+</div>
+</div>
+<a id="a67e41cd03e01988d9d3cdb31833ee57b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a67e41cd03e01988d9d3cdb31833ee57b">&#9670;&nbsp;</a></span>noTone()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void arduino::HardwareGPIO::noTone </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>_pin</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Stop the generation of a square wave triggered by <a class="el" href="classarduino_1_1_hardware_g_p_i_o.html#a9af7c209aa41bc66819441981994cbda" title="Generate a square wave of the specified frequency on a pin.">tone()</a> </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">_pin</td><td>The pin on which to stop generating the tone </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implemented in <a class="el" href="classarduino_1_1_remote_g_p_i_o.html#ab9703ae97eba599f2bcf1840b6a90aef">arduino::RemoteGPIO</a>, <a class="el" href="classarduino_1_1_hardware_g_p_i_o___r_p_i.html#aec6afeddbee12ace5be0a01bdb17a20c">arduino::HardwareGPIO_RPI</a>, and <a class="el" href="classarduino_1_1_g_p_i_o_wrapper.html#a0aeb817fd33c6787d2c50f397d71ec51">arduino::GPIOWrapper</a>.</p>
+
+</div>
+</div>
+<a id="a9544ab8bc08731c991cd8f328de7fa4c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9544ab8bc08731c991cd8f328de7fa4c">&#9670;&nbsp;</a></span>pinMode()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void arduino::HardwareGPIO::pinMode </td>
+          <td>(</td>
+          <td class="paramtype">pin_size_t&#160;</td>
+          <td class="paramname"><em>pinNumber</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">PinMode&#160;</td>
+          <td class="paramname"><em>pinMode</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Configure the specified pin to behave as an input or output. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pinNumber</td><td>The pin number to configure </td></tr>
+    <tr><td class="paramname">pinMode</td><td>The mode to set (INPUT, OUTPUT, INPUT_PULLUP, etc.) </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implemented in <a class="el" href="classarduino_1_1_hardware_g_p_i_o___r_p_i.html#a569c784be4729462f1e45e3392064dd4">arduino::HardwareGPIO_RPI</a>, <a class="el" href="classarduino_1_1_remote_g_p_i_o.html#a835da887c37082e02f176541d3e2946c">arduino::RemoteGPIO</a>, and <a class="el" href="classarduino_1_1_g_p_i_o_wrapper.html#a468eaf21e5509581d2d7f8a8d41db4f5">arduino::GPIOWrapper</a>.</p>
+
+</div>
+</div>
+<a id="a86a07fbfa28a31d8eb75deed3417091e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a86a07fbfa28a31d8eb75deed3417091e">&#9670;&nbsp;</a></span>pulseIn()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual unsigned long arduino::HardwareGPIO::pulseIn </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>pin</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>state</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned long&#160;</td>
+          <td class="paramname"><em>timeout</em> = <code>1000000L</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Read a pulse (HIGH or LOW) on a pin. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pin</td><td>The pin on which you want to read the pulse </td></tr>
+    <tr><td class="paramname">state</td><td>Type of pulse to read (HIGH or LOW) </td></tr>
+    <tr><td class="paramname">timeout</td><td>Timeout in microseconds (default 1 second) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The length of the pulse in microseconds, or 0 if timeout </dd></dl>
+
+<p>Implemented in <a class="el" href="classarduino_1_1_remote_g_p_i_o.html#af2741b3362a60105c9431978649f128c">arduino::RemoteGPIO</a>, <a class="el" href="classarduino_1_1_hardware_g_p_i_o___r_p_i.html#a58e030c09f7776e9f4cd57ae4e7f8d9f">arduino::HardwareGPIO_RPI</a>, and <a class="el" href="classarduino_1_1_g_p_i_o_wrapper.html#a26250c7e720502faa63b1ed63dfba45d">arduino::GPIOWrapper</a>.</p>
+
+</div>
+</div>
+<a id="ae2b49910e4af368da04d2dc2beb07aeb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae2b49910e4af368da04d2dc2beb07aeb">&#9670;&nbsp;</a></span>pulseInLong()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual unsigned long arduino::HardwareGPIO::pulseInLong </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>pin</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>state</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned long&#160;</td>
+          <td class="paramname"><em>timeout</em> = <code>1000000L</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Alternative to <a class="el" href="classarduino_1_1_hardware_g_p_i_o.html#a86a07fbfa28a31d8eb75deed3417091e" title="Read a pulse (HIGH or LOW) on a pin.">pulseIn()</a> which is better at handling long pulses. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pin</td><td>The pin on which you want to read the pulse </td></tr>
+    <tr><td class="paramname">state</td><td>Type of pulse to read (HIGH or LOW) </td></tr>
+    <tr><td class="paramname">timeout</td><td>Timeout in microseconds (default 1 second) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The length of the pulse in microseconds, or 0 if timeout </dd></dl>
+
+<p>Implemented in <a class="el" href="classarduino_1_1_remote_g_p_i_o.html#ad9ce6f3838574413079c981d9146d4dc">arduino::RemoteGPIO</a>, <a class="el" href="classarduino_1_1_hardware_g_p_i_o___r_p_i.html#a0aa4b902617e7736626efac673797c85">arduino::HardwareGPIO_RPI</a>, and <a class="el" href="classarduino_1_1_g_p_i_o_wrapper.html#a7bb614e9d5ff68db1564362a5f8b7f4d">arduino::GPIOWrapper</a>.</p>
+
+</div>
+</div>
+<a id="a9af7c209aa41bc66819441981994cbda"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9af7c209aa41bc66819441981994cbda">&#9670;&nbsp;</a></span>tone()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void arduino::HardwareGPIO::tone </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>_pin</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>frequency</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned long&#160;</td>
+          <td class="paramname"><em>duration</em> = <code>0</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Generate a square wave of the specified frequency on a pin. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">_pin</td><td>The pin on which to generate the tone </td></tr>
+    <tr><td class="paramname">frequency</td><td>The frequency of the tone in hertz </td></tr>
+    <tr><td class="paramname">duration</td><td>The duration of the tone in milliseconds (0 = continuous) </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implemented in <a class="el" href="classarduino_1_1_remote_g_p_i_o.html#a7feee2166c833a0c349fdf0e57737f65">arduino::RemoteGPIO</a>, <a class="el" href="classarduino_1_1_hardware_g_p_i_o___r_p_i.html#a2f12263cb33cfe15f116fc5137785067">arduino::HardwareGPIO_RPI</a>, and <a class="el" href="classarduino_1_1_g_p_i_o_wrapper.html#a4eefb039ba6a8b29f2cce5d2ebf86697">arduino::GPIOWrapper</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
 <li>ArduinoCore-Linux/cores/arduino/<a class="el" href="_hardware_g_p_i_o_8h_source.html">HardwareGPIO.h</a></li>
 </ul>
 </div><!-- contents -->

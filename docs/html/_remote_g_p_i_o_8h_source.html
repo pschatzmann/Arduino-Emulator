@@ -82,48 +82,48 @@ $(function() {
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;  <a class="code" href="classarduino_1_1_remote_g_p_i_o.html">RemoteGPIO</a>(<a class="code" href="classarduino_1_1_stream.html">Stream</a>* stream) { service.setStream(stream); }</div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;  <span class="keywordtype">void</span> setStream(<a class="code" href="classarduino_1_1_stream.html">Stream</a>* stream) { service.setStream(stream); }</div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;  <span class="keywordtype">void</span> pinMode(pin_size_t pinNumber, PinMode pinMode) {</div>
+<div class="line"><a name="l00038"></a><span class="lineno"><a class="line" href="classarduino_1_1_remote_g_p_i_o.html#a835da887c37082e02f176541d3e2946c">   38</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classarduino_1_1_remote_g_p_i_o.html#a835da887c37082e02f176541d3e2946c">pinMode</a>(pin_size_t pinNumber, PinMode <a class="code" href="classarduino_1_1_remote_g_p_i_o.html#a835da887c37082e02f176541d3e2946c">pinMode</a>) {</div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    service.send((uint16_t)GpioPinMode);</div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    service.send((int8_t)pinNumber);</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    service.send((int8_t)pinMode);</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    service.send((int8_t)<a class="code" href="classarduino_1_1_remote_g_p_i_o.html#a835da887c37082e02f176541d3e2946c">pinMode</a>);</div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    service.flush();</div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;  }</div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;  <span class="keywordtype">void</span> digitalWrite(pin_size_t pinNumber, PinStatus status) {</div>
+<div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="classarduino_1_1_remote_g_p_i_o.html#a6a05b7f35716a1981e732121d1e1d26e">   45</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classarduino_1_1_remote_g_p_i_o.html#a6a05b7f35716a1981e732121d1e1d26e">digitalWrite</a>(pin_size_t pinNumber, PinStatus status) {</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    service.send((uint16_t)GpioDigitalWrite);</div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    service.send((uint8_t)pinNumber);</div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    service.send((uint8_t)status);</div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    service.flush();</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;  }</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;  PinStatus digitalRead(pin_size_t pinNumber) {</div>
+<div class="line"><a name="l00052"></a><span class="lineno"><a class="line" href="classarduino_1_1_remote_g_p_i_o.html#ad69e6552972f07584fa2c4c1d232badc">   52</a></span>&#160;  PinStatus <a class="code" href="classarduino_1_1_remote_g_p_i_o.html#ad69e6552972f07584fa2c4c1d232badc">digitalRead</a>(pin_size_t pinNumber) {</div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    service.send((uint16_t)GpioDigitalRead);</div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    service.send((uint8_t)pinNumber);</div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    service.flush();</div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="keywordflow">return</span> (PinStatus)service.receive8();</div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;  }</div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;  <span class="keywordtype">int</span> analogRead(pin_size_t pinNumber) {</div>
+<div class="line"><a name="l00059"></a><span class="lineno"><a class="line" href="classarduino_1_1_remote_g_p_i_o.html#ae8e6dbd8a3b1059b4dd13e0949b623bf">   59</a></span>&#160;  <span class="keywordtype">int</span> <a class="code" href="classarduino_1_1_remote_g_p_i_o.html#ae8e6dbd8a3b1059b4dd13e0949b623bf">analogRead</a>(pin_size_t pinNumber) {</div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    service.send((uint16_t)GpioAnalogRead);</div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    service.send((uint8_t)pinNumber);</div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    service.flush();</div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keywordflow">return</span> service.receive16();</div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;  }</div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;  <span class="keywordtype">void</span> analogReference(uint8_t mode) {</div>
+<div class="line"><a name="l00066"></a><span class="lineno"><a class="line" href="classarduino_1_1_remote_g_p_i_o.html#a3c09a33755589d3731ebe950b38d04e4">   66</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classarduino_1_1_remote_g_p_i_o.html#a3c09a33755589d3731ebe950b38d04e4">analogReference</a>(uint8_t mode) {</div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    service.send((uint16_t)GpioAnalogReference);</div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    service.send(mode);</div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    service.flush();</div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;  }</div>
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;  <span class="keywordtype">void</span> analogWrite(pin_size_t pinNumber, <span class="keywordtype">int</span> value) {</div>
+<div class="line"><a name="l00072"></a><span class="lineno"><a class="line" href="classarduino_1_1_remote_g_p_i_o.html#a0ea1bc0fa85e00f118b877f49c608bcc">   72</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classarduino_1_1_remote_g_p_i_o.html#a0ea1bc0fa85e00f118b877f49c608bcc">analogWrite</a>(pin_size_t pinNumber, <span class="keywordtype">int</span> value) {</div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    service.send((uint16_t)GpioAnalogWrite);</div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    service.send((uint8_t)pinNumber);</div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    service.send(value);</div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    service.flush();</div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;  }</div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; </div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">void</span> tone(uint8_t pinNumber, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> frequency,</div>
+<div class="line"><a name="l00079"></a><span class="lineno"><a class="line" href="classarduino_1_1_remote_g_p_i_o.html#a7feee2166c833a0c349fdf0e57737f65">   79</a></span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classarduino_1_1_remote_g_p_i_o.html#a7feee2166c833a0c349fdf0e57737f65">tone</a>(uint8_t pinNumber, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> frequency,</div>
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;                    <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> duration = 0) {</div>
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    service.send((uint16_t)GpioTone);</div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    service.send((uint8_t)pinNumber);</div>
@@ -132,13 +132,13 @@ $(function() {
 <div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    service.flush();</div>
 <div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;  }</div>
 <div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160; </div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">void</span> noTone(uint8_t pinNumber) {</div>
+<div class="line"><a name="l00088"></a><span class="lineno"><a class="line" href="classarduino_1_1_remote_g_p_i_o.html#ab9703ae97eba599f2bcf1840b6a90aef">   88</a></span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classarduino_1_1_remote_g_p_i_o.html#ab9703ae97eba599f2bcf1840b6a90aef">noTone</a>(uint8_t pinNumber) {</div>
 <div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    service.send((uint16_t)GpioNoTone);</div>
 <div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    service.send((uint8_t)pinNumber);</div>
 <div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    service.flush();</div>
 <div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;  }</div>
 <div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160; </div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> pulseIn(uint8_t pinNumber, uint8_t state,</div>
+<div class="line"><a name="l00094"></a><span class="lineno"><a class="line" href="classarduino_1_1_remote_g_p_i_o.html#af2741b3362a60105c9431978649f128c">   94</a></span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <a class="code" href="classarduino_1_1_remote_g_p_i_o.html#af2741b3362a60105c9431978649f128c">pulseIn</a>(uint8_t pinNumber, uint8_t state,</div>
 <div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;                                <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> timeout = 1000000L) {</div>
 <div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    service.send((uint16_t)GpioPulseIn);</div>
 <div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    service.send((uint8_t)pinNumber);</div>
@@ -148,7 +148,7 @@ $(function() {
 <div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    <span class="keywordflow">return</span> service.receive64();</div>
 <div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;  }</div>
 <div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160; </div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> pulseInLong(uint8_t pinNumber, uint8_t state,</div>
+<div class="line"><a name="l00104"></a><span class="lineno"><a class="line" href="classarduino_1_1_remote_g_p_i_o.html#ad9ce6f3838574413079c981d9146d4dc">  104</a></span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <a class="code" href="classarduino_1_1_remote_g_p_i_o.html#ad9ce6f3838574413079c981d9146d4dc">pulseInLong</a>(uint8_t pinNumber, uint8_t state,</div>
 <div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;                                    <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> timeout = 1000000L) {</div>
 <div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    service.send((uint16_t)GpioPulseInLong);</div>
 <div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    service.send((uint8_t)pinNumber);</div>
@@ -161,13 +161,22 @@ $(function() {
 <div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;  <span class="keyword">operator</span> boolean() { <span class="keywordflow">return</span> service; }</div>
 <div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160; </div>
 <div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160; <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;  <a class="code" href="classarduino_1_1_hardware_service.html">HardwareService</a> service;</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;  HardwareService service;</div>
 <div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;};</div>
 <div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160; </div>
 <div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;}  <span class="comment">// namespace arduino</span></div>
-<div class="ttc" id="aclassarduino_1_1_hardware_g_p_i_o_html"><div class="ttname"><a href="classarduino_1_1_hardware_g_p_i_o.html">arduino::HardwareGPIO</a></div><div class="ttdef"><b>Definition:</b> HardwareGPIO.h:10</div></div>
-<div class="ttc" id="aclassarduino_1_1_hardware_service_html"><div class="ttname"><a href="classarduino_1_1_hardware_service.html">arduino::HardwareService</a></div><div class="ttdef"><b>Definition:</b> HardwareService.h:75</div></div>
+<div class="ttc" id="aclassarduino_1_1_hardware_g_p_i_o_html"><div class="ttname"><a href="classarduino_1_1_hardware_g_p_i_o.html">arduino::HardwareGPIO</a></div><div class="ttdoc">Abstract base class for GPIO (General Purpose Input/Output) functions.</div><div class="ttdef"><b>Definition:</b> HardwareGPIO.h:33</div></div>
 <div class="ttc" id="aclassarduino_1_1_remote_g_p_i_o_html"><div class="ttname"><a href="classarduino_1_1_remote_g_p_i_o.html">arduino::RemoteGPIO</a></div><div class="ttdoc">Remote GPIO implementation that operates over a communication stream.</div><div class="ttdef"><b>Definition:</b> RemoteGPIO.h:32</div></div>
+<div class="ttc" id="aclassarduino_1_1_remote_g_p_i_o_html_a0ea1bc0fa85e00f118b877f49c608bcc"><div class="ttname"><a href="classarduino_1_1_remote_g_p_i_o.html#a0ea1bc0fa85e00f118b877f49c608bcc">arduino::RemoteGPIO::analogWrite</a></div><div class="ttdeci">void analogWrite(pin_size_t pinNumber, int value)</div><div class="ttdoc">Write an analog value (PWM wave) to a pin.</div><div class="ttdef"><b>Definition:</b> RemoteGPIO.h:72</div></div>
+<div class="ttc" id="aclassarduino_1_1_remote_g_p_i_o_html_a3c09a33755589d3731ebe950b38d04e4"><div class="ttname"><a href="classarduino_1_1_remote_g_p_i_o.html#a3c09a33755589d3731ebe950b38d04e4">arduino::RemoteGPIO::analogReference</a></div><div class="ttdeci">void analogReference(uint8_t mode)</div><div class="ttdoc">Configure the reference voltage used for analog input.</div><div class="ttdef"><b>Definition:</b> RemoteGPIO.h:66</div></div>
+<div class="ttc" id="aclassarduino_1_1_remote_g_p_i_o_html_a6a05b7f35716a1981e732121d1e1d26e"><div class="ttname"><a href="classarduino_1_1_remote_g_p_i_o.html#a6a05b7f35716a1981e732121d1e1d26e">arduino::RemoteGPIO::digitalWrite</a></div><div class="ttdeci">void digitalWrite(pin_size_t pinNumber, PinStatus status)</div><div class="ttdoc">Write a HIGH or LOW value to a digital pin.</div><div class="ttdef"><b>Definition:</b> RemoteGPIO.h:45</div></div>
+<div class="ttc" id="aclassarduino_1_1_remote_g_p_i_o_html_a7feee2166c833a0c349fdf0e57737f65"><div class="ttname"><a href="classarduino_1_1_remote_g_p_i_o.html#a7feee2166c833a0c349fdf0e57737f65">arduino::RemoteGPIO::tone</a></div><div class="ttdeci">virtual void tone(uint8_t pinNumber, unsigned int frequency, unsigned long duration=0)</div><div class="ttdoc">Generate a square wave of the specified frequency on a pin.</div><div class="ttdef"><b>Definition:</b> RemoteGPIO.h:79</div></div>
+<div class="ttc" id="aclassarduino_1_1_remote_g_p_i_o_html_a835da887c37082e02f176541d3e2946c"><div class="ttname"><a href="classarduino_1_1_remote_g_p_i_o.html#a835da887c37082e02f176541d3e2946c">arduino::RemoteGPIO::pinMode</a></div><div class="ttdeci">void pinMode(pin_size_t pinNumber, PinMode pinMode)</div><div class="ttdoc">Configure the specified pin to behave as an input or output.</div><div class="ttdef"><b>Definition:</b> RemoteGPIO.h:38</div></div>
+<div class="ttc" id="aclassarduino_1_1_remote_g_p_i_o_html_ab9703ae97eba599f2bcf1840b6a90aef"><div class="ttname"><a href="classarduino_1_1_remote_g_p_i_o.html#ab9703ae97eba599f2bcf1840b6a90aef">arduino::RemoteGPIO::noTone</a></div><div class="ttdeci">virtual void noTone(uint8_t pinNumber)</div><div class="ttdoc">Stop the generation of a square wave triggered by tone()</div><div class="ttdef"><b>Definition:</b> RemoteGPIO.h:88</div></div>
+<div class="ttc" id="aclassarduino_1_1_remote_g_p_i_o_html_ad69e6552972f07584fa2c4c1d232badc"><div class="ttname"><a href="classarduino_1_1_remote_g_p_i_o.html#ad69e6552972f07584fa2c4c1d232badc">arduino::RemoteGPIO::digitalRead</a></div><div class="ttdeci">PinStatus digitalRead(pin_size_t pinNumber)</div><div class="ttdoc">Read the value from a specified digital pin.</div><div class="ttdef"><b>Definition:</b> RemoteGPIO.h:52</div></div>
+<div class="ttc" id="aclassarduino_1_1_remote_g_p_i_o_html_ad9ce6f3838574413079c981d9146d4dc"><div class="ttname"><a href="classarduino_1_1_remote_g_p_i_o.html#ad9ce6f3838574413079c981d9146d4dc">arduino::RemoteGPIO::pulseInLong</a></div><div class="ttdeci">virtual unsigned long pulseInLong(uint8_t pinNumber, uint8_t state, unsigned long timeout=1000000L)</div><div class="ttdoc">Alternative to pulseIn() which is better at handling long pulses.</div><div class="ttdef"><b>Definition:</b> RemoteGPIO.h:104</div></div>
+<div class="ttc" id="aclassarduino_1_1_remote_g_p_i_o_html_ae8e6dbd8a3b1059b4dd13e0949b623bf"><div class="ttname"><a href="classarduino_1_1_remote_g_p_i_o.html#ae8e6dbd8a3b1059b4dd13e0949b623bf">arduino::RemoteGPIO::analogRead</a></div><div class="ttdeci">int analogRead(pin_size_t pinNumber)</div><div class="ttdoc">Read the value from the specified analog pin.</div><div class="ttdef"><b>Definition:</b> RemoteGPIO.h:59</div></div>
+<div class="ttc" id="aclassarduino_1_1_remote_g_p_i_o_html_af2741b3362a60105c9431978649f128c"><div class="ttname"><a href="classarduino_1_1_remote_g_p_i_o.html#af2741b3362a60105c9431978649f128c">arduino::RemoteGPIO::pulseIn</a></div><div class="ttdeci">virtual unsigned long pulseIn(uint8_t pinNumber, uint8_t state, unsigned long timeout=1000000L)</div><div class="ttdoc">Read a pulse (HIGH or LOW) on a pin.</div><div class="ttdef"><b>Definition:</b> RemoteGPIO.h:94</div></div>
 <div class="ttc" id="aclassarduino_1_1_stream_html"><div class="ttname"><a href="classarduino_1_1_stream.html">arduino::Stream</a></div><div class="ttdef"><b>Definition:</b> Stream.h:51</div></div>
 <div class="ttc" id="anamespacearduino_html"><div class="ttname"><a href="namespacearduino.html">arduino</a></div><div class="ttdoc">We provide the WiFi class to simulate the Arduino WIFI. In in Linux we can expect that networking is ...</div><div class="ttdef"><b>Definition:</b> CanMsg.cpp:31</div></div>
 </div><!-- fragment --></div><!-- contents -->
