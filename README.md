@@ -39,39 +39,9 @@ Here is a quick demo:
 - [Using Pins](examples/jupyter/04-Pins.ipynb)
 - [Using Serial](examples/jupyter/05-Serial.ipynb)
 
-## Supported Defines
-
-You can activate/deactivate some functionality with the help of the following defines:
-
-- __USE_RPI__: activates support for Rasperry PI
-- __USE_REMOTE__: activates support for GPIO/SPI/I2C using UDP or Stream
-- __USE_HTTPS__: provide https support using wolfSSL
-- __SKIP_HARDWARE_SETUP__: deactivate all GPIO/SPI/I2C implementations
-- __SKIP_HARDWARE_WIFI__: deactivate WiFi
-
-## Build instructions
-
-Execute the following commends in the root of the Arduino-Emulator:
-
-```Bash
-git clone --recurse-submodules https://github.com/pschatzmann/Arduino-Emulator
-cd Arduino-Emulator
-mkdir build
-cd build
-cmake -DUSE_RPI=OFF -DUSE_HTTPS=OFF -DCMAKE_BUILD_TYPE=Debug ..
-make
-```
-
-Adjust the cmake parameters dependent on your requirements.
 
 ## Documentation
 
 - [Class documentation](https://pschatzmann.github.io/Arduino-Emulator/html/annotated.html). 
 - You can find further information in the [Wiki](https://github.com/pschatzmann/Arduino-Emulator/wiki)
 
-## Usage notes
-
-### Case-insensitive file systems (Windows, OSX, WSL)
-
-To avoid conflicts between system `string.h` and Arduino’s string library `String.h`, just do not put `(include)/api` to include path. Put `(include)` and `(include)/api/deprecated` instead.
-This usual way to resolve this conflict in all Arduino cores.
