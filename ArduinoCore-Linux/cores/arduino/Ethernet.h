@@ -6,11 +6,11 @@
 #include <unistd.h>     // for close
 
 #include "ArduinoLogger.h"
+#include "RingBufferExt.h"
+#include "SocketImpl.h"
 #include "api/Client.h"
 #include "api/Common.h"
 #include "api/IPAddress.h"
-#include "RingBufferExt.h"
-#include "SocketImpl.h"
 
 namespace arduino {
 
@@ -120,7 +120,6 @@ class EthernetClient : public Client {
     return connect(str.c_str(), port);
   }
 
-
   // opens a connection
   virtual int connect(const char* address, uint16_t port) override {
     Logger.info(WIFICLIENT, "connect");
@@ -213,7 +212,7 @@ class EthernetClient : public Client {
     return result;
   }
 
-  virtual size_t readBytes(char* buffer, size_t len)  {
+  virtual size_t readBytes(char* buffer, size_t len) {
     return read((uint8_t*)buffer, len);
   }
 

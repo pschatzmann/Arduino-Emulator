@@ -11,11 +11,12 @@ __attribute__((weak)) void loop() {}
 
 void hardwareSetup(){
 #if !defined(SKIP_HARDWARE_SETUP)
-#  if defined(USE_REMOTE) 
-    HardwareSetupRemote.begin();
-#  endif
 #  if (defined(USE_RPI))
     RPI.begin();
+#  else
+#    if defined(USE_REMOTE)
+        Remote.begin();
+#    endif
 #  endif
 #endif
 }

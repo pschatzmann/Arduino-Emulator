@@ -1,22 +1,18 @@
 
 #pragma once
 #if defined(USE_RPI) && !defined(SKIP_HARDWARE_SETUP)
-#include "Hardware.h" // for Hardware; 
+#include "FileStream.h"
 #include "HardwareGPIO_RPI.h"
 #include "HardwareI2C_RPI.h"
 #include "HardwareSPI_RPI.h"
-#include "FileStream.h"
 
 namespace arduino {
-
-static HardwareI2C_RPI Wire;
-static HardwareSPI_RPI SPI;;
 
 /**
  * @class HardwareSetupRPI
  * @brief Sets up hardware interfaces for Raspberry Pi (GPIO, I2C, SPI).
  */
-class HardwareSetupRPI {
+class HardwareSetupRPI public I2CSource, public SPISource, public GPIOSource {
  public:
   /**
    * @brief Constructor. Initializes hardware interfaces.
@@ -31,18 +27,20 @@ class HardwareSetupRPI {
   /**
    * @brief Initializes hardware pointers to Raspberry Pi interfaces.
    */
-  bool begin() {
+  bool begin(bool asDefault = true) {
     Logger.info("Using Raspberry Pi hardware interfaces");
+    is_default_objects_active = asDefault;
     gpio.begin();
     i2c.begin();
     spi.begin();
-    // setup hardware pointers
-    Hardware.gpio = &gpio;
-    Hardware.i2c = &i2c;
-    Hardware.spi = &spi;
-    // setup global instances
-    Wire = HardwareSetupRPI::get_i2c();
-    SPI = HardwareSetupRPI::get_spi();
+
+    // define the global hardware interfaces
+    if (asDefault) {
+      GPIO.setGPIO(&gpio);
+      SPI.setSPI(&spi);
+      Wire.setI2C(&i2c);
+    }
+
     return gpio && i2c && spi;
   }
 
@@ -50,22 +48,22 @@ class HardwareSetupRPI {
    * @brief Resets hardware pointers to nullptr.
    */
   void end() {
-    Hardware.gpio = nullptr;
-    Hardware.i2c = nullptr;
-    Hardware.spi = nullptr;
+    if (is_default_objects_active) {
+      GPIO.setGPIO(nullptr);
+      SPI.setSPI(nullptr);
+      Wire.setI2C(nullptr);
+    }
   }
 
-  HardwareGPIO_RPI& get_gpio() { return gpio; }
-  HardwareI2C_RPI& get_i2c() { return i2c; }
-  HardwareSPI_RPI& get_spi() { return spi; }
+  HardwareGPIO_RPI* getGPIO() { return &gpio; }
+  HardwareI2C_RPI* getI2C() { return &i2c; }
+  HardwareSPI_RPI* getSPI() { return &spi; }
 
  protected:
-  /** GPIO interface for Raspberry Pi */
   HardwareGPIO_RPI gpio;
-  /** I2C interface for Raspberry Pi */
   HardwareI2C_RPI i2c;
-  /** SPI interface for Raspberry Pi */
   HardwareSPI_RPI spi;
+  bool is_default_objects_active = false;
 };
 
 /**
@@ -79,14 +77,13 @@ static HardwareSetupRPI RPI;
 /**
  * @brief Second hardware serial port for Raspberry Pi.
  *
- * Serial2 provides access to the Raspberry Pi's primary UART device (usually /dev/serial0).
- * This can be used for serial communication with external devices, similar to Serial1/Serial2 on Arduino boards.
- * Example usage:
+ * Serial2 provides access to the Raspberry Pi's primary UART device (usually
+ * /dev/serial0). This can be used for serial communication with external
+ * devices, similar to Serial1/Serial2 on Arduino boards. Example usage:
  *   Serial2.begin(9600);
  *   Serial2.println("Hello from Serial2");
  */
 static FileStream Serial2("/dev/serial0");
-
 
 }  // namespace arduino
 

@@ -1,7 +1,8 @@
 
 add_subdirectory("hallo-world")
-add_subdirectory("remote-api")
-
+add_subdirectory("blink")
+add_subdirectory("i2c")
+add_subdirectory("spi")
 if(USE_HTTPS)
     add_subdirectory("wifi-secure")
 endif(USE_HTTPS)

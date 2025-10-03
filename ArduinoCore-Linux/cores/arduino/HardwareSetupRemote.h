@@ -3,68 +3,63 @@
 #include <exception>
 
 #include "ArduinoLogger.h"
-#include "Hardware.h"
+#include "GPIOWrapper.h"
+#include "I2CWrapper.h"
 #include "RemoteGPIO.h"
 #include "RemoteI2C.h"
 #include "RemoteSPI.h"
+#include "SPIWrapper.h"
 #include "WiFiUdpStream.h"
 
 namespace arduino {
-#if !defined(SKIP_HARDWARE_SETUP) && !defined(USE_RPI)
-static RemoteI2C Wire;
-static RemoteSPI SPI;
-#endif
 
 /**
  * Class which is used to configure the actual Hardware APIs
  */
 
-class HardwareSetupRemoteClass {
+class HardwareSetupRemoteClass : public I2CSource,
+                                 public SPISource,
+                                 public GPIOSource {
  public:
   /// default constructor: you need to call begin() afterwards
   HardwareSetupRemoteClass() = default;
 
   /// HardwareSetup uses the indicated stream
-  HardwareSetupRemoteClass(Stream& stream) {
-    begin(&stream, false);
-  }
+  HardwareSetupRemoteClass(Stream& stream) { begin(&stream, false); }
 
- /// HardwareSetup that uses udp
-  HardwareSetupRemoteClass(int port) {
-    this->port = port;
-  }
+  /// HardwareSetup that uses udp
+  HardwareSetupRemoteClass(int port) { this->port = port; }
 
   /// assigns the different protocols to the stream
-  void begin(Stream* s, bool doHandShake = true) {
+  bool begin(Stream* s, bool asDefault = true, bool doHandShake = true) {
     p_stream = s;
-
-    Hardware.i2c = &i2c;
-    Hardware.spi = &spi;
-    Hardware.gpio = &gpio;
 
     i2c.setStream(s);
     spi.setStream(s);
     gpio.setStream(s);
 
-  #if !defined(SKIP_HARDWARE_SETUP) && !defined(USE_RPI)
     // setup global objects
-    SPI = spi;
-    Wire = i2c;
-  #endif
+    if (asDefault) {
+      SPI.setSPI(&spi);
+      Wire.setI2C(&i2c);
+      GPIO.setGPIO(&gpio);
+    }
 
     if (doHandShake) {
       handShake(s);
     }
+    return i2c && spi && gpio;
   }
 
   /// start with udp on the indicatd port
-  void begin(int port){
+  void begin(int port, bool asDefault) {
     this->port = port;
-    begin();
+    begin(asDefault);
   }
 
   /// start with the default udp stream.
-  void begin() {
+  void begin(bool asDefault = true) {
+    is_default_objects_active = asDefault;
     if (p_stream == nullptr) {
       default_stream.begin(port);
       handShake(&default_stream);
@@ -73,32 +68,35 @@ class HardwareSetupRemoteClass {
       default_stream.setTarget(ip, remote_port);
       default_stream.write((const uint8_t*)"OK", 2);
       default_stream.flush();
-      begin(&default_stream, false);
+      begin(&default_stream, asDefault, false);
     } else {
-      begin(p_stream, true);
+      begin(p_stream, asDefault, true);
     }
   }
 
   void end() {
+    if (is_default_objects_active) {
+      GPIO.setGPIO(nullptr);
+      SPI.setSPI(nullptr);
+      Wire.setI2C(nullptr);
+    }
     if (p_stream == &default_stream) {
       default_stream.stop();
     }
-    Hardware.i2c = nullptr;
-    Hardware.spi = nullptr;
-    Hardware.gpio = nullptr;
   }
 
-  auto& get_gpio() { return gpio; }
-  auto& get_i2c() { return i2c; }
-  auto& get_spi() { return spi; }
+  HardwareGPIO* getGPIO() { return &gpio; }
+  HardwareI2C* getI2C() { return &i2c; }
+  HardwareSPI* getSPI() { return &spi; }
 
  protected:
   WiFiUDPStream default_stream;
-  Stream *p_stream = nullptr;
+  Stream* p_stream = nullptr;
   RemoteI2C i2c;
   RemoteSPI spi;
   RemoteGPIO gpio;
   int port;
+  bool is_default_objects_active = false;
 
   void handShake(Stream* s) {
     while (true) {
@@ -125,6 +123,7 @@ class HardwareSetupRemoteClass {
 };
 
 #if !defined(SKIP_HARDWARE_SETUP)
-static HardwareSetupRemoteClass HardwareSetupRemote{7000};
+static HardwareSetupRemoteClass Remote{7000};
 #endif
+
 }  // namespace arduino

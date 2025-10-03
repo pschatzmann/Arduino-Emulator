@@ -4,7 +4,6 @@
 #include <gpiod.h> // sudo apt-get install libgpiod-dev
 #include <map>
 #include "HardwareGPIO_RPI.h"
-#include "Hardware.h"
 #include "ArduinoLogger.h"
 
 namespace arduino {

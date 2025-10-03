@@ -1,14 +1,33 @@
 #pragma once
-
-#include "HardwareI2CEx.h"
+#include "Stream.h"
+#include "api/HardwareI2C.h"
 #include "HardwareService.h"
 
 namespace arduino {
 
-// forware declaration of stream
-class Stream;
-
-class RemoteI2C : public HardwareI2CEx {
+/**
+ * @brief Remote I2C implementation that operates over a communication stream
+ *
+ * RemoteI2C provides I2C functionality by forwarding all operations to a remote
+ * I2C controller via a communication stream (serial, network, etc.). This enables
+ * I2C operations to be performed on remote hardware while maintaining the standard
+ * HardwareI2C interface.
+ * 
+ * Key features:
+ * - Complete HardwareI2C interface implementation
+ * - Stream-based remote communication protocol
+ * - Automatic command serialization and response handling
+ * - Support for all I2C operations (master/slave, read/write, transactions)
+ * - Real-time bidirectional communication with remote I2C hardware
+ * 
+ * The class uses HardwareService for protocol handling and can work with any
+ * Stream implementation (Serial, TCP, etc.) for remote connectivity.
+ *
+ * @see HardwareI2C
+ * @see HardwareService
+ * @see Stream
+ */
+class RemoteI2C : public HardwareI2C {
  public:
   RemoteI2C() = default;
   RemoteI2C(Stream* stream) { service.setStream(static_cast<Stream*>(stream)); }
@@ -93,6 +112,8 @@ class RemoteI2C : public HardwareI2CEx {
     service.send(I2cPeek);
     return service.receive16();
   }
+
+  operator boolean() { return service; }
 
  protected:
   HardwareService service;

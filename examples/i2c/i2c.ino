@@ -8,7 +8,6 @@ const uint8_t i2cAddress = 0x3C; // Change to your I2C device address
 void setup() {
   Serial.begin(115200); // Start serial communication at 115200 baud
   Serial.println("I2C Test Sketch Start");
-  HardwareSetupRemote.begin(); // urse compile with USE_REMOTE
 
   Wire.begin();
 }

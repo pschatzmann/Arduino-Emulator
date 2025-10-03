@@ -5,6 +5,30 @@
 
 namespace arduino {
 
+/**
+ * @brief Remote GPIO implementation that operates over a communication stream
+ *
+ * RemoteGPIO provides GPIO functionality by forwarding all operations to a remote
+ * GPIO controller via a communication stream (serial, network, etc.). This enables
+ * GPIO operations to be performed on remote hardware while maintaining the standard
+ * HardwareGPIO interface.
+ * 
+ * Key features:
+ * - Complete HardwareGPIO interface implementation
+ * - Stream-based remote communication protocol
+ * - Digital I/O operations (pinMode, digitalWrite, digitalRead)
+ * - Analog I/O operations (analogRead, analogWrite, analogReference)
+ * - PWM and tone generation (analogWrite, tone, noTone)
+ * - Pulse measurement and timing functions (pulseIn, pulseInLong)
+ * - Real-time bidirectional communication with remote GPIO hardware
+ * 
+ * The class uses HardwareService for protocol handling and can work with any
+ * Stream implementation (Serial, TCP, etc.) for remote connectivity.
+ *
+ * @see HardwareGPIO
+ * @see HardwareService
+ * @see Stream
+ */
 class RemoteGPIO : public HardwareGPIO {
  public:
   RemoteGPIO() = default;
@@ -86,6 +110,8 @@ class RemoteGPIO : public HardwareGPIO {
     service.flush();
     return service.receive64();
   }
+
+  operator boolean() { return service; }
 
  protected:
   HardwareService service;

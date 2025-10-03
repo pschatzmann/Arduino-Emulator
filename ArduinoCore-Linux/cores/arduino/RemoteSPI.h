@@ -2,14 +2,32 @@
 
 #include "api/HardwareSPI.h"
 
-/**
- * We virtualize the hardware and send the requests and replys over
- * a stream.
- *
- **/
-
 namespace arduino {
 
+/**
+ * @brief Remote SPI implementation that operates over a communication stream
+ *
+ * RemoteSPI provides SPI functionality by forwarding all operations to a remote
+ * SPI controller via a communication stream (serial, network, etc.). This enables
+ * SPI operations to be performed on remote hardware while maintaining the standard
+ * HardwareSPI interface.
+ * 
+ * Key features:
+ * - Complete HardwareSPI interface implementation
+ * - Stream-based remote communication protocol
+ * - Support for all SPI transfer modes (8-bit, 16-bit, buffer transfers)
+ * - Transaction management with SPISettings support
+ * - Interrupt handling and configuration
+ * - Real-time bidirectional communication with remote SPI hardware
+ * 
+ * The class uses HardwareService for protocol handling and can work with any
+ * Stream implementation (Serial, TCP, etc.) for remote connectivity.
+ *
+ * @see HardwareSPI
+ * @see HardwareService
+ * @see SPISettings
+ * @see Stream
+ */
 class RemoteSPI : public HardwareSPI {
  public:
   RemoteSPI() = default;
@@ -85,6 +103,8 @@ class RemoteSPI : public HardwareSPI {
     service.send(SpiEnd);
     service.flush();
   }
+
+  operator boolean() { return service; }
 
  protected:
   HardwareService service;
