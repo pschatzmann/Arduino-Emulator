@@ -6,6 +6,8 @@
 
 namespace arduino {
 
+SPIWrapper SPI;
+
 uint8_t SPIWrapper::transfer(uint8_t data) {
   HardwareSPI* spi = getSPI();
   if (spi != nullptr) {

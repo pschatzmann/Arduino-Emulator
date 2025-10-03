@@ -9,6 +9,8 @@
 
 namespace arduino {
 
+GPIOWrapper GPIO;
+
 void GPIOWrapper::pinMode(pin_size_t pinNumber, PinMode pinMode) {
   HardwareGPIO* gpio = getGPIO();
   if (gpio != nullptr) {

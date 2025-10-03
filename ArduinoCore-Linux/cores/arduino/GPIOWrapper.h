@@ -76,6 +76,6 @@ class GPIOWrapper : public HardwareGPIO {
 };
 
 /// Global GPIO instance used by Arduino API functions and direct access
-static GPIOWrapper GPIO;
+extern GPIOWrapper GPIO;
 
 }  // namespace arduino

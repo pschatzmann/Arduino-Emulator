@@ -77,7 +77,7 @@ class I2CWrapper : public HardwareI2C {
 };
 
 /// Global Wire instance used by Arduino API functions and direct access
-static I2CWrapper Wire;
+extern I2CWrapper Wire;
 
 /// Type alias for Arduino compatibility - TwoWire refers to I2CWrapper
 using TwoWire = I2CWrapper;

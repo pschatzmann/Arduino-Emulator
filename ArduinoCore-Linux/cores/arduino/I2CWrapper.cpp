@@ -5,6 +5,8 @@
 
 namespace arduino {
 
+I2CWrapper Wire;
+
 void I2CWrapper::begin() {
   HardwareI2C* i2c = getI2C();
   if (i2c != nullptr) {

@@ -66,7 +66,7 @@ class SPIWrapper : public HardwareSPI {
 
   HardwareSPI* getSPI() {
     HardwareSPI* result = p_spi;
-    if (result == nullptr) {
+    if (result == nullptr && p_source != nullptr) {
       result = p_source->getSPI();
     }
     return result;
@@ -74,6 +74,6 @@ class SPIWrapper : public HardwareSPI {
 };
 
 /// Global SPI instance used by Arduino API and direct access
-static SPIWrapper SPI;
+extern SPIWrapper SPI;
 
 }  // namespace arduino
