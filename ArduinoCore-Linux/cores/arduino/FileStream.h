@@ -2,8 +2,7 @@
 
 #include <fstream>
 #include <iostream>
-
-#include "Stream.h"
+#include "api/Stream.h"
 
 namespace arduino {
 

@@ -2,8 +2,8 @@
 
 #if USE_SERIALLIB
 
-#include "HardwareSerial.h"
 #include "serialib.h"
+#include "api/HardwareSerial.h"
 
 namespace arduino {
 
