@@ -2,12 +2,13 @@
 #include "Arduino.h"
 #include "SPI.h"
 
-SPISettings settings(1000000, MSBFIRST, SPI_MODE0); // 1 MHz, MSB first, Mode 0
-const int csPin = 8;
+SPISettings settings(10000, MSBFIRST, SPI_MODE0); // 1 MHz, MSB first, Mode 0
+const int csPin = 13;
 
 void setup() {
   Serial.begin(115200); // Start serial communication at 115200 baud
 
+  SPI.begin();
   pinMode(csPin, OUTPUT);
   digitalWrite(csPin, HIGH);
 }

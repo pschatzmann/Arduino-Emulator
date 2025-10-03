@@ -31,8 +31,6 @@ class HardwareSetupRPI : public I2CSource, public SPISource, public GPIOSource {
     Logger.info("Using Raspberry Pi hardware interfaces");
     is_default_objects_active = asDefault;
     gpio.begin();
-    i2c.begin();
-    spi.begin();
 
     // define the global hardware interfaces
     if (asDefault) {
