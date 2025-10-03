@@ -6,7 +6,7 @@
 ## Using this Project as a library
 
 If you have an Arduino Sketch that you want to run e.g in Linux, OS/X or Windows you can include this library with cmake. 
-Here is an [example cmake file](https://github.com/pschatzmann/arduino-audio-tools/blob/main/examples/examples-desktop/generator/CMakeLists.txt) for a [Arduino Audio Sketch](https://github.com/pschatzmann/arduino-audio-tools/tree/main/examples/examples-desktop/generator)).
+Here is an [example cmake file](https://github.com/pschatzmann/arduino-audio-tools/blob/main/examples/examples-desktop/generator/CMakeLists.txt) for an [Arduino Audio Sketch](https://github.com/pschatzmann/arduino-audio-tools/tree/main/examples/examples-desktop/generator)).
 
 ## GPIO/SPI/I2C
 
