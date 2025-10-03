@@ -6,7 +6,6 @@ int LED_BUILTIN = 13; // Define the built-in LED pin (usually pin 13 on Arduino 
 
 void setup() {
   Serial.begin(115200); // Start serial communication at 115200 baud
-  HardwareSetupRemote.begin(); // urse compile with USE_REMOTE
   pinMode(LED_BUILTIN, OUTPUT); // Initialize the LED pin as output
 }
 

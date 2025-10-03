@@ -7,6 +7,7 @@ project(arduino_emulator VERSION 0.1 DESCRIPTION "Arduino Emulator for Linux" LA
 # Https takes quite some time and is not always neede
 option(USE_HTTPS "Https Support" OFF)
 option(USE_RPI "Raspberry Pi Support" OFF)
+option(USE_REMOTE "Remote API Support" ON)
 option(BUILD_SHARED_LIBS "Build with shared libraries" ON)
 
 # Https support: Build with wolfssl 
@@ -61,6 +62,10 @@ target_compile_options(arduino_emulator PRIVATE -Wno-nonportable-include-path)
 if (USE_RPI)
     target_compile_options(arduino_emulator PUBLIC -DUSE_RPI)
 endif(USE_RPI)
+
+if (USE_REMOTE)
+    target_compile_options(arduino_emulator PUBLIC -DUSE_REMOTE)
+endif(USE_REMOTE)
 
 if(USE_HTTPS)
     # Add external libraries

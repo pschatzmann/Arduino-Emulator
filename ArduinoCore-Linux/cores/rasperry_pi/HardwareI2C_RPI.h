@@ -4,7 +4,6 @@
 #include <fcntl.h>   // for O_RDWR
 #include <unistd.h>  // for open(), close(), etc.
 #include <vector>
-#include "Hardware.h"
 #include "api/HardwareI2C.h"
 #include "ArduinoLogger.h"
 
