@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['networkclientsecure_0',['NetworkClientSecure',['../classarduino_1_1_network_client_secure.html',1,'arduino']]],
-  ['notone_1',['noTone',['../classarduino_1_1_hardware_g_p_i_o___r_p_i.html#aec6afeddbee12ace5be0a01bdb17a20c',1,'arduino::HardwareGPIO_RPI']]]
+  ['opendevice_60',['openDevice',['../classserialib.html#a5c2f95793e0fcd7fa6615682e8f58f16',1,'serialib']]]
 ];

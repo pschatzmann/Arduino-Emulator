@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['gpio_0',['gpio',['../classarduino_1_1_hardware_setup_r_p_i.html#ae0d6014bb8eb67b3962df735566e7928',1,'arduino::HardwareSetupRPI']]]
+  ['gpio_270',['GPIO',['../namespacearduino.html#a67230408a4be8e454f3947313e30c0e1',1,'arduino']]]
 ];
