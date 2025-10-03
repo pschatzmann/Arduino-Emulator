@@ -16,32 +16,9 @@ We provide some alternative implementations:
 - Communicate changes to/from a Microcontroller using UDP or any Arduino Stream
 - Linux / Rasperry PI 
 
-## Rasperry PI
-
-You can run this emulator on an Rasperry PI
-
-- make sure that the -DUSE_RPI cmake option is set to ON
-- install libgpiod-dev (sudo apt install libgpiod-dev)
-- activate SPI and I2C with raspi-config
-
-
-## Jupyter
-
-I initially only wanted to have an interactive [Jupyter](https://jupyter.org/) environemnt in which I could play around with [Arduino](https://www.arduino.cc/) commands and when I discovered that Arduino provides a good starting point with their [ArduinoCore-API](https://github.com/arduino/ArduinoCore-API/tree/105276f8d81413391b14a3dc6c80180ee9e33d56) I decided to start this project.
-
-You can also use [xeus-cling](https://github.com/jupyter-xeus/xeus-cling) as a runtime environment to simulate an Arduino Development board and I have added the missing implementation using C or the C++ std library.
-
-Here is a quick demo:
-
-- [Setup](examples/jupyter/01-Setup.ipynb)
-- [Introduction into some Basic Commands](examples/jupyter/02-BasicCommands.ipynb)
-- [The Network Stack](examples/jupyter/03-Network.ipynb)
-- [Using Pins](examples/jupyter/04-Pins.ipynb)
-- [Using Serial](examples/jupyter/05-Serial.ipynb)
-
 
 ## Documentation
 
 - [Class documentation](https://pschatzmann.github.io/Arduino-Emulator/html/annotated.html). 
-- You can find further important information in the [Wiki](https://github.com/pschatzmann/Arduino-Emulator/wiki)
+- [Wiki](https://github.com/pschatzmann/Arduino-Emulator/wiki)
 
