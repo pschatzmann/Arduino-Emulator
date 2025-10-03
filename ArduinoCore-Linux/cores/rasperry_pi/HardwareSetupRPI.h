@@ -12,7 +12,7 @@ namespace arduino {
  * @class HardwareSetupRPI
  * @brief Sets up hardware interfaces for Raspberry Pi (GPIO, I2C, SPI).
  */
-class HardwareSetupRPI public I2CSource, public SPISource, public GPIOSource {
+class HardwareSetupRPI : public I2CSource, public SPISource, public GPIOSource {
  public:
   /**
    * @brief Constructor. Initializes hardware interfaces.

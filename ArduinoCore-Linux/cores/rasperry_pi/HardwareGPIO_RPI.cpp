@@ -23,7 +23,6 @@ void HardwareGPIO_RPI::begin() {
 }
 
 HardwareGPIO_RPI::~HardwareGPIO_RPI() {
-  Hardware.gpio = nullptr;
   for (auto& kv : gpio_lines) {
     gpiod_line_release(kv.second);
   }
