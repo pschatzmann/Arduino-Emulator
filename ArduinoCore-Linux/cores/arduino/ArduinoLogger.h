@@ -23,37 +23,37 @@ class ArduinoLogger {
   const char* LogLevelTxt[4] = {"Debug", "Info", "Warning", "Error"};
 
   // activate the logging
-  virtual void setLogger(Stream& out, LogLevel level = Error) {
+  void begin(Stream& out, LogLevel level = Warning) {
     this->log_stream_ptr = &out;
     this->log_level = level;
   }
 
   // checks if the logging is active
-  virtual bool isLogging() { return log_stream_ptr != nullptr; }
+  bool isLogging() { return log_stream_ptr != nullptr; }
 
-  virtual void error(const char* str, const char* str1 = nullptr,
-                     const char* str2 = nullptr) {
+  void error(const char* str, const char* str1 = nullptr,
+             const char* str2 = nullptr) {
     log(Error, str, str1, str2);
   }
 
-  virtual void info(const char* str, const char* str1 = nullptr,
-                    const char* str2 = nullptr) {
+  void info(const char* str, const char* str1 = nullptr,
+            const char* str2 = nullptr) {
     log(Info, str, str1, str2);
   }
 
-  virtual void warning(const char* str, const char* str1 = nullptr,
-                       const char* str2 = nullptr) {
+  void warning(const char* str, const char* str1 = nullptr,
+               const char* str2 = nullptr) {
     log(Warning, str, str1, str2);
   }
 
-  virtual void debug(const char* str, const char* str1 = nullptr,
-                     const char* str2 = nullptr) {
+  void debug(const char* str, const char* str1 = nullptr,
+             const char* str2 = nullptr) {
     log(Debug, str, str1, str2);
   }
 
   // write an message to the log
-  virtual void log(LogLevel current_level, const char* str,
-                   const char* str1 = nullptr, const char* str2 = nullptr) {
+  void log(LogLevel current_level, const char* str, const char* str1 = nullptr,
+           const char* str2 = nullptr) {
     if (log_stream_ptr != nullptr) {
       if (current_level >= log_level) {
         log_stream_ptr->print("Emulator - ");
