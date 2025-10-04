@@ -35,6 +35,8 @@
 #define SKIP_HARDWARE_WIFI
 #endif
 
+#define PROGMEM
+
 #include "Serial.h"
 #include "StdioDevice.h"
 #include "ArduinoLogger.h"
