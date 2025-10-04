@@ -2,7 +2,7 @@
 cmake_minimum_required(VERSION 3.11...3.19)
 
 # Project name and a few useful settings. Other commands can pick up the results
-project(arduino_emulator VERSION 0.1 DESCRIPTION "Arduino Emulator for Linux" LANGUAGES CXX)
+project(arduino_emulator VERSION 0.1 DESCRIPTION "Arduino Emulator for Linux" LANGUAGES C CXX)
 
 # Https takes quite some time and is not always neede
 option(USE_HTTPS "Https Support" OFF)
@@ -58,6 +58,9 @@ install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/ArduinoCore-Linux/cores/arduino/"
 # All users of this library will need at least C++17
 target_compile_features(arduino_emulator PUBLIC cxx_std_17)
 target_compile_options(arduino_emulator PRIVATE -Wno-nonportable-include-path)
+
+# Include Arduino library functions
+include(${CMAKE_CURRENT_SOURCE_DIR}/ArduinoLibrary.cmake)
 
 if (USE_RPI)
     target_compile_options(arduino_emulator PUBLIC -DUSE_RPI)
