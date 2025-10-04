@@ -46,3 +46,7 @@
 #include "HardwareSetup.h"
 
 using namespace arduino;
+
+// supported by some platforms
+void analogWriteFrequency(pin_size_t pin, uint32_t freq);
+void analogWriteResolution(uint8_t bits);

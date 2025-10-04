@@ -128,7 +128,7 @@ class HardwareGPIO_RPI : public HardwareGPIO {
   /**
    * @brief Set PWM frequency for a pin.
    */
-  void analogWriteFrequency(uint8_t pin, uint32_t freq);
+  void analogWriteFrequency(pin_size_t pin, uint32_t freq);
 
   /**
    * @brief Set the resolution (number of bits) for analogWrite (PWM output).

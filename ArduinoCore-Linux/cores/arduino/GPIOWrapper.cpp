@@ -1,25 +1,30 @@
 /*
-	GPIOWrapper.cpp
-	Copyright (c) 2025 Phil Schatzmann. All right reserved.
+        GPIOWrapper.cpp
+        Copyright (c) 2025 Phil Schatzmann. All right reserved.
 
-	This library is free software; you can redistribute it and/or
-	modify it under the terms of the GNU Lesser General Public
-	License as published by the Free Software Foundation; either
-	version 2.1 of the License, or (at your option) any later version.
+        This library is free software; you can redistribute it and/or
+        modify it under the terms of the GNU Lesser General Public
+        License as published by the Free Software Foundation; either
+        version 2.1 of the License, or (at your option) any later version.
 
-	This library is distributed in the hope that it will be useful,
-	but WITHOUT ANY WARRANTY; without even the implied warranty of
-	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-	Lesser General Public License for more details.
+        This library is distributed in the hope that it will be useful,
+        but WITHOUT ANY WARRANTY; without even the implied warranty of
+        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+        Lesser General Public License for more details.
 
-	You should have received a copy of the GNU Lesser General Public
-	License along with this library; if not, write to the Free Software
-	Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
+        You should have received a copy of the GNU Lesser General Public
+        License along with this library; if not, write to the Free Software
+        Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 */
 
 #include "GPIOWrapper.h"
+
+#include "ArduinoLogger.h"
 #include "HardwareGPIO.h"
 #include "HardwareService.h"
+#ifdef USE_FTDI
+#include "../ftdi/HardwareGPIO_FTDI.h"
+#endif
 
 /**
  * We support different implementations for the GPIO
@@ -75,6 +80,7 @@ void GPIOWrapper::analogWrite(pin_size_t pinNumber, int value) {
   }
 }
 
+
 void GPIOWrapper::tone(uint8_t _pin, unsigned int frequency,
                        unsigned long duration) {
   HardwareGPIO* gpio = getGPIO();
@@ -107,6 +113,20 @@ unsigned long GPIOWrapper::pulseInLong(uint8_t pin, uint8_t state,
     return gpio->pulseInLong(pin, state, timeout);
   } else {
     return 0;
+  }
+}
+
+void GPIOWrapper::analogWriteFrequency(pin_size_t pin, uint32_t freq) {
+  HardwareGPIO* gpio = getGPIO();
+  if (gpio != nullptr) {
+    gpio->analogWriteFrequency(pin, freq);
+  }
+}
+
+void GPIOWrapper::analogWriteResolution(uint8_t bits) {
+  HardwareGPIO* gpio = getGPIO();
+  if (gpio != nullptr) {
+    gpio->analogWriteResolution(bits);
   }
 }
 

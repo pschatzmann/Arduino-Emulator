@@ -19,6 +19,9 @@
 
 #pragma once
 #include "HardwareSetupRemote.h"
-#if (defined(USE_RPI))
+#if defined(USE_RPI)
 #  include "HardwareSetupRPI.h"
+#endif
+#if defined(USE_FTDI)
+#  include "../ftdi/HardwareSetupFTDI.h"
 #endif

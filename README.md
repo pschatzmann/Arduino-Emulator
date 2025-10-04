@@ -14,6 +14,7 @@ We provide some alternative implementations:
 - Mock Implementation which provides all functions doing nothing
 - Communicate changes to/from a Microcontroller using UDP or any Arduino Stream
 - Rasperry Pi using gpiod.h, linux/i2c-dev.h, linux/spi/spidev.h
+- FTDI support using the FT2232HL
 
 
 ## Documentation

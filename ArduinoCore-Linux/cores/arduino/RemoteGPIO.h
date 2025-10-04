@@ -128,6 +128,17 @@ class RemoteGPIO : public HardwareGPIO {
     service.flush();
     return service.receive64();
   }
+  virtual void analogWriteFrequency(pin_size_t pin, uint32_t freq){
+    service.send((uint16_t)GpioAnalogWriteFrequency);
+    service.send((uint8_t)pin);
+    service.send((uint32_t)freq);
+    service.flush();
+  }
+  virtual void analogWriteResolution(uint8_t bits) {
+    service.send((uint16_t)GpioAnalogWriteResolution);
+    service.send((uint8_t)bits);
+    service.flush();
+  }
 
   operator bool() { return service; }
 

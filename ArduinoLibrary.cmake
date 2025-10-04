@@ -111,5 +111,14 @@ function(arduino_sketch name ino_file)
     if (USE_RPI)
         target_link_libraries(${name} gpiod)
     endif(USE_RPI)
+    
+    if (USE_FTDI)
+        # Find and link libftdi1
+        find_package(PkgConfig REQUIRED)
+        pkg_check_modules(FTDI REQUIRED libftdi1)
+        target_link_libraries(${name} ${FTDI_LIBRARIES})
+        target_include_directories(${name} PUBLIC ${FTDI_INCLUDE_DIRS})
+        target_compile_options(${name} PUBLIC ${FTDI_CFLAGS_OTHER})
+    endif(USE_FTDI)
 endfunction()
 
