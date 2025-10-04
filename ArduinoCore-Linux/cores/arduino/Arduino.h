@@ -18,6 +18,7 @@
 */
 #pragma once
 
+/// do not use exithandler atexit
 #ifndef HOST
 #  define HOST
 #endif
