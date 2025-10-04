@@ -11,13 +11,13 @@ This project provides a C++ emulator library for Arduino, allowing you to run Ar
 
 We provide some alternative implementations:
 
-- Dummy Implementation which does nothing
+- Mock Implementation which provides all functions doing nothing
 - Communicate changes to/from a Microcontroller using UDP or any Arduino Stream
-- Linux / Rasperry Pi 
+- Rasperry Pi using gpiod.h, linux/i2c-dev.h, linux/spi/spidev.h
 
 
 ## Documentation
 
-- [Class documentation](https://pschatzmann.github.io/Arduino-Emulator/html/annotated.html). 
-- [Wiki](https://github.com/pschatzmann/Arduino-Emulator/wiki)
+- [Documentation Wiki](https://github.com/pschatzmann/Arduino-Emulator/wiki)
+- [Class Documentation](https://pschatzmann.github.io/Arduino-Emulator/html/annotated.html). 
 
