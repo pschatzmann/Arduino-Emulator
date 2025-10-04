@@ -1,14 +1,19 @@
 var searchData=
 [
-  ['pi_0',['Rasperry PI',['../index.html#autotoc_md3',1,'']]],
-  ['pinmode_1',['pinmode',['../classarduino_1_1_hardware_g_p_i_o___r_p_i.html#a569c784be4729462f1e45e3392064dd4',1,'arduino::HardwareGPIO_RPI::pinMode()'],['../classarduino_1_1_remote_g_p_i_o.html#a835da887c37082e02f176541d3e2946c',1,'arduino::RemoteGPIO::pinMode()'],['../classarduino_1_1_hardware_g_p_i_o.html#a9544ab8bc08731c991cd8f328de7fa4c',1,'arduino::HardwareGPIO::pinMode()'],['../classarduino_1_1_g_p_i_o_wrapper.html#a468eaf21e5509581d2d7f8a8d41db4f5',1,'arduino::GPIOWrapper::pinMode()']]],
-  ['pluggableusb_5f_2',['PluggableUSB_',['../classarduino_1_1_pluggable_u_s_b__.html',1,'arduino']]],
-  ['pluggableusbmodule_3',['PluggableUSBModule',['../classarduino_1_1_pluggable_u_s_b_module.html',1,'arduino']]],
-  ['print_4',['Print',['../classarduino_1_1_print.html',1,'arduino']]],
-  ['printable_5',['Printable',['../classarduino_1_1_printable.html',1,'arduino']]],
-  ['printablemock_6',['PrintableMock',['../class_printable_mock.html',1,'']]],
-  ['printmock_7',['PrintMock',['../class_print_mock.html',1,'']]],
-  ['project_20as_20a_20library_8',['Using this Project as a library',['../index.html#autotoc_md1',1,'']]],
-  ['pulsein_9',['pulsein',['../classarduino_1_1_g_p_i_o_wrapper.html#a26250c7e720502faa63b1ed63dfba45d',1,'arduino::GPIOWrapper::pulseIn()'],['../classarduino_1_1_hardware_g_p_i_o.html#a86a07fbfa28a31d8eb75deed3417091e',1,'arduino::HardwareGPIO::pulseIn()'],['../classarduino_1_1_remote_g_p_i_o.html#af2741b3362a60105c9431978649f128c',1,'arduino::RemoteGPIO::pulseIn()'],['../classarduino_1_1_hardware_g_p_i_o___r_p_i.html#a58e030c09f7776e9f4cd57ae4e7f8d9f',1,'arduino::HardwareGPIO_RPI::pulseIn()']]],
-  ['pulseinlong_10',['pulseinlong',['../classarduino_1_1_g_p_i_o_wrapper.html#a7bb614e9d5ff68db1564362a5f8b7f4d',1,'arduino::GPIOWrapper::pulseInLong()'],['../classarduino_1_1_hardware_g_p_i_o.html#ae2b49910e4af368da04d2dc2beb07aeb',1,'arduino::HardwareGPIO::pulseInLong()'],['../classarduino_1_1_remote_g_p_i_o.html#ad9ce6f3838574413079c981d9146d4dc',1,'arduino::RemoteGPIO::pulseInLong()'],['../classarduino_1_1_hardware_g_p_i_o___r_p_i.html#a0aa4b902617e7736626efac673797c85',1,'arduino::HardwareGPIO_RPI::pulseInLong()']]]
+  ['read_94',['read',['../classarduino_1_1_hardware_c_a_n.html#a1b4e9c0eec8f32a3ab4402234981d25b',1,'arduino::HardwareCAN::read()'],['../classarduino_1_1_hardware_i2_c___f_t_d_i.html#a9586c9041e8299857732b488c03631ba',1,'arduino::HardwareI2C_FTDI::read()']]],
+  ['readbytes_95',['readBytes',['../classserialib.html#ab05e51ff3bc47c02d7d000d58b45a961',1,'serialib']]],
+  ['readchar_96',['readChar',['../classserialib.html#a6c78b8a11ae7b8af57eea3dbc7fa237b',1,'serialib']]],
+  ['readgpiostate_97',['readGPIOState',['../classarduino_1_1_hardware_g_p_i_o___f_t_d_i.html#ac53208736a6cff78871e15ab308b6e92',1,'arduino::HardwareGPIO_FTDI']]],
+  ['readstring_98',['readString',['../classserialib.html#ab155c84352ddefe1304d391c19497ac1',1,'serialib']]],
+  ['receivebytesendack_99',['receiveByteSendAck',['../classarduino_1_1_hardware_i2_c___f_t_d_i.html#a410b74ade94f8cb1566c4727fadc159c',1,'arduino::HardwareI2C_FTDI']]],
+  ['receivedata_100',['receiveData',['../classarduino_1_1_hardware_s_p_i___f_t_d_i.html#abd25a1930b78c1c7ca4b274f1af3b12c',1,'arduino::HardwareSPI_FTDI::receiveData()'],['../classarduino_1_1_hardware_i2_c___f_t_d_i.html#a330f77304015bd9a24428a49bb2f0945',1,'arduino::HardwareI2C_FTDI::receiveData()']]],
+  ['remotegpio_101',['RemoteGPIO',['../classarduino_1_1_remote_g_p_i_o.html',1,'arduino']]],
+  ['remotei2c_102',['RemoteI2C',['../classarduino_1_1_remote_i2_c.html',1,'arduino']]],
+  ['remoteserialclass_103',['RemoteSerialClass',['../classarduino_1_1_remote_serial_class.html',1,'arduino']]],
+  ['remotespi_104',['RemoteSPI',['../classarduino_1_1_remote_s_p_i.html',1,'arduino']]],
+  ['requestfrom_105',['requestFrom',['../classarduino_1_1_hardware_i2_c___f_t_d_i.html#ad0f9400cea78862f533f6b74f4ba034d',1,'arduino::HardwareI2C_FTDI']]],
+  ['ringbufferext_106',['RingBufferExt',['../classarduino_1_1_ring_buffer_ext.html',1,'arduino']]],
+  ['ringbuffern_107',['RingBufferN',['../classarduino_1_1_ring_buffer_n.html',1,'arduino']]],
+  ['rpi_108',['RPI',['../namespacearduino.html#aaf600ce0d5135956db45dd53f2d9cdab',1,'arduino']]],
+  ['rts_109',['RTS',['../classserialib.html#a5a73f159762fa4d5c252f36acfe7ab47',1,'serialib']]]
 ];

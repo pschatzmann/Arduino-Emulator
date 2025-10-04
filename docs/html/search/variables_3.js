@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['wire_0',['Wire',['../namespacearduino.html#a438e0b6e21770efe4a3aba702b818c4d',1,'arduino']]]
+  ['spi_366',['SPI',['../namespacearduino.html#a5cdbe44f12b33daea39c70b62a63fc66',1,'arduino']]]
 ];

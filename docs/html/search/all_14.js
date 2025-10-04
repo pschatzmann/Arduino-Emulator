@@ -1,16 +1,10 @@
 var searchData=
 [
-  ['wificlient_0',['WiFiClient',['../namespacearduino.html#a3faf49cb9bc73386a5484c845be4b3d3',1,'arduino']]],
-  ['wificlientsecure_1',['WiFiClientSecure',['../namespacearduino.html#a19d9e574f57b774b7e4bb650cd91c677',1,'arduino']]],
-  ['wifimock_2',['WifiMock',['../classarduino_1_1_wifi_mock.html',1,'arduino']]],
-  ['wifiserver_3',['WiFiServer',['../namespacearduino.html#a2b52edc77c5220933cda374fc4b169ac',1,'arduino']]],
-  ['wifiudp_4',['WiFiUDP',['../namespacearduino.html#a1c42c7e192d7c6cb9229562cf928a557',1,'arduino']]],
-  ['wifiudpstream_5',['WiFiUDPStream',['../classarduino_1_1_wi_fi_u_d_p_stream.html',1,'arduino']]],
-  ['windows_20osx_20wsl_6',['Case-insensitive file systems (Windows, OSX, WSL)',['../index.html#autotoc_md9',1,'']]],
-  ['wire_7',['Wire',['../namespacearduino.html#a438e0b6e21770efe4a3aba702b818c4d',1,'arduino']]],
-  ['write_8',['write',['../classarduino_1_1_hardware_c_a_n.html#ac22cd733cb28a1408e79e98667d23b57',1,'arduino::HardwareCAN']]],
-  ['writebytes_9',['writeBytes',['../classserialib.html#aa14196b6f422584bf5eebc4ddb71d483',1,'serialib']]],
-  ['writechar_10',['writeChar',['../classserialib.html#aa6d231cb99664a613bcb503830f73497',1,'serialib']]],
-  ['writestring_11',['writeString',['../classserialib.html#a6a32655c718b998e5b63d8cdc483ac6d',1,'serialib']]],
-  ['wsl_12',['Case-insensitive file systems (Windows, OSX, WSL)',['../index.html#autotoc_md9',1,'']]]
+  ['_7ehardwaregpio_5fftdi_177',['~HardwareGPIO_FTDI',['../classarduino_1_1_hardware_g_p_i_o___f_t_d_i.html#a5f2aae5a652c0fec089d9c6a92f02667',1,'arduino::HardwareGPIO_FTDI']]],
+  ['_7ehardwaregpio_5frpi_178',['~HardwareGPIO_RPI',['../classarduino_1_1_hardware_g_p_i_o___r_p_i.html#a79579e723138b5f682269b99d60b6fdd',1,'arduino::HardwareGPIO_RPI']]],
+  ['_7ehardwarei2c_5fftdi_179',['~HardwareI2C_FTDI',['../classarduino_1_1_hardware_i2_c___f_t_d_i.html#a850e6fac4e02d4b6a4746b38a7caa8b0',1,'arduino::HardwareI2C_FTDI']]],
+  ['_7ehardwaresetupftdi_180',['~HardwareSetupFTDI',['../classarduino_1_1_hardware_setup_f_t_d_i.html#abe3e0bad04dfd5425b5c3bdff8a589b5',1,'arduino::HardwareSetupFTDI']]],
+  ['_7ehardwaresetuprpi_181',['~HardwareSetupRPI',['../classarduino_1_1_hardware_setup_r_p_i.html#a3b162b1537ba1028d925a4d30a9f06e0',1,'arduino::HardwareSetupRPI']]],
+  ['_7ehardwarespi_5fftdi_182',['~HardwareSPI_FTDI',['../classarduino_1_1_hardware_s_p_i___f_t_d_i.html#ae5185a3e003b58d98287d26ed648959f',1,'arduino::HardwareSPI_FTDI']]],
+  ['_7eserialib_183',['~serialib',['../classserialib.html#ac44215001ae198f2c196bb7993327a4b',1,'serialib']]]
 ];

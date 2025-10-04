@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['rpi_0',['RPI',['../namespacearduino.html#aaf600ce0d5135956db45dd53f2d9cdab',1,'arduino']]]
+  ['gpio_364',['GPIO',['../namespacearduino.html#a67230408a4be8e454f3947313e30c0e1',1,'arduino']]]
 ];
