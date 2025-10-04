@@ -3,10 +3,9 @@
 [![Linux build](../../actions/workflows/c-cpp-cmake.yml/badge.svg)](../../actions/workflows/c-cpp-cmake.yml)
 [![Unit tests](../../actions/workflows/unit-tests.yml/badge.svg)](../../actions/workflows/unit-tests.yml)
 
-## Using this Project as a library
+## Purpuse
 
-If you have an Arduino Sketch that you want to run e.g in Linux, OS X or Windows you can include this library with cmake. 
-Here is an [example cmake file](https://github.com/pschatzmann/arduino-audio-tools/blob/main/examples/examples-desktop/generator/CMakeLists.txt) for an [Arduino Audio Sketch](https://github.com/pschatzmann/arduino-audio-tools/tree/main/examples/examples-desktop/generator)).
+This project provides a C++ emulator library for Arduino, allowing you to run Arduino sketches on platforms like Linux, OS X, or Windows. It enables cross-platform development and testing of Arduino code without requiring physical hardware.
 
 ## GPIO/SPI/I2C
 
