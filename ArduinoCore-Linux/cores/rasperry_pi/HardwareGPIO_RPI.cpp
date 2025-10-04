@@ -1,6 +1,5 @@
-
 /*
-  HardwareGPIO_RPI.cpp 
+  HardwareGPIO_RPI.cpp
   Copyright (c) 2025 Phil Schatzmann. All right reserved.
 
   This library is free software; you can redistribute it and/or
@@ -20,9 +19,12 @@
 
 #ifdef USE_RPI
 
-#include <gpiod.h> // sudo apt-get install libgpiod-dev
-#include <map>
 #include "HardwareGPIO_RPI.h"
+
+#include <gpiod.h>  // sudo apt-get install libgpiod-dev
+
+#include <map>
+
 #include "ArduinoLogger.h"
 
 namespace arduino {
@@ -114,6 +116,13 @@ int HardwareGPIO_RPI::analogRead(pin_size_t pinNumber) {
 void HardwareGPIO_RPI::analogReference(uint8_t mode) {
   m_analogReference = mode;
 }
+uint32_t HardwareGPIO_RPI::getFrequency(int pin) {
+  auto it = gpio_frequencies.find(pin);
+  if (it != gpio_frequencies.end()) {
+    return it->second;
+  }
+  return 1000;  // default frequency
+}
 
 void HardwareGPIO_RPI::analogWrite(pin_size_t pinNumber, int value) {
   // Supported hardware PWM pins on Raspberry Pi: 12, 13, 18, 19
@@ -165,15 +174,19 @@ void HardwareGPIO_RPI::analogWrite(pin_size_t pinNumber, int value) {
   snprintf(enable_path, sizeof(enable_path),
            "/sys/class/pwm/pwmchip0/pwm%d/enable", pwm_channel);
 
-  // Set period to 20000 ns (50 kHz)
+  // Determine period from frequency using getFrequency()
+  uint32_t freq = getFrequency(pinNumber);
+  uint32_t period_ns = (freq > 0)
+                           ? (1000000000UL / freq)
+                           : 20000;  // fallback to 20,000 ns if freq is 0
   FILE* fperiod = fopen(period_path, "w");
   if (fperiod) {
-    fprintf(fperiod, "%d", 20000);
+    fprintf(fperiod, "%u", period_ns);
     fclose(fperiod);
   }
-  // Duty cycle: value in range 0-255
-  int duty = (value < 0) ? 0 : (value > 255) ? 255 : value;
-  int duty_ns = (duty * 20000) / 255;
+  // Duty cycle: value in range 0-max_value
+  int duty = (value < 0) ? 0 : (value > max_value) ? max_value : value;
+  int duty_ns = (duty * period_ns) / max_value;
   FILE* fduty = fopen(duty_path, "w");
   if (fduty) {
     fprintf(fduty, "%d", duty_ns);
@@ -189,12 +202,15 @@ void HardwareGPIO_RPI::analogWrite(pin_size_t pinNumber, int value) {
 
 void HardwareGPIO_RPI::tone(uint8_t _pin, unsigned int frequency,
                             unsigned long duration) {
-  Logger.error("HardwareGPIO_RPI", "tone not supported on Raspberry Pi GPIO");
+  analogWriteFrequency(_pin, frequency);
+  analogWrite(_pin, max_value / 2);  // 50% duty cycle for 8-bit PWM
+  if (duration > 0) {
+    delay(duration);
+    noTone(_pin);
+  }
 }
 
-void HardwareGPIO_RPI::noTone(uint8_t _pin) {
-  Logger.error("HardwareGPIO_RPI", "noTone not supported on Raspberry Pi GPIO");
-}
+void HardwareGPIO_RPI::noTone(uint8_t _pin) { analogWrite(_pin, 0); }
 
 unsigned long HardwareGPIO_RPI::pulseIn(uint8_t pin, uint8_t state,
                                         unsigned long timeout) {
@@ -222,6 +238,15 @@ void HardwareGPIO_RPI::analogWriteFrequency(uint8_t pin, uint32_t freq) {
     return;
   }
   gpio_frequencies[pin] = freq;
+}
+
+void HardwareGPIO_RPI::analogWriteResolution(uint8_t bits) {
+  if (bits == 0 || bits > 16) {
+    Logger.error("HardwareGPIO_RPI",
+                 "analogWriteResolution: bits must be between 1 and 16");
+    return;
+  }
+  max_value = (1 << bits) - 1;  // Calculate max value based on bits
 }
 
 }  // namespace arduino

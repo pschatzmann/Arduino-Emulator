@@ -130,14 +130,27 @@ class HardwareGPIO_RPI : public HardwareGPIO {
    */
   void analogWriteFrequency(uint8_t pin, uint32_t freq);
 
+  /**
+   * @brief Set the resolution (number of bits) for analogWrite (PWM output).
+   * @param bits Number of bits for PWM resolution (e.g., 8 for 0-255).
+   */
+  void analogWriteResolution(uint8_t bits);
+
+  /**
+   * @brief Boolean conversion operator.
+   * @return true if the GPIO interface is open and initialized, false otherwise.
+   */
   operator bool() { return is_open; }
 
- private:
+ protected:
   int m_analogReference = 0;
   std::map<pin_size_t, uint32_t> gpio_frequencies;
   int pwm_pins[4] = {12, 13, 18, 19};
   bool is_open = false;
   const char* device_name = "gpiochip0";
+  uint32_t max_value = 255; // Default for 8-bit resolution
+
+  uint32_t getFrequency(int pin);
 };
 
 }  // namespace arduino

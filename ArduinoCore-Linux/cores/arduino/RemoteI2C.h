@@ -113,7 +113,7 @@ class RemoteI2C : public HardwareI2C {
     return service.receive16();
   }
 
-  operator boolean() { return service; }
+  operator bool() { return service; }
 
  protected:
   HardwareService service;

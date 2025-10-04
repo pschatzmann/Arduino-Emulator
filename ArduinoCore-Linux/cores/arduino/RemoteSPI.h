@@ -123,7 +123,7 @@ class RemoteSPI : public HardwareSPI {
     service.flush();
   }
 
-  operator boolean() { return service; }
+  operator bool() { return service; }
 
  protected:
   HardwareService service;

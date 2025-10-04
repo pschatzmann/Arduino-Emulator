@@ -181,7 +181,7 @@ class HardwareService {
     return blockingRead((char*)data, len);
   }
 
-  operator boolean() { return io != nullptr; }
+  operator bool() { return io != nullptr; }
 
  protected:
   Stream* io = nullptr;

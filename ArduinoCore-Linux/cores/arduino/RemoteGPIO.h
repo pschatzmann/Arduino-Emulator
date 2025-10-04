@@ -129,7 +129,7 @@ class RemoteGPIO : public HardwareGPIO {
     return service.receive64();
   }
 
-  operator boolean() { return service; }
+  operator bool() { return service; }
 
  protected:
   HardwareService service;
