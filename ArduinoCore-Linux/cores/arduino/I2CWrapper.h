@@ -87,7 +87,7 @@ class I2CWrapper : public HardwareI2C {
 
   HardwareI2C* getI2C() {
     HardwareI2C* result = p_i2c;
-    if (result == nullptr) {
+    if (result == nullptr && p_source != nullptr) {
       result = p_source->getI2C();
     }
     return result;
