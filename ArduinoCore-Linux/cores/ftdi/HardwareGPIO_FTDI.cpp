@@ -240,7 +240,9 @@ void HardwareGPIO_FTDI::analogWrite(pin_size_t pinNumber, int value) {
 }
 
 void HardwareGPIO_FTDI::analogWriteFrequency(pin_size_t pinNumber, uint32_t frequency) {
-  Logger.debug("analogWriteFrequency called");
+  String pin{pinNumber};
+  String freq{frequency};
+  Logger.debug("analogWriteFrequency:", pin.c_str(), freq.c_str());
   
   if (!is_open || pinNumber > 15) {
     Logger.error("Invalid pin number or FTDI not initialized");

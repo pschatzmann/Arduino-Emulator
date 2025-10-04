@@ -1,8 +1,8 @@
 // pwm example
 #include "Arduino.h"
 
-// Pin definitions for FTDI FT2232HL
-const int LED1_PIN = 0;   // Channel A, pin 0 (ADBUS0)
+// GPIO 12 should work on a PI and with FTDI FT2232HL for PWM
+const int LED1_PIN = 12;   // GPIO 12
 
 void setup() {
   // Initialize serial communication
