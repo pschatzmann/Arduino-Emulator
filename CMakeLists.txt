@@ -64,6 +64,7 @@ include(${CMAKE_CURRENT_SOURCE_DIR}/Arduino.cmake)
 
 if (USE_RPI)
     target_compile_options(arduino_emulator PUBLIC -DUSE_RPI)
+    target_link_libraries(arduino_emulator gpiod)
 endif(USE_RPI)
 
 if (USE_REMOTE)

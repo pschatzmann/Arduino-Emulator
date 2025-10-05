@@ -65,9 +65,6 @@ function(arduino_library LIB_NAME LIB_PATH)
             # For interface libraries, use INTERFACE linkage
             target_link_libraries(${LIB_NAME} INTERFACE arduino_emulator)
         endif()    
-        if (USE_RPI)
-            target_link_libraries(${LIB_NAME} PUBLIC gpiod)
-        endif(USE_RPI)
 
     endif()
 
@@ -122,9 +119,5 @@ function(arduino_sketch name ino_file)
         target_compile_definitions(${name} PUBLIC ${ARG_DEFINITIONS})
     endif()
     
-    # Add platform-specific libraries
-    if (USE_RPI)
-        target_link_libraries(${name} gpiod)
-    endif(USE_RPI)
 endfunction()
 
