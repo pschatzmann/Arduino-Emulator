@@ -224,7 +224,7 @@ unsigned long HardwareGPIO_RPI::pulseInLong(uint8_t pin, uint8_t state,
   return 0;
 }
 
-void HardwareGPIO_RPI::analogWriteFrequency(uint8_t pin, uint32_t freq) {
+void HardwareGPIO_RPI::analogWriteFrequency(pin_size_t pin, uint32_t freq) {
   bool supported = false;
   for (int i = 0; i < 4; ++i) {
     if (pin == pwm_pins[i]) {
