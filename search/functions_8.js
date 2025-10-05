@@ -1,4 +1,10 @@
 var searchData=
 [
-  ['notone_0',['notone',['../classarduino_1_1_g_p_i_o_wrapper.html#a0aeb817fd33c6787d2c50f397d71ec51',1,'arduino::GPIOWrapper::noTone()'],['../classarduino_1_1_hardware_g_p_i_o.html#a67e41cd03e01988d9d3cdb31833ee57b',1,'arduino::HardwareGPIO::noTone()'],['../classarduino_1_1_remote_g_p_i_o.html#ab9703ae97eba599f2bcf1840b6a90aef',1,'arduino::RemoteGPIO::noTone()'],['../classarduino_1_1_hardware_g_p_i_o___r_p_i.html#aec6afeddbee12ace5be0a01bdb17a20c',1,'arduino::HardwareGPIO_RPI::noTone()']]]
+  ['inittimer_0',['initTimer',['../classtime_out.html#a88b4caef4ce7bfc42b73a61589c098e8',1,'timeOut']]],
+  ['iscts_1',['isCTS',['../classserialib.html#aca544a6f8dfa33f8e771713646768215',1,'serialib']]],
+  ['isdcd_2',['isDCD',['../classserialib.html#a5f451a5eea7c8c1bdcff684ba131d6ff',1,'serialib']]],
+  ['isdsr_3',['isDSR',['../classserialib.html#a3f1f0894543dfb17955de50157965dd7',1,'serialib']]],
+  ['isdtr_4',['isDTR',['../classserialib.html#a4ec78286be81602bf1df44a4eb8372a8',1,'serialib']]],
+  ['isri_5',['isRI',['../classserialib.html#a605d8a8015fadb5db5521350aefe084e',1,'serialib']]],
+  ['isrts_6',['isRTS',['../classserialib.html#ab2b121af07fb732f82668f6a14e93cfb',1,'serialib']]]
 ];

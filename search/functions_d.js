@@ -1,5 +1,27 @@
 var searchData=
 [
-  ['timeout_0',['timeOut',['../classtime_out.html#a2cffa89f7b90e4501e07e8cb7ccb3117',1,'timeOut']]],
-  ['tone_1',['tone',['../classarduino_1_1_g_p_i_o_wrapper.html#a4eefb039ba6a8b29f2cce5d2ebf86697',1,'arduino::GPIOWrapper::tone()'],['../classarduino_1_1_hardware_g_p_i_o.html#a9af7c209aa41bc66819441981994cbda',1,'arduino::HardwareGPIO::tone()'],['../classarduino_1_1_remote_g_p_i_o.html#a7feee2166c833a0c349fdf0e57737f65',1,'arduino::RemoteGPIO::tone()'],['../classarduino_1_1_hardware_g_p_i_o___r_p_i.html#a2f12263cb33cfe15f116fc5137785067',1,'arduino::HardwareGPIO_RPI::tone()']]]
+  ['sendbytecheckack_0',['sendByteCheckAck',['../classarduino_1_1_hardware_i2_c___f_t_d_i.html#a8046687f3f668a94f594f026615ff515',1,'arduino::HardwareI2C_FTDI']]],
+  ['senddata_1',['senddata',['../classarduino_1_1_hardware_i2_c___f_t_d_i.html#ae472c6f5189de6539394ddb1ef4a1957',1,'arduino::HardwareI2C_FTDI::sendData()'],['../classarduino_1_1_hardware_s_p_i___f_t_d_i.html#a63b15ef1a05f9a6fa85de09ca327126c',1,'arduino::HardwareSPI_FTDI::sendData()']]],
+  ['sendrepeatedstart_2',['sendRepeatedStart',['../classarduino_1_1_hardware_i2_c___f_t_d_i.html#ac78c80009921c74f0447c44300eb8136',1,'arduino::HardwareI2C_FTDI']]],
+  ['sendstart_3',['sendStart',['../classarduino_1_1_hardware_i2_c___f_t_d_i.html#a5bc8374211506bc957c6944445eef078',1,'arduino::HardwareI2C_FTDI']]],
+  ['sendstop_4',['sendStop',['../classarduino_1_1_hardware_i2_c___f_t_d_i.html#accde84d5f37f50537d47152b18d7fc7e',1,'arduino::HardwareI2C_FTDI']]],
+  ['serial1_5',['Serial1',['../namespacearduino.html#a8bf2dfa8621a2fd45f0f69ee06c2d885',1,'arduino']]],
+  ['serial2_6',['Serial2',['../namespacearduino.html#aa9b5bb779e9660566ebec490609d5d04',1,'arduino']]],
+  ['serialib_7',['serialib',['../classserialib.html#a26166f63ad73013ca7cbcd2ae59edc91',1,'serialib']]],
+  ['setclock_8',['setClock',['../classarduino_1_1_hardware_i2_c___f_t_d_i.html#a52e8bbe713f52da21dc126799b8e4e65',1,'arduino::HardwareI2C_FTDI']]],
+  ['setclockfrequency_9',['setclockfrequency',['../classarduino_1_1_hardware_s_p_i___f_t_d_i.html#a8b81ce5db5892a7d37e109c514d24551',1,'arduino::HardwareSPI_FTDI::setClockFrequency()'],['../classarduino_1_1_hardware_i2_c___f_t_d_i.html#a480ef5cd91e577261882fd0e091b6a4c',1,'arduino::HardwareI2C_FTDI::setClockFrequency()']]],
+  ['setdeviceparams_10',['setDeviceParams',['../classarduino_1_1_hardware_setup_f_t_d_i.html#a0d880b2995aa1ecdd21a2993663c9734',1,'arduino::HardwareSetupFTDI']]],
+  ['setdtr_11',['setDTR',['../classserialib.html#a7564b9e28b1b50675d9d6d3fabc896c0',1,'serialib']]],
+  ['setgpio_12',['setGPIO',['../classarduino_1_1_g_p_i_o_wrapper.html#a4fbb67aaa1e606e6eadf23f4723f01a2',1,'arduino::GPIOWrapper']]],
+  ['seti2c_13',['setI2C',['../classarduino_1_1_i2_c_wrapper.html#af31b2f00dffd4f062d23fce42c1c2678',1,'arduino::I2CWrapper']]],
+  ['setlinestates_14',['setLineStates',['../classarduino_1_1_hardware_i2_c___f_t_d_i.html#a0f76756ad18789206c61f5632a378fea',1,'arduino::HardwareI2C_FTDI']]],
+  ['setrts_15',['setRTS',['../classserialib.html#a21767ffe86a76f300a71c496fbcc26a1',1,'serialib']]],
+  ['setsource_16',['setsource',['../classarduino_1_1_g_p_i_o_wrapper.html#a4aaeb3adb73f412ee1743a33bb829d1a',1,'arduino::GPIOWrapper::setSource()'],['../classarduino_1_1_i2_c_wrapper.html#a3311764d8d6d6a62a86d88d2ad0ce37c',1,'arduino::I2CWrapper::setSource()'],['../classarduino_1_1_s_p_i_wrapper.html#a50ab5983b464332a3d5dab2d7ebc9bde',1,'arduino::SPIWrapper::setSource(SPISource *source)']]],
+  ['setspi_17',['setSPI',['../classarduino_1_1_s_p_i_wrapper.html#aa32e071cd4ff470892e3f22ad41fd189',1,'arduino::SPIWrapper']]],
+  ['startpwmthread_18',['startPWMThread',['../classarduino_1_1_hardware_g_p_i_o___f_t_d_i.html#aecd9e609bff7128b8239bcde706f372e',1,'arduino::HardwareGPIO_FTDI']]],
+  ['stoppwmthread_19',['stopPWMThread',['../classarduino_1_1_hardware_g_p_i_o___f_t_d_i.html#a7ea835b8a253fbed39cf4a2eec925af5',1,'arduino::HardwareGPIO_FTDI']]],
+  ['swap_5fint16_20',['swap_int16',['../classarduino_1_1_hardware_service.html#abac939cf64aa5544b0747da2cf356392',1,'arduino::HardwareService']]],
+  ['swap_5fint32_21',['swap_int32',['../classarduino_1_1_hardware_service.html#a088293bf035a3f094a84484db2905688',1,'arduino::HardwareService']]],
+  ['swap_5fuint16_22',['swap_uint16',['../classarduino_1_1_hardware_service.html#a2b4a50d915c1796e2af32dcabe87369e',1,'arduino::HardwareService']]],
+  ['swap_5fuint32_23',['swap_uint32',['../classarduino_1_1_hardware_service.html#af7cb07b87f7adc926a77094837e18b66',1,'arduino::HardwareService']]]
 ];

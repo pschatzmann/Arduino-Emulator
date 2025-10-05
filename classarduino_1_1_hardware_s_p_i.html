@@ -85,48 +85,327 @@ Inheritance diagram for arduino::HardwareSPI:</div>
  <div class="center">
   <img src="classarduino_1_1_hardware_s_p_i.png" usemap="#arduino::HardwareSPI_map" alt=""/>
   <map id="arduino::HardwareSPI_map" name="arduino::HardwareSPI_map">
-<area href="classarduino_1_1_hardware_s_p_i___r_p_i.html" title="Implementation of SPI communication for Raspberry Pi using Linux SPI device interface." alt="arduino::HardwareSPI_RPI" shape="rect" coords="0,56,162,80"/>
-<area href="classarduino_1_1_remote_s_p_i.html" title="Remote SPI implementation that operates over a communication stream." alt="arduino::RemoteSPI" shape="rect" coords="172,56,334,80"/>
-<area href="classarduino_1_1_s_p_i_wrapper.html" title="SPI wrapper class that provides flexible hardware abstraction." alt="arduino::SPIWrapper" shape="rect" coords="344,56,506,80"/>
+<area href="classarduino_1_1_hardware_s_p_i___f_t_d_i.html" title="Implementation of SPI communication for FTDI FT2232HL using MPSSE mode." alt="arduino::HardwareSPI_FTDI" shape="rect" coords="0,56,170,80"/>
+<area href="classarduino_1_1_hardware_s_p_i___r_p_i.html" title="Implementation of SPI communication for Raspberry Pi using Linux SPI device interface." alt="arduino::HardwareSPI_RPI" shape="rect" coords="180,56,350,80"/>
+<area href="classarduino_1_1_remote_s_p_i.html" title="Remote SPI implementation that operates over a communication stream." alt="arduino::RemoteSPI" shape="rect" coords="360,56,530,80"/>
+<area href="classarduino_1_1_s_p_i_wrapper.html" title="SPI wrapper class that provides flexible hardware abstraction." alt="arduino::SPIWrapper" shape="rect" coords="540,56,710,80"/>
   </map>
 </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ad598d545d2f14ed6e7cc28991add8860" id="r_ad598d545d2f14ed6e7cc28991add8860"><td class="memItemLeft" align="right" valign="top"><a id="ad598d545d2f14ed6e7cc28991add8860" name="ad598d545d2f14ed6e7cc28991add8860"></a>
-<a class="el" href="classarduino_1_1_d_m_a_buffer.html">virtual</a> <a class="el" href="classarduino_1_1_d_m_a_buffer.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><b>attachInterrupt</b> ()=0</td></tr>
+<tr class="memitem:ad598d545d2f14ed6e7cc28991add8860" id="r_ad598d545d2f14ed6e7cc28991add8860"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classarduino_1_1_d_m_a_buffer.html">virtual</a> <a class="el" href="classarduino_1_1_d_m_a_buffer.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classarduino_1_1_hardware_s_p_i.html#ad598d545d2f14ed6e7cc28991add8860">attachInterrupt</a> ()=0</td></tr>
 <tr class="separator:ad598d545d2f14ed6e7cc28991add8860"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae47e860df7c818da20f271db21ea17c3" id="r_ae47e860df7c818da20f271db21ea17c3"><td class="memItemLeft" align="right" valign="top"><a id="ae47e860df7c818da20f271db21ea17c3" name="ae47e860df7c818da20f271db21ea17c3"></a>
 <a class="el" href="classarduino_1_1_d_m_a_buffer.html">virtual</a> <a class="el" href="classarduino_1_1_d_m_a_buffer.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><b>begin</b> ()=0</td></tr>
 <tr class="separator:ae47e860df7c818da20f271db21ea17c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a716995581a26ee8abd5a8a53d5b93870" id="r_a716995581a26ee8abd5a8a53d5b93870"><td class="memItemLeft" align="right" valign="top"><a id="a716995581a26ee8abd5a8a53d5b93870" name="a716995581a26ee8abd5a8a53d5b93870"></a>
-<a class="el" href="classarduino_1_1_d_m_a_buffer.html">virtual</a> <a class="el" href="classarduino_1_1_d_m_a_buffer.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><b>beginTransaction</b> (<a class="el" href="classarduino_1_1_s_p_i_settings.html">SPISettings</a> <a class="el" href="classarduino_1_1_d_m_a_buffer.html">settings</a>)=0</td></tr>
+<tr class="memitem:a716995581a26ee8abd5a8a53d5b93870" id="r_a716995581a26ee8abd5a8a53d5b93870"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classarduino_1_1_d_m_a_buffer.html">virtual</a> <a class="el" href="classarduino_1_1_d_m_a_buffer.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classarduino_1_1_hardware_s_p_i.html#a716995581a26ee8abd5a8a53d5b93870">beginTransaction</a> (<a class="el" href="classarduino_1_1_s_p_i_settings.html">SPISettings</a> <a class="el" href="classarduino_1_1_d_m_a_buffer.html">settings</a>)=0</td></tr>
 <tr class="separator:a716995581a26ee8abd5a8a53d5b93870"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7335b5572e205c6c23bde6e25c57ab6a" id="r_a7335b5572e205c6c23bde6e25c57ab6a"><td class="memItemLeft" align="right" valign="top"><a id="a7335b5572e205c6c23bde6e25c57ab6a" name="a7335b5572e205c6c23bde6e25c57ab6a"></a>
-<a class="el" href="classarduino_1_1_d_m_a_buffer.html">virtual</a> <a class="el" href="classarduino_1_1_d_m_a_buffer.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><b>detachInterrupt</b> ()=0</td></tr>
+<tr class="memitem:a7335b5572e205c6c23bde6e25c57ab6a" id="r_a7335b5572e205c6c23bde6e25c57ab6a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classarduino_1_1_d_m_a_buffer.html">virtual</a> <a class="el" href="classarduino_1_1_d_m_a_buffer.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classarduino_1_1_hardware_s_p_i.html#a7335b5572e205c6c23bde6e25c57ab6a">detachInterrupt</a> ()=0</td></tr>
 <tr class="separator:a7335b5572e205c6c23bde6e25c57ab6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac8aa5da170b0984de4325c90dffb29e7" id="r_ac8aa5da170b0984de4325c90dffb29e7"><td class="memItemLeft" align="right" valign="top"><a id="ac8aa5da170b0984de4325c90dffb29e7" name="ac8aa5da170b0984de4325c90dffb29e7"></a>
-<a class="el" href="classarduino_1_1_d_m_a_buffer.html">virtual</a> <a class="el" href="classarduino_1_1_d_m_a_buffer.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><b>end</b> ()=0</td></tr>
+<tr class="memitem:ac8aa5da170b0984de4325c90dffb29e7" id="r_ac8aa5da170b0984de4325c90dffb29e7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classarduino_1_1_d_m_a_buffer.html">virtual</a> <a class="el" href="classarduino_1_1_d_m_a_buffer.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classarduino_1_1_hardware_s_p_i.html#ac8aa5da170b0984de4325c90dffb29e7">end</a> ()=0</td></tr>
 <tr class="separator:ac8aa5da170b0984de4325c90dffb29e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac9f69e3da1578ad82536577dde9e04e6" id="r_ac9f69e3da1578ad82536577dde9e04e6"><td class="memItemLeft" align="right" valign="top"><a id="ac9f69e3da1578ad82536577dde9e04e6" name="ac9f69e3da1578ad82536577dde9e04e6"></a>
-<a class="el" href="classarduino_1_1_d_m_a_buffer.html">virtual</a> <a class="el" href="classarduino_1_1_d_m_a_buffer.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><b>endTransaction</b> (<a class="el" href="classarduino_1_1_d_m_a_buffer.html">void</a>)=0</td></tr>
+<tr class="memitem:ac9f69e3da1578ad82536577dde9e04e6" id="r_ac9f69e3da1578ad82536577dde9e04e6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classarduino_1_1_d_m_a_buffer.html">virtual</a> <a class="el" href="classarduino_1_1_d_m_a_buffer.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classarduino_1_1_hardware_s_p_i.html#ac9f69e3da1578ad82536577dde9e04e6">endTransaction</a> (<a class="el" href="classarduino_1_1_d_m_a_buffer.html">void</a>)=0</td></tr>
 <tr class="separator:ac9f69e3da1578ad82536577dde9e04e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a02dc46a4e768fe583efd20fc67acf3b7" id="r_a02dc46a4e768fe583efd20fc67acf3b7"><td class="memItemLeft" align="right" valign="top"><a id="a02dc46a4e768fe583efd20fc67acf3b7" name="a02dc46a4e768fe583efd20fc67acf3b7"></a>
-<a class="el" href="classarduino_1_1_d_m_a_buffer.html">virtual</a> <a class="el" href="classarduino_1_1_d_m_a_buffer.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><b>notUsingInterrupt</b> (<a class="el" href="classarduino_1_1_d_m_a_buffer.html">int</a> <a class="el" href="classarduino_1_1_d_m_a_buffer.html">interruptNumber</a>)=0</td></tr>
+<tr class="memitem:a02dc46a4e768fe583efd20fc67acf3b7" id="r_a02dc46a4e768fe583efd20fc67acf3b7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classarduino_1_1_d_m_a_buffer.html">virtual</a> <a class="el" href="classarduino_1_1_d_m_a_buffer.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classarduino_1_1_hardware_s_p_i.html#a02dc46a4e768fe583efd20fc67acf3b7">notUsingInterrupt</a> (<a class="el" href="classarduino_1_1_d_m_a_buffer.html">int</a> <a class="el" href="classarduino_1_1_d_m_a_buffer.html">interruptNumber</a>)=0</td></tr>
 <tr class="separator:a02dc46a4e768fe583efd20fc67acf3b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad910e2eb79a52a2c9fdb2ad67190ecce" id="r_ad910e2eb79a52a2c9fdb2ad67190ecce"><td class="memItemLeft" align="right" valign="top"><a id="ad910e2eb79a52a2c9fdb2ad67190ecce" name="ad910e2eb79a52a2c9fdb2ad67190ecce"></a>
-<a class="el" href="classarduino_1_1_d_m_a_buffer.html">virtual</a> <a class="el" href="classarduino_1_1_d_m_a_buffer.html">uint8_t</a>&#160;</td><td class="memItemRight" valign="bottom"><b>transfer</b> (<a class="el" href="classarduino_1_1_d_m_a_buffer.html">uint8_t</a> data)=0</td></tr>
+<tr class="memitem:ad910e2eb79a52a2c9fdb2ad67190ecce" id="r_ad910e2eb79a52a2c9fdb2ad67190ecce"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classarduino_1_1_d_m_a_buffer.html">virtual</a> <a class="el" href="classarduino_1_1_d_m_a_buffer.html">uint8_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classarduino_1_1_hardware_s_p_i.html#ad910e2eb79a52a2c9fdb2ad67190ecce">transfer</a> (<a class="el" href="classarduino_1_1_d_m_a_buffer.html">uint8_t</a> data)=0</td></tr>
 <tr class="separator:ad910e2eb79a52a2c9fdb2ad67190ecce"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3a6102abc21cab99a17a4d82554bc1fd" id="r_a3a6102abc21cab99a17a4d82554bc1fd"><td class="memItemLeft" align="right" valign="top"><a id="a3a6102abc21cab99a17a4d82554bc1fd" name="a3a6102abc21cab99a17a4d82554bc1fd"></a>
-<a class="el" href="classarduino_1_1_d_m_a_buffer.html">virtual</a> <a class="el" href="classarduino_1_1_d_m_a_buffer.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><b>transfer</b> (<a class="el" href="classarduino_1_1_d_m_a_buffer.html">void</a> *<a class="el" href="classarduino_1_1_d_m_a_buffer.html">buf</a>, <a class="el" href="classarduino_1_1_d_m_a_buffer.html">size_t</a> <a class="el" href="classarduino_1_1_d_m_a_buffer.html">count</a>)=0</td></tr>
+<tr class="memitem:a3a6102abc21cab99a17a4d82554bc1fd" id="r_a3a6102abc21cab99a17a4d82554bc1fd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classarduino_1_1_d_m_a_buffer.html">virtual</a> <a class="el" href="classarduino_1_1_d_m_a_buffer.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classarduino_1_1_hardware_s_p_i.html#a3a6102abc21cab99a17a4d82554bc1fd">transfer</a> (<a class="el" href="classarduino_1_1_d_m_a_buffer.html">void</a> *<a class="el" href="classarduino_1_1_d_m_a_buffer.html">buf</a>, <a class="el" href="classarduino_1_1_d_m_a_buffer.html">size_t</a> <a class="el" href="classarduino_1_1_d_m_a_buffer.html">count</a>)=0</td></tr>
 <tr class="separator:a3a6102abc21cab99a17a4d82554bc1fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af2f155bd2ddf464af2b520c9983dbe04" id="r_af2f155bd2ddf464af2b520c9983dbe04"><td class="memItemLeft" align="right" valign="top"><a id="af2f155bd2ddf464af2b520c9983dbe04" name="af2f155bd2ddf464af2b520c9983dbe04"></a>
-<a class="el" href="classarduino_1_1_d_m_a_buffer.html">virtual</a> <a class="el" href="classarduino_1_1_d_m_a_buffer.html">uint16_t</a>&#160;</td><td class="memItemRight" valign="bottom"><b>transfer16</b> (<a class="el" href="classarduino_1_1_d_m_a_buffer.html">uint16_t</a> data)=0</td></tr>
+<tr class="memitem:af2f155bd2ddf464af2b520c9983dbe04" id="r_af2f155bd2ddf464af2b520c9983dbe04"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classarduino_1_1_d_m_a_buffer.html">virtual</a> <a class="el" href="classarduino_1_1_d_m_a_buffer.html">uint16_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classarduino_1_1_hardware_s_p_i.html#af2f155bd2ddf464af2b520c9983dbe04">transfer16</a> (<a class="el" href="classarduino_1_1_d_m_a_buffer.html">uint16_t</a> data)=0</td></tr>
 <tr class="separator:af2f155bd2ddf464af2b520c9983dbe04"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a09087655eadc7a6ac517ffb7e85dc0a7" id="r_a09087655eadc7a6ac517ffb7e85dc0a7"><td class="memItemLeft" align="right" valign="top"><a id="a09087655eadc7a6ac517ffb7e85dc0a7" name="a09087655eadc7a6ac517ffb7e85dc0a7"></a>
-<a class="el" href="classarduino_1_1_d_m_a_buffer.html">virtual</a> <a class="el" href="classarduino_1_1_d_m_a_buffer.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><b>usingInterrupt</b> (<a class="el" href="classarduino_1_1_d_m_a_buffer.html">int</a> <a class="el" href="classarduino_1_1_d_m_a_buffer.html">interruptNumber</a>)=0</td></tr>
+<tr class="memitem:a09087655eadc7a6ac517ffb7e85dc0a7" id="r_a09087655eadc7a6ac517ffb7e85dc0a7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classarduino_1_1_d_m_a_buffer.html">virtual</a> <a class="el" href="classarduino_1_1_d_m_a_buffer.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classarduino_1_1_hardware_s_p_i.html#a09087655eadc7a6ac517ffb7e85dc0a7">usingInterrupt</a> (<a class="el" href="classarduino_1_1_d_m_a_buffer.html">int</a> <a class="el" href="classarduino_1_1_d_m_a_buffer.html">interruptNumber</a>)=0</td></tr>
 <tr class="separator:a09087655eadc7a6ac517ffb7e85dc0a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="ad598d545d2f14ed6e7cc28991add8860" name="ad598d545d2f14ed6e7cc28991add8860"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad598d545d2f14ed6e7cc28991add8860">&#9670;&#160;</a></span>attachInterrupt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classarduino_1_1_d_m_a_buffer.html">virtual</a> <a class="el" href="classarduino_1_1_d_m_a_buffer.html">void</a> arduino::HardwareSPI::attachInterrupt </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implemented in <a class="el" href="classarduino_1_1_hardware_s_p_i___f_t_d_i.html#afb70031fef31707e6b8a4ce7a2055f0a">arduino::HardwareSPI_FTDI</a>.</p>
+
+</div>
+</div>
+<a id="a716995581a26ee8abd5a8a53d5b93870" name="a716995581a26ee8abd5a8a53d5b93870"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a716995581a26ee8abd5a8a53d5b93870">&#9670;&#160;</a></span>beginTransaction()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classarduino_1_1_d_m_a_buffer.html">virtual</a> <a class="el" href="classarduino_1_1_d_m_a_buffer.html">void</a> arduino::HardwareSPI::beginTransaction </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classarduino_1_1_s_p_i_settings.html">SPISettings</a>&#160;</td>
+          <td class="paramname"><em>settings</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implemented in <a class="el" href="classarduino_1_1_hardware_s_p_i___f_t_d_i.html#a70ddd08cf63a47c719511b14b5bceab9">arduino::HardwareSPI_FTDI</a>.</p>
+
+</div>
+</div>
+<a id="a7335b5572e205c6c23bde6e25c57ab6a" name="a7335b5572e205c6c23bde6e25c57ab6a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7335b5572e205c6c23bde6e25c57ab6a">&#9670;&#160;</a></span>detachInterrupt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classarduino_1_1_d_m_a_buffer.html">virtual</a> <a class="el" href="classarduino_1_1_d_m_a_buffer.html">void</a> arduino::HardwareSPI::detachInterrupt </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implemented in <a class="el" href="classarduino_1_1_hardware_s_p_i___f_t_d_i.html#a5c73df0608004c034c20537eecc4c54e">arduino::HardwareSPI_FTDI</a>.</p>
+
+</div>
+</div>
+<a id="ac8aa5da170b0984de4325c90dffb29e7" name="ac8aa5da170b0984de4325c90dffb29e7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac8aa5da170b0984de4325c90dffb29e7">&#9670;&#160;</a></span>end()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classarduino_1_1_d_m_a_buffer.html">virtual</a> <a class="el" href="classarduino_1_1_d_m_a_buffer.html">void</a> arduino::HardwareSPI::end </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implemented in <a class="el" href="classarduino_1_1_hardware_s_p_i___f_t_d_i.html#aea83c5e8690439d3892b9289ef17a86e">arduino::HardwareSPI_FTDI</a>.</p>
+
+</div>
+</div>
+<a id="ac9f69e3da1578ad82536577dde9e04e6" name="ac9f69e3da1578ad82536577dde9e04e6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac9f69e3da1578ad82536577dde9e04e6">&#9670;&#160;</a></span>endTransaction()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classarduino_1_1_d_m_a_buffer.html">virtual</a> <a class="el" href="classarduino_1_1_d_m_a_buffer.html">void</a> arduino::HardwareSPI::endTransaction </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classarduino_1_1_d_m_a_buffer.html">void</a>&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implemented in <a class="el" href="classarduino_1_1_hardware_s_p_i___f_t_d_i.html#a0b980e80b8ad443a67bdd26d15b25572">arduino::HardwareSPI_FTDI</a>.</p>
+
+</div>
+</div>
+<a id="a02dc46a4e768fe583efd20fc67acf3b7" name="a02dc46a4e768fe583efd20fc67acf3b7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a02dc46a4e768fe583efd20fc67acf3b7">&#9670;&#160;</a></span>notUsingInterrupt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classarduino_1_1_d_m_a_buffer.html">virtual</a> <a class="el" href="classarduino_1_1_d_m_a_buffer.html">void</a> arduino::HardwareSPI::notUsingInterrupt </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classarduino_1_1_d_m_a_buffer.html">int</a>&#160;</td>
+          <td class="paramname"><em>interruptNumber</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implemented in <a class="el" href="classarduino_1_1_hardware_s_p_i___f_t_d_i.html#a784f2eb8f64f3d1be53c2e737f2282e6">arduino::HardwareSPI_FTDI</a>.</p>
+
+</div>
+</div>
+<a id="ad910e2eb79a52a2c9fdb2ad67190ecce" name="ad910e2eb79a52a2c9fdb2ad67190ecce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad910e2eb79a52a2c9fdb2ad67190ecce">&#9670;&#160;</a></span>transfer() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classarduino_1_1_d_m_a_buffer.html">virtual</a> <a class="el" href="classarduino_1_1_d_m_a_buffer.html">uint8_t</a> arduino::HardwareSPI::transfer </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classarduino_1_1_d_m_a_buffer.html">uint8_t</a>&#160;</td>
+          <td class="paramname"><em>data</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implemented in <a class="el" href="classarduino_1_1_hardware_s_p_i___f_t_d_i.html#a7da8f98d8e501be09759007f575a93ac">arduino::HardwareSPI_FTDI</a>.</p>
+
+</div>
+</div>
+<a id="a3a6102abc21cab99a17a4d82554bc1fd" name="a3a6102abc21cab99a17a4d82554bc1fd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3a6102abc21cab99a17a4d82554bc1fd">&#9670;&#160;</a></span>transfer() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classarduino_1_1_d_m_a_buffer.html">virtual</a> <a class="el" href="classarduino_1_1_d_m_a_buffer.html">void</a> arduino::HardwareSPI::transfer </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classarduino_1_1_d_m_a_buffer.html">void</a> *&#160;</td>
+          <td class="paramname"><em>buf</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classarduino_1_1_d_m_a_buffer.html">size_t</a>&#160;</td>
+          <td class="paramname"><em>count</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implemented in <a class="el" href="classarduino_1_1_hardware_s_p_i___f_t_d_i.html#ac8562c53a48d7f7cc160e592cbc8ad88">arduino::HardwareSPI_FTDI</a>.</p>
+
+</div>
+</div>
+<a id="af2f155bd2ddf464af2b520c9983dbe04" name="af2f155bd2ddf464af2b520c9983dbe04"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af2f155bd2ddf464af2b520c9983dbe04">&#9670;&#160;</a></span>transfer16()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classarduino_1_1_d_m_a_buffer.html">virtual</a> <a class="el" href="classarduino_1_1_d_m_a_buffer.html">uint16_t</a> arduino::HardwareSPI::transfer16 </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classarduino_1_1_d_m_a_buffer.html">uint16_t</a>&#160;</td>
+          <td class="paramname"><em>data</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implemented in <a class="el" href="classarduino_1_1_hardware_s_p_i___f_t_d_i.html#a3c717296528871f2dc756efb235a492d">arduino::HardwareSPI_FTDI</a>.</p>
+
+</div>
+</div>
+<a id="a09087655eadc7a6ac517ffb7e85dc0a7" name="a09087655eadc7a6ac517ffb7e85dc0a7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a09087655eadc7a6ac517ffb7e85dc0a7">&#9670;&#160;</a></span>usingInterrupt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classarduino_1_1_d_m_a_buffer.html">virtual</a> <a class="el" href="classarduino_1_1_d_m_a_buffer.html">void</a> arduino::HardwareSPI::usingInterrupt </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classarduino_1_1_d_m_a_buffer.html">int</a>&#160;</td>
+          <td class="paramname"><em>interruptNumber</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implemented in <a class="el" href="classarduino_1_1_hardware_s_p_i___f_t_d_i.html#aa2c06dc801e9849324290a83662f214a">arduino::HardwareSPI_FTDI</a>.</p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>ArduinoCore-API/api/<a class="el" href="_hardware_s_p_i_8h_source.html">HardwareSPI.h</a></li>
 </ul>

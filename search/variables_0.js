@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['gpio_0',['GPIO',['../namespacearduino.html#a67230408a4be8e454f3947313e30c0e1',1,'arduino']]]
+  ['ftdi_0',['FTDI',['../namespacearduino.html#aa493660fbe7510eae3086ce7e525fb29',1,'arduino']]]
 ];
