@@ -1,7 +1,0 @@
-var searchData=
-[
-  ['begin_0',['begin',['../classarduino_1_1_hardware_c_a_n.html#a784fbdde8524fa2e2d332a882ed03b5e',1,'arduino::HardwareCAN::begin()'],['../classarduino_1_1_hardware_setup_remote.html#abe57889e4711d7b71f46bfa1d74e57e7',1,'arduino::HardwareSetupRemote::begin(Stream *s, bool asDefault=true, bool doHandShake=true)'],['../classarduino_1_1_hardware_setup_remote.html#a061b8f969e2ff3effdaab762508af04b',1,'arduino::HardwareSetupRemote::begin(int port, bool asDefault)'],['../classarduino_1_1_hardware_setup_remote.html#aa166a81edc67949e56dc14fa8b984fdc',1,'arduino::HardwareSetupRemote::begin(bool asDefault=true)'],['../classarduino_1_1_hardware_g_p_i_o___r_p_i.html#a48ddae6a1acd20f13460c94ea620d5b0',1,'arduino::HardwareGPIO_RPI::begin()'],['../classarduino_1_1_hardware_setup_r_p_i.html#a5307755b8fd46e0aaec33ca52c68576b',1,'arduino::HardwareSetupRPI::begin()']]],
-  ['bugs_20issues_1',['Bugs &amp; Issues',['..//home/pschatzmann/Development/Arduino-Emulator/ArduinoCore-API/README.md#autotoc_md14',1,'']]],
-  ['build_20and_20run_20unit_20tests_2',['To build and run unit tests',['..//home/pschatzmann/Development/Arduino-Emulator/ArduinoCore-API/README.md#autotoc_md17',1,'']]],
-  ['build_20instructions_3',['Build instructions',['../index.html#autotoc_md6',1,'']]]
-];
