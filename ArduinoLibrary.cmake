@@ -31,11 +31,20 @@ function(arduino_library LIB_NAME LIB_PATH)
         endif()
         set(LIB_PATH "${CLONE_DIR}")
     endif()
-    set(INC_DIR "${LIB_PATH}/src")
-    file(GLOB SRC_FILES
-        "${LIB_PATH}/src/*.c"
-        "${LIB_PATH}/src/*.cpp"
-    )
+    if(EXISTS "${LIB_PATH}/src")
+        set(INC_DIR "${LIB_PATH}/src")
+        file(GLOB_RECURSE SRC_FILES
+            "${LIB_PATH}/src/*.c"
+            "${LIB_PATH}/src/*.cpp"
+        )
+    else()
+        # Legacy libraries without src folder
+        set(INC_DIR "${LIB_PATH}")
+        file(GLOB_RECURSE SRC_FILES
+            "${LIB_PATH}/*.c"
+            "${LIB_PATH}/*.cpp"
+        )
+    endif()
     # Only create library if there are source files
     if(SRC_FILES)
         add_library(${LIB_NAME} STATIC ${SRC_FILES})
