@@ -11,8 +11,8 @@ BME280 mySensor;
 void setup() {
 	Serial.begin(9600);
 	Serial.println("Reading basic values from BME280");
-	// Begin communication over SPI. Use pin 10 as CS.
-	if (mySensor.beginSPI(csPin) == false) {
+	// Begin communication over SPI. Use pin 13 as CS.
+	if (!mySensor.beginSPI(csPin)) {
 		Serial.println("The sensor did not respond. Please check wiring.");
 		while (1);  // Freeze
 	}
