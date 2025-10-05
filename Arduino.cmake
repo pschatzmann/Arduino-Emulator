@@ -64,8 +64,13 @@ function(arduino_library LIB_NAME LIB_PATH)
         else()
             # For interface libraries, use INTERFACE linkage
             target_link_libraries(${LIB_NAME} INTERFACE arduino_emulator)
-        endif()
+        endif()    
+        if (USE_RPI)
+            target_link_libraries(${LIB_NAME} PUBLIC gpiod)
+        endif(USE_RPI)
+
     endif()
+
 endfunction()
 
 # arduino_sketch(<name> <ino_file> [LIBRARIES <lib1> <lib2> ...] [DEFINITIONS <def1> <def2> ...])
