@@ -22,6 +22,11 @@ if(USE_HTTPS)
     add_definitions(-DUSE_HTTPS -DDEBUG_WOLFSSL)
 endif(USE_HTTPS)
 
+# FTDI support: Build with libftdi1
+if(USE_FTDI)
+    add_definitions(-DUSE_FTDI)
+endif(USE_FTDI)
+
 add_definitions(-DHOST)
 
 # glob, but only for CMake 3.12 or later:
@@ -29,7 +34,8 @@ file(GLOB HEADER_LIST CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/ArduinoCore
 file(GLOB SRC_LIST CONFIGURE_DEPENDS 
     "${CMAKE_CURRENT_SOURCE_DIR}/ArduinoCore-API/api/*.cpp" 
     "${CMAKE_CURRENT_SOURCE_DIR}/ArduinoCore-Linux/cores/arduino/*.cpp" 
-    "${CMAKE_CURRENT_SOURCE_DIR}/ArduinoCore-Linux/cores/rasperry_pi/*.cpp")
+    "${CMAKE_CURRENT_SOURCE_DIR}/ArduinoCore-Linux/cores/rasperry_pi/*.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/ArduinoCore-Linux/cores/ftdi/*.cpp")
 
 # Make an dynamic library 
 add_library(arduino_emulator ${SRC_LIST} ${HEADER_LIST})
@@ -39,6 +45,7 @@ target_include_directories (arduino_emulator PUBLIC
     "${CMAKE_CURRENT_SOURCE_DIR}/ArduinoCore-API"
     "${CMAKE_CURRENT_SOURCE_DIR}/ArduinoCore-Linux/cores/arduino"
     "${CMAKE_CURRENT_SOURCE_DIR}/ArduinoCore-Linux/cores/rasperry_pi"
+    "${CMAKE_CURRENT_SOURCE_DIR}/ArduinoCore-Linux/cores/ftdi"
     "${CMAKE_CURRENT_SOURCE_DIR}/ArduinoCore-Linux/libraries" 
     "${CMAKE_CURRENT_SOURCE_DIR}/ArduinoCore-API/api/deprecated"
     )   
@@ -57,7 +64,6 @@ install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/ArduinoCore-Linux/cores/arduino/"
 
 # All users of this library will need at least C++17
 target_compile_features(arduino_emulator PUBLIC cxx_std_17)
-target_compile_options(arduino_emulator PRIVATE -Wno-nonportable-include-path)
 
 # Include Arduino library functions
 include(${CMAKE_CURRENT_SOURCE_DIR}/Arduino.cmake)
@@ -75,6 +81,17 @@ if(USE_HTTPS)
     # Add external libraries
     target_link_libraries(arduino_emulator wolfssl)
 endif(USE_HTTPS)
+
+if(USE_FTDI)
+    # Link with libftdi1
+    find_package(PkgConfig REQUIRED)
+    pkg_check_modules(FTDI REQUIRED libftdi1)
+    target_link_libraries(arduino_emulator ${FTDI_LIBRARIES})
+    target_include_directories(arduino_emulator PUBLIC ${FTDI_INCLUDE_DIRS})
+    target_compile_options(arduino_emulator PUBLIC ${FTDI_CFLAGS_OTHER})
+    # Suppress deprecation warnings for FTDI-related code
+    target_compile_options(arduino_emulator PRIVATE -Wno-deprecated-declarations)
+endif(USE_FTDI)
 
 # build examples
 add_subdirectory("examples")

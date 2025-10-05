@@ -66,6 +66,8 @@ enum HWCalls {
   GpioNoTone,
   GpioPulseIn,
   GpioPulseInLong,
+  GpioAnalogWriteFrequency,
+  GpioAnalogWriteResolution,
   SerialBegin,
   SerialEnd,
   SerialWrite,

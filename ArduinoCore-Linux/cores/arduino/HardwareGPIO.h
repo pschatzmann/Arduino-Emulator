@@ -1,5 +1,5 @@
 /*
-  HardwareGPIO.h 
+  HardwareGPIO.h
   Copyright (c) 2025 Phil Schatzmann. All right reserved.
 
   This library is free software; you can redistribute it and/or
@@ -25,10 +25,10 @@ namespace arduino {
 /**
  * @brief Abstract base class for GPIO (General Purpose Input/Output) functions
  *
- * HardwareGPIO defines the interface for hardware abstraction of GPIO operations
- * across different platforms and microcontrollers. This class provides a unified
- * API for digital and analog I/O operations that can be implemented by platform-specific
- * classes.
+ * HardwareGPIO defines the interface for hardware abstraction of GPIO
+ * operations across different platforms and microcontrollers. This class
+ * provides a unified API for digital and analog I/O operations that can be
+ * implemented by platform-specific classes.
  *
  * The class supports:
  * - Digital pin operations (pinMode, digitalWrite, digitalRead)
@@ -100,7 +100,8 @@ class HardwareGPIO {
    * @param frequency The frequency of the tone in hertz
    * @param duration The duration of the tone in milliseconds (0 = continuous)
    */
-  virtual void tone(uint8_t _pin, unsigned int frequency, unsigned long duration = 0) = 0;
+  virtual void tone(uint8_t _pin, unsigned int frequency,
+                    unsigned long duration = 0) = 0;
 
   /**
    * @brief Stop the generation of a square wave triggered by tone()
@@ -115,7 +116,8 @@ class HardwareGPIO {
    * @param timeout Timeout in microseconds (default 1 second)
    * @return The length of the pulse in microseconds, or 0 if timeout
    */
-  virtual unsigned long pulseIn(uint8_t pin, uint8_t state, unsigned long timeout = 1000000L) = 0;
+  virtual unsigned long pulseIn(uint8_t pin, uint8_t state,
+                                unsigned long timeout = 1000000L) = 0;
 
   /**
    * @brief Alternative to pulseIn() which is better at handling long pulses
@@ -124,7 +126,23 @@ class HardwareGPIO {
    * @param timeout Timeout in microseconds (default 1 second)
    * @return The length of the pulse in microseconds, or 0 if timeout
    */
-  virtual unsigned long pulseInLong(uint8_t pin, uint8_t state, unsigned long timeout = 1000000L) = 0;
+  virtual unsigned long pulseInLong(uint8_t pin, uint8_t state,
+                                    unsigned long timeout = 1000000L) = 0;
+
+  /**
+   * @brief Set the PWM frequency for analogWrite() on the specified pin
+   * @param pin The pin number to configure PWM frequency for
+   * @param freq The desired PWM frequency in Hz
+   * @note Not all platforms support per-pin frequency control
+   */
+  virtual void analogWriteFrequency(pin_size_t pin, uint32_t freq) = 0;
+
+  /**
+   * @brief Set the resolution of the analogWrite() values
+   * @param bits The resolution in bits (e.g., 8 for 0-255, 10 for 0-1023)
+   * @note Default is typically 8 bits (0-255). Higher resolutions may not be supported on all platforms
+   */
+  virtual void analogWriteResolution(uint8_t bits) = 0;
 };
 
 }  // namespace arduino
