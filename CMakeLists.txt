@@ -66,7 +66,7 @@ install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/ArduinoCore-Linux/cores/arduino/"
 target_compile_features(arduino_emulator PUBLIC cxx_std_17)
 
 # Include Arduino library functions
-include(${CMAKE_CURRENT_SOURCE_DIR}/ArduinoLibrary.cmake)
+include(${CMAKE_CURRENT_SOURCE_DIR}/Arduino.cmake)
 
 if (USE_RPI)
     target_compile_options(arduino_emulator PUBLIC -DUSE_RPI)

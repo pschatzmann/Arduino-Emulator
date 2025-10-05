@@ -1,10 +1,10 @@
-# ArduinoLibrary.cmake
+# Arduino.cmake
 # Defines a function to easily add Arduino-style libraries to your CMake project.
 #
 # Example usage for arduino-SAM library from GitHub
-# Place this in your CMakeLists.txt after including ArduinoLibrary.cmake
+# Place this in your CMakeLists.txt after including Arduino.cmake
 #
-# include(${CMAKE_SOURCE_DIR}/ArduinoLibrary.cmake)
+# include(${CMAKE_SOURCE_DIR}/Arduino.cmake)
 # arduino_library(arduino-SAM "https://github.com/pschatzmann/arduino-SAM")
 # target_link_libraries(your_target PRIVATE arduino-SAM)
 
