@@ -51,6 +51,7 @@ class HardwareSetupRPI : public I2CSource, public SPISource, public GPIOSource {
 
     // define the global hardware interfaces
     if (asDefault) {
+      Logger.warning("GPIO, I2C, SPI set up for Raspberry Pi");
       GPIO.setGPIO(&gpio);
       SPI.setSPI(&spi);
       Wire.setI2C(&i2c);

@@ -76,6 +76,7 @@ class HardwareSetupRemote : public I2CSource,
 
     // setup global objects
     if (asDefault) {
+      Logger.warning("GPIO, I2C, SPI set up for Remote");
       SPI.setSPI(&spi);
       Wire.setI2C(&i2c);
       GPIO.setGPIO(&gpio);
