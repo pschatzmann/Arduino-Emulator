@@ -51,11 +51,12 @@ function(arduino_library LIB_NAME LIB_PATH)
         target_compile_options(${LIB_NAME} PRIVATE -DPROGMEM=)
         # Ensure C files are compiled as C, not C++
         set_target_properties(${LIB_NAME} PROPERTIES LINKER_LANGUAGE C)
+        target_include_directories(${LIB_NAME} PUBLIC ${INC_DIR})
     else()
         # Create a header-only interface library if no source files
         add_library(${LIB_NAME} INTERFACE)
+        target_include_directories(${LIB_NAME} INTERFACE ${INC_DIR})
     endif()
-    target_include_directories(${LIB_NAME} PUBLIC ${INC_DIR})
     # Link arduino_emulator to propagate its include directories
     if(TARGET arduino_emulator)
         if(SRC_FILES)
