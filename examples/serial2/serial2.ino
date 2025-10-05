@@ -7,6 +7,8 @@ void setup() {
 }
 
 void loop() {
-  Serial2.println("Hallo world from Serial2");
+  auto txt = "Hallo world from Serial2";
+  Serial.println(txt);
+  Serial2.println(txt);
   delay(1000); // Wait for 1 second
 }
