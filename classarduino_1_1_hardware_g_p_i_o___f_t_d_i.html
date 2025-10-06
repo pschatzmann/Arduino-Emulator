@@ -140,6 +140,9 @@ Public Member Functions</h2></td></tr>
 <a class="el" href="classarduino_1_1_d_m_a_buffer.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><b>end</b> ()</td></tr>
 <tr class="memdesc:aa13a830e1aff61c90387a1a71d105f1f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Close the FTDI connection and cleanup resources. <br /></td></tr>
 <tr class="separator:aa13a830e1aff61c90387a1a71d105f1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1406a34d57feee1ff6a3237e0e04af27" id="r_a1406a34d57feee1ff6a3237e0e04af27"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classarduino_1_1_d_m_a_buffer.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classarduino_1_1_hardware_g_p_i_o___f_t_d_i.html#a1406a34d57feee1ff6a3237e0e04af27">getPWMStatistics</a> (pin_size_t <a class="el" href="classarduino_1_1_d_m_a_buffer.html">pin</a>, <a class="el" href="classarduino_1_1_d_m_a_buffer.html">uint64_t</a> &amp;<a class="el" href="classarduino_1_1_d_m_a_buffer.html">cycles</a>, <a class="el" href="classarduino_1_1_d_m_a_buffer.html">uint64_t</a> &amp;max_jitter_us, <a class="el" href="classarduino_1_1_d_m_a_buffer.html">uint64_t</a> &amp;<a class="el" href="classarduino_1_1_d_m_a_buffer.html">avg_jitter_us</a>)</td></tr>
+<tr class="memdesc:a1406a34d57feee1ff6a3237e0e04af27"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get PWM statistics for monitoring timing accuracy.  <br /></td></tr>
+<tr class="separator:a1406a34d57feee1ff6a3237e0e04af27"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0aa457f595bb700c3080c05d94b2d33f" id="r_a0aa457f595bb700c3080c05d94b2d33f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classarduino_1_1_d_m_a_buffer.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classarduino_1_1_hardware_g_p_i_o___f_t_d_i.html#a0aa457f595bb700c3080c05d94b2d33f">noTone</a> (<a class="el" href="classarduino_1_1_d_m_a_buffer.html">uint8_t</a> <a class="el" href="classarduino_1_1_d_m_a_buffer.html">_pin</a>) <a class="el" href="classarduino_1_1_d_m_a_buffer.html">override</a></td></tr>
 <tr class="memdesc:a0aa457f595bb700c3080c05d94b2d33f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stop tone generation on a pin (not supported by FT2232HL).  <br /></td></tr>
 <tr class="separator:a0aa457f595bb700c3080c05d94b2d33f"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -644,6 +647,57 @@ Requires libftdi1 development library to be installed. </dd></dl>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Channel number (0 for pins 0-7, 1 for pins 8-15) </dd></dl>
+
+</div>
+</div>
+<a id="a1406a34d57feee1ff6a3237e0e04af27" name="a1406a34d57feee1ff6a3237e0e04af27"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1406a34d57feee1ff6a3237e0e04af27">&#9670;&#160;</a></span>getPWMStatistics()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classarduino_1_1_d_m_a_buffer.html">void</a> arduino::HardwareGPIO_FTDI::getPWMStatistics </td>
+          <td>(</td>
+          <td class="paramtype">pin_size_t&#160;</td>
+          <td class="paramname"><em>pin</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classarduino_1_1_d_m_a_buffer.html">uint64_t</a> &amp;&#160;</td>
+          <td class="paramname"><em>cycles</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classarduino_1_1_d_m_a_buffer.html">uint64_t</a> &amp;&#160;</td>
+          <td class="paramname"><em>max_jitter_us</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classarduino_1_1_d_m_a_buffer.html">uint64_t</a> &amp;&#160;</td>
+          <td class="paramname"><em>avg_jitter_us</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get PWM statistics for monitoring timing accuracy. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pin</td><td>Pin number </td></tr>
+    <tr><td class="paramname">cycles</td><td>Total number of PWM cycles completed </td></tr>
+    <tr><td class="paramname">max_jitter_us</td><td>Maximum jitter observed in microseconds </td></tr>
+    <tr><td class="paramname">avg_jitter_us</td><td>Average jitter in microseconds </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
