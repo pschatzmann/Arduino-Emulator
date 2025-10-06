@@ -79,6 +79,16 @@ bool HardwareGPIO_FTDI::begin(int vendor_id, int product_id,
     return false;
   }
 
+  // Set low latency timer for better PWM performance (default is 16ms, set to 1ms)
+  ret = ftdi_set_latency_timer(ftdi_context, 1);
+  if (ret < 0) {
+    Logger.warning("Failed to set latency timer: %s", ftdi_get_error_string(ftdi_context));
+  }
+  
+  // Enable USB transfer chunking for better performance
+  ftdi_write_data_set_chunksize(ftdi_context, 256);
+  ftdi_read_data_set_chunksize(ftdi_context, 256);
+
   is_open = true;
   Logger.info("FTDI GPIO interface initialized successfully");
   return true;
@@ -249,8 +259,9 @@ void HardwareGPIO_FTDI::analogWriteFrequency(pin_size_t pinNumber, uint32_t freq
     return;
   }
   
-  if (frequency == 0 || frequency > 100000) {  // Limit to reasonable range
-    Logger.error("Invalid PWM frequency (valid range: 1-100000)");
+  // Limit to reasonable range - higher frequencies will have poor accuracy due to USB latency
+  if (frequency == 0 || frequency > 10000) {
+    Logger.error("Invalid PWM frequency (valid range: 1-10000 Hz for reliable operation)");
     return;
   }
   
@@ -268,7 +279,7 @@ void HardwareGPIO_FTDI::analogWriteFrequency(pin_size_t pinNumber, uint32_t freq
     // If PWM was active, recalculate timing
     if (was_enabled) {
       pwm.on_time_us = (pwm.period_us * current_duty) / 255;
-      pwm.last_toggle = std::chrono::high_resolution_clock::now();
+      pwm.period_start = std::chrono::high_resolution_clock::now();
       Logger.debug("Updated PWM frequency for active pin");
     }
   }
@@ -377,7 +388,8 @@ void HardwareGPIO_FTDI::pwmThreadFunction() {
   
   while (pwm_thread_running) {
     auto current_time = std::chrono::high_resolution_clock::now();
-    bool state_changed = false;
+    bool channel_a_changed = false;
+    bool channel_b_changed = false;
     
     {
       std::lock_guard<std::mutex> lock(pwm_mutex);
@@ -390,59 +402,97 @@ void HardwareGPIO_FTDI::pwmThreadFunction() {
         if (!pwm.enabled) continue;
         
         auto elapsed = std::chrono::duration_cast<std::chrono::microseconds>(
-          current_time - pwm.last_toggle).count();
+          current_time - pwm.period_start).count();
         
-        if (pwm.current_state) {
-          // Pin is currently HIGH, check if it's time to go LOW
-          if (elapsed >= pwm.on_time_us) {
-            pwm.current_state = false;
-            pwm.last_toggle = current_time;
-            
-            // Update hardware pin state
-            int channel = getChannel(pin);
-            int bit_pos = getBitPosition(pin);
-            
-            if (channel == 0) {
+        bool new_state = false;
+        bool state_change = false;
+        
+        if (elapsed >= pwm.period_us) {
+          // New period starts
+          // Calculate jitter for statistics
+          uint64_t expected_period_time = pwm.cycle_count * pwm.period_us;
+          auto total_elapsed = std::chrono::duration_cast<std::chrono::microseconds>(
+            current_time - pwm.period_start).count();
+          uint64_t jitter = (total_elapsed > expected_period_time) ? 
+                           (total_elapsed - expected_period_time) : 
+                           (expected_period_time - total_elapsed);
+          
+          pwm.total_jitter_us += jitter;
+          if (jitter > pwm.max_jitter_us) {
+            pwm.max_jitter_us = jitter;
+          }
+          
+          pwm.period_start = current_time;
+          pwm.cycle_count++;
+          new_state = (pwm.on_time_us > 0);
+          state_change = (new_state != pwm.current_state);
+        } else if (pwm.current_state && elapsed >= pwm.on_time_us) {
+          // Transition HIGH to LOW
+          new_state = false;
+          state_change = true;
+        } else {
+          new_state = pwm.current_state;
+        }
+        
+        if (state_change) {
+          pwm.current_state = new_state;
+          int channel = getChannel(pin);
+          int bit_pos = getBitPosition(pin);
+          
+          if (channel == 0) {
+            if (new_state) {
+              pin_values_a |= (1 << bit_pos);
+            } else {
               pin_values_a &= ~(1 << bit_pos);
+            }
+            channel_a_changed = true;
+          } else {
+            if (new_state) {
+              pin_values_b |= (1 << bit_pos);
             } else {
               pin_values_b &= ~(1 << bit_pos);
             }
-            state_changed = true;
-          }
-        } else {
-          // Pin is currently LOW, check if it's time to go HIGH or start new period
-          uint32_t off_time_us = pwm.period_us - pwm.on_time_us;
-          if (elapsed >= off_time_us) {
-            pwm.current_state = true;
-            pwm.last_toggle = current_time;
-            
-            // Update hardware pin state (only if duty cycle > 0)
-            if (pwm.on_time_us > 0) {
-              int channel = getChannel(pin);
-              int bit_pos = getBitPosition(pin);
-              
-              if (channel == 0) {
-                pin_values_a |= (1 << bit_pos);
-              } else {
-                pin_values_b |= (1 << bit_pos);
-              }
-              state_changed = true;
-            }
+            channel_b_changed = true;
           }
         }
       }
     }
     
-    // Update hardware if any pin states changed
-    if (state_changed) {
-      // Update both channels - this could be optimized to only update changed channels
+    // Update only changed channels to reduce USB overhead
+    if (channel_a_changed) {
       updateGPIOState(0);
+    }
+    if (channel_b_changed) {
       updateGPIOState(1);
     }
     
-    // Sleep for a short time to avoid excessive CPU usage
-    // PWM resolution is limited by this sleep time
-    std::this_thread::sleep_for(std::chrono::microseconds(10));
+    // Dynamic sleep time based on active PWM frequencies
+    // Sleep for a fraction of the minimum period to ensure responsive timing
+    auto min_period = std::chrono::microseconds::max();
+    {
+      std::lock_guard<std::mutex> lock(pwm_mutex);
+      for (const auto& pair : pwm_pins) {
+        if (pair.second.enabled) {
+          auto period = std::chrono::microseconds(pair.second.period_us);
+          min_period = std::min(min_period, period);
+        }
+      }
+    }
+    
+    if (min_period != std::chrono::microseconds::max()) {
+      // Sleep for 1% of minimum period, but at least 1µs and at most 100µs
+      auto sleep_time = std::max(
+        std::chrono::microseconds(1),
+        std::min(
+          std::chrono::microseconds(100),
+          min_period / 100
+        )
+      );
+      std::this_thread::sleep_for(sleep_time);
+    } else {
+      // No active PWM pins, sleep longer
+      std::this_thread::sleep_for(std::chrono::microseconds(100));
+    }
   }
   
   Logger.info("PWM thread stopped");
@@ -453,6 +503,19 @@ void HardwareGPIO_FTDI::startPWMThread() {
   
   pwm_thread_running = true;
   pwm_thread = std::thread(&HardwareGPIO_FTDI::pwmThreadFunction, this);
+  
+  // Set real-time priority for better timing accuracy (Linux only)
+  #ifdef __linux__
+  struct sched_param param;
+  param.sched_priority = sched_get_priority_max(SCHED_FIFO) - 1; // High but not max priority
+  if (pthread_setschedparam(pwm_thread.native_handle(), SCHED_FIFO, &param) != 0) {
+    Logger.warning("Failed to set real-time priority for PWM thread (requires CAP_SYS_NICE capability or root)");
+    Logger.warning("PWM timing may be less accurate. Consider running with elevated privileges for production use.");
+  } else {
+    Logger.info("PWM thread running with real-time priority");
+  }
+  #endif
+  
   Logger.info("PWM thread started");
 }
 
@@ -476,9 +539,27 @@ void HardwareGPIO_FTDI::updatePWMPin(pin_size_t pin, uint8_t duty_cycle, uint32_
   pwm.period_us = 1000000 / frequency;  // Convert Hz to microseconds
   pwm.on_time_us = (pwm.period_us * duty_cycle) / 255;  // Calculate on-time based on duty cycle
   pwm.current_state = false;
-  pwm.last_toggle = std::chrono::high_resolution_clock::now();
+  pwm.period_start = std::chrono::high_resolution_clock::now();
+  pwm.cycle_count = 0;
+  pwm.max_jitter_us = 0;
+  pwm.total_jitter_us = 0;
   
   Logger.debug("PWM pin configured");
+}
+
+void HardwareGPIO_FTDI::getPWMStatistics(pin_size_t pin, uint64_t& cycles, 
+                                         uint64_t& max_jitter_us, uint64_t& avg_jitter_us) {
+  std::lock_guard<std::mutex> lock(pwm_mutex);
+  auto it = pwm_pins.find(pin);
+  if (it != pwm_pins.end() && it->second.enabled) {
+    cycles = it->second.cycle_count;
+    max_jitter_us = it->second.max_jitter_us;
+    avg_jitter_us = (cycles > 0) ? it->second.total_jitter_us / cycles : 0;
+  } else {
+    cycles = 0;
+    max_jitter_us = 0;
+    avg_jitter_us = 0;
+  }
 }
 
 void HardwareGPIO_FTDI::analogWriteResolution(uint8_t bits) {

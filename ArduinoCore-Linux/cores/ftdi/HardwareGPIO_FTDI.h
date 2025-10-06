@@ -174,6 +174,16 @@ class HardwareGPIO_FTDI : public HardwareGPIO {
    */
   operator bool() { return is_open && ftdi_context != nullptr; }
 
+  /**
+   * @brief Get PWM statistics for monitoring timing accuracy.
+   * @param pin Pin number
+   * @param cycles Total number of PWM cycles completed
+   * @param max_jitter_us Maximum jitter observed in microseconds
+   * @param avg_jitter_us Average jitter in microseconds
+   */
+  void getPWMStatistics(pin_size_t pin, uint64_t& cycles, 
+                       uint64_t& max_jitter_us, uint64_t& avg_jitter_us);
+
  protected:
   struct ftdi_context* ftdi_context = nullptr;
   bool is_open = false;
@@ -194,8 +204,12 @@ class HardwareGPIO_FTDI : public HardwareGPIO {
     uint32_t frequency = 1000;  // Hz
     uint32_t period_us = 1000;  // Period in microseconds
     uint32_t on_time_us = 0;    // On time in microseconds
-    std::chrono::high_resolution_clock::time_point last_toggle;
+    std::chrono::high_resolution_clock::time_point period_start;  // Start of current period
     bool current_state = false;
+    uint64_t cycle_count = 0;   // Total cycles for drift correction
+    // Statistics for monitoring
+    uint64_t max_jitter_us = 0;
+    uint64_t total_jitter_us = 0;
   };
   
   std::map<pin_size_t, PWMPin> pwm_pins;
