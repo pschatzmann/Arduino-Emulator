@@ -82,14 +82,16 @@ class EthernetClient : public Client {
     active_clients().push_back(this);
   }
   EthernetClient(SocketImpl* sock, int bufferSize = 256, long timeout = 2000) {
-    setTimeout(timeout);
-    this->bufferSize = bufferSize;
-    readBuffer = RingBufferExt(bufferSize);
-    writeBuffer = RingBufferExt(bufferSize);
-    p_sock = sock;
-    is_connected = p_sock->connected();
-    registerCleanup();
-    active_clients().push_back(this);
+    if (sock) {
+      setTimeout(timeout);
+      this->bufferSize = bufferSize;
+      readBuffer = RingBufferExt(bufferSize);
+      writeBuffer = RingBufferExt(bufferSize);
+      p_sock = sock;
+      is_connected = p_sock->connected();
+      registerCleanup();
+      active_clients().push_back(this);
+    }
   }
   EthernetClient(int socket) {
     setTimeout(2000);
