@@ -26,6 +26,7 @@
 #include "ArduinoLogger.h"
 #include "RingBufferExt.h"
 #include "SocketImpl.h"
+#include "SignalHandler.h"
 #include "api/Client.h"
 #include "api/Common.h"
 #include "api/IPAddress.h"
