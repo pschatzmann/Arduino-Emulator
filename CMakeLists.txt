@@ -9,6 +9,7 @@ option(USE_HTTPS "Https Support" OFF)
 option(USE_RPI "Raspberry Pi Support" OFF)
 option(USE_REMOTE "Remote API Support" OFF)
 option(BUILD_SHARED_LIBS "Build with shared libraries" ON)
+option(BUILD_EXAMPLES "Build with examples" OFF)
 
 # Https support: Build with wolfssl 
 if(USE_HTTPS)
@@ -94,4 +95,6 @@ if(USE_FTDI)
 endif(USE_FTDI)
 
 # build examples
-add_subdirectory("examples")
+if(BUILD_EXAMPLES)
+    add_subdirectory("examples")
+endif(BUILD_EXAMPLES)
