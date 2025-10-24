@@ -25,6 +25,8 @@
 #include <map>
 #include <algorithm>
 
+#undef INADDR_NONE
+
 // Generic signal handler utility
 class SignalHandler {
  public:
