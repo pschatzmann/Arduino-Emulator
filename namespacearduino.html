@@ -121,6 +121,8 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classarduino_1_1_hardware_g_p_i_o.html">HardwareGPIO</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Abstract base class for GPIO (General Purpose Input/Output) functions.  <a href="classarduino_1_1_hardware_g_p_i_o.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classarduino_1_1_hardware_g_p_i_o___f_i_r_m_a_t_a.html">HardwareGPIO_FIRMATA</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classarduino_1_1_hardware_g_p_i_o___f_t_d_i.html">HardwareGPIO_FTDI</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">GPIO hardware abstraction for FTDI FT2232HL in the Arduino emulator.  <a href="classarduino_1_1_hardware_g_p_i_o___f_t_d_i.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -502,15 +504,27 @@ template&lt;<a class="el" href="classarduino_1_1_d_m_a_buffer.html">typename</a>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
+<tr class="memitem:ad74b560cb5bd9388d664313ebc6a3a78" id="r_ad74b560cb5bd9388d664313ebc6a3a78"><td class="memItemLeft" align="right" valign="top"><a id="ad74b560cb5bd9388d664313ebc6a3a78" name="ad74b560cb5bd9388d664313ebc6a3a78"></a>
+<a class="el" href="classarduino_1_1_d_m_a_buffer.html">constexpr</a> <a class="el" href="classarduino_1_1_d_m_a_buffer.html">uint8_t</a>&#160;</td><td class="memItemRight" valign="bottom"><b>ANALOG_MESSAGE</b> = 0xE0</td></tr>
+<tr class="separator:ad74b560cb5bd9388d664313ebc6a3a78"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a174eadda9929da153199e119936f1709" id="r_a174eadda9929da153199e119936f1709"><td class="memItemLeft" align="right" valign="top"><a id="a174eadda9929da153199e119936f1709" name="a174eadda9929da153199e119936f1709"></a>
+std::map&lt; pin_size_t, <a class="el" href="classarduino_1_1_d_m_a_buffer.html">int</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>analogValues</b></td></tr>
+<tr class="separator:a174eadda9929da153199e119936f1709"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aeda6926424b7ccb602870fc85af3a5db" id="r_aeda6926424b7ccb602870fc85af3a5db"><td class="memItemLeft" align="right" valign="top"><a id="aeda6926424b7ccb602870fc85af3a5db" name="aeda6926424b7ccb602870fc85af3a5db"></a>
 <a class="el" href="classarduino_1_1_d_m_a_buffer.html">const</a> <a class="el" href="classarduino_1_1_s_p_i_settings.html">SPISettings</a>&#160;</td><td class="memItemRight" valign="bottom"><b>DEFAULT_SPI_SETTINGS</b> = <a class="el" href="classarduino_1_1_s_p_i_settings.html">SPISettings</a>()</td></tr>
 <tr class="separator:aeda6926424b7ccb602870fc85af3a5db"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5fabda3e9813a0600fa343e158449bf2" id="r_a5fabda3e9813a0600fa343e158449bf2"><td class="memItemLeft" align="right" valign="top"><a id="a5fabda3e9813a0600fa343e158449bf2" name="a5fabda3e9813a0600fa343e158449bf2"></a>
+<a class="el" href="classarduino_1_1_d_m_a_buffer.html">constexpr</a> <a class="el" href="classarduino_1_1_d_m_a_buffer.html">uint8_t</a>&#160;</td><td class="memItemRight" valign="bottom"><b>DIGITAL_MESSAGE</b> = 0x90</td></tr>
+<tr class="separator:a5fabda3e9813a0600fa343e158449bf2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a949ee4944b08770f83ab700548b1780f" id="r_a949ee4944b08770f83ab700548b1780f"><td class="memItemLeft" align="right" valign="top"><a id="a949ee4944b08770f83ab700548b1780f" name="a949ee4944b08770f83ab700548b1780f"></a>
 <a class="el" href="classarduino_1_1_d_m_a_buffer.html">enum</a> arduino:: { ... } &#160;</td><td class="memItemRight" valign="bottom"><b>DMABufferFlags</b></td></tr>
 <tr class="separator:a949ee4944b08770f83ab700548b1780f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aefb27191f81a97c93f4a0b0e3c96bc8d" id="r_aefb27191f81a97c93f4a0b0e3c96bc8d"><td class="memItemLeft" align="right" valign="top"><a id="aefb27191f81a97c93f4a0b0e3c96bc8d" name="aefb27191f81a97c93f4a0b0e3c96bc8d"></a>
 <a class="el" href="classarduino_1_1_ethernet_impl.html">EthernetImpl</a>&#160;</td><td class="memItemRight" valign="bottom"><b>Ethernet</b></td></tr>
 <tr class="separator:aefb27191f81a97c93f4a0b0e3c96bc8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abda2293d915dbab2cda4b58aca5f241c" id="r_abda2293d915dbab2cda4b58aca5f241c"><td class="memItemLeft" align="right" valign="top"><a id="abda2293d915dbab2cda4b58aca5f241c" name="abda2293d915dbab2cda4b58aca5f241c"></a>
+<a class="el" href="classarduino_1_1_stream.html">Stream</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>firmataStream</b> = <a class="el" href="classarduino_1_1_d_m_a_buffer.html">nullptr</a></td></tr>
+<tr class="separator:abda2293d915dbab2cda4b58aca5f241c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa493660fbe7510eae3086ce7e525fb29" id="r_aa493660fbe7510eae3086ce7e525fb29"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classarduino_1_1_d_m_a_buffer.html">static</a> <a class="el" href="classarduino_1_1_hardware_setup_f_t_d_i.html">HardwareSetupFTDI</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacearduino.html#aa493660fbe7510eae3086ce7e525fb29">FTDI</a></td></tr>
 <tr class="memdesc:aa493660fbe7510eae3086ce7e525fb29"><td class="mdescLeft">&#160;</td><td class="mdescRight">Global instance for FTDI FT2232HL hardware setup.  <br /></td></tr>
 <tr class="separator:aa493660fbe7510eae3086ce7e525fb29"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -533,18 +547,36 @@ Variables</h2></td></tr>
 <tr class="memitem:acf18469599031c92bbc159f85ba9ebb3" id="r_acf18469599031c92bbc159f85ba9ebb3"><td class="memItemLeft" align="right" valign="top"><a id="acf18469599031c92bbc159f85ba9ebb3" name="acf18469599031c92bbc159f85ba9ebb3"></a>
 <a class="el" href="classarduino_1_1_d_m_a_buffer.html">static</a> <a class="el" href="classarduino_1_1_arduino_logger.html">ArduinoLogger</a>&#160;</td><td class="memItemRight" valign="bottom"><b>Logger</b></td></tr>
 <tr class="separator:acf18469599031c92bbc159f85ba9ebb3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4160948f6da12f303ded701c45219f43" id="r_a4160948f6da12f303ded701c45219f43"><td class="memItemLeft" align="right" valign="top"><a id="a4160948f6da12f303ded701c45219f43" name="a4160948f6da12f303ded701c45219f43"></a>
+std::map&lt; pin_size_t, PinMode &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>pinModes</b></td></tr>
+<tr class="separator:a4160948f6da12f303ded701c45219f43"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9f8b92b04a63f1339f8a1d188218cd72" id="r_a9f8b92b04a63f1339f8a1d188218cd72"><td class="memItemLeft" align="right" valign="top"><a id="a9f8b92b04a63f1339f8a1d188218cd72" name="a9f8b92b04a63f1339f8a1d188218cd72"></a>
+std::map&lt; pin_size_t, PinStatus &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>pinStates</b></td></tr>
+<tr class="separator:a9f8b92b04a63f1339f8a1d188218cd72"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac8e4429259c668599683daf3ee53134b" id="r_ac8e4429259c668599683daf3ee53134b"><td class="memItemLeft" align="right" valign="top"><a id="ac8e4429259c668599683daf3ee53134b" name="ac8e4429259c668599683daf3ee53134b"></a>
 <a class="el" href="classarduino_1_1_d_m_a_buffer.html">static</a> <a class="el" href="classarduino_1_1_hardware_setup_remote.html">HardwareSetupRemote</a>&#160;</td><td class="memItemRight" valign="bottom"><b>Remote</b> {7000}</td></tr>
 <tr class="separator:ac8e4429259c668599683daf3ee53134b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9ff41b6a77700cad68f58f39164c237a" id="r_a9ff41b6a77700cad68f58f39164c237a"><td class="memItemLeft" align="right" valign="top"><a id="a9ff41b6a77700cad68f58f39164c237a" name="a9ff41b6a77700cad68f58f39164c237a"></a>
+<a class="el" href="classarduino_1_1_d_m_a_buffer.html">constexpr</a> <a class="el" href="classarduino_1_1_d_m_a_buffer.html">uint8_t</a>&#160;</td><td class="memItemRight" valign="bottom"><b>REPORT_ANALOG</b> = 0xC0</td></tr>
+<tr class="separator:a9ff41b6a77700cad68f58f39164c237a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac131faabf19e466b732f2a620d9c7fa7" id="r_ac131faabf19e466b732f2a620d9c7fa7"><td class="memItemLeft" align="right" valign="top"><a id="ac131faabf19e466b732f2a620d9c7fa7" name="ac131faabf19e466b732f2a620d9c7fa7"></a>
+<a class="el" href="classarduino_1_1_d_m_a_buffer.html">constexpr</a> <a class="el" href="classarduino_1_1_d_m_a_buffer.html">uint8_t</a>&#160;</td><td class="memItemRight" valign="bottom"><b>REPORT_DIGITAL</b> = 0xD0</td></tr>
+<tr class="separator:ac131faabf19e466b732f2a620d9c7fa7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaf600ce0d5135956db45dd53f2d9cdab" id="r_aaf600ce0d5135956db45dd53f2d9cdab"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classarduino_1_1_d_m_a_buffer.html">static</a> <a class="el" href="classarduino_1_1_hardware_setup_r_p_i.html">HardwareSetupRPI</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacearduino.html#aaf600ce0d5135956db45dd53f2d9cdab">RPI</a></td></tr>
 <tr class="memdesc:aaf600ce0d5135956db45dd53f2d9cdab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Global instance for Raspberry Pi hardware setup.  <br /></td></tr>
 <tr class="separator:aaf600ce0d5135956db45dd53f2d9cdab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ade32eee1e18f943ec57d67ab7562287b" id="r_ade32eee1e18f943ec57d67ab7562287b"><td class="memItemLeft" align="right" valign="top"><a id="ade32eee1e18f943ec57d67ab7562287b" name="ade32eee1e18f943ec57d67ab7562287b"></a>
+std::vector&lt; <a class="el" href="classarduino_1_1_d_m_a_buffer.html">uint8_t</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>rxBuffer</b></td></tr>
+<tr class="separator:ade32eee1e18f943ec57d67ab7562287b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab442e5b643580cd192c7d9c2dddd36dc" id="r_ab442e5b643580cd192c7d9c2dddd36dc"><td class="memItemLeft" align="right" valign="top"><a id="ab442e5b643580cd192c7d9c2dddd36dc" name="ab442e5b643580cd192c7d9c2dddd36dc"></a>
 <a class="el" href="classarduino_1_1_d_m_a_buffer.html">static</a> <a class="el" href="classarduino_1_1_stdio_device.html">StdioDevice</a>&#160;</td><td class="memItemRight" valign="bottom"><b>Serial</b></td></tr>
 <tr class="separator:ab442e5b643580cd192c7d9c2dddd36dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5354654d9e5359c3fc33f9b71c411b7e" id="r_a5354654d9e5359c3fc33f9b71c411b7e"><td class="memItemLeft" align="right" valign="top"><a id="a5354654d9e5359c3fc33f9b71c411b7e" name="a5354654d9e5359c3fc33f9b71c411b7e"></a>
 <a class="el" href="classarduino_1_1_d_m_a_buffer.html">static</a> <a class="el" href="classarduino_1_1_stdio_device.html">StdioDevice</a>&#160;</td><td class="memItemRight" valign="bottom"><b>Serial2</b></td></tr>
 <tr class="separator:a5354654d9e5359c3fc33f9b71c411b7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a45970c24c2e0a72578364ff1e264a07c" id="r_a45970c24c2e0a72578364ff1e264a07c"><td class="memItemLeft" align="right" valign="top"><a id="a45970c24c2e0a72578364ff1e264a07c" name="a45970c24c2e0a72578364ff1e264a07c"></a>
+<a class="el" href="classarduino_1_1_d_m_a_buffer.html">constexpr</a> <a class="el" href="classarduino_1_1_d_m_a_buffer.html">uint8_t</a>&#160;</td><td class="memItemRight" valign="bottom"><b>SET_PIN_MODE</b> = 0xF4</td></tr>
+<tr class="separator:a45970c24c2e0a72578364ff1e264a07c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a22bfc732eb918d62096e799f87d5f72d" id="r_a22bfc732eb918d62096e799f87d5f72d"><td class="memItemLeft" align="right" valign="top"><a id="a22bfc732eb918d62096e799f87d5f72d" name="a22bfc732eb918d62096e799f87d5f72d"></a>
 <a class="el" href="classarduino_1_1_d_m_a_buffer.html">const</a> <a class="el" href="classarduino_1_1_d_m_a_buffer.html">char</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>SOCKET_IMPL</b> = &quot;SocketImpl&quot;</td></tr>
 <tr class="separator:a22bfc732eb918d62096e799f87d5f72d"><td class="memSeparator" colspan="2">&#160;</td></tr>
