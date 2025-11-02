@@ -22,6 +22,7 @@
 #include <arpa/inet.h>  // for inet_pton
 #include <netdb.h>      // for gethostbyname, struct hostent
 #include <unistd.h>     // for close
+#include <memory>  // This is the include you need
 
 #include "ArduinoLogger.h"
 #include "RingBufferExt.h"
@@ -75,13 +76,13 @@ class EthernetClient : public Client {
  public:
   EthernetClient() {
     setTimeout(2000);
-    p_sock = new SocketImpl();
+    p_sock = std::make_shared<SocketImpl>();
     readBuffer = RingBufferExt(bufferSize);
     writeBuffer = RingBufferExt(bufferSize);
     registerCleanup();
     active_clients().push_back(this);
   }
-  EthernetClient(SocketImpl* sock, int bufferSize = 256, long timeout = 2000) {
+  EthernetClient(std::shared_ptr<SocketImpl> sock, int bufferSize = 256, long timeout = 2000) {
     if (sock) {
       setTimeout(timeout);
       this->bufferSize = bufferSize;
@@ -97,22 +98,8 @@ class EthernetClient : public Client {
     setTimeout(2000);
     readBuffer = RingBufferExt(bufferSize);
     writeBuffer = RingBufferExt(bufferSize);
-    p_sock = new SocketImpl(socket);
+    p_sock = std::make_shared<SocketImpl>(socket);
     is_connected = p_sock->connected();
-    registerCleanup();
-    active_clients().push_back(this);
-  }
-
-  virtual ~EthernetClient() {
-    auto& clients = active_clients();
-    auto it = std::find(clients.begin(), clients.end(), this);
-    if (it != clients.end()) {
-      clients.erase(it);
-    }
-    if (p_sock) {
-      delete p_sock;
-      p_sock = nullptr;
-    }
   }
 
   // checks if we are connected - using a timeout
@@ -264,7 +251,7 @@ class EthernetClient : public Client {
 
  protected:
   const char* WIFICLIENT = "EthernetClient";
-  SocketImpl* p_sock = nullptr;
+  std::shared_ptr<SocketImpl> p_sock = nullptr;
   int bufferSize = 256;
   RingBufferExt readBuffer;
   RingBufferExt writeBuffer;
