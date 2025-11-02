@@ -1,5 +1,5 @@
 /*
-	WiFiUDP.h 
+	WiFiUdp.h 
 	Copyright (c) 2025 Phil Schatzmann. All right reserved.
 
 	This library is free software; you can redistribute it and/or

@@ -21,7 +21,7 @@
 #include <string.h>
 #include <thread>
 #include "ArduinoLogger.h"
-#include "WiFiUDP.h"
+#include "WiFiUdp.h"
 #include "api/ArduinoAPI.h"
 #include "api/IPAddress.h"
 

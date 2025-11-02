@@ -172,7 +172,7 @@ class EthernetServer : public Server {
     // non blocking check if we have any request to accept
     if (!is_blocking) {
       if (poll_rc <= 0 || !(pfd.revents & POLLIN)) {
-        EthernetClient result;
+        EthernetClient result(nullptr);
         return result;
       }
     }
@@ -180,7 +180,7 @@ class EthernetServer : public Server {
     // accept client connection (blocking call)
     if ((client_fd = ::accept(server_fd, (struct sockaddr*)&client_addr,
                               &client_addr_len)) < 0) {
-      EthernetClient result;
+      EthernetClient result(nullptr);
       Logger.error("accept failed");
       return result;
     }
