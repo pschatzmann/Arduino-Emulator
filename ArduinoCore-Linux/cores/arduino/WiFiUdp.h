@@ -18,7 +18,7 @@
 */
 
 #pragma once
-#include "EthernetUDP.h"
+#include "UDP.h"
 
 namespace arduino {
 
