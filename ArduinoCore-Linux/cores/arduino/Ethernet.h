@@ -52,6 +52,11 @@ class EthernetImpl {
     return adress;
   }
 
+  /// To be compatible with Ethernet library: do nothing
+  void begin(IPAddress macAddress ) {}
+  /// To be compatible with Ethernet library: do nothing
+  void begin(IPAddress macAddress, IPAddress staticIP, IPAddress staticDNS, IPAddress staticGateway, IPAddress staticSubnet) {}
+
  protected:
   IPAddress adress;
 };

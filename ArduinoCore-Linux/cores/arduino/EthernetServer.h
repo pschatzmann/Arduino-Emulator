@@ -74,8 +74,9 @@ class EthernetServer : public Server {
       servers.erase(it);
     }
   }
-  void begin() { begin(0); }
+  void begin() { begin(_port); }
   void begin(int port) { begin_(port); }
+
   void stop() {
     if (server_fd > 0) {
       // Set SO_LINGER to force immediate close
@@ -104,6 +105,7 @@ class EthernetServer : public Server {
   using Print::write;
 
  protected:
+
   bool begin_(int port = 0) {
     if (port > 0) _port = port;
     _status = wl_status_t::WL_DISCONNECTED;
