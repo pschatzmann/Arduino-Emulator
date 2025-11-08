@@ -103,7 +103,7 @@ int SocketImpl::connect(const char *address, uint16_t port) {
 // -1=>Error
 size_t SocketImpl::write(const uint8_t *str, size_t len) {
   Logger.debug(SOCKET_IMPL, "write");
-  return ::send(sock, str, len, 0);
+  return ::send(sock, str, len, MSG_NOSIGNAL);
 }
 
 // provides the available bytes
@@ -118,7 +118,7 @@ size_t SocketImpl::available() {
 
 // direct read
 size_t SocketImpl::read(uint8_t *buffer, size_t len) {
-  size_t result = ::recv(sock, buffer, len, MSG_DONTWAIT);
+  size_t result = ::recv(sock, buffer, len, MSG_DONTWAIT | MSG_NOSIGNAL);
   char lenStr[80];
   sprintf(lenStr, "%ld -> %ld", len, result);
   Logger.debug(SOCKET_IMPL, "read->", lenStr);

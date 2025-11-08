@@ -36,6 +36,11 @@ class SocketImpl {
     is_connected = true;
     serv_addr = *address;
   };
+  virtual ~SocketImpl() {
+    if (sock != -1) {
+      close();
+    }
+  }
   // checks if we are connected
   virtual uint8_t connected();
   // opens a conection
