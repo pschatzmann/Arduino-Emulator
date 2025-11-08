@@ -175,7 +175,7 @@ class SocketImplSecure : public SocketImpl {
 class NetworkClientSecure : public EthernetClient {
  public:
   NetworkClientSecure(int bufferSize = 256, long timeout = 2000)
-      : EthernetClient(new SocketImplSecure(), bufferSize, timeout) {}
+      : EthernetClient(std::make_shared<SocketImplSecure>(), bufferSize, timeout) {}
   void setCACert(const char* cert) override { p_sock->setCACert(cert); }
   void setInsecure() override { p_sock->setInsecure(); }
 };
