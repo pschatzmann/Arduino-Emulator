@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>arduino-emulator: ArduinoCore-Linux/cores/arduino/EthernetUDP.h Source File</title>
+<title>arduino-emulator: ArduinoCore-Linux/cores/arduino/UDP.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -78,7 +78,7 @@ $(document).ready(function() { init_codefold(0); });
 </div>
 </div><!-- top -->
 <div class="header">
-  <div class="headertitle"><div class="title">EthernetUDP.h</div></div>
+  <div class="headertitle"><div class="title">UDP.h</div></div>
 </div><!--header-->
 <div class="contents">
 <div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/*</span></div>
@@ -116,21 +116,21 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>  <span class="keywordtype">int</span> udp_server;</div>
 <div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>  <a class="code hl_class" href="classarduino_1_1_i_p_address.html">IPAddress</a> multicast_ip;</div>
 <div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>  <a class="code hl_class" href="classarduino_1_1_i_p_address.html">IPAddress</a> remote_ip;</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>  <a class="code hl_class" href="classarduino_1_1_d_m_a_buffer.html">uint16_t</a> server_port;</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>  <a class="code hl_class" href="classarduino_1_1_d_m_a_buffer.html">uint16_t</a> remote_port;</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>  uint16_t server_port;</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>  uint16_t remote_port;</div>
 <div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>  <span class="keywordtype">char</span>* tx_buffer;</div>
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>  <span class="keywordtype">size_t</span> tx_buffer_len;</div>
 <div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>  <a class="code hl_class" href="classarduino_1_1_ring_buffer_ext.html">RingBufferExt</a>* rx_buffer;</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>  <span class="keywordtype">void</span> log_e(<span class="keyword">const</span> <span class="keywordtype">char</span>* <a class="code hl_class" href="classarduino_1_1_d_m_a_buffer.html">msg</a>, <span class="keywordtype">int</span> <a class="code hl_class" href="classarduino_1_1_d_m_a_buffer.html">errorNo</a>);</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>  <span class="keywordtype">void</span> log_e(<span class="keyword">const</span> <span class="keywordtype">char</span>* msg, <span class="keywordtype">int</span> errorNo);</div>
 <div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
 <div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>  <span class="keyword">static</span> std::vector&lt;EthernetUDP*&gt;&amp; active_udp() {</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    <span class="keyword">static</span> std::vector&lt;EthernetUDP*&gt; <a class="code hl_class" href="classarduino_1_1_d_m_a_buffer.html">udp_list</a>;</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    <span class="keywordflow">return</span> <a class="code hl_class" href="classarduino_1_1_d_m_a_buffer.html">udp_list</a>;</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    <span class="keyword">static</span> std::vector&lt;EthernetUDP*&gt; udp_list;</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    <span class="keywordflow">return</span> udp_list;</div>
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>  }</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>  <span class="keyword">static</span> <span class="keywordtype">void</span> cleanupAll(<span class="keywordtype">int</span> <a class="code hl_class" href="classarduino_1_1_d_m_a_buffer.html">sig</a>) {</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span>* <a class="code hl_class" href="classarduino_1_1_d_m_a_buffer.html">udp</a> : active_udp()) {</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>      <span class="keywordflow">if</span> (<a class="code hl_class" href="classarduino_1_1_d_m_a_buffer.html">udp</a>) {</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>        <a class="code hl_class" href="classarduino_1_1_d_m_a_buffer.html">udp</a>-&gt;stop();</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>  <span class="keyword">static</span> <span class="keywordtype">void</span> cleanupAll(<span class="keywordtype">int</span> sig) {</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span>* udp : active_udp()) {</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>      <span class="keywordflow">if</span> (udp) {</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>        udp-&gt;stop();</div>
 <div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>      }</div>
 <div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    }</div>
 <div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>  }</div>
@@ -138,17 +138,17 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> <span class="keyword">public</span>:</div>
 <div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>  <a class="code hl_class" href="classarduino_1_1_ethernet_u_d_p.html">EthernetUDP</a>();</div>
 <div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>  <a class="code hl_class" href="classarduino_1_1_ethernet_u_d_p.html">~EthernetUDP</a>();</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>  <a class="code hl_class" href="classarduino_1_1_d_m_a_buffer.html">uint8_t</a> begin(<a class="code hl_class" href="classarduino_1_1_i_p_address.html">IPAddress</a> <a class="code hl_class" href="classarduino_1_1_d_m_a_buffer.html">a</a>, <a class="code hl_class" href="classarduino_1_1_d_m_a_buffer.html">uint16_t</a> <a class="code hl_class" href="classarduino_1_1_d_m_a_buffer.html">p</a>);</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>  <a class="code hl_class" href="classarduino_1_1_d_m_a_buffer.html">uint8_t</a> begin(<a class="code hl_class" href="classarduino_1_1_d_m_a_buffer.html">uint16_t</a> <a class="code hl_class" href="classarduino_1_1_d_m_a_buffer.html">p</a>);</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>  <a class="code hl_class" href="classarduino_1_1_d_m_a_buffer.html">uint8_t</a> beginMulticast(<a class="code hl_class" href="classarduino_1_1_i_p_address.html">IPAddress</a> <a class="code hl_class" href="classarduino_1_1_d_m_a_buffer.html">a</a>, <a class="code hl_class" href="classarduino_1_1_d_m_a_buffer.html">uint16_t</a> <a class="code hl_class" href="classarduino_1_1_d_m_a_buffer.html">p</a>);</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>  uint8_t begin(<a class="code hl_class" href="classarduino_1_1_i_p_address.html">IPAddress</a> a, uint16_t p);</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>  uint8_t begin(uint16_t p);</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>  uint8_t beginMulticast(<a class="code hl_class" href="classarduino_1_1_i_p_address.html">IPAddress</a> a, uint16_t p);</div>
 <div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>  <span class="keywordtype">void</span> stop();</div>
 <div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>  <span class="keywordtype">int</span> beginMulticastPacket();</div>
 <div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>  <span class="keywordtype">int</span> beginPacket();</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>  <span class="keywordtype">int</span> beginPacket(<a class="code hl_class" href="classarduino_1_1_i_p_address.html">IPAddress</a> <a class="code hl_class" href="classarduino_1_1_d_m_a_buffer.html">ip</a>, <a class="code hl_class" href="classarduino_1_1_d_m_a_buffer.html">uint16_t</a> port);</div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>  <span class="keywordtype">int</span> beginPacket(<span class="keyword">const</span> <span class="keywordtype">char</span>* <a class="code hl_class" href="classarduino_1_1_d_m_a_buffer.html">host</a>, <a class="code hl_class" href="classarduino_1_1_d_m_a_buffer.html">uint16_t</a> port);</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>  <span class="keywordtype">int</span> beginPacket(<a class="code hl_class" href="classarduino_1_1_i_p_address.html">IPAddress</a> ip, uint16_t port);</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>  <span class="keywordtype">int</span> beginPacket(<span class="keyword">const</span> <span class="keywordtype">char</span>* host, uint16_t port);</div>
 <div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>  <span class="keywordtype">int</span> endPacket();</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>  <span class="keywordtype">size_t</span> write(<a class="code hl_class" href="classarduino_1_1_d_m_a_buffer.html">uint8_t</a>);</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>  <span class="keywordtype">size_t</span> write(<span class="keyword">const</span> <a class="code hl_class" href="classarduino_1_1_d_m_a_buffer.html">uint8_t</a>* buffer, <span class="keywordtype">size_t</span> size);</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>  <span class="keywordtype">size_t</span> write(uint8_t);</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>  <span class="keywordtype">size_t</span> write(<span class="keyword">const</span> uint8_t* buffer, <span class="keywordtype">size_t</span> size);</div>
 <div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>  <span class="keywordtype">int</span> parsePacket();</div>
 <div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>  <span class="keywordtype">int</span> available();</div>
 <div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>  <span class="keywordtype">int</span> read();</div>
@@ -157,15 +157,15 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>  <span class="keywordtype">int</span> peek();</div>
 <div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>  <span class="keywordtype">void</span> flush();</div>
 <div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>  <a class="code hl_class" href="classarduino_1_1_i_p_address.html">IPAddress</a> remoteIP();</div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>  <a class="code hl_class" href="classarduino_1_1_d_m_a_buffer.html">uint16_t</a> remotePort();</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>  uint16_t remotePort();</div>
 <div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>  </div>
 <div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span><span class="keyword">protected</span>:</div>
 <div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>  <span class="keywordtype">void</span> registerCleanup() {</div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    <span class="keyword">static</span> <span class="keywordtype">bool</span> <a class="code hl_class" href="classarduino_1_1_d_m_a_buffer.html">signal_registered</a> = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    <span class="keywordflow">if</span> (!<a class="code hl_class" href="classarduino_1_1_d_m_a_buffer.html">signal_registered</a>) {</div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>      SignalHandler::registerHandler(<a class="code hl_class" href="classarduino_1_1_d_m_a_buffer.html">SIGINT</a>, cleanupAll);</div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>      SignalHandler::registerHandler(<a class="code hl_class" href="classarduino_1_1_d_m_a_buffer.html">SIGTERM</a>, cleanupAll);</div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>      <a class="code hl_class" href="classarduino_1_1_d_m_a_buffer.html">signal_registered</a> = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    <span class="keyword">static</span> <span class="keywordtype">bool</span> signal_registered = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    <span class="keywordflow">if</span> (!signal_registered) {</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>      SignalHandler::registerHandler(SIGINT, cleanupAll);</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>      SignalHandler::registerHandler(SIGTERM, cleanupAll);</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>      signal_registered = <span class="keyword">true</span>;</div>
 <div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>    }</div>
 <div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>  }</div>
 <div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span> </div>
@@ -173,8 +173,7 @@ $(document).ready(function() { init_codefold(0); });
 </div>
 <div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span> </div>
 <div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>}  <span class="comment">// namespace arduino</span></div>
-<div class="ttc" id="aclassarduino_1_1_d_m_a_buffer_html"><div class="ttname"><a href="classarduino_1_1_d_m_a_buffer.html">arduino::DMABuffer</a></div><div class="ttdef"><b>Definition</b> DMAPool.h:103</div></div>
-<div class="ttc" id="aclassarduino_1_1_ethernet_u_d_p_html"><div class="ttname"><a href="classarduino_1_1_ethernet_u_d_p.html">arduino::EthernetUDP</a></div><div class="ttdef"><b>Definition</b> EthernetUDP.h:30</div></div>
+<div class="ttc" id="aclassarduino_1_1_ethernet_u_d_p_html"><div class="ttname"><a href="classarduino_1_1_ethernet_u_d_p.html">arduino::EthernetUDP</a></div><div class="ttdef"><b>Definition</b> UDP.h:30</div></div>
 <div class="ttc" id="aclassarduino_1_1_i_p_address_html"><div class="ttname"><a href="classarduino_1_1_i_p_address.html">arduino::IPAddress</a></div><div class="ttdef"><b>Definition</b> IPAddress.h:43</div></div>
 <div class="ttc" id="aclassarduino_1_1_ring_buffer_ext_html"><div class="ttname"><a href="classarduino_1_1_ring_buffer_ext.html">arduino::RingBufferExt</a></div><div class="ttdoc">Implementation of a Simple Circular Buffer. Instead of comparing the position of the read and write p...</div><div class="ttdef"><b>Definition</b> RingBufferExt.h:35</div></div>
 <div class="ttc" id="aclassarduino_1_1_u_d_p_html"><div class="ttname"><a href="classarduino_1_1_u_d_p.html">arduino::UDP</a></div><div class="ttdef"><b>Definition</b> Udp.h:42</div></div>
