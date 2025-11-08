@@ -46,20 +46,79 @@ typedef enum {
 } wl_status_t;
 
 class EthernetImpl {
- public:
-  IPAddress& localIP() {
-    SocketImpl sock;
-    adress.fromString(sock.getIPAddress());
-    return adress;
+public:
+  EthernetImpl() {
+    // Set some defaults
+    _macAddress[0] = 0xDE; _macAddress[1] = 0xAD; _macAddress[2] = 0xBE; _macAddress[3] = 0xEF; _macAddress[4] = 0xFE; _macAddress[5] = 0xED;
+    _localIP = IPAddress(192,168,1,177);
+    _subnetMask = IPAddress(255,255,255,0);
+    _gatewayIP = IPAddress(192,168,1,1);
+    _dnsServerIP = IPAddress(8,8,8,8);
+    _hardwareStatus = 1; // Assume present
+    _linkStatus = 2; // Assume linkON
+    _retransmissionCount = 8;
+    _retransmissionTimeout = 2000;
   }
 
-  /// To be compatible with Ethernet library: do nothing
-  bool begin(uint8_t macAddress[6] ) { return true;}
-  /// To be compatible with Ethernet library: do nothing
-  bool begin(uint8_t macAddress[6], IPAddress staticIP, IPAddress staticDNS, IPAddress staticGateway, IPAddress staticSubnet) { return true;}
+  // Begin with MAC only
+  bool begin(uint8_t macAddress[6]) {
+    setMACAddress(macAddress);
+    return true;
+  }
+  // Begin with full config
+  bool begin(uint8_t macAddress[6], IPAddress localIP, IPAddress dnsServerIP, IPAddress gateway, IPAddress subnet) {
+    setMACAddress(macAddress);
+    setLocalIP(localIP);
+    setDnsServerIP(dnsServerIP);
+    setGatewayIP(gateway);
+    setSubnetMask(subnet);
+    return true;
+  }
 
- protected:
-  IPAddress adress;
+  // Returns the local IP address
+  IPAddress localIP() { return _localIP; }
+  // Returns the subnet mask
+  IPAddress subnetMask() { return _subnetMask; }
+  // Returns the gateway IP
+  IPAddress gatewayIP() { return _gatewayIP; }
+  // Returns the DNS server IP
+  IPAddress dnsServerIP() { return _dnsServerIP; }
+  // Returns the MAC address
+  void MACAddress(uint8_t* mac) { for (int i=0; i<6; ++i) mac[i] = _macAddress[i]; }
+  // Set the MAC address
+  void setMACAddress(const uint8_t* mac) { for (int i=0; i<6; ++i) _macAddress[i] = mac[i]; }
+  // Set the local IP
+  void setLocalIP(const IPAddress& ip) { _localIP = ip; }
+  // Set the subnet mask
+  void setSubnetMask(const IPAddress& mask) { _subnetMask = mask; }
+  // Set the gateway IP
+  void setGatewayIP(const IPAddress& ip) { _gatewayIP = ip; }
+  // Set the DNS server IP
+  void setDnsServerIP(const IPAddress& ip) { _dnsServerIP = ip; }
+  // Set retransmission count
+  void setRetransmissionCount(uint8_t count) { _retransmissionCount = count; }
+  // Set retransmission timeout
+  void setRetransmissionTimeout(uint16_t timeout) { _retransmissionTimeout = timeout; }
+
+  // Returns hardware status (1 = present, 0 = absent)
+  int hardwareStatus() { return _hardwareStatus; }
+  // Returns link status (2 = linkON, 1 = linkOFF, 0 = unknown)
+  int linkStatus() { return _linkStatus; }
+  // Init (returns true for compatibility)
+  bool init(uint8_t socketCount = 4) { _hardwareStatus = 1; return true; }
+  // Maintain (returns 0 for compatibility)
+  int maintain() { return 0; }
+
+protected:
+  uint8_t _macAddress[6];
+  IPAddress _localIP;
+  IPAddress _subnetMask;
+  IPAddress _gatewayIP;
+  IPAddress _dnsServerIP;
+  int _hardwareStatus = 1; // 1 = present, 0 = absent
+  int _linkStatus = 2;     // 2 = linkON, 1 = linkOFF, 0 = unknown
+  uint8_t _retransmissionCount = 8;
+  uint16_t _retransmissionTimeout = 2000;
 };
 
 inline EthernetImpl Ethernet;
