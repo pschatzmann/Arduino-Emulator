@@ -34,6 +34,8 @@
 
 namespace arduino {
 
+#define ETHERNET_DEFAULT_READ_TIMEOUT 200
+
 typedef enum {
   WL_NO_SHIELD = 255,
   WL_IDLE_STATUS = 0,
@@ -139,14 +141,14 @@ class EthernetClient : public Client {
 
  public:
   EthernetClient() {
-    setTimeout(2000);
+    setTimeout(ETHERNET_DEFAULT_READ_TIMEOUT);
     p_sock = std::make_shared<SocketImpl>();
     readBuffer = RingBufferExt(bufferSize);
     writeBuffer = RingBufferExt(bufferSize);
     registerCleanup();
     active_clients().push_back(this);
   }
-  EthernetClient(std::shared_ptr<SocketImpl> sock, int bufferSize = 256, long timeout = 2000) {
+  EthernetClient(std::shared_ptr<SocketImpl> sock, int bufferSize = 256, long timeout = ETHERNET_DEFAULT_READ_TIMEOUT) {
     if (sock) {
       setTimeout(timeout);
       this->bufferSize = bufferSize;
@@ -159,7 +161,7 @@ class EthernetClient : public Client {
     }
   }
   EthernetClient(int socket) {
-    setTimeout(2000);
+    setTimeout(ETHERNET_DEFAULT_READ_TIMEOUT);
     readBuffer = RingBufferExt(bufferSize);
     writeBuffer = RingBufferExt(bufferSize);
     p_sock = std::make_shared<SocketImpl>(socket);
@@ -170,7 +172,7 @@ class EthernetClient : public Client {
   virtual uint8_t connected() override {
     if (!is_connected) return false;       // connect has failed
     if (p_sock->connected()) return true;  // check socket
-    long timeout = millis() + getTimeout();
+    long timeout = millis() + getConnectionTimeout();
     uint8_t result = p_sock->connected();
     while (result <= 0 && millis() < timeout) {
       delay(200);
@@ -313,8 +315,17 @@ class EthernetClient : public Client {
     Logger.error(WIFICLIENT, "setCACert not supported");
   }
 
+  void setConnectionTimeout(int32_t timeout) {
+    connectTimeout = timeout;
+  }
+
+  int32_t getConnectionTimeout() {
+    return connectTimeout;
+  }
+
  protected:
   const char* WIFICLIENT = "EthernetClient";
+  int32_t connectTimeout = 5000;  // default timeout 5 seconds
   std::shared_ptr<SocketImpl> p_sock = nullptr;
   int bufferSize = 256;
   RingBufferExt readBuffer;
