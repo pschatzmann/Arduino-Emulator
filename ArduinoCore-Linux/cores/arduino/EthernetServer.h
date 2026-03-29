@@ -39,6 +39,8 @@ class EthernetServer : public Server {
   struct sockaddr_in server_addr;
   int _status = wl_status_t::WL_DISCONNECTED;
   bool is_blocking = false;
+  bool _noDelay = false;
+
   static std::vector<EthernetServer*>& active_servers() {
     static std::vector<EthernetServer*> servers;
     return servers;
@@ -102,6 +104,19 @@ class EthernetServer : public Server {
   }
   int status() { return _status; }
 
+  // The following are for compatibility with ESP32 WiFiServer
+  // get/setNoDelay maintain the state variable, but otherwise
+  // have no effect on the code.
+  void setNoDelay(bool nodelay) { _noDelay = nodelay; }
+  bool getNoDelay() { return _noDelay; }
+  bool hasClient() {
+    if (server_fd <= 0) return false;
+    struct pollfd pfd;
+    pfd.fd = server_fd;
+    pfd.events = POLLIN;
+    return ::poll(&pfd, 1, 0) > 0 && (pfd.revents & POLLIN);
+  }
+
   using Print::write;
 
  protected:
@@ -148,6 +163,8 @@ class EthernetServer : public Server {
       Logger.error("listen failed");
       return false;
     }
+
+    _noDelay = false;
 
     // Add to active servers list for signal handling
     active_servers().push_back(this);
