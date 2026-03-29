@@ -142,9 +142,43 @@ void SocketImpl::close() {
   ::close(sock);
 }
 
-#ifndef __APPLE__
-// The sysctl() method of getting the routing table information also
-// works in Linux, but is deprecated there.
+// Linux-compatible implementation: parse /proc/net/route for default interface
+#if defined(__linux__)
+static char *defaultInterface() {
+  FILE *f;
+  char line[256], *p, *c;
+
+  f = fopen("/proc/net/route", "r");
+  if (!f) {
+    return nullptr;
+  }
+
+  // Skip the header line
+  if (!fgets(line, sizeof(line), f)) {
+    fclose(f);
+    return nullptr;
+  }
+
+  while (fgets(line, sizeof(line), f)) {
+    p = strtok(line, " \t");
+    c = strtok(NULL, " \t");
+
+    if (p != NULL && c != NULL) {
+      if (strcmp(c, "00000000") == 0) {
+        static char defaultInterface[IF_NAMESIZE];
+        strncpy(defaultInterface, p, IF_NAMESIZE - 1);
+        defaultInterface[IF_NAMESIZE - 1] = '\0';
+        Logger.info("Default network interface is ", p);
+        fclose(f);
+        return defaultInterface;
+      }
+    }
+  }
+  fclose(f);
+  return nullptr;
+}
+#elif defined(__APPLE__)
+// macOS/BSD implementation using sysctl
 static char *defaultInterface() {
   int mib[] = {CTL_NET, PF_ROUTE, 0, AF_INET, NET_RT_FLAGS, RTF_GATEWAY};
   size_t needed = 0;
@@ -183,30 +217,8 @@ static char *defaultInterface() {
   return result;
 }
 #else
-char *defaultInterface() {
-  FILE *f;
-  char line[100], *p, *c;
-
-  f = fopen("/proc/net/route", "r");
-  if (!f) {
-    return nullptr;
-  }
-
-  while (fgets(line, 100, f)) {
-    p = strtok(line, " \t");
-    c = strtok(NULL, " \t");
-
-    if (p != NULL && c != NULL) {
-      if (strcmp(c, "00000000") == 0) {
-        static char defaultInterface[20];
-        strcpy(defaultInterface, p);
-        Logger.info("Default network interface is ", p);
-        fclose(f);
-        return defaultInterface;
-      }
-    }
-  }
-  fclose(f);
+// Stub for other platforms
+static char *defaultInterface() {
   return nullptr;
 }
 #endif
