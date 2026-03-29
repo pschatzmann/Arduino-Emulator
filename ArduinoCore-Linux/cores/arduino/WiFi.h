@@ -31,6 +31,8 @@
 
 namespace arduino {
 
+typedef enum { WIFI_OFF = 0, WIFI_STA = 1, WIFI_AP = 2, WIFI_AP_STA = 3 } WiFiMode_t;  // For ESP compatibility
+
 enum wifi_ps_type_t { WIFI_PS_NONE, WIFI_PS_MIN_MODEM, WIFI_PS_MAX_MODEM };
 
 class WifiMock {
@@ -55,6 +57,10 @@ class WifiMock {
   int macAddress() { return mac; }
 
   void setClientInsecure() {}
+
+  // WIFI_STA is the best approximation to interface enabled
+  void mode(WiFiMode_t m);
+  WiFiMode_t getMode() { return WIFI_STA; };
 
  protected:
   IPAddress adress;
