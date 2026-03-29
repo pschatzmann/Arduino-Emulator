@@ -98,6 +98,17 @@ void I2CWrapper::onReceive(void (*)(int)) {}
 
 void I2CWrapper::onRequest(void (*)(void)) {}
 
+size_t I2CWrapper::write(const uint8_t* data, size_t len) {
+  int cnt = len;
+  while (cnt) {
+    if (!write(*data++)) {
+      return len - cnt;
+    }
+    --cnt;
+  }
+  return len;
+}
+
 size_t I2CWrapper::write(uint8_t data) {
   HardwareI2C* i2c = getI2C();
   if (i2c != nullptr) {
