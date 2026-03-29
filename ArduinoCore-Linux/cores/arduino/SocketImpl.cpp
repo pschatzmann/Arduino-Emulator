@@ -30,6 +30,10 @@
 #include <sys/socket.h>
 #include <sys/types.h>
 #include <unistd.h>
+#ifdef __APPLE__
+#include <net/route.h>
+#include <sys/sysctl.h>
+#endif
 
 #include <cstring>
 
@@ -138,11 +142,55 @@ void SocketImpl::close() {
   ::close(sock);
 }
 
+#ifndef __APPLE__
+// The sysctl() method of getting the routing table information also
+// works in Linux, but is deprecated there.
+static char *defaultInterface() {
+  int mib[] = {CTL_NET, PF_ROUTE, 0, AF_INET, NET_RT_FLAGS, RTF_GATEWAY};
+  size_t needed = 0;
+
+  if (sysctl(mib, 6, NULL, &needed, NULL, 0) < 0 || needed == 0)
+    return nullptr;
+
+  char *buf = (char *)malloc(needed);
+  if (!buf) return nullptr;
+
+  if (sysctl(mib, 6, buf, &needed, NULL, 0) < 0) {
+    free(buf);
+    return nullptr;
+  }
+
+  static char ifname[IF_NAMESIZE];
+  char *result = nullptr;
+
+  for (char *p = buf; p < buf + needed;) {
+    struct rt_msghdr *rtm = (struct rt_msghdr *)p;
+    struct sockaddr *sa = (struct sockaddr *)(rtm + 1);
+    if (sa->sa_family == AF_INET) {
+      struct sockaddr_in *sin = (struct sockaddr_in *)sa;
+      if (sin->sin_addr.s_addr == INADDR_ANY) {
+        if (if_indextoname(rtm->rtm_index, ifname) != nullptr) {
+          Logger.info("Default network interface is ", ifname);
+          result = ifname;
+        }
+        break;
+      }
+    }
+    p += rtm->rtm_msglen;
+  }
+
+  free(buf);
+  return result;
+}
+#else
 char *defaultInterface() {
   FILE *f;
   char line[100], *p, *c;
 
   f = fopen("/proc/net/route", "r");
+  if (!f) {
+    return nullptr;
+  }
 
   while (fgets(line, 100, f)) {
     p = strtok(line, " \t");
@@ -153,12 +201,15 @@ char *defaultInterface() {
         static char defaultInterface[20];
         strcpy(defaultInterface, p);
         Logger.info("Default network interface is ", p);
+        fclose(f);
         return defaultInterface;
       }
     }
   }
+  fclose(f);
   return nullptr;
 }
+#endif
 
 // determines the IP Adress
 const char *SocketImpl::getIPAddress() {

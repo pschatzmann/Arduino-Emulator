@@ -66,6 +66,7 @@ class I2CWrapper : public HardwareI2C {
   void onReceive(void (*)(int));
   void onRequest(void (*)(void));
   size_t write(uint8_t);
+  size_t write(const uint8_t *, size_t);
   int available();
   int read();
   int peek();
