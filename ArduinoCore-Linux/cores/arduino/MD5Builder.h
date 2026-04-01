@@ -2,6 +2,7 @@
     MD5Builder - Simple MD5 hash calculations
 
     Updated for the Pico by Earle F. Philhower, III
+    Updated for Linux by Mitch Bradley
 
     Modified from the ESP8266 version which is
     Copyright (c) 2015 Hristo Gochkov. All rights reserved.
@@ -26,15 +27,17 @@
 
 #include <api/String.h>
 #include <Stream.h>
-#include <bearssl/bearssl_hash.h>
+#include <cstring>
 
 class MD5Builder {
 private:
-    br_md5_context _ctx;
-    uint8_t _buf[16];
+    uint64_t _size;        // Size of input in bytes
+    uint32_t _buffer[4];   // Current accumulation of hash
+    uint8_t _input[64];    // Input to be used in the next step
+    uint8_t _digest[16];   // Result of algorithm
 public:
     void begin(void);
-    void add(const uint8_t * data, const uint16_t len);
+    void add(const uint8_t * data, const size_t len);
     void add(const char * data) {
         add((const uint8_t*)data, strlen(data));
     }

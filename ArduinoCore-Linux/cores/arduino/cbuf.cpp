@@ -21,7 +21,7 @@
 #include "cbuf.h"
 
 cbuf::cbuf(size_t size) :
-    next(NULL), _size(size+1), _buf(new char[size+1]), _bufend(_buf + size + 1), _begin(_buf), _end(_begin)
+    next(NULL), _size(size), _buf(new char[size+1]), _bufend(_buf + size + 1), _begin(_buf), _end(_begin)
 {
 }
 
@@ -39,14 +39,13 @@ size_t cbuf::resize(size_t newSize)
 {
 
     size_t bytes_available = available();
-    newSize += 1;
     // not lose any data
     // if data can be lost use remove or flush before resize
     if((newSize < bytes_available) || (newSize == _size)) {
         return _size;
     }
 
-    char *newbuf = new char[newSize];
+    char *newbuf = new char[newSize+1];
     char *oldbuf = _buf;
 
     if(!newbuf) {
@@ -60,7 +59,7 @@ size_t cbuf::resize(size_t newSize)
 
     _begin = newbuf;
     _end = newbuf + bytes_available;
-    _bufend = newbuf + newSize;
+    _bufend = newbuf + newSize + 1;
     _size = newSize;
 
     _buf = newbuf;
@@ -85,9 +84,9 @@ size_t cbuf::size()
 size_t cbuf::room() const
 {
     if(_end >= _begin) {
-        return _size - (_end - _begin) - 1;
+        return _size - (_end - _begin);
     }
-    return _begin - _end - 1;
+    return _begin - _end;
 }
 
 int cbuf::peek()
