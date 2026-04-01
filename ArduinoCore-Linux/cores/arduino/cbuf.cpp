@@ -73,7 +73,7 @@ size_t cbuf::available() const
     if(_end >= _begin) {
         return _end - _begin;
     }
-    return _size - (_begin - _end);
+    return _size + 1 - (_begin - _end);
 }
 
 size_t cbuf::size()
@@ -86,7 +86,7 @@ size_t cbuf::room() const
     if(_end >= _begin) {
         return _size - (_end - _begin);
     }
-    return _begin - _end;
+    return _begin - _end - 1;
 }
 
 int cbuf::peek()
