@@ -11,6 +11,7 @@ void base64_init_encodestate(base64_encodestate* state_in)
 {
     state_in->step = step_A;
     state_in->result = 0;
+    state_in->stepcount = 0;
 }
 
 char base64_encode_value(char value_in)
