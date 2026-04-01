@@ -266,8 +266,9 @@ bool MD5Builder::addStream(Stream &stream, const size_t maxLen) {
 }
 
 /*
- * Pad the current input to get to 448 bytes, append the size in bits to the very end,
- * and save the result of the final iteration into digest.
+ * Pad the current input so its length is congruent to 448 bits (56 bytes) modulo 512 bits,
+ * then append the size in bits to the very end, and save the result of the final iteration
+ * into digest.
  */
 void MD5Builder::calculate(void) {
     uint32_t input[16];
