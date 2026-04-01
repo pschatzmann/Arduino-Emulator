@@ -48,10 +48,6 @@ size_t cbuf::resize(size_t newSize)
     char *newbuf = new char[newSize+1];
     char *oldbuf = _buf;
 
-    if(!newbuf) {
-        return _size;
-    }
-
     if(_buf) {
         read(newbuf, bytes_available);
         memset((newbuf + bytes_available), 0x00, (newSize - bytes_available));
