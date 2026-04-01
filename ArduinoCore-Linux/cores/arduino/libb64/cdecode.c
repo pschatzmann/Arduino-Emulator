@@ -90,7 +90,7 @@ static int base64_decode_chars_signed(const int8_t* code_in, const int length_in
 }
 
 int base64_decode_value(char value_in){
-  return base64_decode_value_signed(*((int8_t *) &value_in));
+  return base64_decode_value_signed((int8_t)value_in);
 }
 
 int base64_decode_block(const char* code_in, const int length_in, char* plaintext_out, base64_decodestate* state_in){
