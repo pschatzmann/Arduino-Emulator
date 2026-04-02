@@ -143,9 +143,9 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>  <a class="code hl_class" href="classarduino_1_1_s_p_i_source.html">SPISource</a>* p_source = <span class="keyword">nullptr</span>;</div>
 <div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span> </div>
 <div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>  <a class="code hl_class" href="classarduino_1_1_hardware_s_p_i.html">HardwareSPI</a>* getSPI() {</div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>    <a class="code hl_class" href="classarduino_1_1_hardware_s_p_i.html">HardwareSPI</a>* <a class="code hl_class" href="classarduino_1_1_d_m_a_buffer.html">result</a> = p_spi;</div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>    <span class="keywordflow">if</span> (<a class="code hl_class" href="classarduino_1_1_d_m_a_buffer.html">result</a> == <span class="keyword">nullptr</span> &amp;&amp; p_source != <span class="keyword">nullptr</span>) {</div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>      <a class="code hl_class" href="classarduino_1_1_d_m_a_buffer.html">result</a> = p_source-&gt;getSPI();</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>    <a class="code hl_class" href="classarduino_1_1_hardware_s_p_i.html">HardwareSPI</a>* result = p_spi;</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>    <span class="keywordflow">if</span> (result == <span class="keyword">nullptr</span> &amp;&amp; p_source != <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>      result = p_source-&gt;getSPI();</div>
 <div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>    }</div>
 <div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>    <span class="keywordflow">return</span> result;</div>
 <div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>  }</div>

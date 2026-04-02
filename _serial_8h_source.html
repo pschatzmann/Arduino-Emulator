@@ -135,15 +135,15 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>  }</div>
 <div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
 <div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>  <span class="keyword">virtual</span> <span class="keywordtype">int</span> read(<span class="keywordtype">void</span>) {</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    <span class="keywordtype">int</span> <a class="code hl_class" href="classarduino_1_1_d_m_a_buffer.html">result</a> = -1;</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    <span class="keywordtype">int</span> result = -1;</div>
 <div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    <span class="keywordflow">if</span> (peek_char != -1) {</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>      <a class="code hl_class" href="classarduino_1_1_d_m_a_buffer.html">result</a> = peek_char;</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>      result = peek_char;</div>
 <div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>      peek_char = -1;</div>
 <div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    } <span class="keywordflow">else</span> {</div>
 <div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>      <span class="keywordtype">char</span> <a class="code hl_class" href="classarduino_1_1_d_m_a_buffer.html">c</a>;</div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>      <a class="code hl_class" href="classarduino_1_1_d_m_a_buffer.html">result</a> = serial.<a class="code hl_function" href="classserialib.html#a6c78b8a11ae7b8af57eea3dbc7fa237b">readChar</a>(&amp;<a class="code hl_class" href="classarduino_1_1_d_m_a_buffer.html">c</a>, timeout);</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>      result = serial.<a class="code hl_function" href="classserialib.html#a6c78b8a11ae7b8af57eea3dbc7fa237b">readChar</a>(&amp;<a class="code hl_class" href="classarduino_1_1_d_m_a_buffer.html">c</a>, timeout);</div>
 <div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    }</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    <span class="keywordflow">return</span> <a class="code hl_class" href="classarduino_1_1_d_m_a_buffer.html">result</a>;</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    <span class="keywordflow">return</span> result;</div>
 <div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>  };</div>
 <div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span> </div>
 <div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>  <span class="keyword">virtual</span> <span class="keywordtype">void</span> flush(<span class="keywordtype">void</span>) {};</div>

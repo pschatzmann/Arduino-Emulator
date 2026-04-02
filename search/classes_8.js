@@ -1,6 +1,19 @@
 var searchData=
 [
-  ['i2csource_0',['I2CSource',['../classarduino_1_1_i2_c_source.html',1,'arduino']]],
-  ['i2cwrapper_1',['I2CWrapper',['../classarduino_1_1_i2_c_wrapper.html',1,'arduino']]],
-  ['ipaddress_2',['IPAddress',['../classarduino_1_1_i_p_address.html',1,'arduino']]]
+  ['hardwarecan_0',['HardwareCAN',['../classarduino_1_1_hardware_c_a_n.html',1,'arduino']]],
+  ['hardwaregpio_1',['HardwareGPIO',['../classarduino_1_1_hardware_g_p_i_o.html',1,'arduino']]],
+  ['hardwaregpio_5ffirmata_2',['HardwareGPIO_FIRMATA',['../classarduino_1_1_hardware_g_p_i_o___f_i_r_m_a_t_a.html',1,'arduino']]],
+  ['hardwaregpio_5fftdi_3',['HardwareGPIO_FTDI',['../classarduino_1_1_hardware_g_p_i_o___f_t_d_i.html',1,'arduino']]],
+  ['hardwaregpio_5frpi_4',['HardwareGPIO_RPI',['../classarduino_1_1_hardware_g_p_i_o___r_p_i.html',1,'arduino']]],
+  ['hardwarei2c_5',['HardwareI2C',['../classarduino_1_1_hardware_i2_c.html',1,'arduino']]],
+  ['hardwarei2c_5fftdi_6',['HardwareI2C_FTDI',['../classarduino_1_1_hardware_i2_c___f_t_d_i.html',1,'arduino']]],
+  ['hardwarei2c_5frpi_7',['HardwareI2C_RPI',['../classarduino_1_1_hardware_i2_c___r_p_i.html',1,'arduino']]],
+  ['hardwareserial_8',['HardwareSerial',['../classarduino_1_1_hardware_serial.html',1,'arduino']]],
+  ['hardwareservice_9',['HardwareService',['../classarduino_1_1_hardware_service.html',1,'arduino']]],
+  ['hardwaresetupftdi_10',['HardwareSetupFTDI',['../classarduino_1_1_hardware_setup_f_t_d_i.html',1,'arduino']]],
+  ['hardwaresetupremote_11',['HardwareSetupRemote',['../classarduino_1_1_hardware_setup_remote.html',1,'arduino']]],
+  ['hardwaresetuprpi_12',['HardwareSetupRPI',['../classarduino_1_1_hardware_setup_r_p_i.html',1,'arduino']]],
+  ['hardwarespi_13',['HardwareSPI',['../classarduino_1_1_hardware_s_p_i.html',1,'arduino']]],
+  ['hardwarespi_5fftdi_14',['HardwareSPI_FTDI',['../classarduino_1_1_hardware_s_p_i___f_t_d_i.html',1,'arduino']]],
+  ['hardwarespi_5frpi_15',['HardwareSPI_RPI',['../classarduino_1_1_hardware_s_p_i___r_p_i.html',1,'arduino']]]
 ];

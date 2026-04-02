@@ -1,7 +1,6 @@
 var searchData=
 [
-  ['ethernetclient_0',['EthernetClient',['../classarduino_1_1_ethernet_client.html',1,'arduino']]],
-  ['ethernetimpl_1',['EthernetImpl',['../classarduino_1_1_ethernet_impl.html',1,'arduino']]],
-  ['ethernetserver_2',['EthernetServer',['../classarduino_1_1_ethernet_server.html',1,'arduino']]],
-  ['ethernetudp_3',['EthernetUDP',['../classarduino_1_1_ethernet_u_d_p.html',1,'arduino']]]
+  ['dmabuffer_0',['DMABuffer',['../classarduino_1_1_d_m_a_buffer.html',1,'arduino']]],
+  ['dmapool_1',['DMAPool',['../classarduino_1_1_d_m_a_pool.html',1,'arduino']]],
+  ['dmapool_3c_20t_2c_20_5f_5fcache_5fline_5fsize_5f_5f_20_3e_2',['DMAPool&lt; T, __CACHE_LINE_SIZE__ &gt;',['../classarduino_1_1_d_m_a_pool.html',1,'arduino']]]
 ];

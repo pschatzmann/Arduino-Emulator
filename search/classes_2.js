@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['canmsg_0',['CanMsg',['../classarduino_1_1_can_msg.html',1,'arduino']]],
-  ['canmsgringbuffer_1',['CanMsgRingbuffer',['../classarduino_1_1_can_msg_ringbuffer.html',1,'arduino']]],
-  ['client_2',['Client',['../classarduino_1_1_client.html',1,'arduino']]]
+  ['base64_5fdecodestate_0',['base64_decodestate',['../structbase64__decodestate.html',1,'']]],
+  ['base64_5fencodestate_1',['base64_encodestate',['../structbase64__encodestate.html',1,'']]]
 ];
