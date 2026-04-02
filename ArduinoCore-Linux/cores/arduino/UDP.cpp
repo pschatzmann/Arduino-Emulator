@@ -1,5 +1,5 @@
 /*
-  EthernetUDP.cpp
+  UDP.cpp
   Copyright (c) 2025 Phil Schatzmann. All right reserved.
 
   This library is free software; you can redistribute it and/or
@@ -16,7 +16,7 @@
   License along with this library; if not, write to the Free Software
   Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 */
-#include "EthernetUDP.h"
+#include "EthernetUdp.h"
 #include <errno.h>
 #include <fcntl.h>
 #include <netdb.h>
