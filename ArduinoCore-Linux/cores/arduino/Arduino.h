@@ -50,3 +50,7 @@ using namespace arduino;
 // supported by some platforms
 void analogWriteFrequency(pin_size_t pin, uint32_t freq);
 void analogWriteResolution(uint8_t bits);
+
+// ESP32-ism that is adopted by most Arduino implementations
+// and used by, at least, ESPAsyncWebServer
+extern const String emptyString;

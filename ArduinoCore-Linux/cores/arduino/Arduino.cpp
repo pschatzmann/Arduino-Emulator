@@ -232,3 +232,5 @@ void analogWriteResolution(uint8_t bits) {
  * @note This is used to prevent watchdog timer resets in long-running loops
  */
 void yield() {}
+
+const String emptyString;
