@@ -22,7 +22,10 @@
 #include <arpa/inet.h>  // for inet_pton
 #include <netdb.h>      // for gethostbyname, struct hostent
 #include <unistd.h>     // for close
+#include <chrono>
+#include <future>
 #include <memory>  // This is the include you need
+#include <thread>
 
 #include "ArduinoLogger.h"
 #include "RingBufferExt.h"
@@ -170,15 +173,13 @@ class EthernetClient : public Client {
 
   // checks if we are connected - using a timeout
   virtual uint8_t connected() override {
-    if (!is_connected) return false;       // connect has failed
-    if (p_sock->connected()) return true;  // check socket
-    long timeout = millis() + getConnectionTimeout();
-    uint8_t result = p_sock->connected();
-    while (result <= 0 && millis() < timeout) {
-      delay(200);
-      result = p_sock->connected();
-    }
-    return result;
+    if (!is_connected || !p_sock) return false;
+
+    // A disconnected socket should be reported immediately. Retrying here
+    // turns normal peer shutdown into a multi-second stall for callers like
+    // TelnetClient::closeOnDisconnect().
+    is_connected = p_sock->connected();
+    return is_connected;
   }
 
   // support conversion to bool
@@ -186,32 +187,50 @@ class EthernetClient : public Client {
 
   // opens a conection
   virtual int connect(IPAddress ipAddress, uint16_t port) override {
+    return connect(ipAddress, port, getConnectionTimeout());
+  }
+
+  int connect(IPAddress ipAddress, uint16_t port, int32_t timeout_ms) {
     String str = String(ipAddress[0]) + String(".") + String(ipAddress[1]) +
                  String(".") + String(ipAddress[2]) + String(".") +
                  String(ipAddress[3]);
     this->address = ipAddress;
     this->port = port;
-    return connect(str.c_str(), port);
+    return connect(str.c_str(), port, timeout_ms);
   }
 
   // opens a connection
   virtual int connect(const char* address, uint16_t port) override {
+    return connect(address, port, getConnectionTimeout());
+  }
+
+  int connect(const char* address, uint16_t port, int32_t timeout_ms) {
     Logger.info(WIFICLIENT, "connect");
     this->port = port;
     if (connectedFast()) {
       p_sock->close();
     }
-    IPAddress adr = resolveAddress(address, port);
+    uint32_t start_ms = millis();
+    IPAddress adr = resolveAddress(address, timeout_ms);
     if (adr == IPAddress(0, 0, 0, 0)) {
       is_connected = false;
       return 0;
     }
+
+    int32_t remaining_timeout = timeout_ms;
+    if (timeout_ms >= 0) {
+      uint32_t elapsed_ms = millis() - start_ms;
+      remaining_timeout = elapsed_ms >= static_cast<uint32_t>(timeout_ms)
+                              ? 0
+                              : timeout_ms - static_cast<int32_t>(elapsed_ms);
+    }
+
     // performs the actual connection
     String str = adr.toString();
     Logger.info("Connecting to ", str.c_str());
-    p_sock->connect(str.c_str(), port);
-    is_connected = true;
-    return 1;
+    int result = p_sock->connect(str.c_str(), port, remaining_timeout);
+    is_connected = result > 0;
+    return is_connected ? 1 : 0;
   }
 
   virtual size_t write(char c) { return write((uint8_t)c); }
@@ -334,21 +353,67 @@ class EthernetClient : public Client {
   IPAddress address{0, 0, 0, 0};
   uint16_t port = 0;
 
+  IPAddress resolveHostnameWithTimeout(const char* hostname, int32_t timeout_ms) {
+    if (timeout_ms < 0) {
+      struct addrinfo hints;
+      memset(&hints, 0, sizeof(hints));
+      hints.ai_family = AF_INET;
+      hints.ai_socktype = SOCK_STREAM;
+
+      struct addrinfo* result = nullptr;
+      if (getaddrinfo(hostname, nullptr, &hints, &result) != 0 || result == nullptr) {
+        Logger.error(WIFICLIENT, "Hostname resolution failed");
+        return IPAddress(0, 0, 0, 0);
+      }
+
+      auto* addr = reinterpret_cast<struct sockaddr_in*>(result->ai_addr);
+      IPAddress resolved(addr->sin_addr.s_addr);
+      freeaddrinfo(result);
+      return resolved;
+    }
+
+    auto promise = std::make_shared<std::promise<IPAddress>>();
+    auto future = promise->get_future();
+    std::string hostname_copy(hostname);
+
+    std::thread resolver([promise, hostname_copy]() {
+      struct addrinfo hints;
+      memset(&hints, 0, sizeof(hints));
+      hints.ai_family = AF_INET;
+      hints.ai_socktype = SOCK_STREAM;
+
+      struct addrinfo* result = nullptr;
+      IPAddress resolved(0, 0, 0, 0);
+      if (getaddrinfo(hostname_copy.c_str(), nullptr, &hints, &result) == 0 && result != nullptr) {
+        auto* addr = reinterpret_cast<struct sockaddr_in*>(result->ai_addr);
+        resolved = IPAddress(addr->sin_addr.s_addr);
+        freeaddrinfo(result);
+      }
+      promise->set_value(resolved);
+    });
+
+    auto status = future.wait_for(std::chrono::milliseconds(timeout_ms));
+    if (status == std::future_status::ready) {
+      resolver.join();
+      auto resolved = future.get();
+      if (resolved == IPAddress(0, 0, 0, 0)) {
+        Logger.error(WIFICLIENT, "Hostname resolution failed");
+      }
+      return resolved;
+    }
+
+    resolver.detach();
+    Logger.error(WIFICLIENT, "Hostname resolution timeout");
+    return IPAddress(0, 0, 0, 0);
+  }
+
   // resolves the address and returns sockaddr_in
-  IPAddress resolveAddress(const char* address, uint16_t port) {
+  IPAddress resolveAddress(const char* address, int32_t timeout_ms) {
     struct sockaddr_in serv_addr4;
     memset(&serv_addr4, 0, sizeof(serv_addr4));
     serv_addr4.sin_family = AF_INET;
-    serv_addr4.sin_port = htons(port);
     if (::inet_pton(AF_INET, address, &serv_addr4.sin_addr) <= 0) {
-      // Not an IP, try to resolve hostname
-      struct hostent* he = ::gethostbyname(address);
-      if (he == nullptr || he->h_addr_list[0] == nullptr) {
-        Logger.error(WIFICLIENT, "Hostname resolution failed");
-        serv_addr4.sin_addr.s_addr = 0;
-      } else {
-        memcpy(&serv_addr4.sin_addr, he->h_addr_list[0], he->h_length);
-      }
+      return resolveHostnameWithTimeout(address, timeout_ms);
     }
     return IPAddress(serv_addr4.sin_addr.s_addr);
   }
