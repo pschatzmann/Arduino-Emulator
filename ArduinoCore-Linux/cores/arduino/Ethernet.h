@@ -22,10 +22,7 @@
 #include <arpa/inet.h>  // for inet_pton
 #include <netdb.h>      // for gethostbyname, struct hostent
 #include <unistd.h>     // for close
-#include <chrono>
-#include <future>
 #include <memory>  // This is the include you need
-#include <thread>
 
 #include "ArduinoLogger.h"
 #include "RingBufferExt.h"
@@ -210,25 +207,16 @@ class EthernetClient : public Client {
     if (connectedFast()) {
       p_sock->close();
     }
-    uint32_t start_ms = millis();
-    IPAddress adr = resolveAddress(address, timeout_ms);
+    IPAddress adr = resolveAddress(address);
     if (adr == IPAddress(0, 0, 0, 0)) {
       is_connected = false;
       return 0;
     }
 
-    int32_t remaining_timeout = timeout_ms;
-    if (timeout_ms >= 0) {
-      uint32_t elapsed_ms = millis() - start_ms;
-      remaining_timeout = elapsed_ms >= static_cast<uint32_t>(timeout_ms)
-                              ? 0
-                              : timeout_ms - static_cast<int32_t>(elapsed_ms);
-    }
-
     // performs the actual connection
     String str = adr.toString();
     Logger.info("Connecting to ", str.c_str());
-    int result = p_sock->connect(str.c_str(), port, remaining_timeout);
+    int result = p_sock->connect(str.c_str(), port, timeout_ms);
     is_connected = result > 0;
     return is_connected ? 1 : 0;
   }
@@ -353,67 +341,31 @@ class EthernetClient : public Client {
   IPAddress address{0, 0, 0, 0};
   uint16_t port = 0;
 
-  IPAddress resolveHostnameWithTimeout(const char* hostname, int32_t timeout_ms) {
-    if (timeout_ms < 0) {
-      struct addrinfo hints;
-      memset(&hints, 0, sizeof(hints));
-      hints.ai_family = AF_INET;
-      hints.ai_socktype = SOCK_STREAM;
+  IPAddress resolveHostname(const char* hostname) {
+    struct addrinfo hints;
+    memset(&hints, 0, sizeof(hints));
+    hints.ai_family = AF_INET;
+    hints.ai_socktype = SOCK_STREAM;
 
-      struct addrinfo* result = nullptr;
-      if (getaddrinfo(hostname, nullptr, &hints, &result) != 0 || result == nullptr) {
-        Logger.error(WIFICLIENT, "Hostname resolution failed");
-        return IPAddress(0, 0, 0, 0);
-      }
-
-      auto* addr = reinterpret_cast<struct sockaddr_in*>(result->ai_addr);
-      IPAddress resolved(addr->sin_addr.s_addr);
-      freeaddrinfo(result);
-      return resolved;
+    struct addrinfo* result = nullptr;
+    if (getaddrinfo(hostname, nullptr, &hints, &result) != 0 || result == nullptr) {
+      Logger.error(WIFICLIENT, "Hostname resolution failed");
+      return IPAddress(0, 0, 0, 0);
     }
 
-    auto promise = std::make_shared<std::promise<IPAddress>>();
-    auto future = promise->get_future();
-    std::string hostname_copy(hostname);
-
-    std::thread resolver([promise, hostname_copy]() {
-      struct addrinfo hints;
-      memset(&hints, 0, sizeof(hints));
-      hints.ai_family = AF_INET;
-      hints.ai_socktype = SOCK_STREAM;
-
-      struct addrinfo* result = nullptr;
-      IPAddress resolved(0, 0, 0, 0);
-      if (getaddrinfo(hostname_copy.c_str(), nullptr, &hints, &result) == 0 && result != nullptr) {
-        auto* addr = reinterpret_cast<struct sockaddr_in*>(result->ai_addr);
-        resolved = IPAddress(addr->sin_addr.s_addr);
-        freeaddrinfo(result);
-      }
-      promise->set_value(resolved);
-    });
-
-    auto status = future.wait_for(std::chrono::milliseconds(timeout_ms));
-    if (status == std::future_status::ready) {
-      resolver.join();
-      auto resolved = future.get();
-      if (resolved == IPAddress(0, 0, 0, 0)) {
-        Logger.error(WIFICLIENT, "Hostname resolution failed");
-      }
-      return resolved;
-    }
-
-    resolver.detach();
-    Logger.error(WIFICLIENT, "Hostname resolution timeout");
-    return IPAddress(0, 0, 0, 0);
+    auto* addr = reinterpret_cast<struct sockaddr_in*>(result->ai_addr);
+    IPAddress resolved(addr->sin_addr.s_addr);
+    freeaddrinfo(result);
+    return resolved;
   }
 
   // resolves the address and returns sockaddr_in
-  IPAddress resolveAddress(const char* address, int32_t timeout_ms) {
+  IPAddress resolveAddress(const char* address) {
     struct sockaddr_in serv_addr4;
     memset(&serv_addr4, 0, sizeof(serv_addr4));
     serv_addr4.sin_family = AF_INET;
     if (::inet_pton(AF_INET, address, &serv_addr4.sin_addr) <= 0) {
-      return resolveHostnameWithTimeout(address, timeout_ms);
+      return resolveHostname(address);
     }
     return IPAddress(serv_addr4.sin_addr.s_addr);
   }
