@@ -26,10 +26,12 @@
 #include <net/if.h>
 #include <netdb.h>
 #include <netinet/in.h>
+#include <sys/select.h>
 #include <sys/ioctl.h>
 #include <sys/socket.h>
 #include <sys/types.h>
 #include <unistd.h>
+#include <cerrno>
 #ifdef __APPLE__
 #include <net/route.h>
 #include <sys/sysctl.h>
@@ -48,30 +50,57 @@ uint8_t SocketImpl::connected() {
   if (sock < 0) return false;
   char buf[2];
   int result = ::recv(sock, &buf, 1, MSG_PEEK | MSG_DONTWAIT);
-  // if peek is working we are connected - if not we do further checks
-  is_connected = result >= 0;
-  if (!is_connected) {
-    int error_code;
-    socklen_t error_code_size;
-    // int getsockopt(int sockfd, int level, int optname,void *optval, socklen_t
-    // *optlen);
-    int result =
-        getsockopt(sock, SOL_SOCKET, SO_ERROR, &error_code, &error_code_size);
-    if (result != 0) {
-      char msg[50];
-      sprintf(msg, "%d", result);
-      Logger.debug(SOCKET_IMPL, "getsockopt->", msg);
-    }
-
-    is_connected = (result == 0);
+  if (result > 0) {
+    is_connected = true;
+    return true;
   }
 
-  return is_connected;
+  if (result == 0) {
+    Logger.info(SOCKET_IMPL, "peer closed connection");
+    close();
+    is_connected = false;
+    return false;
+  }
+
+  if (errno == EAGAIN || errno == EWOULDBLOCK) {
+    is_connected = true;
+    return true;
+  }
+
+  int error_code = 0;
+  socklen_t error_code_size = sizeof(error_code);
+  // int getsockopt(int sockfd, int level, int optname,void *optval, socklen_t
+  // *optlen);
+  int sockopt_result =
+      getsockopt(sock, SOL_SOCKET, SO_ERROR, &error_code, &error_code_size);
+  if (sockopt_result != 0) {
+    char msg[50];
+    sprintf(msg, "%d", sockopt_result);
+    Logger.debug(SOCKET_IMPL, "getsockopt->", msg);
+  }
+
+  if (sockopt_result == 0 && error_code == 0) {
+    is_connected = true;
+    return true;
+  }
+
+  close();
+  is_connected = false;
+  return false;
 }
 
 // opens a conection
 int SocketImpl::connect(const char *address, uint16_t port) {
+  return connect(address, port, -1);
+}
+
+int SocketImpl::connect(const char *address, uint16_t port, int32_t timeout_ms) {
+  if (sock >= 0) {
+    close();
+  }
+
   if ((sock = ::socket(AF_INET, SOCK_STREAM, 0)) < 0) {
+    is_connected = false;
     Logger.error(SOCKET_IMPL, "could not create socket");
     return -1;
   }
@@ -89,13 +118,77 @@ int SocketImpl::connect(const char *address, uint16_t port) {
 
   // Convert IPv4 and IPv6 addresses from text to binary form
   if (::inet_pton(AF_INET, address_ip, &serv_addr.sin_addr) <= 0) {
+    close();
     Logger.error(SOCKET_IMPL, "invalid address");
     return -2;
   }
 
-  if (::connect(sock, (struct sockaddr *)&serv_addr, sizeof(serv_addr)) < 0) {
-    Logger.error(SOCKET_IMPL, "could not connect");
-    return -3;
+  if (timeout_ms < 0) {
+    if (::connect(sock, (struct sockaddr *)&serv_addr, sizeof(serv_addr)) < 0) {
+      close();
+      Logger.error(SOCKET_IMPL, "could not connect");
+      return -3;
+    }
+  } else {
+    int flags = fcntl(sock, F_GETFL, 0);
+    if (flags < 0) {
+      flags = 0;
+    }
+
+    if (fcntl(sock, F_SETFL, flags | O_NONBLOCK) < 0) {
+      close();
+      Logger.error(SOCKET_IMPL, "could not set nonblocking connect");
+      return -3;
+    }
+
+    int result = ::connect(sock, (struct sockaddr *)&serv_addr, sizeof(serv_addr));
+    if (result < 0) {
+      if (errno != EINPROGRESS && errno != EWOULDBLOCK) {
+        fcntl(sock, F_SETFL, flags);
+        close();
+        Logger.error(SOCKET_IMPL, "could not connect");
+        return -3;
+      }
+
+      fd_set writefds;
+      FD_ZERO(&writefds);
+      FD_SET(sock, &writefds);
+
+      fd_set errorfds;
+      FD_ZERO(&errorfds);
+      FD_SET(sock, &errorfds);
+
+      timeval timeout {
+        .tv_sec = timeout_ms / 1000,
+        .tv_usec = (timeout_ms % 1000) * 1000,
+      };
+
+      result = select(sock + 1, nullptr, &writefds, &errorfds, &timeout);
+      if (result == 0) {
+        fcntl(sock, F_SETFL, flags);
+        close();
+        Logger.error(SOCKET_IMPL, "connect timeout");
+        return -4;
+      }
+
+      if (result < 0) {
+        fcntl(sock, F_SETFL, flags);
+        close();
+        Logger.error(SOCKET_IMPL, "select failed during connect");
+        return -3;
+      }
+
+      int error_code = 0;
+      socklen_t error_len = sizeof(error_code);
+      if (getsockopt(sock, SOL_SOCKET, SO_ERROR, &error_code, &error_len) != 0 || error_code != 0) {
+        fcntl(sock, F_SETFL, flags);
+        close();
+        Logger.error(SOCKET_IMPL, "could not connect");
+        return -3;
+      }
+    }
+
+    fcntl(sock, F_SETFL, flags);
   }
 
   is_connected = true;
@@ -112,8 +205,24 @@ size_t SocketImpl::write(const uint8_t *str, size_t len) {
 
 // provides the available bytes
 size_t SocketImpl::available() {
+  if (sock < 0) {
+    is_connected = false;
+    return 0;
+  }
+
   int bytes_available;
-  ioctl(sock, FIONREAD, &bytes_available);
+  if (ioctl(sock, FIONREAD, &bytes_available) != 0) {
+    if (errno != EAGAIN && errno != EWOULDBLOCK) {
+      close();
+      is_connected = false;
+    }
+    return 0;
+  }
+
+  if (bytes_available == 0 && !connected()) {
+    return 0;
+  }
+
   char msg[50];
   sprintf(msg, "%d", bytes_available);
   Logger.debug(SOCKET_IMPL, "available->", msg);
@@ -122,7 +231,27 @@ size_t SocketImpl::available() {
 
 // direct read
 size_t SocketImpl::read(uint8_t *buffer, size_t len) {
-  size_t result = ::recv(sock, buffer, len, MSG_DONTWAIT | MSG_NOSIGNAL);
+  if (sock < 0) {
+    is_connected = false;
+    return static_cast<size_t>(-1);
+  }
+
+  ssize_t result = ::recv(sock, buffer, len, MSG_DONTWAIT | MSG_NOSIGNAL);
+  if (result == 0) {
+    Logger.info(SOCKET_IMPL, "read EOF");
+    close();
+    is_connected = false;
+    return static_cast<size_t>(-1);
+  }
+
+  if (result < 0) {
+    if (errno != EAGAIN && errno != EWOULDBLOCK) {
+      close();
+      is_connected = false;
+    }
+    return static_cast<size_t>(-1);
+  }
+
   char lenStr[80];
   sprintf(lenStr, "%ld -> %ld", len, result);
   Logger.debug(SOCKET_IMPL, "read->", lenStr);
@@ -139,7 +268,11 @@ int SocketImpl::peek() {
 
 void SocketImpl::close() {
   Logger.info(SOCKET_IMPL, "close");
-  ::close(sock);
+  if (sock >= 0) {
+    ::close(sock);
+    sock = -1;
+  }
+  is_connected = false;
 }
 
 // Linux-compatible implementation: parse /proc/net/route for default interface
