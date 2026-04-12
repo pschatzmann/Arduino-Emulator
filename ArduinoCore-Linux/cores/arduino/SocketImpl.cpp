@@ -158,10 +158,9 @@ int SocketImpl::connect(const char *address, uint16_t port, int32_t timeout_ms) 
       FD_ZERO(&errorfds);
       FD_SET(sock, &errorfds);
 
-      timeval timeout {
-        .tv_sec = timeout_ms / 1000,
-        .tv_usec = (timeout_ms % 1000) * 1000,
-      };
+      timeval timeout;
+      timeout.tv_sec = timeout_ms / 1000;
+      timeout.tv_usec = (timeout_ms % 1000) * 1000;
 
       result = select(sock + 1, nullptr, &writefds, &errorfds, &timeout);
       if (result == 0) {
