@@ -6,6 +6,7 @@ add_subdirectory("spi")
 add_subdirectory("serial2")
 add_subdirectory("using-arduino-library")
 add_subdirectory("pwm")
+add_subdirectory("network-connect-timing")
 
 # BME280 Sensor Examples
 arduino_library(SparkFunBME280 "https://github.com/sparkfun/SparkFun_BME280_Arduino_Library" )

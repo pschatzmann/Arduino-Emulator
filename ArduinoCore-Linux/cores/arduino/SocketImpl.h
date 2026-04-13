@@ -45,12 +45,14 @@ class SocketImpl {
   virtual uint8_t connected();
   // opens a conection
   virtual int connect(const char* address, uint16_t port);
+  // opens a connection with a timeout in milliseconds
+  virtual int connect(const char* address, uint16_t port, int32_t timeout_ms);
   // sends some data
   virtual size_t write(const uint8_t* str, size_t len);
   // provides the available bytes
   virtual size_t available();
   // direct read
-  virtual size_t read(uint8_t* buffer, size_t len);
+  virtual int read(uint8_t* buffer, size_t len);
   // peeks one character
   virtual int peek();
   // coloses the connection
