@@ -52,7 +52,7 @@ class SocketImpl {
   // provides the available bytes
   virtual size_t available();
   // direct read
-  virtual size_t read(uint8_t* buffer, size_t len);
+  virtual int read(uint8_t* buffer, size_t len);
   // peeks one character
   virtual int peek();
   // coloses the connection

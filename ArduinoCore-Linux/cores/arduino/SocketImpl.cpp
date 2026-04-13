@@ -229,10 +229,10 @@ size_t SocketImpl::available() {
 }
 
 // direct read
-size_t SocketImpl::read(uint8_t *buffer, size_t len) {
+int SocketImpl::read(uint8_t *buffer, size_t len) {
   if (sock < 0) {
     is_connected = false;
-    return static_cast<size_t>(-1);
+    return -1;
   }
 
   ssize_t result = ::recv(sock, buffer, len, MSG_DONTWAIT | MSG_NOSIGNAL);
@@ -240,21 +240,24 @@ size_t SocketImpl::read(uint8_t *buffer, size_t len) {
     Logger.info(SOCKET_IMPL, "read EOF");
     close();
     is_connected = false;
-    return static_cast<size_t>(-1);
+    return -1;
   }
 
   if (result < 0) {
-    if (errno != EAGAIN && errno != EWOULDBLOCK) {
-      close();
-      is_connected = false;
+    if (errno == EAGAIN || errno == EWOULDBLOCK) {
+      return 0;
     }
-    return static_cast<size_t>(-1);
+
+    close();
+    is_connected = false;
+    return -1;
   }
 
   char lenStr[80];
   sprintf(lenStr, "%ld -> %ld", len, result);
   Logger.debug(SOCKET_IMPL, "read->", lenStr);
-  return result;
+  // Possible narrowing can't be helped because of Arduino API compatiblity
+  return static_cast<int>(result);
 }
 
 // peeks one character

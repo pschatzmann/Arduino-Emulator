@@ -294,11 +294,13 @@ class EthernetClient : public Client {
   }
 
   virtual size_t readBytes(char* buffer, size_t len) {
-    return read((uint8_t*)buffer, len);
+    int result = read((uint8_t*)buffer, len);
+    return result < 0 ? 0 : static_cast<size_t>(result);
   }
 
   virtual size_t readBytes(uint8_t* buffer, size_t len) {
-    return read(buffer, len);
+    int result = read(buffer, len);
+    return result < 0 ? 0 : static_cast<size_t>(result);
   }
 
   // peeks one character
@@ -384,11 +386,11 @@ class EthernetClient : public Client {
     int result = 0;
     long timeout = millis() + getTimeout();
     result = p_sock->read(buffer, len);
-    while (result <= 0 && millis() < timeout) {
+    while (result == 0 && millis() < timeout) {
       delay(200);
       result = p_sock->read(buffer, len);
     }
-    //}
+
     char lenStr[16];
     sprintf(lenStr, "%d", result);
     Logger.debug(WIFICLIENT, "read->", lenStr);
