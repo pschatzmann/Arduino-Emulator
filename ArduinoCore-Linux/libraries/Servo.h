@@ -34,8 +34,6 @@
 /// Invalid pin sentinel
 #define SERVO_NO_PIN  255
 
-namespace arduino {
-
 /**
  * @class Servo
  * @brief Arduino-compatible Servo library for Raspberry Pi.
@@ -212,10 +210,5 @@ class Servo {
     if (fe) { fprintf(fe, "%d", us > 0 ? 1 : 0); fclose(fe); }
   }
 };
-
-}  // namespace arduino
-
-// Pull into global namespace for Arduino sketch compatibility
-using arduino::Servo;
 
 #endif  // USE_RPI
