@@ -24,17 +24,136 @@
 #include <gpiod.h>  // sudo apt-get install libgpiod-dev
 
 #include <map>
+#include <string>
 
 #include "ArduinoLogger.h"
 
 namespace arduino {
 
-// Helper: map pin number to gpiod_line*
+// -------------------------------------------------------------------------
+// libgpiod v1 vs v2 compatibility layer
+//
+// v1: gpiod_chip_open_by_name(), gpiod_line*, gpiod_line_request_output(), etc.
+// v2: gpiod_chip_open(path), gpiod_line_request*, gpiod_line_settings, etc.
+//     Detected via GPIOD_API_VERSION macro (defined as 2 in gpiod v2 headers).
+// -------------------------------------------------------------------------
+
+#if defined(GPIOD_API_VERSION) && GPIOD_API_VERSION >= 2
+
+// ---- libgpiod v2 implementation ----------------------------------------
+
+// Each pin gets its own line request (one line per request for simplicity)
+static std::map<pin_size_t, gpiod_line_request*> gpio_requests;
+static gpiod_chip* gpio_chip = nullptr;
+
+void HardwareGPIO_RPI::begin() {
+  Logger.warning("Activating Raspberry PI: GPIO (libgpiod v2)");
+  // Build device path: "gpiochip0" -> "/dev/gpiochip0"
+  std::string path = std::string("/dev/") + device_name;
+  gpio_chip = gpiod_chip_open(path.c_str());
+  if (!gpio_chip) {
+    Logger.error("HardwareGPIO_RPI", "Failed to open", path.c_str());
+  } else {
+    is_open = true;
+  }
+}
+
+HardwareGPIO_RPI::~HardwareGPIO_RPI() {
+  for (auto& kv : gpio_requests) {
+    if (kv.second) gpiod_line_request_release(kv.second);
+  }
+  gpio_requests.clear();
+  if (gpio_chip) {
+    gpiod_chip_close(gpio_chip);
+    gpio_chip = nullptr;
+  }
+}
+
+static gpiod_line_request* requestLine(gpiod_chip* chip, pin_size_t pin,
+                                       gpiod_line_direction direction,
+                                       gpiod_line_value initial = GPIOD_LINE_VALUE_INACTIVE) {
+  // Release existing request if any
+  auto it = gpio_requests.find(pin);
+  if (it != gpio_requests.end() && it->second) {
+    gpiod_line_request_release(it->second);
+    gpio_requests[pin] = nullptr;
+  }
+
+  gpiod_line_settings* settings = gpiod_line_settings_new();
+  gpiod_line_settings_set_direction(settings, direction);
+  if (direction == GPIOD_LINE_DIRECTION_OUTPUT) {
+    gpiod_line_settings_set_output_value(settings, initial);
+  }
+
+  gpiod_line_config* line_cfg = gpiod_line_config_new();
+  unsigned int offset = pin;
+  gpiod_line_config_add_line_settings(line_cfg, &offset, 1, settings);
+
+  gpiod_request_config* req_cfg = gpiod_request_config_new();
+  gpiod_request_config_set_consumer(req_cfg, "arduino-emulator");
+
+  gpiod_line_request* request = gpiod_chip_request_lines(chip, req_cfg, line_cfg);
+
+  gpiod_line_settings_free(settings);
+  gpiod_line_config_free(line_cfg);
+  gpiod_request_config_free(req_cfg);
+
+  return request;
+}
+
+void HardwareGPIO_RPI::pinMode(pin_size_t pinNumber, PinMode pinMode) {
+  if (!gpio_chip) return;
+  gpiod_line_direction dir = (pinMode == OUTPUT)
+                                 ? GPIOD_LINE_DIRECTION_OUTPUT
+                                 : GPIOD_LINE_DIRECTION_INPUT;
+  gpiod_line_request* req = requestLine(gpio_chip, pinNumber, dir);
+  if (!req) {
+    Logger.error("HardwareGPIO_RPI", "Failed to set pin mode");
+    return;
+  }
+  gpio_requests[pinNumber] = req;
+}
+
+void HardwareGPIO_RPI::digitalWrite(pin_size_t pinNumber, PinStatus status) {
+  // Ensure pin is configured as output
+  if (gpio_requests.find(pinNumber) == gpio_requests.end() || !gpio_requests[pinNumber]) {
+    pinMode(pinNumber, OUTPUT);
+  }
+  gpiod_line_request* req = gpio_requests[pinNumber];
+  if (req) {
+    gpiod_line_value val = (status == HIGH) ? GPIOD_LINE_VALUE_ACTIVE
+                                            : GPIOD_LINE_VALUE_INACTIVE;
+    if (gpiod_line_request_set_value(req, pinNumber, val) < 0) {
+      Logger.error("HardwareGPIO_RPI", "Failed to write value");
+    }
+  }
+}
+
+PinStatus HardwareGPIO_RPI::digitalRead(pin_size_t pinNumber) {
+  if (gpio_requests.find(pinNumber) == gpio_requests.end() || !gpio_requests[pinNumber]) {
+    pinMode(pinNumber, INPUT);
+  }
+  gpiod_line_request* req = gpio_requests[pinNumber];
+  if (req) {
+    gpiod_line_value val = gpiod_line_request_get_value(req, pinNumber);
+    if (val == GPIOD_LINE_VALUE_ERROR) {
+      Logger.error("HardwareGPIO_RPI", "Failed to read value");
+      return LOW;
+    }
+    return (val == GPIOD_LINE_VALUE_ACTIVE) ? HIGH : LOW;
+  }
+  return LOW;
+}
+
+#else  // libgpiod v1
+
+// ---- libgpiod v1 implementation ----------------------------------------
+
 static std::map<pin_size_t, gpiod_line*> gpio_lines;
 static gpiod_chip* gpio_chip = nullptr;
 
 void HardwareGPIO_RPI::begin() {
-  Logger.warning("Activating Rasperry PI: GPIO");
+  Logger.warning("Activating Raspberry PI: GPIO (libgpiod v1)");
   gpio_chip = gpiod_chip_open_by_name(device_name);
   if (!gpio_chip) {
     Logger.error("HardwareGPIO_RPI", "Failed to open", device_name);
@@ -45,7 +164,7 @@ void HardwareGPIO_RPI::begin() {
 
 HardwareGPIO_RPI::~HardwareGPIO_RPI() {
   for (auto& kv : gpio_lines) {
-    gpiod_line_release(kv.second);
+    if (kv.second) gpiod_line_release(kv.second);
   }
   gpio_lines.clear();
   if (gpio_chip) {
@@ -56,15 +175,18 @@ HardwareGPIO_RPI::~HardwareGPIO_RPI() {
 
 void HardwareGPIO_RPI::pinMode(pin_size_t pinNumber, PinMode pinMode) {
   if (!gpio_chip) return;
-  gpiod_line* line = gpio_lines[pinNumber];
-  if (!line) {
-    line = gpiod_chip_get_line(gpio_chip, pinNumber);
-    if (!line) {
-      Logger.error("HardwareGPIO_RPI", "Failed to get line");
-      return;
-    }
-    gpio_lines[pinNumber] = line;
+  // Release existing line if mode is changing
+  auto it = gpio_lines.find(pinNumber);
+  if (it != gpio_lines.end() && it->second) {
+    gpiod_line_release(it->second);
+    gpio_lines[pinNumber] = nullptr;
   }
+  gpiod_line* line = gpiod_chip_get_line(gpio_chip, pinNumber);
+  if (!line) {
+    Logger.error("HardwareGPIO_RPI", "Failed to get line");
+    return;
+  }
+  gpio_lines[pinNumber] = line;
   int ret = 0;
   if (pinMode == OUTPUT) {
     ret = gpiod_line_request_output(line, "arduino-emulator", 0);
@@ -106,6 +228,8 @@ PinStatus HardwareGPIO_RPI::digitalRead(pin_size_t pinNumber) {
   }
   return LOW;
 }
+
+#endif  // GPIOD_API_VERSION
 
 int HardwareGPIO_RPI::analogRead(pin_size_t pinNumber) {
   Logger.error("HardwareGPIO_RPI",
