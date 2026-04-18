@@ -79,10 +79,9 @@ if (USE_RPI)
     # Detect libgpiod major version and pass it as a compile definition
     if(GPIOD_VERSION VERSION_GREATER_EQUAL "2.0")
         message(STATUS "libgpiod v2 detected (${GPIOD_VERSION})")
-        target_compile_definitions(arduino_emulator PUBLIC -DLIBGPIOD_V2)
     else()
         message(STATUS "libgpiod v1 detected (${GPIOD_VERSION})")
-        target_compile_definitions(arduino_emulator PUBLIC -DLIBGPIOD_V2)
+        add_compile_definitions(-DLIBGPIOD_V1)
     endif()
 endif(USE_RPI)
 
