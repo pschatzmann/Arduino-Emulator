@@ -71,7 +71,17 @@ include(${CMAKE_CURRENT_SOURCE_DIR}/Arduino.cmake)
 
 if (USE_RPI)
     target_compile_options(arduino_emulator PUBLIC -DUSE_RPI)
-    target_link_libraries(arduino_emulator gpiod)
+    find_package(PkgConfig REQUIRED)
+    pkg_check_modules(GPIOD REQUIRED libgpiod)
+    target_link_libraries(arduino_emulator ${GPIOD_LIBRARIES})
+    target_include_directories(arduino_emulator PUBLIC ${GPIOD_INCLUDE_DIRS})
+    # Detect libgpiod major version and pass it as a compile definition
+    if(GPIOD_VERSION VERSION_GREATER_EQUAL "2.0")
+        message(STATUS "libgpiod v2 detected (${GPIOD_VERSION})")
+        target_compile_definitions(arduino_emulator PUBLIC LIBGPIOD_V2)
+    else()
+        message(STATUS "libgpiod v1 detected (${GPIOD_VERSION})")
+    endif()
 endif(USE_RPI)
 
 if (USE_REMOTE)

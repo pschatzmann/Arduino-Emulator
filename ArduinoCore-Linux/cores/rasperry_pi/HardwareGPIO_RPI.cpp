@@ -33,12 +33,12 @@ namespace arduino {
 // -------------------------------------------------------------------------
 // libgpiod v1 vs v2 compatibility layer
 //
+// Version is detected at cmake time via pkg-config and passed as LIBGPIOD_V2.
 // v1: gpiod_chip_open_by_name(), gpiod_line*, gpiod_line_request_output(), etc.
 // v2: gpiod_chip_open(path), gpiod_line_request*, gpiod_line_settings, etc.
-//     Detected via GPIOD_API_VERSION macro (defined as 2 in gpiod v2 headers).
 // -------------------------------------------------------------------------
 
-#if defined(GPIOD_API_VERSION) && GPIOD_API_VERSION >= 2
+#if defined(LIBGPIOD_V2)
 
 // ---- libgpiod v2 implementation ----------------------------------------
 
