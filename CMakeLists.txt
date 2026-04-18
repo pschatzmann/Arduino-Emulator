@@ -8,7 +8,7 @@ project(arduino_emulator VERSION 0.1 DESCRIPTION "Arduino Emulator for Linux" LA
 option(USE_HTTPS "Https Support" OFF)
 option(USE_RPI "Raspberry Pi Support" OFF)
 option(USE_REMOTE "Remote API Support" OFF)
-option(BUILD_SHARED_LIBS "Build with shared libraries" ON)
+option(BUILD_SHARED_LIBS "Build with shared libraries" OFF)
 option(BUILD_EXAMPLES "Build with examples" OFF)
 
 # Https support: Build with wolfssl 
