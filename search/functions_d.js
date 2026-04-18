@@ -8,7 +8,7 @@ var searchData=
   ['serial1_5',['Serial1',['../namespacearduino.html#a8bf2dfa8621a2fd45f0f69ee06c2d885',1,'arduino']]],
   ['serial2_6',['Serial2',['../namespacearduino.html#aa9b5bb779e9660566ebec490609d5d04',1,'arduino']]],
   ['serialib_7',['serialib',['../classserialib.html#a26166f63ad73013ca7cbcd2ae59edc91',1,'serialib']]],
-  ['servo_8',['Servo',['../class_servo.html#a3ab761ee77168f18e649676d73a15b77',1,'Servo']]],
+  ['servo_8',['servo',['../class_servo.html#a3ab761ee77168f18e649676d73a15b77',1,'Servo::Servo(HardwareGPIO_RPI &amp;gpio)'],['../class_servo.html#a70b2b17657cf258cdcb57503bcf62cd2',1,'Servo::Servo()']]],
   ['setclock_9',['setClock',['../classarduino_1_1_hardware_i2_c___f_t_d_i.html#a52e8bbe713f52da21dc126799b8e4e65',1,'arduino::HardwareI2C_FTDI']]],
   ['setclockfrequency_10',['setclockfrequency',['../classarduino_1_1_hardware_i2_c___f_t_d_i.html#a480ef5cd91e577261882fd0e091b6a4c',1,'arduino::HardwareI2C_FTDI::setClockFrequency()'],['../classarduino_1_1_hardware_s_p_i___f_t_d_i.html#a8b81ce5db5892a7d37e109c514d24551',1,'arduino::HardwareSPI_FTDI::setClockFrequency()']]],
   ['setdeviceparams_11',['setDeviceParams',['../classarduino_1_1_hardware_setup_f_t_d_i.html#a0d880b2995aa1ecdd21a2993663c9734',1,'arduino::HardwareSetupFTDI']]],
