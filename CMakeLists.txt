@@ -82,6 +82,7 @@ if (USE_RPI)
         target_compile_definitions(arduino_emulator PUBLIC -DLIBGPIOD_V2)
     else()
         message(STATUS "libgpiod v1 detected (${GPIOD_VERSION})")
+        target_compile_definitions(arduino_emulator PUBLIC -DLIBGPIOD_V2)
     endif()
 endif(USE_RPI)
 
