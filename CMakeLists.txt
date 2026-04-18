@@ -71,18 +71,36 @@ include(${CMAKE_CURRENT_SOURCE_DIR}/Arduino.cmake)
 
 if (USE_RPI)
 
-    target_compile_definitions(arduino_emulator PUBLIC -DUSE_RPI)
-    find_package(PkgConfig REQUIRED)
-    pkg_check_modules(GPIOD REQUIRED libgpiod)
-    target_link_libraries(arduino_emulator ${GPIOD_LIBRARIES})
-    target_include_directories(arduino_emulator PUBLIC ${GPIOD_INCLUDE_DIRS})
-    # Detect libgpiod major version and pass it as a compile definition
-    if(GPIOD_VERSION VERSION_GREATER_EQUAL "2.0")
-        message(STATUS "libgpiod v2 detected (${GPIOD_VERSION})")
-    else()
-        message(STATUS "libgpiod v1 detected (${GPIOD_VERSION})")
-        add_compile_definitions(-DLIBGPIOD_V1)
+    # target_compile_definitions(arduino_emulator PUBLIC -DUSE_RPI)
+    # find_package(PkgConfig REQUIRED)
+    # pkg_check_modules(GPIOD REQUIRED libgpiod)
+    # target_link_libraries(arduino_emulator ${GPIOD_LIBRARIES})
+    # target_include_directories(arduino_emulator PUBLIC ${GPIOD_INCLUDE_DIRS})
+    # # Detect libgpiod major version and pass it as a compile definition
+    # if(GPIOD_VERSION VERSION_GREATER_EQUAL "2.0")
+    #     message(STATUS "libgpiod v2 detected (${GPIOD_VERSION})")
+    # else()
+    #     message(STATUS "libgpiod v1 detected (${GPIOD_VERSION})")
+    #     add_compile_definitions(-DLIBGPIOD_V1)
+    # endif()
+
+
+    # Find installed libgpiod 
+    find_library(GPIOD_LIB NAMES gpiod gpiod2)
+    if(GPIOD_LIB)
+        if(GPIOD_LIB MATCHES "gpiod2")
+        else()
+            add_compile_options(-DLIBGPIOD_V1)
+        endif()
+        message(STATUS "Found ${GPIOD_NAME}: ${GPIOD_LIB}")
     endif()
+
+    # Link arduino_emulator explicitly to the found lib if present
+    if(GPIOD_LIB)
+        target_link_libraries(arduino_emulator PUBLIC ${GPIOD_LIB})
+    endif()
+
+
 endif(USE_RPI)
 
 if (USE_REMOTE)
