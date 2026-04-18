@@ -13,8 +13,8 @@ var searchData=
   ['arduino_20c_20emulator_20library_10',['An Arduino C++ Emulator Library',['../index.html',1,'']]],
   ['arduinocore_20api_11',['Implementing ArduinoCore-API',['..//home/runner/work/Arduino-Emulator/Arduino-Emulator/ArduinoCore-API/README.md#autotoc_md12',1,'']]],
   ['arduinologger_12',['ArduinoLogger',['../classarduino_1_1_arduino_logger.html',1,'arduino']]],
-  ['attach_13',['attach',['../classarduino_1_1_servo.html#ad40b96b26c99679e780bf39184dbc690',1,'arduino::Servo::attach(int pin)'],['../classarduino_1_1_servo.html#a65b68cf276c6e5f2cc0c4159bb1f934a',1,'arduino::Servo::attach(int pin, int min, int max)']]],
-  ['attached_14',['attached',['../classarduino_1_1_servo.html#a232e2584f0d7d0204f43909c36ea8b56',1,'arduino::Servo']]],
+  ['attach_13',['attach',['../class_servo.html#aeccd2077f07ebc45250da14e72a0c461',1,'Servo::attach(int pin)'],['../class_servo.html#a70076d9a77de97241badd1f377817219',1,'Servo::attach(int pin, int min, int max)']]],
+  ['attached_14',['attached',['../class_servo.html#a243c190018cc807116ac4ca2c9b0f66e',1,'Servo']]],
   ['attachinterrupt_15',['attachInterrupt',['../classarduino_1_1_hardware_s_p_i___f_t_d_i.html#afb70031fef31707e6b8a4ce7a2055f0a',1,'arduino::HardwareSPI_FTDI']]],
   ['available_16',['available',['../classarduino_1_1_hardware_c_a_n.html#a2490c3c429e28464b2ee616ed6dc306a',1,'arduino::HardwareCAN::available()'],['../classserialib.html#a50c91bf8cab23afdfdf05ca58392456f',1,'serialib::available()'],['../classarduino_1_1_hardware_i2_c___f_t_d_i.html#adb6529b8e9d5d3e517c02393e3a07e71',1,'arduino::HardwareI2C_FTDI::available()']]]
 ];

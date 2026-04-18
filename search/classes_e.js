@@ -6,7 +6,7 @@ var searchData=
   ['serialib_3',['serialib',['../classserialib.html',1,'']]],
   ['serialimpl_4',['SerialImpl',['../classarduino_1_1_serial_impl.html',1,'arduino']]],
   ['server_5',['Server',['../classarduino_1_1_server.html',1,'arduino']]],
-  ['servo_6',['Servo',['../classarduino_1_1_servo.html',1,'arduino']]],
+  ['servo_6',['Servo',['../class_servo.html',1,'']]],
   ['signalhandler_7',['SignalHandler',['../class_signal_handler.html',1,'']]],
   ['socketimpl_8',['SocketImpl',['../classarduino_1_1_socket_impl.html',1,'arduino']]],
   ['socketimplsecure_9',['SocketImplSecure',['../classarduino_1_1_socket_impl_secure.html',1,'arduino']]],
