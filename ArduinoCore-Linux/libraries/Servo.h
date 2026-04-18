@@ -23,6 +23,7 @@
 #include <algorithm>
 #include <cstdio>
 #include "HardwareGPIO_RPI.h"
+#include "HardwareSetupRPI.h"
 
 /// Standard servo pulse range in microseconds
 #define SERVO_DEFAULT_MIN_US  544
@@ -59,10 +60,19 @@
 class Servo {
  public:
   /**
-   * @brief Constructor. Requires a reference to an initialised HardwareGPIO_RPI.
+   * @brief Default constructor. Uses the global RPI GPIO instance.
+   */
+  Servo() : _gpio(arduino::RPI.getGPIO()),
+            _pin(SERVO_NO_PIN),
+            _min(SERVO_DEFAULT_MIN_US),
+            _max(SERVO_DEFAULT_MAX_US),
+            _pulseUs((SERVO_DEFAULT_MIN_US + SERVO_DEFAULT_MAX_US) / 2) {}
+
+  /**
+   * @brief Constructor with explicit HardwareGPIO_RPI instance.
    */
   Servo(HardwareGPIO_RPI& gpio)
-      : _gpio(gpio),
+      : _gpio(&gpio),
         _pin(SERVO_NO_PIN),
         _min(SERVO_DEFAULT_MIN_US),
         _max(SERVO_DEFAULT_MAX_US),
@@ -92,8 +102,10 @@ class Servo {
     _pin = pin;
     _min = min;
     _max = max;
-    _gpio.pinMode(_pin, OUTPUT);
-    _gpio.analogWriteFrequency(_pin, 50);  // Fix to 50 Hz for servo control
+    if (_gpio) {
+      _gpio->pinMode(_pin, OUTPUT);
+      _gpio->analogWriteFrequency(_pin, 50);  // Fix to 50 Hz for servo control
+    }
     _writePulse(_pulseUs);
     return 0;
   }
@@ -152,7 +164,7 @@ class Servo {
   }
 
  private:
-  HardwareGPIO_RPI& _gpio;
+  HardwareGPIO_RPI* _gpio;
   int _pin;
   int _min;
   int _max;

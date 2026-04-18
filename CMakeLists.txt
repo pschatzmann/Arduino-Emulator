@@ -70,7 +70,7 @@ target_compile_features(arduino_emulator PUBLIC cxx_std_17)
 include(${CMAKE_CURRENT_SOURCE_DIR}/Arduino.cmake)
 
 if (USE_RPI)
-    target_compile_options(arduino_emulator PUBLIC -DUSE_RPI)
+    target_compile_definitions(arduino_emulator PUBLIC USE_RPI)
     find_package(PkgConfig REQUIRED)
     pkg_check_modules(GPIOD REQUIRED libgpiod)
     target_link_libraries(arduino_emulator ${GPIOD_LIBRARIES})
