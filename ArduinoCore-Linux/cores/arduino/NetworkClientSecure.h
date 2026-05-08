@@ -63,7 +63,7 @@ class SocketImplSecure : public SocketImpl {
     }
   }
   // direct read
-  size_t read(uint8_t* buffer, size_t len) {
+  int read(uint8_t* buffer, size_t len) override {
     // size_t result = ::recv(sock, buffer, len, MSG_DONTWAIT );
     if (ssl == nullptr) {
       wolfSSL_set_fd(ssl, sock);
@@ -71,8 +71,20 @@ class SocketImplSecure : public SocketImpl {
     int result = ::wolfSSL_read(ssl, buffer, len);
 
     if (result < 0) {
-      result = 0;
+      int error = wolfSSL_get_error(ssl, result);
+      if (error == SSL_ERROR_WANT_READ || error == SSL_ERROR_WANT_WRITE) {
+        return 0;
+      }
+
+      is_connected = false;
+      return -1;
     }
+
+    if (result == 0) {
+      is_connected = false;
+      return -1;
+    }
+
     // 
     char lenStr[80];
     sprintf(lenStr, "%ld -> %d", len, result);
