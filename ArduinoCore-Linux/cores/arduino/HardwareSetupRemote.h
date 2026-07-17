@@ -144,7 +144,7 @@ class HardwareSetupRemote : public I2CSource,
           char buffer[30];
           int len = s->readBytes(buffer, 18);
           buffer[len] = 0;
-          if (strncmp(buffer, "Arduino-Emulator", 16)) {
+          if (strncmp(buffer, "Arduino-Emulator", 16)==0) {
             Logger.info("WiFiUDPStream", "device found!");
             break;
           } else {

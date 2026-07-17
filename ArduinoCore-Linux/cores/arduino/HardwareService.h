@@ -136,7 +136,7 @@ class HardwareService {
   }
 
   void send(uint64_t dataIn) {
-    uint32_t data = swap_uint64(dataIn);
+    uint64_t data = swap_uint64(dataIn);
     io->write((uint8_t*)&data, sizeof(data));
   }
 
@@ -145,7 +145,7 @@ class HardwareService {
     io->write((uint8_t*)&data, sizeof(data));
   }
   void send(int64_t dataIn) {
-    int32_t data = swap_int64(dataIn);
+    int64_t data = swap_int64(dataIn);
     io->write((uint8_t*)&data, sizeof(data));
   }
 
