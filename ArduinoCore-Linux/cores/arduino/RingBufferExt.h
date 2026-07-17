@@ -107,7 +107,12 @@ class RingBufferExt {
   }
 
  protected:
-  std::vector<char> buffer;
+  // Must be unsigned: peek()/read() return byte values widened to int, and
+  // -1 is the "no data" sentinel. A signed char storing byte value 0xFF
+  // sign-extends to -1, indistinguishable from "empty" — permanently
+  // wedging the buffer on any payload containing a 0xFF byte (e.g. Opus or
+  // raw PCM audio), since read() then refuses to ever advance past it.
+  std::vector<uint8_t> buffer;
   int max_len;
   int actual_len = 0;
   int actual_read_pos = 0;
