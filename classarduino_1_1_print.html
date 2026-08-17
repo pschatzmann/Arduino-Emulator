@@ -91,19 +91,19 @@ Inheritance diagram for arduino::Print:</div>
 <area href="classarduino_1_1_ethernet_server.html" alt="arduino::EthernetServer" shape="rect" coords="0,112,166,136"/>
 <area href="class_stream_mock.html" alt="StreamMock" shape="rect" coords="352,112,518,136"/>
 <area href="classarduino_1_1_client.html" alt="arduino::Client" shape="rect" coords="352,168,518,192"/>
-<area href="classarduino_1_1_file_stream.html" title="We use the FileStream class to be able to provide Serail, Serial1 and Serial2 outside of the Arduino ..." alt="arduino::FileStream" shape="rect" coords="352,224,518,248"/>
+<area href="classarduino_1_1_file_stream.html" title="We use the FileStream class to be able to provide Serial, Serial1 and Serial2 outside of the Arduino ..." alt="arduino::FileStream" shape="rect" coords="352,224,518,248"/>
 <area href="classarduino_1_1_hardware_i2_c.html" alt="arduino::HardwareI2C" shape="rect" coords="352,280,518,304"/>
 <area href="classarduino_1_1_hardware_serial.html" alt="arduino::HardwareSerial" shape="rect" coords="352,336,518,360"/>
 <area href="classarduino_1_1_remote_serial_class.html" title="Remote Serial implementation that operates over a communication stream." alt="arduino::RemoteSerialClass" shape="rect" coords="352,392,518,416"/>
 <area href="classarduino_1_1_stdio_device.html" title="Provides a Stream interface for standard input/output operations outside the Arduino environment." alt="arduino::StdioDevice" shape="rect" coords="352,448,518,472"/>
 <area href="classarduino_1_1_u_d_p.html" alt="arduino::UDP" shape="rect" coords="352,504,518,528"/>
+<area href="classarduino_1_1_u_d_p_stream.html" title="A UDP class which makes sure that we can use UDP as simple Stream w/o additional complexity...." alt="arduino::UDPStream" shape="rect" coords="352,560,518,584"/>
   </map>
 </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ae5e885f052e4da882d4570ebd0f4474d" id="r_ae5e885f052e4da882d4570ebd0f4474d"><td class="memItemLeft" align="right" valign="top"><a id="ae5e885f052e4da882d4570ebd0f4474d" name="ae5e885f052e4da882d4570ebd0f4474d"></a>
-<a class="el" href="classarduino_1_1_d_m_a_buffer.html">virtual</a> <a class="el" href="classarduino_1_1_d_m_a_buffer.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><b>availableForWrite</b> ()</td></tr>
+<tr class="memitem:ae5e885f052e4da882d4570ebd0f4474d" id="r_ae5e885f052e4da882d4570ebd0f4474d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classarduino_1_1_d_m_a_buffer.html">virtual</a> <a class="el" href="classarduino_1_1_d_m_a_buffer.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classarduino_1_1_print.html#ae5e885f052e4da882d4570ebd0f4474d">availableForWrite</a> ()</td></tr>
 <tr class="separator:ae5e885f052e4da882d4570ebd0f4474d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aac69c50d6ea94ec4d8ca81f53eb0eb12" id="r_aac69c50d6ea94ec4d8ca81f53eb0eb12"><td class="memItemLeft" align="right" valign="top"><a id="aac69c50d6ea94ec4d8ca81f53eb0eb12" name="aac69c50d6ea94ec4d8ca81f53eb0eb12"></a>
 <a class="el" href="classarduino_1_1_d_m_a_buffer.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><b>clearWriteError</b> ()</td></tr>
@@ -212,6 +212,33 @@ Protected Member Functions</h2></td></tr>
 <tr class="separator:ad4c57909d9181be38d19c61d6ff827ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="ae5e885f052e4da882d4570ebd0f4474d" name="ae5e885f052e4da882d4570ebd0f4474d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae5e885f052e4da882d4570ebd0f4474d">&#9670;&#160;</a></span>availableForWrite()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classarduino_1_1_d_m_a_buffer.html">virtual</a> <a class="el" href="classarduino_1_1_d_m_a_buffer.html">int</a> arduino::Print::availableForWrite </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented in <a class="el" href="classarduino_1_1_u_d_p_stream.html#adf20ffa28ca308790b251fec79278f57">arduino::UDPStream</a>.</p>
+
+</div>
+</div>
 <a id="a87c35debc8f72bc2aad9af64eed836b4" name="a87c35debc8f72bc2aad9af64eed836b4"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a87c35debc8f72bc2aad9af64eed836b4">&#9670;&#160;</a></span>flush()</h2>
 
@@ -274,7 +301,7 @@ Protected Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented in <a class="el" href="classarduino_1_1_hardware_i2_c___f_t_d_i.html#af32e14ec1472c43f8b42d79bff550a64">arduino::HardwareI2C_FTDI</a>.</p>
+<p>Reimplemented in <a class="el" href="classarduino_1_1_u_d_p_stream.html#ab572660ad7d72cae3bcde8719dcd71cb">arduino::UDPStream</a>, and <a class="el" href="classarduino_1_1_hardware_i2_c___f_t_d_i.html#af32e14ec1472c43f8b42d79bff550a64">arduino::HardwareI2C_FTDI</a>.</p>
 
 </div>
 </div>

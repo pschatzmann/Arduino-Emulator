@@ -16,5 +16,6 @@ var searchData=
   ['attach_13',['attach',['../class_servo.html#aeccd2077f07ebc45250da14e72a0c461',1,'Servo::attach(int pin)'],['../class_servo.html#a70076d9a77de97241badd1f377817219',1,'Servo::attach(int pin, int min, int max)']]],
   ['attached_14',['attached',['../class_servo.html#a243c190018cc807116ac4ca2c9b0f66e',1,'Servo']]],
   ['attachinterrupt_15',['attachInterrupt',['../classarduino_1_1_hardware_s_p_i___f_t_d_i.html#afb70031fef31707e6b8a4ce7a2055f0a',1,'arduino::HardwareSPI_FTDI']]],
-  ['available_16',['available',['../classarduino_1_1_hardware_c_a_n.html#a2490c3c429e28464b2ee616ed6dc306a',1,'arduino::HardwareCAN::available()'],['../classserialib.html#a50c91bf8cab23afdfdf05ca58392456f',1,'serialib::available()'],['../classarduino_1_1_hardware_i2_c___f_t_d_i.html#adb6529b8e9d5d3e517c02393e3a07e71',1,'arduino::HardwareI2C_FTDI::available()']]]
+  ['available_16',['available',['../classarduino_1_1_hardware_c_a_n.html#a2490c3c429e28464b2ee616ed6dc306a',1,'arduino::HardwareCAN::available()'],['../classserialib.html#a50c91bf8cab23afdfdf05ca58392456f',1,'serialib::available()'],['../classarduino_1_1_u_d_p_stream.html#a2d9babbd2b1c29723e7f5982394256b3',1,'arduino::UDPStream::available()'],['../classarduino_1_1_hardware_i2_c___f_t_d_i.html#adb6529b8e9d5d3e517c02393e3a07e71',1,'arduino::HardwareI2C_FTDI::available()']]],
+  ['availableforwrite_17',['availableForWrite',['../classarduino_1_1_u_d_p_stream.html#adf20ffa28ca308790b251fec79278f57',1,'arduino::UDPStream']]]
 ];
