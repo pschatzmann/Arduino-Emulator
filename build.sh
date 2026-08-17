@@ -5,7 +5,7 @@ then
     # apk add git cmake make binutils build-base doxygen musl-dev 
     # git clone https://github.com/arduino/ArduinoCore-API.git 
     rm -r ./build
-    cmake -S ../Arduino-Emulator -B ./build -DUSE_HTTPS=ON 
+    cmake -S ../Arduino-Emulator -B ./build -DUSE_HTTPS=ON -DBUILD_SHARED_LIBS=ON -DUSE_REMOTE=ON
     make -C ./build clean
     if make -C ./build; then
         echo "Build completed successfully!"

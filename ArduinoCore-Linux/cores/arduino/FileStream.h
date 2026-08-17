@@ -24,7 +24,7 @@
 namespace arduino {
 
 /**
- * @brief We use the FileStream class to be able to provide Serail, Serial1 and
+ * @brief We use the FileStream class to be able to provide Serial, Serial1 and
  * Serial2 outside of the Arduino environment;
  */
 class FileStream : public Stream {
@@ -45,6 +45,10 @@ class FileStream : public Stream {
   }
 
   virtual void begin(int speed) {
+    // nothing to be done
+  }
+
+  virtual void end() {
     // nothing to be done
   }
 

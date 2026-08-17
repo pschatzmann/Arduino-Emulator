@@ -44,6 +44,7 @@
 #include "api/ArduinoAPI.h"
 #include "RemoteSerial.h"
 #include "HardwareSetup.h"
+#include "FileStream.h"
 
 using namespace arduino;
 

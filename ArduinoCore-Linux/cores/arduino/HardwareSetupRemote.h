@@ -26,7 +26,7 @@
 #include "RemoteI2C.h"
 #include "RemoteSPI.h"
 #include "SPIWrapper.h"
-#include "WiFiUdpStream.h"
+#include "UDPStream.h"
 
 namespace arduino {
 
@@ -127,7 +127,7 @@ class HardwareSetupRemote : public I2CSource,
   HardwareSPI* getSPI() { return &spi; }
 
  protected:
-  WiFiUDPStream default_stream;
+  arduino::UDPStream default_stream;
   Stream* p_stream = nullptr;
   RemoteI2C i2c;
   RemoteSPI spi;
@@ -145,15 +145,15 @@ class HardwareSetupRemote : public I2CSource,
           int len = s->readBytes(buffer, 18);
           buffer[len] = 0;
           if (strncmp(buffer, "Arduino-Emulator", 16)==0) {
-            Logger.info("WiFiUDPStream", "device found!");
+            Logger.info("UDPStream", "device found!");
             break;
           } else {
-            Logger.info("WiFiUDPStream", "unknown command", buffer);
+            Logger.info("UDPStream", "unknown command", buffer);
           }
         }
         delay(10000);
       } catch (const std::exception& ex) {
-        Logger.error("WiFiUDPStream", ex.what());
+        Logger.error("UDPStream", ex.what());
       }
     }
   }
