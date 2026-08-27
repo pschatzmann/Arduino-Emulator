@@ -108,6 +108,20 @@ class SocketImplSecure : public SocketImpl {
       return -1;
     }
 
+    // Reset the TLS session for this connection - reusing ssl as-is
+    // across a stop()/connect() cycle (this object's owner, e.g.
+    // URLStream's own client_secure, is typically kept and reconnected
+    // rather than recreated) leaves it in stale post-handshake state, so
+    // a second connect() would send a request the server never replies
+    // to instead of doing a fresh handshake.
+    if (ssl != nullptr) {
+      wolfSSL_free(ssl);
+    }
+    ssl = wolfSSL_new(wolf_ctx);
+    if (is_insecure && ssl != nullptr) {
+      wolfSSL_set_verify(ssl, SSL_VERIFY_NONE, nullptr);
+    }
+
     // Set SSL file descriptor
     wolfSSL_set_fd(ssl, sock);
 

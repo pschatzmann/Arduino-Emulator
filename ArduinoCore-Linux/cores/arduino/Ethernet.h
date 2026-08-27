@@ -209,7 +209,16 @@ class EthernetClient : public Client {
     // performs the actual connection
     String str = adr.toString();
     Logger.info("Connecting to ", str.c_str());
-    p_sock->connect(str.c_str(), port);
+    // p_sock->connect()'s result was previously ignored here, so a TLS
+    // handshake failure (SocketImplSecure, see NetworkClientSecure.h)
+    // still left is_connected true - callers went on to write/read over
+    // the now-invalid socket, surfacing as a confusing downstream
+    // failure (e.g. a header read timeout) instead of a clear connect
+    // failure right here.
+    if (p_sock->connect(str.c_str(), port) <= 0) {
+      is_connected = false;
+      return 0;
+    }
     is_connected = true;
     return 1;
   }
