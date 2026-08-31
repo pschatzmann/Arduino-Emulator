@@ -21,6 +21,7 @@
 #include <stdio.h>
 
 #include <chrono>
+#include <cstdint>
 #include <cstring>
 #include <ctime>
 #include <thread>
@@ -59,6 +60,24 @@ PluggableUSB_::PluggableUSB_() {}
 
 }  // namespace arduino
 
+namespace {
+
+using MonotonicClock = std::chrono::steady_clock;
+
+const MonotonicClock::time_point& clockEpoch() {
+  static const MonotonicClock::time_point epoch = MonotonicClock::now();
+  return epoch;
+}
+
+uint64_t elapsedMicroseconds() {
+  return static_cast<uint64_t>(
+      std::chrono::duration_cast<std::chrono::microseconds>(
+          MonotonicClock::now() - clockEpoch())
+          .count());
+}
+
+}  // namespace
+
 /**
  * @brief Pause the program for the amount of time (in milliseconds) specified as parameter
  * @param ms The number of milliseconds to pause (unsigned long)
@@ -93,18 +112,7 @@ char* dtostrf(double val, signed char width, unsigned char prec, char* sout) {
  * @return Number of milliseconds passed since the program started (unsigned long)
  */
 unsigned long millis() {
-  static uint64_t start = 0;
-  using namespace std::chrono;
-  // Get current time with precision of milliseconds
-  auto now = time_point_cast<milliseconds>(system_clock::now());
-  // sys_milliseconds is type time_point<system_clock, milliseconds>
-  using sys_milliseconds = decltype(now);
-  // Convert time_point to signed integral type
-  auto result = now.time_since_epoch().count();
-  if (start == 0) {
-    start = result;
-  }
-  return result - start;
+  return static_cast<uint32_t>(elapsedMicroseconds() / 1000ULL);
 }
 
 /**
@@ -112,13 +120,7 @@ unsigned long millis() {
  * @return Number of microseconds passed since the program started (unsigned long)
  */
 unsigned long micros(void) {
-  using namespace std::chrono;
-  // Get current time with precision of milliseconds
-  auto now = time_point_cast<microseconds>(system_clock::now());
-  // sys_milliseconds is type time_point<system_clock, milliseconds>
-  using sys_milliseconds = decltype(now);
-  // Convert time_point to signed integral type
-  return now.time_since_epoch().count();
+  return static_cast<uint32_t>(elapsedMicroseconds());
 }
 
 /**

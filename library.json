@@ -1,0 +1,23 @@
+{
+  "name": "Arduino-Emulator",
+  "version": "0.1.0",
+  "description": "Desktop Arduino compatibility runtime",
+  "keywords": ["arduino", "emulator", "native"],
+  "frameworks": "*",
+  "platforms": "native",
+  "build": {
+    "srcDir": ".",
+    "includeDir": ".",
+    "flags": [
+      "-I ArduinoCore-API",
+      "-I ArduinoCore-API/api",
+      "-I ArduinoCore-Linux/cores/arduino",
+      "-I ArduinoCore-Linux/libraries"
+    ],
+    "srcFilter": [
+      "+<ArduinoCore-API/api/*.cpp>",
+      "+<ArduinoCore-Linux/cores/arduino/*.cpp>",
+      "-<ArduinoCore-Linux/cores/arduino/Main.cpp>"
+    ]
+  }
+}

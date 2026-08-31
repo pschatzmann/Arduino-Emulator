@@ -19,6 +19,12 @@
 #pragma once
 
 #include <iostream>
+#include <algorithm>
+#include <deque>
+#if defined(__unix__) || defined(__APPLE__)
+#include <sys/ioctl.h>
+#include <unistd.h>
+#endif
 #include <streambuf>
 #include "api/Stream.h"
 #include "api/Printable.h"
@@ -127,19 +133,60 @@ class StdioDevice : public Stream {
     return 1;
   }
 
-  int available() override { return std::cin.rdbuf()->in_avail(); };
+  int available() override {
+#if defined(__unix__) || defined(__APPLE__)
+    fillInputBuffer();
+    return static_cast<int>(inputBuffer_.size());
+#endif
+    return std::cin.rdbuf()->in_avail();
+  }
 
-  int read() override { return std::cin.get(); }
+  int read() override {
+#if defined(__unix__) || defined(__APPLE__)
+    if (available() == 0) return -1;
+    const int value = inputBuffer_.front();
+    inputBuffer_.pop_front();
+    return value;
+#else
+    return std::cin.get();
+#endif
+  }
 
-  int peek() override { return std::cin.peek(); }
+  int peek() override {
+#if defined(__unix__) || defined(__APPLE__)
+    return available() > 0 ? inputBuffer_.front() : -1;
+#else
+    return std::cin.peek();
+#endif
+  }
 
  protected:
   bool auto_flush = true;
+
+#if defined(__unix__) || defined(__APPLE__)
+ private:
+  void fillInputBuffer() {
+    int byteCount = 0;
+    if (ioctl(STDIN_FILENO, FIONREAD, &byteCount) != 0 || byteCount <= 0) {
+      return;
+    }
+
+    char buffer[256];
+    const size_t bytesToRead = std::min(static_cast<size_t>(byteCount), sizeof(buffer));
+    const ssize_t bytesRead = ::read(STDIN_FILENO, buffer, bytesToRead);
+    if (bytesRead <= 0) {
+      return;
+    }
+    inputBuffer_.insert(inputBuffer_.end(), buffer, buffer + bytesRead);
+  }
+
+  std::deque<unsigned char> inputBuffer_;
+#endif
 };
 
-static StdioDevice Serial;
+inline StdioDevice Serial;
 #ifndef USE_RPI
-static StdioDevice Serial2;
+inline StdioDevice Serial2;
 #endif
 
 }  // namespace arduino
