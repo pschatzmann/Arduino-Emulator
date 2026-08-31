@@ -8,6 +8,12 @@
   "build": {
     "srcDir": ".",
     "includeDir": ".",
+    "flags": [
+      "-I ArduinoCore-API",
+      "-I ArduinoCore-API/api",
+      "-I ArduinoCore-Linux/cores/arduino",
+      "-I ArduinoCore-Linux/libraries"
+    ],
     "srcFilter": [
       "+<ArduinoCore-API/api/*.cpp>",
       "+<ArduinoCore-Linux/cores/arduino/*.cpp>",
