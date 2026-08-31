@@ -60,7 +60,11 @@
 #define SS -1
 #endif
 
-using namespace std;
+#ifndef BUILTIN_SDCARD
+#define BUILTIN_SDCARD -1
+#endif
+
+using std::ios;
 
 /**
  * @brief C++ std based emulatoion of SdSpiConfig
@@ -252,15 +256,46 @@ class SdFat {
     int rc = ::rmdir(path);
     return rc == 0;
   }
+
+  /**
+   * @brief Return whether the host filesystem backing the emulator is usable.
+   *
+   * The emulator has no removable media, so a writable current working
+   * directory is the closest equivalent to an inserted SD card.
+   */
+  bool mediaPresent() {
+    std::error_code ec;
+    const std::filesystem::path root = std::filesystem::current_path(ec);
+    if (ec || !std::filesystem::exists(root, ec) || ec) {
+      return false;
+    }
+
+    const auto status = std::filesystem::status(root, ec);
+    if (ec) {
+      return false;
+    }
+
+    return (status.permissions() & std::filesystem::perms::owner_write) !=
+           std::filesystem::perms::none;
+  }
+
+  /** @brief Total capacity in bytes of the host filesystem backing SD. */
+  uint64_t totalSize() { return totalBytes(); }
+
+  /** @brief Used bytes of the host filesystem backing SD. */
+  uint64_t usedSize() { return usedBytes(); }
+
   uint64_t totalBytes() {
     std::error_code ec;
-    const std::filesystem::space_info si = std::filesystem::space("/home", ec);
-    return si.capacity;
+    const std::filesystem::space_info si =
+        std::filesystem::space(std::filesystem::current_path(ec), ec);
+    return ec ? 0 : si.capacity;
   }
   uint64_t usedBytes() {
     std::error_code ec;
-    const std::filesystem::space_info si = std::filesystem::space("/home", ec);
-    return si.capacity - si.available;
+    const std::filesystem::space_info si =
+        std::filesystem::space(std::filesystem::current_path(ec), ec);
+    return ec ? 0 : si.capacity - si.available;
   }
 };
 
