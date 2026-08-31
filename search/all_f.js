@@ -14,10 +14,11 @@ var searchData=
   ['remoteport_11',['remotePort',['../classarduino_1_1_u_d_p_stream.html#a0f3fb28f74c59497e91d441007267925',1,'arduino::UDPStream']]],
   ['remoteserialclass_12',['RemoteSerialClass',['../classarduino_1_1_remote_serial_class.html',1,'arduino']]],
   ['remotespi_13',['RemoteSPI',['../classarduino_1_1_remote_s_p_i.html',1,'arduino']]],
-  ['requestfrom_14',['requestFrom',['../classarduino_1_1_hardware_i2_c___f_t_d_i.html#ad0f9400cea78862f533f6b74f4ba034d',1,'arduino::HardwareI2C_FTDI']]],
-  ['ringbufferext_15',['RingBufferExt',['../classarduino_1_1_ring_buffer_ext.html',1,'arduino']]],
-  ['ringbuffern_16',['RingBufferN',['../classarduino_1_1_ring_buffer_n.html',1,'arduino']]],
-  ['rpi_17',['RPI',['../namespacearduino.html#aaf600ce0d5135956db45dd53f2d9cdab',1,'arduino']]],
-  ['rts_18',['RTS',['../classserialib.html#a5a73f159762fa4d5c252f36acfe7ab47',1,'serialib']]],
-  ['run_20unit_20tests_19',['To build and run unit tests',['..//home/runner/work/Arduino-Emulator/Arduino-Emulator/ArduinoCore-API/README.md#autotoc_md11',1,'']]]
+  ['removesysexhandler_14',['removeSysexHandler',['../classarduino_1_1_firmata_transport.html#af532db164d4fcce32cd6f00a984f34d9',1,'arduino::FirmataTransport']]],
+  ['requestfrom_15',['requestFrom',['../classarduino_1_1_hardware_i2_c___f_t_d_i.html#ad0f9400cea78862f533f6b74f4ba034d',1,'arduino::HardwareI2C_FTDI']]],
+  ['ringbufferext_16',['RingBufferExt',['../classarduino_1_1_ring_buffer_ext.html',1,'arduino']]],
+  ['ringbuffern_17',['RingBufferN',['../classarduino_1_1_ring_buffer_n.html',1,'arduino']]],
+  ['rpi_18',['RPI',['../namespacearduino.html#aaf600ce0d5135956db45dd53f2d9cdab',1,'arduino']]],
+  ['rts_19',['RTS',['../classserialib.html#a5a73f159762fa4d5c252f36acfe7ab47',1,'serialib']]],
+  ['run_20unit_20tests_20',['To build and run unit tests',['..//home/runner/work/Arduino-Emulator/Arduino-Emulator/ArduinoCore-API/README.md#autotoc_md11',1,'']]]
 ];

@@ -75,11 +75,18 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
+<a href="#pro-static-methods">Static Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classarduino_1_1_hardware_g_p_i_o___f_i_r_m_a_t_a-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">arduino::HardwareGPIO_FIRMATA Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>GPIO hardware abstraction that speaks the Firmata protocol over an arbitrary <a class="el" href="classarduino_1_1_stream.html">Stream</a> (e.g. a serial connection to a device running StandardFirmata).  
+ <a href="classarduino_1_1_hardware_g_p_i_o___f_i_r_m_a_t_a.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_hardware_g_p_i_o___f_i_r_8h_source.html">HardwareGPIO_FIR.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for arduino::HardwareGPIO_FIRMATA:</div>
 <div class="dyncontent">
@@ -92,68 +99,118 @@ Inheritance diagram for arduino::HardwareGPIO_FIRMATA:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a135d8c07d623570db55881fd8d2f989d" id="r_a135d8c07d623570db55881fd8d2f989d"><td class="memItemLeft" align="right" valign="top"><a id="a135d8c07d623570db55881fd8d2f989d" name="a135d8c07d623570db55881fd8d2f989d"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>~HardwareGPIO_FIRMA</b> ()</td></tr>
-<tr class="memdesc:a135d8c07d623570db55881fd8d2f989d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor for <a class="el" href="classarduino_1_1_hardware_g_p_i_o___f_t_d_i.html" title="GPIO hardware abstraction for FTDI FT2232HL in the Arduino emulator.">HardwareGPIO_FTDI</a>. <br /></td></tr>
-<tr class="separator:a135d8c07d623570db55881fd8d2f989d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2af8383295a6c6dabc0f00ec6b14ea91" id="r_a2af8383295a6c6dabc0f00ec6b14ea91"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classarduino_1_1_d_m_a_buffer.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classarduino_1_1_hardware_g_p_i_o___f_i_r_m_a_t_a.html#a2af8383295a6c6dabc0f00ec6b14ea91">analogRead</a> (pin_size_t <a class="el" href="classarduino_1_1_d_m_a_buffer.html">pinNumber</a>) <a class="el" href="classarduino_1_1_d_m_a_buffer.html">override</a></td></tr>
-<tr class="memdesc:a2af8383295a6c6dabc0f00ec6b14ea91"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read an analog value from a pin (not supported by FT2232HL).  <br /></td></tr>
+<tr class="memdesc:a2af8383295a6c6dabc0f00ec6b14ea91"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read the value from the specified analog pin.  <br /></td></tr>
 <tr class="separator:a2af8383295a6c6dabc0f00ec6b14ea91"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab7f8a7bba5a33afd9d7acd2a0dfdd400" id="r_ab7f8a7bba5a33afd9d7acd2a0dfdd400"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classarduino_1_1_d_m_a_buffer.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classarduino_1_1_hardware_g_p_i_o___f_i_r_m_a_t_a.html#ab7f8a7bba5a33afd9d7acd2a0dfdd400">analogReference</a> (<a class="el" href="classarduino_1_1_d_m_a_buffer.html">uint8_t</a> mode) <a class="el" href="classarduino_1_1_d_m_a_buffer.html">override</a></td></tr>
-<tr class="memdesc:ab7f8a7bba5a33afd9d7acd2a0dfdd400"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the analog reference mode (not supported by FT2232HL).  <br /></td></tr>
+<tr class="memdesc:ab7f8a7bba5a33afd9d7acd2a0dfdd400"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configure the reference voltage used for analog input.  <br /></td></tr>
 <tr class="separator:ab7f8a7bba5a33afd9d7acd2a0dfdd400"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a87237dd7ca4346cf0bffb99392270c95" id="r_a87237dd7ca4346cf0bffb99392270c95"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classarduino_1_1_d_m_a_buffer.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classarduino_1_1_hardware_g_p_i_o___f_i_r_m_a_t_a.html#a87237dd7ca4346cf0bffb99392270c95">analogWrite</a> (pin_size_t <a class="el" href="classarduino_1_1_d_m_a_buffer.html">pinNumber</a>, <a class="el" href="classarduino_1_1_d_m_a_buffer.html">int</a> <a class="el" href="classarduino_1_1_d_m_a_buffer.html">value</a>) <a class="el" href="classarduino_1_1_d_m_a_buffer.html">override</a></td></tr>
-<tr class="memdesc:a87237dd7ca4346cf0bffb99392270c95"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write an analog value (PWM) to a pin using software PWM.  <br /></td></tr>
+<tr class="memitem:a87237dd7ca4346cf0bffb99392270c95" id="r_a87237dd7ca4346cf0bffb99392270c95"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classarduino_1_1_d_m_a_buffer.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classarduino_1_1_hardware_g_p_i_o___f_i_r_m_a_t_a.html#a87237dd7ca4346cf0bffb99392270c95">analogWrite</a> (pin_size_t <a class="el" href="classarduino_1_1_d_m_a_buffer.html">pinNumber</a>, <a class="el" href="classarduino_1_1_d_m_a_buffer.html">int</a> value) <a class="el" href="classarduino_1_1_d_m_a_buffer.html">override</a></td></tr>
+<tr class="memdesc:a87237dd7ca4346cf0bffb99392270c95"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write an analog value (PWM wave) to a pin.  <br /></td></tr>
 <tr class="separator:a87237dd7ca4346cf0bffb99392270c95"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab4a3bdb9ba5bb000b7ab9eade96535ab" id="r_ab4a3bdb9ba5bb000b7ab9eade96535ab"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classarduino_1_1_d_m_a_buffer.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classarduino_1_1_hardware_g_p_i_o___f_i_r_m_a_t_a.html#ab4a3bdb9ba5bb000b7ab9eade96535ab">analogWriteFrequency</a> (pin_size_t <a class="el" href="classarduino_1_1_d_m_a_buffer.html">pinNumber</a>, <a class="el" href="classarduino_1_1_d_m_a_buffer.html">uint32_t</a> frequency)</td></tr>
-<tr class="memdesc:ab4a3bdb9ba5bb000b7ab9eade96535ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the PWM frequency for <a class="el" href="classarduino_1_1_hardware_g_p_i_o___f_i_r_m_a_t_a.html#a87237dd7ca4346cf0bffb99392270c95" title="Write an analog value (PWM) to a pin using software PWM.">analogWrite()</a> on a specific pin.  <br /></td></tr>
+<tr class="memdesc:ab4a3bdb9ba5bb000b7ab9eade96535ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the PWM frequency for <a class="el" href="classarduino_1_1_hardware_g_p_i_o___f_i_r_m_a_t_a.html#a87237dd7ca4346cf0bffb99392270c95" title="Write an analog value (PWM wave) to a pin.">analogWrite()</a> on the specified pin.  <br /></td></tr>
 <tr class="separator:ab4a3bdb9ba5bb000b7ab9eade96535ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a14ae6740c6ae812d2915feef2a0f43f0" id="r_a14ae6740c6ae812d2915feef2a0f43f0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classarduino_1_1_d_m_a_buffer.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classarduino_1_1_hardware_g_p_i_o___f_i_r_m_a_t_a.html#a14ae6740c6ae812d2915feef2a0f43f0">analogWriteResolution</a> (<a class="el" href="classarduino_1_1_d_m_a_buffer.html">uint8_t</a> <a class="el" href="classarduino_1_1_d_m_a_buffer.html">bits</a>) <a class="el" href="classarduino_1_1_d_m_a_buffer.html">override</a></td></tr>
-<tr class="memdesc:a14ae6740c6ae812d2915feef2a0f43f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the resolution for <a class="el" href="classarduino_1_1_hardware_g_p_i_o___f_i_r_m_a_t_a.html#a87237dd7ca4346cf0bffb99392270c95" title="Write an analog value (PWM) to a pin using software PWM.">analogWrite()</a> operations.  <br /></td></tr>
+<tr class="memdesc:a14ae6740c6ae812d2915feef2a0f43f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the resolution of the <a class="el" href="classarduino_1_1_hardware_g_p_i_o___f_i_r_m_a_t_a.html#a87237dd7ca4346cf0bffb99392270c95" title="Write an analog value (PWM wave) to a pin.">analogWrite()</a> values.  <br /></td></tr>
 <tr class="separator:a14ae6740c6ae812d2915feef2a0f43f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aafac83b731ca69d213a2cd5300ed83e9" id="r_aafac83b731ca69d213a2cd5300ed83e9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classarduino_1_1_d_m_a_buffer.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classarduino_1_1_hardware_g_p_i_o___f_i_r_m_a_t_a.html#aafac83b731ca69d213a2cd5300ed83e9">begin</a> (<a class="el" href="classarduino_1_1_firmata_transport.html">FirmataTransport</a> &amp;transport)</td></tr>
+<tr class="memdesc:aafac83b731ca69d213a2cd5300ed83e9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Attach to an already-started, externally-owned transport, e.g. to share one Firmata connection with I2C/SPI backends.  <br /></td></tr>
+<tr class="separator:aafac83b731ca69d213a2cd5300ed83e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa055e970d924e6811ee6250181a5fdf0" id="r_aa055e970d924e6811ee6250181a5fdf0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classarduino_1_1_d_m_a_buffer.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classarduino_1_1_hardware_g_p_i_o___f_i_r_m_a_t_a.html#aa055e970d924e6811ee6250181a5fdf0">begin</a> (<a class="el" href="classarduino_1_1_stream.html">Stream</a> &amp;<a class="el" href="classarduino_1_1_d_m_a_buffer.html">stream</a>)</td></tr>
-<tr class="memdesc:aa055e970d924e6811ee6250181a5fdf0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize the GPIO hardware interface for FTDI FT2232HL.  <br /></td></tr>
+<tr class="memdesc:aa055e970d924e6811ee6250181a5fdf0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start talking Firmata over the given stream. Owns a private <a class="el" href="classarduino_1_1_firmata_transport.html" title="Single reader thread + byte-stream parser shared by every Firmata-based hardware backend (GPIO,...">FirmataTransport</a> for this connection alone.  <br /></td></tr>
 <tr class="separator:aa055e970d924e6811ee6250181a5fdf0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6ea59d0ec84ba7d0074014b15432adaa" id="r_a6ea59d0ec84ba7d0074014b15432adaa"><td class="memItemLeft" align="right" valign="top">PinStatus&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classarduino_1_1_hardware_g_p_i_o___f_i_r_m_a_t_a.html#a6ea59d0ec84ba7d0074014b15432adaa">digitalRead</a> (pin_size_t <a class="el" href="classarduino_1_1_d_m_a_buffer.html">pinNumber</a>) <a class="el" href="classarduino_1_1_d_m_a_buffer.html">override</a></td></tr>
-<tr class="memdesc:a6ea59d0ec84ba7d0074014b15432adaa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read a digital value from a GPIO pin.  <br /></td></tr>
+<tr class="memdesc:a6ea59d0ec84ba7d0074014b15432adaa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read the value from a specified digital pin.  <br /></td></tr>
 <tr class="separator:a6ea59d0ec84ba7d0074014b15432adaa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9cbe73a9614f12b3a66a7bfdbce79ecb" id="r_a9cbe73a9614f12b3a66a7bfdbce79ecb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classarduino_1_1_d_m_a_buffer.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classarduino_1_1_hardware_g_p_i_o___f_i_r_m_a_t_a.html#a9cbe73a9614f12b3a66a7bfdbce79ecb">digitalWrite</a> (pin_size_t <a class="el" href="classarduino_1_1_d_m_a_buffer.html">pinNumber</a>, PinStatus status) <a class="el" href="classarduino_1_1_d_m_a_buffer.html">override</a></td></tr>
-<tr class="memdesc:a9cbe73a9614f12b3a66a7bfdbce79ecb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write a digital value to a GPIO pin.  <br /></td></tr>
+<tr class="memdesc:a9cbe73a9614f12b3a66a7bfdbce79ecb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write a HIGH or LOW value to a digital pin.  <br /></td></tr>
 <tr class="separator:a9cbe73a9614f12b3a66a7bfdbce79ecb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4d1dcc89ae4e6661b5da435c3b7e5571" id="r_a4d1dcc89ae4e6661b5da435c3b7e5571"><td class="memItemLeft" align="right" valign="top"><a id="a4d1dcc89ae4e6661b5da435c3b7e5571" name="a4d1dcc89ae4e6661b5da435c3b7e5571"></a>
 <a class="el" href="classarduino_1_1_d_m_a_buffer.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><b>end</b> ()</td></tr>
-<tr class="memdesc:a4d1dcc89ae4e6661b5da435c3b7e5571"><td class="mdescLeft">&#160;</td><td class="mdescRight">Close the FTDI connection and cleanup resources. <br /></td></tr>
+<tr class="memdesc:a4d1dcc89ae4e6661b5da435c3b7e5571"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stop the reader thread (if owned) and detach. <br /></td></tr>
 <tr class="separator:a4d1dcc89ae4e6661b5da435c3b7e5571"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab3d63ea5dc858823dd07047f3d275612" id="r_ab3d63ea5dc858823dd07047f3d275612"><td class="memItemLeft" align="right" valign="top"><a id="ab3d63ea5dc858823dd07047f3d275612" name="ab3d63ea5dc858823dd07047f3d275612"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>HardwareGPIO_FIRMA</b> ()=<a class="el" href="classarduino_1_1_d_m_a_buffer.html">default</a></td></tr>
-<tr class="memdesc:ab3d63ea5dc858823dd07047f3d275612"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor for <a class="el" href="classarduino_1_1_hardware_g_p_i_o___f_i_r_m_a_t_a.html">HardwareGPIO_FIRMATA</a>. <br /></td></tr>
-<tr class="separator:ab3d63ea5dc858823dd07047f3d275612"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a92527f952ff435df715366e42920afba" id="r_a92527f952ff435df715366e42920afba"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classarduino_1_1_d_m_a_buffer.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classarduino_1_1_hardware_g_p_i_o___f_i_r_m_a_t_a.html#a92527f952ff435df715366e42920afba">noTone</a> (<a class="el" href="classarduino_1_1_d_m_a_buffer.html">uint8_t</a> _pin) <a class="el" href="classarduino_1_1_d_m_a_buffer.html">override</a></td></tr>
-<tr class="memdesc:a92527f952ff435df715366e42920afba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stop tone generation on a pin (not supported by FT2232HL).  <br /></td></tr>
+<tr class="memdesc:a92527f952ff435df715366e42920afba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stop the generation of a square wave triggered by <a class="el" href="classarduino_1_1_hardware_g_p_i_o___f_i_r_m_a_t_a.html#aa0f1aff1e7bd60244072fab4becb4654" title="Generate a square wave of the specified frequency on a pin.">tone()</a>  <br /></td></tr>
 <tr class="separator:a92527f952ff435df715366e42920afba"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae5b02d4308ef9cd0992b1aab97bcb207" id="r_ae5b02d4308ef9cd0992b1aab97bcb207"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classarduino_1_1_hardware_g_p_i_o___f_i_r_m_a_t_a.html#ae5b02d4308ef9cd0992b1aab97bcb207">operator bool</a> ()</td></tr>
-<tr class="memdesc:ae5b02d4308ef9cd0992b1aab97bcb207"><td class="mdescLeft">&#160;</td><td class="mdescRight">Boolean conversion operator.  <br /></td></tr>
+<tr class="memitem:ae5b02d4308ef9cd0992b1aab97bcb207" id="r_ae5b02d4308ef9cd0992b1aab97bcb207"><td class="memItemLeft" align="right" valign="top"><a id="ae5b02d4308ef9cd0992b1aab97bcb207" name="ae5b02d4308ef9cd0992b1aab97bcb207"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>operator bool</b> ()</td></tr>
 <tr class="separator:ae5b02d4308ef9cd0992b1aab97bcb207"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afc61b523cc22c700f332e5b8b5fa8d91" id="r_afc61b523cc22c700f332e5b8b5fa8d91"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classarduino_1_1_d_m_a_buffer.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classarduino_1_1_hardware_g_p_i_o___f_i_r_m_a_t_a.html#afc61b523cc22c700f332e5b8b5fa8d91">pinMode</a> (pin_size_t <a class="el" href="classarduino_1_1_d_m_a_buffer.html">pinNumber</a>, PinMode pinMode) <a class="el" href="classarduino_1_1_d_m_a_buffer.html">override</a></td></tr>
-<tr class="memdesc:afc61b523cc22c700f332e5b8b5fa8d91"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the mode of a GPIO pin (INPUT, OUTPUT, etc).  <br /></td></tr>
+<tr class="memdesc:afc61b523cc22c700f332e5b8b5fa8d91"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configure the specified pin to behave as an input or output.  <br /></td></tr>
 <tr class="separator:afc61b523cc22c700f332e5b8b5fa8d91"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a22cfbe5be13eaea31c686f99fb1608c8" id="r_a22cfbe5be13eaea31c686f99fb1608c8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classarduino_1_1_d_m_a_buffer.html">unsigned</a> <a class="el" href="classarduino_1_1_d_m_a_buffer.html">long</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classarduino_1_1_hardware_g_p_i_o___f_i_r_m_a_t_a.html#a22cfbe5be13eaea31c686f99fb1608c8">pulseIn</a> (<a class="el" href="classarduino_1_1_d_m_a_buffer.html">uint8_t</a> <a class="el" href="classarduino_1_1_d_m_a_buffer.html">pin</a>, <a class="el" href="classarduino_1_1_d_m_a_buffer.html">uint8_t</a> <a class="el" href="classarduino_1_1_d_m_a_buffer.html">state</a>, <a class="el" href="classarduino_1_1_d_m_a_buffer.html">unsigned</a> <a class="el" href="classarduino_1_1_d_m_a_buffer.html">long</a> timeout=1000000L) <a class="el" href="classarduino_1_1_d_m_a_buffer.html">override</a></td></tr>
-<tr class="memdesc:a22cfbe5be13eaea31c686f99fb1608c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Measure pulse duration on a pin.  <br /></td></tr>
+<tr class="memitem:a22cfbe5be13eaea31c686f99fb1608c8" id="r_a22cfbe5be13eaea31c686f99fb1608c8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classarduino_1_1_d_m_a_buffer.html">unsigned</a> <a class="el" href="classarduino_1_1_d_m_a_buffer.html">long</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classarduino_1_1_hardware_g_p_i_o___f_i_r_m_a_t_a.html#a22cfbe5be13eaea31c686f99fb1608c8">pulseIn</a> (<a class="el" href="classarduino_1_1_d_m_a_buffer.html">uint8_t</a> pin, <a class="el" href="classarduino_1_1_d_m_a_buffer.html">uint8_t</a> <a class="el" href="classarduino_1_1_d_m_a_buffer.html">state</a>, <a class="el" href="classarduino_1_1_d_m_a_buffer.html">unsigned</a> <a class="el" href="classarduino_1_1_d_m_a_buffer.html">long</a> timeout=1000000L) <a class="el" href="classarduino_1_1_d_m_a_buffer.html">override</a></td></tr>
+<tr class="memdesc:a22cfbe5be13eaea31c686f99fb1608c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read a pulse (HIGH or LOW) on a pin.  <br /></td></tr>
 <tr class="separator:a22cfbe5be13eaea31c686f99fb1608c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad387b9f2751256eee199fae0e19599f4" id="r_ad387b9f2751256eee199fae0e19599f4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classarduino_1_1_d_m_a_buffer.html">unsigned</a> <a class="el" href="classarduino_1_1_d_m_a_buffer.html">long</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classarduino_1_1_hardware_g_p_i_o___f_i_r_m_a_t_a.html#ad387b9f2751256eee199fae0e19599f4">pulseInLong</a> (<a class="el" href="classarduino_1_1_d_m_a_buffer.html">uint8_t</a> <a class="el" href="classarduino_1_1_d_m_a_buffer.html">pin</a>, <a class="el" href="classarduino_1_1_d_m_a_buffer.html">uint8_t</a> <a class="el" href="classarduino_1_1_d_m_a_buffer.html">state</a>, <a class="el" href="classarduino_1_1_d_m_a_buffer.html">unsigned</a> <a class="el" href="classarduino_1_1_d_m_a_buffer.html">long</a> timeout=1000000L) <a class="el" href="classarduino_1_1_d_m_a_buffer.html">override</a></td></tr>
-<tr class="memdesc:ad387b9f2751256eee199fae0e19599f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Measure long pulse duration on a pin.  <br /></td></tr>
+<tr class="memitem:ad387b9f2751256eee199fae0e19599f4" id="r_ad387b9f2751256eee199fae0e19599f4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classarduino_1_1_d_m_a_buffer.html">unsigned</a> <a class="el" href="classarduino_1_1_d_m_a_buffer.html">long</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classarduino_1_1_hardware_g_p_i_o___f_i_r_m_a_t_a.html#ad387b9f2751256eee199fae0e19599f4">pulseInLong</a> (<a class="el" href="classarduino_1_1_d_m_a_buffer.html">uint8_t</a> pin, <a class="el" href="classarduino_1_1_d_m_a_buffer.html">uint8_t</a> <a class="el" href="classarduino_1_1_d_m_a_buffer.html">state</a>, <a class="el" href="classarduino_1_1_d_m_a_buffer.html">unsigned</a> <a class="el" href="classarduino_1_1_d_m_a_buffer.html">long</a> timeout=1000000L) <a class="el" href="classarduino_1_1_d_m_a_buffer.html">override</a></td></tr>
+<tr class="memdesc:ad387b9f2751256eee199fae0e19599f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Alternative to <a class="el" href="classarduino_1_1_hardware_g_p_i_o___f_i_r_m_a_t_a.html#a22cfbe5be13eaea31c686f99fb1608c8" title="Read a pulse (HIGH or LOW) on a pin.">pulseIn()</a> which is better at handling long pulses.  <br /></td></tr>
 <tr class="separator:ad387b9f2751256eee199fae0e19599f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa0f1aff1e7bd60244072fab4becb4654" id="r_aa0f1aff1e7bd60244072fab4becb4654"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classarduino_1_1_d_m_a_buffer.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classarduino_1_1_hardware_g_p_i_o___f_i_r_m_a_t_a.html#aa0f1aff1e7bd60244072fab4becb4654">tone</a> (<a class="el" href="classarduino_1_1_d_m_a_buffer.html">uint8_t</a> _pin, <a class="el" href="classarduino_1_1_d_m_a_buffer.html">unsigned</a> <a class="el" href="classarduino_1_1_d_m_a_buffer.html">int</a> frequency, <a class="el" href="classarduino_1_1_d_m_a_buffer.html">unsigned</a> <a class="el" href="classarduino_1_1_d_m_a_buffer.html">long</a> <a class="el" href="classarduino_1_1_d_m_a_buffer.html">duration</a>=0) <a class="el" href="classarduino_1_1_d_m_a_buffer.html">override</a></td></tr>
-<tr class="memdesc:aa0f1aff1e7bd60244072fab4becb4654"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate a tone on a pin (not supported by FT2232HL).  <br /></td></tr>
+<tr class="memdesc:aa0f1aff1e7bd60244072fab4becb4654"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate a square wave of the specified frequency on a pin.  <br /></td></tr>
 <tr class="separator:aa0f1aff1e7bd60244072fab4becb4654"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:a15ac331c15017b831d4cafe25cd4fe40" id="r_a15ac331c15017b831d4cafe25cd4fe40"><td class="memItemLeft" align="right" valign="top"><a id="a15ac331c15017b831d4cafe25cd4fe40" name="a15ac331c15017b831d4cafe25cd4fe40"></a>
+<a class="el" href="classarduino_1_1_d_m_a_buffer.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><b>enableAnalogReporting</b> (pin_size_t <a class="el" href="classarduino_1_1_d_m_a_buffer.html">pinNumber</a>)</td></tr>
+<tr class="memdesc:a15ac331c15017b831d4cafe25cd4fe40"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable REPORT_ANALOG for pinNumber, once. <br /></td></tr>
+<tr class="separator:a15ac331c15017b831d4cafe25cd4fe40"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a659cbed6e7c3265a2322da9a38624d51" id="r_a659cbed6e7c3265a2322da9a38624d51"><td class="memItemLeft" align="right" valign="top"><a id="a659cbed6e7c3265a2322da9a38624d51" name="a659cbed6e7c3265a2322da9a38624d51"></a>
+<a class="el" href="classarduino_1_1_d_m_a_buffer.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><b>enableDigitalReporting</b> (pin_size_t <a class="el" href="classarduino_1_1_d_m_a_buffer.html">pinNumber</a>)</td></tr>
+<tr class="memdesc:a659cbed6e7c3265a2322da9a38624d51"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable REPORT_DIGITAL for the port containing pinNumber, once. <br /></td></tr>
+<tr class="separator:a659cbed6e7c3265a2322da9a38624d51"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afef9fd1ce9a2071519de0ca36c4a6c54" id="r_afef9fd1ce9a2071519de0ca36c4a6c54"><td class="memItemLeft" align="right" valign="top"><a id="afef9fd1ce9a2071519de0ca36c4a6c54" name="afef9fd1ce9a2071519de0ca36c4a6c54"></a>
+<a class="el" href="classarduino_1_1_d_m_a_buffer.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><b>handleAnalogMessage</b> (<a class="el" href="classarduino_1_1_d_m_a_buffer.html">const</a> <a class="el" href="structarduino_1_1_firmata_analog_message.html">FirmataAnalogMessage</a> &amp;<a class="el" href="classarduino_1_1_d_m_a_buffer.html">msg</a>)</td></tr>
+<tr class="separator:afef9fd1ce9a2071519de0ca36c4a6c54"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7f260c96f9650524ea7d7ce42928ee97" id="r_a7f260c96f9650524ea7d7ce42928ee97"><td class="memItemLeft" align="right" valign="top"><a id="a7f260c96f9650524ea7d7ce42928ee97" name="a7f260c96f9650524ea7d7ce42928ee97"></a>
+<a class="el" href="classarduino_1_1_d_m_a_buffer.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><b>handleDigitalMessage</b> (<a class="el" href="classarduino_1_1_d_m_a_buffer.html">const</a> <a class="el" href="structarduino_1_1_firmata_digital_message.html">FirmataDigitalMessage</a> &amp;<a class="el" href="classarduino_1_1_d_m_a_buffer.html">msg</a>)</td></tr>
+<tr class="separator:a7f260c96f9650524ea7d7ce42928ee97"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-static-methods" name="pro-static-methods"></a>
+Static Protected Member Functions</h2></td></tr>
+<tr class="memitem:aca730e6165d3359df44d30f3f1e9a02d" id="r_aca730e6165d3359df44d30f3f1e9a02d"><td class="memItemLeft" align="right" valign="top"><a id="aca730e6165d3359df44d30f3f1e9a02d" name="aca730e6165d3359df44d30f3f1e9a02d"></a>
+<a class="el" href="classarduino_1_1_d_m_a_buffer.html">static</a> <a class="el" href="classarduino_1_1_d_m_a_buffer.html">uint8_t</a>&#160;</td><td class="memItemRight" valign="bottom"><b>toFirmataPinMode</b> (PinMode mode)</td></tr>
+<tr class="memdesc:aca730e6165d3359df44d30f3f1e9a02d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Translate the Arduino PinMode enum to the Firmata SET_PIN_MODE value. <br /></td></tr>
+<tr class="separator:aca730e6165d3359df44d30f3f1e9a02d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
+<tr class="memitem:adc429b88f6dd94e99746c4ce3db80c15" id="r_adc429b88f6dd94e99746c4ce3db80c15"><td class="memItemLeft" align="right" valign="top"><a id="adc429b88f6dd94e99746c4ce3db80c15" name="adc429b88f6dd94e99746c4ce3db80c15"></a>
+std::map&lt; pin_size_t, <a class="el" href="classarduino_1_1_d_m_a_buffer.html">bool</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>analog_reporting_enabled_</b></td></tr>
+<tr class="separator:adc429b88f6dd94e99746c4ce3db80c15"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2e62e0e40af5001874e96abb6d79d279" id="r_a2e62e0e40af5001874e96abb6d79d279"><td class="memItemLeft" align="right" valign="top"><a id="a2e62e0e40af5001874e96abb6d79d279" name="a2e62e0e40af5001874e96abb6d79d279"></a>
+std::map&lt; pin_size_t, <a class="el" href="classarduino_1_1_d_m_a_buffer.html">int</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>analog_values_</b></td></tr>
+<tr class="separator:a2e62e0e40af5001874e96abb6d79d279"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ade97c1ecffffa4cb170e2935a077fb9c" id="r_ade97c1ecffffa4cb170e2935a077fb9c"><td class="memItemLeft" align="right" valign="top"><a id="ade97c1ecffffa4cb170e2935a077fb9c" name="ade97c1ecffffa4cb170e2935a077fb9c"></a>
+std::map&lt; <a class="el" href="classarduino_1_1_d_m_a_buffer.html">uint8_t</a>, <a class="el" href="classarduino_1_1_d_m_a_buffer.html">bool</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>digital_reporting_enabled_</b></td></tr>
+<tr class="separator:ade97c1ecffffa4cb170e2935a077fb9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaff625d2d37e85d9325bf4b977a0657c" id="r_aaff625d2d37e85d9325bf4b977a0657c"><td class="memItemLeft" align="right" valign="top"><a id="aaff625d2d37e85d9325bf4b977a0657c" name="aaff625d2d37e85d9325bf4b977a0657c"></a>
 <a class="el" href="classarduino_1_1_d_m_a_buffer.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><b>is_open</b> = <a class="el" href="classarduino_1_1_d_m_a_buffer.html">false</a></td></tr>
 <tr class="separator:aaff625d2d37e85d9325bf4b977a0657c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab6e6b0ab29998de475d3ec6748b924e6" id="r_ab6e6b0ab29998de475d3ec6748b924e6"><td class="memItemLeft" align="right" valign="top"><a id="ab6e6b0ab29998de475d3ec6748b924e6" name="ab6e6b0ab29998de475d3ec6748b924e6"></a>
+std::unique_ptr&lt; <a class="el" href="classarduino_1_1_firmata_transport.html">FirmataTransport</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>owned_transport_</b></td></tr>
+<tr class="separator:ab6e6b0ab29998de475d3ec6748b924e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1f8c356ef7f39d509d702772faccd079" id="r_a1f8c356ef7f39d509d702772faccd079"><td class="memItemLeft" align="right" valign="top"><a id="a1f8c356ef7f39d509d702772faccd079" name="a1f8c356ef7f39d509d702772faccd079"></a>
+std::map&lt; pin_size_t, PinMode &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>pin_modes_</b></td></tr>
+<tr class="separator:a1f8c356ef7f39d509d702772faccd079"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac0edc3e84a23b0f59be8a4cce2e3251c" id="r_ac0edc3e84a23b0f59be8a4cce2e3251c"><td class="memItemLeft" align="right" valign="top"><a id="ac0edc3e84a23b0f59be8a4cce2e3251c" name="ac0edc3e84a23b0f59be8a4cce2e3251c"></a>
+std::map&lt; pin_size_t, PinStatus &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>pin_states_</b></td></tr>
+<tr class="separator:ac0edc3e84a23b0f59be8a4cce2e3251c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3b5c9af0abd9679caeea5e8a1e6f3d77" id="r_a3b5c9af0abd9679caeea5e8a1e6f3d77"><td class="memItemLeft" align="right" valign="top"><a id="a3b5c9af0abd9679caeea5e8a1e6f3d77" name="a3b5c9af0abd9679caeea5e8a1e6f3d77"></a>
+std::mutex&#160;</td><td class="memItemRight" valign="bottom"><b>state_mutex_</b></td></tr>
+<tr class="separator:a3b5c9af0abd9679caeea5e8a1e6f3d77"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a77afbc1fd14a40724fec58e1b5e4be76" id="r_a77afbc1fd14a40724fec58e1b5e4be76"><td class="memItemLeft" align="right" valign="top"><a id="a77afbc1fd14a40724fec58e1b5e4be76" name="a77afbc1fd14a40724fec58e1b5e4be76"></a>
+<a class="el" href="classarduino_1_1_firmata_transport.html">FirmataTransport</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>transport_</b> = <a class="el" href="classarduino_1_1_d_m_a_buffer.html">nullptr</a></td></tr>
+<tr class="separator:a77afbc1fd14a40724fec58e1b5e4be76"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>GPIO hardware abstraction that speaks the Firmata protocol over an arbitrary <a class="el" href="classarduino_1_1_stream.html">Stream</a> (e.g. a serial connection to a device running StandardFirmata). </p>
+<p>Digital/analog pin reports are pushed asynchronously by the remote device once reporting has been enabled for a port/pin. A <a class="el" href="classarduino_1_1_firmata_transport.html" title="Single reader thread + byte-stream parser shared by every Firmata-based hardware backend (GPIO,...">FirmataTransport</a> drains the <a class="el" href="classarduino_1_1_stream.html">Stream</a> and dispatches parsed reports here so <a class="el" href="classarduino_1_1_hardware_g_p_i_o___f_i_r_m_a_t_a.html#a6ea59d0ec84ba7d0074014b15432adaa" title="Read the value from a specified digital pin.">digitalRead()</a>/ <a class="el" href="classarduino_1_1_hardware_g_p_i_o___f_i_r_m_a_t_a.html#a2af8383295a6c6dabc0f00ec6b14ea91" title="Read the value from the specified analog pin.">analogRead()</a> can return immediately.</p>
+<p>Use <a class="el" href="classarduino_1_1_hardware_g_p_i_o___f_i_r_m_a_t_a.html#aa055e970d924e6811ee6250181a5fdf0" title="Start talking Firmata over the given stream. Owns a private FirmataTransport for this connection alon...">begin(Stream&amp;)</a> for a standalone GPIO-only connection, or <a class="el" href="classarduino_1_1_hardware_g_p_i_o___f_i_r_m_a_t_a.html#aafac83b731ca69d213a2cd5300ed83e9" title="Attach to an already-started, externally-owned transport, e.g. to share one Firmata connection with I...">begin(FirmataTransport&amp;)</a> to share one connection with HardwareI2C_FIRMATA/HardwareSPI_FIRMATA (see <a class="el" href="_hardware_setup_f_i_r_8h_source.html">HardwareSetupFIR.h</a>).</p>
+<dl class="section note"><dt>Note</dt><dd>This class is only available when USE_FIRMATA is defined. </dd>
+<dd>
+Only the classic (non-SysEx) subset of the Firmata protocol is supported: pins 0-15, digital/analog messages, pin mode and reporting requests. </dd></dl>
+</div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a2af8383295a6c6dabc0f00ec6b14ea91" name="a2af8383295a6c6dabc0f00ec6b14ea91"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a2af8383295a6c6dabc0f00ec6b14ea91">&#9670;&#160;</a></span>analogRead()</h2>
 
@@ -178,14 +235,14 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Read an analog value from a pin (not supported by FT2232HL). </p>
+<p>Read the value from the specified analog pin. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">pinNumber</td><td>Pin number </td></tr>
+    <tr><td class="paramname">pinNumber</td><td>The analog pin to read from (A0, A1, etc.) </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Always returns 0 (no ADC on FT2232HL) </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The analog reading on the pin (0-1023 for 10-bit ADC) </dd></dl>
 
 <p>Implements <a class="el" href="classarduino_1_1_hardware_g_p_i_o.html#ac93235fd6bdd93a8c91b1f802b191fec">arduino::HardwareGPIO</a>.</p>
 
@@ -215,10 +272,10 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Set the analog reference mode (not supported by FT2232HL). </p>
+<p>Configure the reference voltage used for analog input. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">mode</td><td>Reference mode (ignored) </td></tr>
+    <tr><td class="paramname">mode</td><td>The reference type (DEFAULT, INTERNAL, EXTERNAL, etc.) </td></tr>
   </table>
   </dd>
 </dl>
@@ -261,11 +318,11 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Write an analog value (PWM) to a pin using software PWM. </p>
+<p>Write an analog value (PWM wave) to a pin. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">pinNumber</td><td>Pin number (0-15) </td></tr>
-    <tr><td class="paramname">value</td><td>PWM duty cycle (0-255, where 0=0% and 255=100%) </td></tr>
+    <tr><td class="paramname">pinNumber</td><td>The pin to write to </td></tr>
+    <tr><td class="paramname">value</td><td>The duty cycle (0-255 for 8-bit PWM) </td></tr>
   </table>
   </dd>
 </dl>
@@ -287,13 +344,13 @@ Protected Attributes</h2></td></tr>
           <td class="memname"><a class="el" href="classarduino_1_1_d_m_a_buffer.html">void</a> arduino::HardwareGPIO_FIRMATA::analogWriteFrequency </td>
           <td>(</td>
           <td class="paramtype">pin_size_t&#160;</td>
-          <td class="paramname"><em>pinNumber</em>, </td>
+          <td class="paramname"><em>pin</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="classarduino_1_1_d_m_a_buffer.html">uint32_t</a>&#160;</td>
-          <td class="paramname"><em>frequency</em>&#160;</td>
+          <td class="paramname"><em>freq</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -308,14 +365,15 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Set the PWM frequency for <a class="el" href="classarduino_1_1_hardware_g_p_i_o___f_i_r_m_a_t_a.html#a87237dd7ca4346cf0bffb99392270c95" title="Write an analog value (PWM) to a pin using software PWM.">analogWrite()</a> on a specific pin. </p>
+<p>Set the PWM frequency for <a class="el" href="classarduino_1_1_hardware_g_p_i_o___f_i_r_m_a_t_a.html#a87237dd7ca4346cf0bffb99392270c95" title="Write an analog value (PWM wave) to a pin.">analogWrite()</a> on the specified pin. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">pinNumber</td><td>Pin number (0-15) </td></tr>
-    <tr><td class="paramname">frequency</td><td>PWM frequency in Hz (default: 1000Hz) </td></tr>
+    <tr><td class="paramname">pin</td><td>The pin number to configure PWM frequency for </td></tr>
+    <tr><td class="paramname">freq</td><td>The desired PWM frequency in Hz </td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section note"><dt>Note</dt><dd>Not all platforms support per-pin frequency control </dd></dl>
 
 <p>Implements <a class="el" href="classarduino_1_1_hardware_g_p_i_o.html#a0bcdeb80117d8864d53b44ab89549940">arduino::HardwareGPIO</a>.</p>
 
@@ -345,21 +403,48 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Set the resolution for <a class="el" href="classarduino_1_1_hardware_g_p_i_o___f_i_r_m_a_t_a.html#a87237dd7ca4346cf0bffb99392270c95" title="Write an analog value (PWM) to a pin using software PWM.">analogWrite()</a> operations. </p>
+<p>Set the resolution of the <a class="el" href="classarduino_1_1_hardware_g_p_i_o___f_i_r_m_a_t_a.html#a87237dd7ca4346cf0bffb99392270c95" title="Write an analog value (PWM wave) to a pin.">analogWrite()</a> values. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">bits</td><td>The resolution in bits (8-bit by default for FTDI) </td></tr>
+    <tr><td class="paramname">bits</td><td>The resolution in bits (e.g., 8 for 0-255, 10 for 0-1023) </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section note"><dt>Note</dt><dd>FT2232HL supports 8-bit PWM resolution (0-255) </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>Default is typically 8 bits (0-255). Higher resolutions may not be supported on all platforms </dd></dl>
 
 <p>Implements <a class="el" href="classarduino_1_1_hardware_g_p_i_o.html#a605c192c777b366c277d205be9c8cbba">arduino::HardwareGPIO</a>.</p>
 
 </div>
 </div>
+<a id="aafac83b731ca69d213a2cd5300ed83e9" name="aafac83b731ca69d213a2cd5300ed83e9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aafac83b731ca69d213a2cd5300ed83e9">&#9670;&#160;</a></span>begin() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classarduino_1_1_d_m_a_buffer.html">bool</a> arduino::HardwareGPIO_FIRMATA::begin </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classarduino_1_1_firmata_transport.html">FirmataTransport</a> &amp;&#160;</td>
+          <td class="paramname"><em>transport</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Attach to an already-started, externally-owned transport, e.g. to share one Firmata connection with I2C/SPI backends. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">transport</td><td>A transport whose <a class="el" href="classarduino_1_1_hardware_g_p_i_o___f_i_r_m_a_t_a.html#aa055e970d924e6811ee6250181a5fdf0" title="Start talking Firmata over the given stream. Owns a private FirmataTransport for this connection alon...">begin()</a> has already been called. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if initialization successful, false otherwise. </dd></dl>
+
+</div>
+</div>
 <a id="aa055e970d924e6811ee6250181a5fdf0" name="aa055e970d924e6811ee6250181a5fdf0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa055e970d924e6811ee6250181a5fdf0">&#9670;&#160;</a></span>begin()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#aa055e970d924e6811ee6250181a5fdf0">&#9670;&#160;</a></span>begin() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -374,17 +459,14 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Initialize the GPIO hardware interface for FTDI FT2232HL. </p>
+<p>Start talking Firmata over the given stream. Owns a private <a class="el" href="classarduino_1_1_firmata_transport.html" title="Single reader thread + byte-stream parser shared by every Firmata-based hardware backend (GPIO,...">FirmataTransport</a> for this connection alone. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">vendor_id</td><td>USB vendor ID (default: 0x0403) </td></tr>
-    <tr><td class="paramname">product_id</td><td>USB product ID (default: 0x6010 for FT2232HL) </td></tr>
-    <tr><td class="paramname">description</td><td>Device description string (optional) </td></tr>
-    <tr><td class="paramname">serial</td><td>Device serial number (optional) </td></tr>
+    <tr><td class="paramname">stream</td><td>Already-opened stream connected to the Firmata device. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>true if initialization successful, false otherwise </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>true if initialization successful, false otherwise. </dd></dl>
 
 </div>
 </div>
@@ -412,14 +494,14 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Read a digital value from a GPIO pin. </p>
+<p>Read the value from a specified digital pin. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">pinNumber</td><td>Pin number (0-15) </td></tr>
+    <tr><td class="paramname">pinNumber</td><td>The pin number to read from </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Pin status (HIGH or LOW) </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>HIGH or LOW </dd></dl>
 
 <p>Implements <a class="el" href="classarduino_1_1_hardware_g_p_i_o.html#a408e951f42d9f765cd89c39fe84c8886">arduino::HardwareGPIO</a>.</p>
 
@@ -459,11 +541,11 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Write a digital value to a GPIO pin. </p>
+<p>Write a HIGH or LOW value to a digital pin. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">pinNumber</td><td>Pin number (0-15) </td></tr>
-    <tr><td class="paramname">status</td><td>Pin status (HIGH or LOW) </td></tr>
+    <tr><td class="paramname">pinNumber</td><td>The pin number to write to </td></tr>
+    <tr><td class="paramname">status</td><td>The value to write (HIGH or LOW) </td></tr>
   </table>
   </dd>
 </dl>
@@ -496,43 +578,15 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Stop tone generation on a pin (not supported by FT2232HL). </p>
+<p>Stop the generation of a square wave triggered by <a class="el" href="classarduino_1_1_hardware_g_p_i_o___f_i_r_m_a_t_a.html#aa0f1aff1e7bd60244072fab4becb4654" title="Generate a square wave of the specified frequency on a pin.">tone()</a> </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">_pin</td><td>Pin number (ignored) </td></tr>
+    <tr><td class="paramname">_pin</td><td>The pin on which to stop generating the tone </td></tr>
   </table>
   </dd>
 </dl>
 
 <p>Implements <a class="el" href="classarduino_1_1_hardware_g_p_i_o.html#a67e41cd03e01988d9d3cdb31833ee57b">arduino::HardwareGPIO</a>.</p>
-
-</div>
-</div>
-<a id="ae5b02d4308ef9cd0992b1aab97bcb207" name="ae5b02d4308ef9cd0992b1aab97bcb207"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae5b02d4308ef9cd0992b1aab97bcb207">&#9670;&#160;</a></span>operator bool()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">arduino::HardwareGPIO_FIRMATA::operator <a class="el" href="classarduino_1_1_d_m_a_buffer.html">bool</a> </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Boolean conversion operator. </p>
-<dl class="section return"><dt>Returns</dt><dd>true if the FTDI interface is open and initialized, false otherwise. </dd></dl>
 
 </div>
 </div>
@@ -570,11 +624,11 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Set the mode of a GPIO pin (INPUT, OUTPUT, etc). </p>
+<p>Configure the specified pin to behave as an input or output. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">pinNumber</td><td>Pin number (0-15 for FT2232HL) </td></tr>
-    <tr><td class="paramname">pinMode</td><td>Pin mode (INPUT, OUTPUT, INPUT_PULLUP) </td></tr>
+    <tr><td class="paramname">pinNumber</td><td>The pin number to configure </td></tr>
+    <tr><td class="paramname">pinMode</td><td>The mode to set (INPUT, OUTPUT, INPUT_PULLUP, etc.) </td></tr>
   </table>
   </dd>
 </dl>
@@ -623,16 +677,16 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Measure pulse duration on a pin. </p>
+<p>Read a pulse (HIGH or LOW) on a pin. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">pin</td><td>Pin number </td></tr>
-    <tr><td class="paramname">state</td><td>Pin state to measure </td></tr>
-    <tr><td class="paramname">timeout</td><td>Timeout in microseconds </td></tr>
+    <tr><td class="paramname">pin</td><td>The pin on which you want to read the pulse </td></tr>
+    <tr><td class="paramname">state</td><td>Type of pulse to read (HIGH or LOW) </td></tr>
+    <tr><td class="paramname">timeout</td><td>Timeout in microseconds (default 1 second) </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Always returns 0 (not implemented) </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The length of the pulse in microseconds, or 0 if timeout </dd></dl>
 
 <p>Implements <a class="el" href="classarduino_1_1_hardware_g_p_i_o.html#a86a07fbfa28a31d8eb75deed3417091e">arduino::HardwareGPIO</a>.</p>
 
@@ -678,16 +732,16 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Measure long pulse duration on a pin. </p>
+<p>Alternative to <a class="el" href="classarduino_1_1_hardware_g_p_i_o___f_i_r_m_a_t_a.html#a22cfbe5be13eaea31c686f99fb1608c8" title="Read a pulse (HIGH or LOW) on a pin.">pulseIn()</a> which is better at handling long pulses. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">pin</td><td>Pin number </td></tr>
-    <tr><td class="paramname">state</td><td>Pin state to measure </td></tr>
-    <tr><td class="paramname">timeout</td><td>Timeout in microseconds </td></tr>
+    <tr><td class="paramname">pin</td><td>The pin on which you want to read the pulse </td></tr>
+    <tr><td class="paramname">state</td><td>Type of pulse to read (HIGH or LOW) </td></tr>
+    <tr><td class="paramname">timeout</td><td>Timeout in microseconds (default 1 second) </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Always returns 0 (not implemented) </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The length of the pulse in microseconds, or 0 if timeout </dd></dl>
 
 <p>Implements <a class="el" href="classarduino_1_1_hardware_g_p_i_o.html#ae2b49910e4af368da04d2dc2beb07aeb">arduino::HardwareGPIO</a>.</p>
 
@@ -733,12 +787,12 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Generate a tone on a pin (not supported by FT2232HL). </p>
+<p>Generate a square wave of the specified frequency on a pin. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">_pin</td><td>Pin number </td></tr>
-    <tr><td class="paramname">frequency</td><td>Frequency in Hz (ignored) </td></tr>
-    <tr><td class="paramname">duration</td><td>Duration in ms (ignored) </td></tr>
+    <tr><td class="paramname">_pin</td><td>The pin on which to generate the tone </td></tr>
+    <tr><td class="paramname">frequency</td><td>The frequency of the tone in hertz </td></tr>
+    <tr><td class="paramname">duration</td><td>The duration of the tone in milliseconds (0 = continuous) </td></tr>
   </table>
   </dd>
 </dl>

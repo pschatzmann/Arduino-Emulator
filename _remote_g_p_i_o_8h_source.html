@@ -158,10 +158,10 @@ $(document).ready(function() { init_codefold(0); });
 </div>
 <div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span> </div>
 <div class="foldopen" id="foldopen00090" data-start="{" data-end="}">
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno"><a class="line" href="classarduino_1_1_remote_g_p_i_o.html#a0ea1bc0fa85e00f118b877f49c608bcc">   90</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classarduino_1_1_remote_g_p_i_o.html#a0ea1bc0fa85e00f118b877f49c608bcc">analogWrite</a>(pin_size_t <a class="code hl_class" href="classarduino_1_1_d_m_a_buffer.html">pinNumber</a>, <span class="keywordtype">int</span> <a class="code hl_class" href="classarduino_1_1_d_m_a_buffer.html">value</a>) {</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno"><a class="line" href="classarduino_1_1_remote_g_p_i_o.html#a0ea1bc0fa85e00f118b877f49c608bcc">   90</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classarduino_1_1_remote_g_p_i_o.html#a0ea1bc0fa85e00f118b877f49c608bcc">analogWrite</a>(pin_size_t <a class="code hl_class" href="classarduino_1_1_d_m_a_buffer.html">pinNumber</a>, <span class="keywordtype">int</span> value) {</div>
 <div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>    service.send((<a class="code hl_class" href="classarduino_1_1_d_m_a_buffer.html">uint16_t</a>)GpioAnalogWrite);</div>
 <div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>    service.send((<a class="code hl_class" href="classarduino_1_1_d_m_a_buffer.html">uint8_t</a>)<a class="code hl_class" href="classarduino_1_1_d_m_a_buffer.html">pinNumber</a>);</div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>    service.send(<a class="code hl_class" href="classarduino_1_1_d_m_a_buffer.html">value</a>);</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>    service.send(value);</div>
 <div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>    service.flush();</div>
 <div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>  }</div>
 </div>
@@ -209,9 +209,9 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>  }</div>
 </div>
 <div class="foldopen" id="foldopen00131" data-start="{" data-end="}">
-<div class="line"><a id="l00131" name="l00131"></a><span class="lineno"><a class="line" href="classarduino_1_1_remote_g_p_i_o.html#ab023fd9e72b08412627f660e44463ff5">  131</a></span>  <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classarduino_1_1_remote_g_p_i_o.html#ab023fd9e72b08412627f660e44463ff5">analogWriteFrequency</a>(pin_size_t <a class="code hl_class" href="classarduino_1_1_d_m_a_buffer.html">pin</a>, <a class="code hl_class" href="classarduino_1_1_d_m_a_buffer.html">uint32_t</a> <a class="code hl_class" href="classarduino_1_1_d_m_a_buffer.html">freq</a>){</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno"><a class="line" href="classarduino_1_1_remote_g_p_i_o.html#ab023fd9e72b08412627f660e44463ff5">  131</a></span>  <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classarduino_1_1_remote_g_p_i_o.html#ab023fd9e72b08412627f660e44463ff5">analogWriteFrequency</a>(pin_size_t pin, <a class="code hl_class" href="classarduino_1_1_d_m_a_buffer.html">uint32_t</a> <a class="code hl_class" href="classarduino_1_1_d_m_a_buffer.html">freq</a>){</div>
 <div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>    service.send((<a class="code hl_class" href="classarduino_1_1_d_m_a_buffer.html">uint16_t</a>)GpioAnalogWriteFrequency);</div>
-<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>    service.send((<a class="code hl_class" href="classarduino_1_1_d_m_a_buffer.html">uint8_t</a>)<a class="code hl_class" href="classarduino_1_1_d_m_a_buffer.html">pin</a>);</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>    service.send((<a class="code hl_class" href="classarduino_1_1_d_m_a_buffer.html">uint8_t</a>)pin);</div>
 <div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>    service.send((<a class="code hl_class" href="classarduino_1_1_d_m_a_buffer.html">uint32_t</a>)<a class="code hl_class" href="classarduino_1_1_d_m_a_buffer.html">freq</a>);</div>
 <div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>    service.flush();</div>
 <div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>  }</div>
