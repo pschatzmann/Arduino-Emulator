@@ -1,8 +1,8 @@
 var searchData=
 [
-  ['write_0',['write',['../classarduino_1_1_hardware_c_a_n.html#ac22cd733cb28a1408e79e98667d23b57',1,'arduino::HardwareCAN::write()'],['../classarduino_1_1_u_d_p_stream.html#ab572660ad7d72cae3bcde8719dcd71cb',1,'arduino::UDPStream::write()'],['../classarduino_1_1_hardware_i2_c___f_t_d_i.html#abd37b42ecb72af90aabd162c7164fdba',1,'arduino::HardwareI2C_FTDI::write(uint8_t data) override'],['../classarduino_1_1_hardware_i2_c___f_t_d_i.html#af32e14ec1472c43f8b42d79bff550a64',1,'arduino::HardwareI2C_FTDI::write(const uint8_t *data, size_t len) override'],['../class_servo.html#a72b4b546912eada96a6ef705168ceb8a',1,'Servo::write()']]],
-  ['writebytes_1',['writeBytes',['../classserialib.html#aa14196b6f422584bf5eebc4ddb71d483',1,'serialib']]],
-  ['writechar_2',['writeChar',['../classserialib.html#aa6d231cb99664a613bcb503830f73497',1,'serialib']]],
-  ['writemicroseconds_3',['writeMicroseconds',['../class_servo.html#af2d4fe8296f9b0184c1a939d792937ae',1,'Servo']]],
-  ['writestring_4',['writeString',['../classserialib.html#a6a32655c718b998e5b63d8cdc483ac6d',1,'serialib']]]
+  ['udpstream_0',['udpstream',['../classarduino_1_1_u_d_p_stream.html#a7c0e8f695bc0566b91d4a2fbe92ab7fc',1,'arduino::UDPStream::UDPStream()=default'],['../classarduino_1_1_u_d_p_stream.html#abf3bb68b453a2af59f6c943470daab60',1,'arduino::UDPStream::UDPStream(IPAddress a, uint16_t port)']]],
+  ['updategpiostate_1',['updateGPIOState',['../classarduino_1_1_hardware_g_p_i_o___f_t_d_i.html#aa1d1c444cb88887b74a160a51c3042d5',1,'arduino::HardwareGPIO_FTDI']]],
+  ['updatepwmpin_2',['updatePWMPin',['../classarduino_1_1_hardware_g_p_i_o___f_t_d_i.html#aac6c31c7150967878c87e39747585aa1',1,'arduino::HardwareGPIO_FTDI']]],
+  ['usedsize_3',['usedSize',['../class_sd_fat.html#a2477b9f4f1b856b451408830140422cb',1,'SdFat']]],
+  ['usinginterrupt_4',['usingInterrupt',['../classarduino_1_1_hardware_s_p_i___f_t_d_i.html#aa2c06dc801e9849324290a83662f214a',1,'arduino::HardwareSPI_FTDI']]]
 ];

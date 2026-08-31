@@ -119,6 +119,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>initErrorHalt</b> ()<
 <tr class="memitem:a6294adccc03e23e35db6488bf9ace69f" id="r_a6294adccc03e23e35db6488bf9ace69f"><td class="memItemLeft" align="right" valign="top"><a id="a6294adccc03e23e35db6488bf9ace69f" name="a6294adccc03e23e35db6488bf9ace69f"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>initErrorHalt</b> ()</td></tr>
 <tr class="separator:a6294adccc03e23e35db6488bf9ace69f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a498b6fcf9723154105e01e572e89690c" id="r_a498b6fcf9723154105e01e572e89690c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sd_fat.html#a498b6fcf9723154105e01e572e89690c">mediaPresent</a> ()</td></tr>
+<tr class="memdesc:a498b6fcf9723154105e01e572e89690c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return whether the host filesystem backing the emulator is usable.  <br /></td></tr>
+<tr class="separator:a498b6fcf9723154105e01e572e89690c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaa73f615acf77e1937862f80ae092292" id="r_aaa73f615acf77e1937862f80ae092292"><td class="memItemLeft" align="right" valign="top"><a id="aaa73f615acf77e1937862f80ae092292" name="aaa73f615acf77e1937862f80ae092292"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>mkdir</b> (const char *name)</td></tr>
 <tr class="separator:aaa73f615acf77e1937862f80ae092292"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -134,13 +137,50 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>rmdir</b> (const char
 <tr class="memitem:af8f2ccb3b065dd9bcff3bcee2dd697ed" id="r_af8f2ccb3b065dd9bcff3bcee2dd697ed"><td class="memItemLeft" align="right" valign="top"><a id="af8f2ccb3b065dd9bcff3bcee2dd697ed" name="af8f2ccb3b065dd9bcff3bcee2dd697ed"></a>
 uint64_t&#160;</td><td class="memItemRight" valign="bottom"><b>totalBytes</b> ()</td></tr>
 <tr class="separator:af8f2ccb3b065dd9bcff3bcee2dd697ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a944c388d964c029680f9a94552653627" id="r_a944c388d964c029680f9a94552653627"><td class="memItemLeft" align="right" valign="top"><a id="a944c388d964c029680f9a94552653627" name="a944c388d964c029680f9a94552653627"></a>
+uint64_t&#160;</td><td class="memItemRight" valign="bottom"><b>totalSize</b> ()</td></tr>
+<tr class="memdesc:a944c388d964c029680f9a94552653627"><td class="mdescLeft">&#160;</td><td class="mdescRight">Total capacity in bytes of the host filesystem backing SD. <br /></td></tr>
+<tr class="separator:a944c388d964c029680f9a94552653627"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8f240f956cc98dd0ad43fda9b9e79d75" id="r_a8f240f956cc98dd0ad43fda9b9e79d75"><td class="memItemLeft" align="right" valign="top"><a id="a8f240f956cc98dd0ad43fda9b9e79d75" name="a8f240f956cc98dd0ad43fda9b9e79d75"></a>
 uint64_t&#160;</td><td class="memItemRight" valign="bottom"><b>usedBytes</b> ()</td></tr>
 <tr class="separator:a8f240f956cc98dd0ad43fda9b9e79d75"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2477b9f4f1b856b451408830140422cb" id="r_a2477b9f4f1b856b451408830140422cb"><td class="memItemLeft" align="right" valign="top"><a id="a2477b9f4f1b856b451408830140422cb" name="a2477b9f4f1b856b451408830140422cb"></a>
+uint64_t&#160;</td><td class="memItemRight" valign="bottom"><b>usedSize</b> ()</td></tr>
+<tr class="memdesc:a2477b9f4f1b856b451408830140422cb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Used bytes of the host filesystem backing SD. <br /></td></tr>
+<tr class="separator:a2477b9f4f1b856b451408830140422cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>C++ std based emulatoion ofr <a class="el" href="class_sd_fat.html" title="C++ std based emulatoion ofr SdFat.">SdFat</a>. </p>
-</div><hr/>The documentation for this class was generated from the following files:<ul>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a498b6fcf9723154105e01e572e89690c" name="a498b6fcf9723154105e01e572e89690c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a498b6fcf9723154105e01e572e89690c">&#9670;&#160;</a></span>mediaPresent()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool SdFat::mediaPresent </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Return whether the host filesystem backing the emulator is usable. </p>
+<p>The emulator has no removable media, so a writable current working directory is the closest equivalent to an inserted SD card. </p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
 <li>ArduinoCore-Linux/libraries/<a class="el" href="_s_d_8h_source.html">SD.h</a></li>
 <li>ArduinoCore-Linux/libraries/<a class="el" href="_sd_fat_8h_source.html">SdFat.h</a></li>
 </ul>
