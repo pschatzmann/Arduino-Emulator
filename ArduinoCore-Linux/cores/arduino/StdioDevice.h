@@ -19,6 +19,10 @@
 #pragma once
 
 #include <iostream>
+#if defined(__unix__) || defined(__APPLE__)
+#include <sys/ioctl.h>
+#include <unistd.h>
+#endif
 #include <streambuf>
 #include "api/Stream.h"
 #include "api/Printable.h"
@@ -127,7 +131,15 @@ class StdioDevice : public Stream {
     return 1;
   }
 
-  int available() override { return std::cin.rdbuf()->in_avail(); };
+  int available() override {
+#if defined(__unix__) || defined(__APPLE__)
+    int byteCount = 0;
+    if (ioctl(STDIN_FILENO, FIONREAD, &byteCount) == 0) {
+      return byteCount;
+    }
+#endif
+    return std::cin.rdbuf()->in_avail();
+  }
 
   int read() override { return std::cin.get(); }
 
@@ -137,9 +149,9 @@ class StdioDevice : public Stream {
   bool auto_flush = true;
 };
 
-static StdioDevice Serial;
+inline StdioDevice Serial;
 #ifndef USE_RPI
-static StdioDevice Serial2;
+inline StdioDevice Serial2;
 #endif
 
 }  // namespace arduino
