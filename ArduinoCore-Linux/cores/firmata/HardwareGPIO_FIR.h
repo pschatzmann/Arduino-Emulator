@@ -1,6 +1,6 @@
 #pragma once
 /*
-  HardwareGPIO_FIR.h 
+  HardwareGPIO_FIR.h
   Copyright (c) 2025 Phil Schatzmann. All right reserved.
 
   This library is free software; you can redistribute it and/or
@@ -18,151 +18,102 @@
   Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 */
 #ifdef USE_FIRMATA
-// Undefine DEPRECATED macro from libftdi1 to avoid conflict with Arduino API
-#ifdef DEPRECATED
-#undef DEPRECATED
-#endif
 #include "HardwareGPIO.h"
+#include "FirmataTransport.h"
 #include <map>
-#include <thread>
-#include <atomic>
+#include <memory>
 #include <mutex>
-#include <chrono>
 
 namespace arduino {
 
 /**
  * @class HardwareGPIO_FIRMATA
+ * @brief GPIO hardware abstraction that speaks the Firmata protocol over an
+ * arbitrary Stream (e.g. a serial connection to a device running
+ * StandardFirmata).
+ *
+ * Digital/analog pin reports are pushed asynchronously by the remote device
+ * once reporting has been enabled for a port/pin. A FirmataTransport drains
+ * the Stream and dispatches parsed reports here so digitalRead()/
+ * analogRead() can return immediately.
+ *
+ * Use begin(Stream&) for a standalone GPIO-only connection, or
+ * begin(FirmataTransport&) to share one connection with
+ * HardwareI2C_FIRMATA/HardwareSPI_FIRMATA (see HardwareSetupFIR.h).
+ *
+ * @note This class is only available when USE_FIRMATA is defined.
+ * @note Only the classic (non-SysEx) subset of the Firmata protocol is
+ *       supported: pins 0-15, digital/analog messages, pin mode and
+ *       reporting requests.
  */
 class HardwareGPIO_FIRMATA : public HardwareGPIO {
  public:
-  /**
-   * @brief Constructor for HardwareGPIO_FIRMATA.
-   */
-  HardwareGPIO_FIRMA() = default;
+  HardwareGPIO_FIRMATA() = default;
+  ~HardwareGPIO_FIRMATA();
 
   /**
-   * @brief Destructor for HardwareGPIO_FTDI.
-   */
-  ~HardwareGPIO_FIRMA();
-
-  /**
-   * @brief Initialize the GPIO hardware interface for FTDI FT2232HL.
-   * @param vendor_id USB vendor ID (default: 0x0403)
-   * @param product_id USB product ID (default: 0x6010 for FT2232HL)
-   * @param description Device description string (optional)
-   * @param serial Device serial number (optional)
-   * @return true if initialization successful, false otherwise
+   * @brief Start talking Firmata over the given stream. Owns a private
+   * FirmataTransport for this connection alone.
+   * @param stream Already-opened stream connected to the Firmata device.
+   * @return true if initialization successful, false otherwise.
    */
   bool begin(Stream &stream);
 
   /**
-   * @brief Close the FTDI connection and cleanup resources.
+   * @brief Attach to an already-started, externally-owned transport, e.g.
+   * to share one Firmata connection with I2C/SPI backends.
+   * @param transport A transport whose begin() has already been called.
+   * @return true if initialization successful, false otherwise.
+   */
+  bool begin(FirmataTransport &transport);
+
+  /**
+   * @brief Stop the reader thread (if owned) and detach.
    */
   void end();
 
-  /**
-   * @brief Set the mode of a GPIO pin (INPUT, OUTPUT, etc).
-   * @param pinNumber Pin number (0-15 for FT2232HL)
-   * @param pinMode Pin mode (INPUT, OUTPUT, INPUT_PULLUP)
-   */
   void pinMode(pin_size_t pinNumber, PinMode pinMode) override;
-
-  /**
-   * @brief Write a digital value to a GPIO pin.
-   * @param pinNumber Pin number (0-15)
-   * @param status Pin status (HIGH or LOW)
-   */
   void digitalWrite(pin_size_t pinNumber, PinStatus status) override;
-
-  /**
-   * @brief Read a digital value from a GPIO pin.
-   * @param pinNumber Pin number (0-15)
-   * @return Pin status (HIGH or LOW)
-   */
   PinStatus digitalRead(pin_size_t pinNumber) override;
-
-  /**
-   * @brief Read an analog value from a pin (not supported by FT2232HL).
-   * @param pinNumber Pin number
-   * @return Always returns 0 (no ADC on FT2232HL)
-   */
   int analogRead(pin_size_t pinNumber) override;
-
-  /**
-   * @brief Set the analog reference mode (not supported by FT2232HL).
-   * @param mode Reference mode (ignored)
-   */
   void analogReference(uint8_t mode) override;
-
-  /**
-   * @brief Write an analog value (PWM) to a pin using software PWM.
-   * @param pinNumber Pin number (0-15)
-   * @param value PWM duty cycle (0-255, where 0=0% and 255=100%)
-   */
   void analogWrite(pin_size_t pinNumber, int value) override;
-
-  /**
-   * @brief Set the PWM frequency for analogWrite() on a specific pin.
-   * @param pinNumber Pin number (0-15)
-   * @param frequency PWM frequency in Hz (default: 1000Hz)
-   */
   void analogWriteFrequency(pin_size_t pinNumber, uint32_t frequency);
-
-  /**
-   * @brief Generate a tone on a pin (not supported by FT2232HL).
-   * @param _pin Pin number
-   * @param frequency Frequency in Hz (ignored)
-   * @param duration Duration in ms (ignored)
-   */
   void tone(uint8_t _pin, unsigned int frequency,
             unsigned long duration = 0) override;
-
-  /**
-   * @brief Stop tone generation on a pin (not supported by FT2232HL).
-   * @param _pin Pin number (ignored)
-   */
   void noTone(uint8_t _pin) override;
-
-  /**
-   * @brief Measure pulse duration on a pin 
-   * @param pin Pin number
-   * @param state Pin state to measure
-   * @param timeout Timeout in microseconds
-   * @return Always returns 0 (not implemented)
-   */
   unsigned long pulseIn(uint8_t pin, uint8_t state,
                         unsigned long timeout = 1000000L) override;
-
-  /**
-   * @brief Measure long pulse duration on a pin
-   * @param pin Pin number
-   * @param state Pin state to measure
-   * @param timeout Timeout in microseconds
-   * @return Always returns 0 (not implemented)
-   */
   unsigned long pulseInLong(uint8_t pin, uint8_t state,
                             unsigned long timeout = 1000000L) override;
-
-  /**
-   * @brief Set the resolution for analogWrite() operations.
-   * @param bits The resolution in bits (8-bit by default for FTDI)
-   * @note FT2232HL supports 8-bit PWM resolution (0-255)
-   */
   void analogWriteResolution(uint8_t bits) override;
 
-  /**
-   * @brief Boolean conversion operator.
-   * @return true if the FTDI interface is open and initialized, false otherwise.
-   */
-  operator bool() { return is_open && ftdi_context != nullptr; }
-
+  operator bool() { return is_open; }
 
  protected:
+  FirmataTransport *transport_ = nullptr;              // non-owning
+  std::unique_ptr<FirmataTransport> owned_transport_;   // set by begin(Stream&)
   bool is_open = false;
-  
+
+  std::mutex state_mutex_;
+  std::map<pin_size_t, PinMode> pin_modes_;
+  std::map<pin_size_t, PinStatus> pin_states_;
+  std::map<pin_size_t, int> analog_values_;
+  std::map<uint8_t, bool> digital_reporting_enabled_;
+  std::map<pin_size_t, bool> analog_reporting_enabled_;
+
+  void handleDigitalMessage(const FirmataDigitalMessage &msg);
+  void handleAnalogMessage(const FirmataAnalogMessage &msg);
+
+  /// Enable REPORT_DIGITAL for the port containing pinNumber, once.
+  void enableDigitalReporting(pin_size_t pinNumber);
+  /// Enable REPORT_ANALOG for pinNumber, once.
+  void enableAnalogReporting(pin_size_t pinNumber);
+
+  /// Translate the Arduino PinMode enum to the Firmata SET_PIN_MODE value.
+  static uint8_t toFirmataPinMode(PinMode mode);
 };
 
 }  // namespace arduino
 
-#endif  // USE_FTDI
+#endif  // USE_FIRMATA

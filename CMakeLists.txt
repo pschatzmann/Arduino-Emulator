@@ -8,6 +8,7 @@ project(arduino_emulator VERSION 0.1 DESCRIPTION "Arduino Emulator for Linux" LA
 option(USE_HTTPS "Https Support" OFF)
 option(USE_RPI "Raspberry Pi Support" OFF)
 option(USE_REMOTE "Remote API Support" OFF)
+option(USE_FIRMATA "Firmata GPIO Support" OFF)
 option(BUILD_SHARED_LIBS "Build with shared libraries" OFF)
 option(BUILD_EXAMPLES "Build with examples" OFF)
 
@@ -28,6 +29,11 @@ if(USE_FTDI)
     add_definitions(-DUSE_FTDI)
 endif()
 
+# Firmata support: GPIO over a Stream speaking the Firmata protocol
+if(USE_FIRMATA)
+    add_definitions(-DUSE_FIRMATA)
+endif()
+
 add_definitions(-DHOST)
 
 # glob, but only for CMake 3.12 or later:
@@ -36,7 +42,8 @@ file(GLOB SRC_LIST CONFIGURE_DEPENDS
     "${CMAKE_CURRENT_SOURCE_DIR}/ArduinoCore-API/api/*.cpp" 
     "${CMAKE_CURRENT_SOURCE_DIR}/ArduinoCore-Linux/cores/arduino/*.cpp" 
     "${CMAKE_CURRENT_SOURCE_DIR}/ArduinoCore-Linux/cores/rasperry_pi/*.cpp"
-    "${CMAKE_CURRENT_SOURCE_DIR}/ArduinoCore-Linux/cores/ftdi/*.cpp")
+    "${CMAKE_CURRENT_SOURCE_DIR}/ArduinoCore-Linux/cores/ftdi/*.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/ArduinoCore-Linux/cores/firmata/*.cpp")
 
 # Make an dynamic library 
 add_library(arduino_emulator ${SRC_LIST} ${HEADER_LIST})
@@ -47,7 +54,8 @@ target_include_directories (arduino_emulator PUBLIC
     "${CMAKE_CURRENT_SOURCE_DIR}/ArduinoCore-Linux/cores/arduino"
     "${CMAKE_CURRENT_SOURCE_DIR}/ArduinoCore-Linux/cores/rasperry_pi"
     "${CMAKE_CURRENT_SOURCE_DIR}/ArduinoCore-Linux/cores/ftdi"
-    "${CMAKE_CURRENT_SOURCE_DIR}/ArduinoCore-Linux/libraries" 
+    "${CMAKE_CURRENT_SOURCE_DIR}/ArduinoCore-Linux/cores/firmata"
+    "${CMAKE_CURRENT_SOURCE_DIR}/ArduinoCore-Linux/libraries"
     "${CMAKE_CURRENT_SOURCE_DIR}/ArduinoCore-API/api/deprecated"
     )   
 
@@ -163,6 +171,10 @@ if(USE_FTDI)
     # Suppress deprecation warnings for FTDI-related code
     target_compile_options(arduino_emulator PRIVATE -Wno-deprecated-declarations)
 endif(USE_FTDI)
+
+if(USE_FIRMATA)
+    message(STATUS "USE_FIRMATA=${USE_FIRMATA}")
+endif(USE_FIRMATA)
 
 # build examples
 if(BUILD_EXAMPLES)

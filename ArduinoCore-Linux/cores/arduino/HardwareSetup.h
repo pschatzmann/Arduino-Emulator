@@ -25,3 +25,6 @@
 #if defined(USE_FTDI)
 #  include "../ftdi/HardwareSetupFTDI.h"
 #endif
+#if defined(USE_FIRMATA)
+#  include "../firmata/HardwareSetupFIR.h"
+#endif

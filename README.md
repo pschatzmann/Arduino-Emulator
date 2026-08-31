@@ -16,6 +16,7 @@ We provide some alternative implementations:
 - Communicate changes to/from a Microcontroller using UDP or any Arduino Stream
 - Rasperry Pi using gpiod.h, linux/i2c-dev.h, linux/spi/spidev.h
 - FTDI support using the FT2232HL
+- Support of Firmata
 
 
 ## Documentation
