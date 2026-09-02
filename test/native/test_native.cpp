@@ -1,10 +1,12 @@
 #include <Arduino.h>
 #include <EthernetServer.h>
+#include <SD.h>
 #include <UDP.h>
 #include <unity.h>
 
 #include <array>
 #include <cstring>
+#include <filesystem>
 
 #if defined(_WIN32)
 #include <windows.h>
@@ -102,6 +104,38 @@ void test_ethernet_configuration() {
   TEST_ASSERT_EQUAL(2, Ethernet.linkStatus());
 }
 
+void test_sd_filesystem() {
+  const std::filesystem::path directory =
+      std::filesystem::current_path() / "sd_unit_test_directory";
+  const std::filesystem::path filename = directory / "record.txt";
+  SD.remove(filename.string().c_str());
+  SD.rmdir(directory.string().c_str());
+
+  TEST_ASSERT_TRUE(SD.begin());
+  TEST_ASSERT_TRUE(SD.mkdir(directory.string().c_str()));
+  TEST_ASSERT_TRUE(SD.exists(directory.string().c_str()));
+
+  File output = SD.open(filename.string().c_str(), O_WRITE);
+  TEST_ASSERT_TRUE(output);
+  const char content[] = "sd-emulator";
+  TEST_ASSERT_EQUAL(sizeof(content) - 1,
+                    output.write(reinterpret_cast<const uint8_t*>(content),
+                                 sizeof(content) - 1));
+  TEST_ASSERT_TRUE(output.close());
+
+  File input = SD.open(filename.string().c_str(), O_READ);
+  TEST_ASSERT_TRUE(input);
+  char readback[sizeof(content)] = {};
+  TEST_ASSERT_EQUAL(sizeof(content) - 1,
+                    input.readBytes(readback, sizeof(readback) - 1));
+  TEST_ASSERT_EQUAL_STRING(content, readback);
+  TEST_ASSERT_TRUE(input.close());
+
+  TEST_ASSERT_TRUE(SD.remove(filename.string().c_str()));
+  TEST_ASSERT_TRUE(SD.rmdir(directory.string().c_str()));
+  TEST_ASSERT_FALSE(SD.exists(filename.string().c_str()));
+}
+
 void test_udp_loopback() {
   constexpr uint16_t port = 45871;
   EthernetUDP receiver;
@@ -156,6 +190,7 @@ void setup_test() {
   RUN_TEST(test_gpio_delegation);
   RUN_TEST(test_arduino_types);
   RUN_TEST(test_ethernet_configuration);
+  RUN_TEST(test_sd_filesystem);
   RUN_TEST(test_udp_loopback);
   RUN_TEST(test_tcp_loopback);
   UNITY_END();

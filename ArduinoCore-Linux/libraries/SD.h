@@ -21,6 +21,9 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <unistd.h>
+#if defined(_WIN32)
+#include <direct.h>
+#endif
 
 #include <cstdint>
 #include <filesystem>
@@ -251,7 +254,13 @@ class SdFat {
   }
 
   bool remove(const char *name) { return std::remove(name) == 0; }
-  bool mkdir(const char *name) { return ::mkdir(name, 0777) == 0; }
+  bool mkdir(const char *name) {
+#if defined(_WIN32)
+    return ::_mkdir(name) == 0;
+#else
+    return ::mkdir(name, 0777) == 0;
+#endif
+  }
   bool rmdir(const char *path) {
     int rc = ::rmdir(path);
     return rc == 0;
