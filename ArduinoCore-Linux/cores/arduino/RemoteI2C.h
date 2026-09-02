@@ -1,5 +1,5 @@
 #pragma once
-#include "Stream.h"
+#include "api/Stream.h"
 #include "api/HardwareI2C.h"
 #include "HardwareService.h"
 

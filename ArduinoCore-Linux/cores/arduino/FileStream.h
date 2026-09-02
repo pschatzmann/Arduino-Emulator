@@ -19,6 +19,7 @@
 #pragma once
 #include <fstream>
 #include <iostream>
+#include "Platform.h"
 #include "api/Stream.h"
 
 namespace arduino {
@@ -110,6 +111,12 @@ class FileStream : public Stream {
  * Serial1 object. Example: Serial1.begin(9600); Serial1.println("Hello from
  * Serial1");
  */
+#if ARDUINO_EMULATOR_WINDOWS
+// No physical COM port is assumed on Windows. Use SerialImpl and pass the
+// selected device explicitly when hardware serial is required.
+static FileStream Serial1(nullptr, nullptr);
+#else
 static FileStream Serial1("/dev/ttyACM0");
+#endif
 
 }  // namespace arduino

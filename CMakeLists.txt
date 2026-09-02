@@ -2,7 +2,7 @@
 cmake_minimum_required(VERSION 3.11...3.19)
 
 # Project name and a few useful settings. Other commands can pick up the results
-project(arduino_emulator VERSION 0.1 DESCRIPTION "Arduino Emulator for Linux" LANGUAGES C CXX)
+project(arduino_emulator VERSION 0.1 DESCRIPTION "Desktop Arduino Emulator" LANGUAGES C CXX)
 
 # Https takes quite some time and is not always neede
 option(USE_HTTPS "Https Support" OFF)
@@ -11,6 +11,7 @@ option(USE_REMOTE "Remote API Support" OFF)
 option(USE_FIRMATA "Firmata GPIO Support" OFF)
 option(BUILD_SHARED_LIBS "Build with shared libraries" OFF)
 option(BUILD_EXAMPLES "Build with examples" OFF)
+option(USE_FTDI "FTDI hardware support" OFF)
 
 # Https support: Build with wolfssl 
 if(USE_HTTPS)
@@ -40,10 +41,20 @@ add_definitions(-DHOST)
 file(GLOB HEADER_LIST CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/ArduinoCore-API/api/*.h")
 file(GLOB SRC_LIST CONFIGURE_DEPENDS 
     "${CMAKE_CURRENT_SOURCE_DIR}/ArduinoCore-API/api/*.cpp" 
-    "${CMAKE_CURRENT_SOURCE_DIR}/ArduinoCore-Linux/cores/arduino/*.cpp" 
-    "${CMAKE_CURRENT_SOURCE_DIR}/ArduinoCore-Linux/cores/rasperry_pi/*.cpp"
-    "${CMAKE_CURRENT_SOURCE_DIR}/ArduinoCore-Linux/cores/ftdi/*.cpp"
-    "${CMAKE_CURRENT_SOURCE_DIR}/ArduinoCore-Linux/cores/firmata/*.cpp")
+    "${CMAKE_CURRENT_SOURCE_DIR}/ArduinoCore-Linux/cores/arduino/*.cpp")
+
+if(USE_RPI)
+    file(GLOB RPI_SRC CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/ArduinoCore-Linux/cores/rasperry_pi/*.cpp")
+    list(APPEND SRC_LIST ${RPI_SRC})
+endif()
+if(USE_FTDI)
+    file(GLOB FTDI_SRC CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/ArduinoCore-Linux/cores/ftdi/*.cpp")
+    list(APPEND SRC_LIST ${FTDI_SRC})
+endif()
+if(USE_FIRMATA)
+    file(GLOB FIRMATA_SRC CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/ArduinoCore-Linux/cores/firmata/*.cpp")
+    list(APPEND SRC_LIST ${FIRMATA_SRC})
+endif()
 
 # Make an dynamic library 
 add_library(arduino_emulator ${SRC_LIST} ${HEADER_LIST})
@@ -73,6 +84,11 @@ install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/ArduinoCore-Linux/cores/arduino/"
 
 # All users of this library will need at least C++17
 target_compile_features(arduino_emulator PUBLIC cxx_std_17)
+
+if(WIN32)
+    target_compile_definitions(arduino_emulator PUBLIC ARDUINO_EMULATOR_WINDOWS=1)
+    target_link_libraries(arduino_emulator PUBLIC ws2_32)
+endif()
 
 # Include Arduino library functions
 include(${CMAKE_CURRENT_SOURCE_DIR}/Arduino.cmake)

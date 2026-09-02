@@ -18,6 +18,8 @@
 */
 #pragma once
 
+#include "Platform.h"
+
 /// do not use exithandler atexit
 #ifndef HOST
 #  define HOST

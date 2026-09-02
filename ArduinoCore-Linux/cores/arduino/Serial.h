@@ -33,7 +33,15 @@ namespace arduino {
 
 class SerialImpl : public HardwareSerial {
  public:
-  SerialImpl(const char* device = "/dev/ttyACM0") { this->device = device; }
+#if ARDUINO_EMULATOR_WINDOWS
+  SerialImpl(const char* device = nullptr) { this->device = device; }
+#else
+  SerialImpl(const char* device = nullptr) { this->device = device; }
+#endif
+
+  // Physical serial is opt-in: the host cannot safely guess a usable COM
+  // port. Examples can use SerialImpl serial; serial.setDevice("COM5").
+  void setDevice(const char* device) { this->device = device; }
 
   virtual void begin(unsigned long baudrate) { open(baudrate); }
 
@@ -87,8 +95,14 @@ class SerialImpl : public HardwareSerial {
   long timeout = 1000;
 
   virtual void open(unsigned long baudrate) {
-    if (!serial.openDevice(device, baudrate)) {
+    if (device == nullptr) {
+      is_open = false;
+      return;
+    }
+    if (serial.openDevice(device, baudrate) <= 0) {
+      is_open = false;
       Logger.error("SerialImpl", "could not open", device);
+      return;
     }
     is_open = true;
   }

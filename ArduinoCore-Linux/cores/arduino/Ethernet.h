@@ -19,9 +19,8 @@
 */
 #pragma once
 
-#include <arpa/inet.h>  // for inet_pton
-#include <netdb.h>      // for gethostbyname, struct hostent
-#include <unistd.h>     // for close
+#include "DesktopSocket.h"
+#include <cstring>
 #include <memory>  // This is the include you need
 
 #include "ArduinoLogger.h"
@@ -351,12 +350,17 @@ class EthernetClient : public Client {
     serv_addr4.sin_port = htons(port);
     if (::inet_pton(AF_INET, address, &serv_addr4.sin_addr) <= 0) {
       // Not an IP, try to resolve hostname
-      struct hostent* he = ::gethostbyname(address);
-      if (he == nullptr || he->h_addr_list[0] == nullptr) {
+      addrinfo hints{};
+      hints.ai_family = AF_INET;
+      addrinfo* info = nullptr;
+      int rc = ::getaddrinfo(address, nullptr, &hints, &info);
+      if (rc != 0 || info == nullptr) {
         Logger.error(WIFICLIENT, "Hostname resolution failed");
         serv_addr4.sin_addr.s_addr = 0;
       } else {
-        memcpy(&serv_addr4.sin_addr, he->h_addr_list[0], he->h_length);
+        auto* resolved = reinterpret_cast<sockaddr_in*>(info->ai_addr);
+        memcpy(&serv_addr4.sin_addr, &resolved->sin_addr, sizeof(serv_addr4.sin_addr));
+        freeaddrinfo(info);
       }
     }
     return IPAddress(serv_addr4.sin_addr.s_addr);
