@@ -104,6 +104,16 @@ void test_ethernet_configuration() {
   TEST_ASSERT_EQUAL(2, Ethernet.linkStatus());
 }
 
+void test_socket_error_mapping() {
+#if defined(_WIN32)
+  TEST_ASSERT_TRUE(socketWouldBlock(WSAEWOULDBLOCK));
+  TEST_ASSERT_TRUE(socketConnectionReset(WSAECONNRESET));
+#else
+  TEST_ASSERT_TRUE(socketWouldBlock(EAGAIN));
+  TEST_ASSERT_TRUE(socketConnectionReset(ECONNRESET));
+#endif
+}
+
 void test_sd_filesystem() {
   const std::filesystem::path directory =
       std::filesystem::current_path() / "sd_unit_test_directory";
@@ -190,6 +200,7 @@ void setup_test() {
   RUN_TEST(test_gpio_delegation);
   RUN_TEST(test_arduino_types);
   RUN_TEST(test_ethernet_configuration);
+  RUN_TEST(test_socket_error_mapping);
   RUN_TEST(test_sd_filesystem);
   RUN_TEST(test_udp_loopback);
   RUN_TEST(test_tcp_loopback);

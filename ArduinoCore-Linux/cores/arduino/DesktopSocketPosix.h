@@ -33,6 +33,7 @@ inline int socketLastError() { return errno; }
 inline bool socketWouldBlock(int error) {
   return error == EWOULDBLOCK || error == EAGAIN;
 }
+inline bool socketConnectionReset(int error) { return error == ECONNRESET; }
 
 inline bool setSocketNonBlocking(SocketHandle socket, bool enabled = true) {
   int flags = fcntl(socket, F_GETFL, 0);

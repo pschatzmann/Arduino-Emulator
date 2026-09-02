@@ -36,6 +36,7 @@ inline void ensureSocketRuntime() {
 inline void closeSocket(SocketHandle socket) { closesocket(socket); }
 inline int socketLastError() { return WSAGetLastError(); }
 inline bool socketWouldBlock(int error) { return error == WSAEWOULDBLOCK; }
+inline bool socketConnectionReset(int error) { return error == WSAECONNRESET; }
 
 inline bool setSocketNonBlocking(SocketHandle socket, bool enabled = true) {
   u_long mode = enabled ? 1UL : 0UL;

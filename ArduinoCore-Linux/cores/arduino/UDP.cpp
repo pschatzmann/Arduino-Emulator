@@ -18,8 +18,6 @@
 */
 #include "EthernetUdp.h"
 #include "DesktopSocket.h"
-#include <errno.h>
-
 #undef write
 #undef read
 
@@ -55,18 +53,18 @@ uint8_t EthernetUDP::begin(IPAddress address, uint16_t port) {
 
   tx_buffer = new char[1460];
   if (!tx_buffer) {
-    log_e("EthernetUDP: could not create tx buffer: %d", errno);
+    log_e("EthernetUDP: could not create tx buffer: %d", socketLastError());
     return 0;
   }
 
   if ((udp_server = socket(AF_INET, SOCK_DGRAM, 0)) == INVALID_SOCKET_HANDLE) {
-    log_e("EthernetUDP: could not create socket: %d", errno);
+    log_e("EthernetUDP: could not create socket: %d", socketLastError());
     return 0;
   }
 
   int yes = 1;
   if (setsockopt(udp_server, SOL_SOCKET, SO_REUSEADDR, (const char*)&yes, sizeof(yes)) < 0) {
-    log_e("EthernetUDP: could not set socket option: %d", errno);
+    log_e("EthernetUDP: could not set socket option: %d", socketLastError());
     stop();
     return 0;
   }
@@ -77,7 +75,7 @@ uint8_t EthernetUDP::begin(IPAddress address, uint16_t port) {
   addr.sin_port = htons(server_port);
   addr.sin_addr.s_addr = (uint32_t)address;
   if (bind(udp_server, (struct sockaddr *)&addr, sizeof(addr)) == -1) {
-    log_e("EthernetUDP: could not bind socket: %d", errno);
+    log_e("EthernetUDP: could not bind socket: %d", socketLastError());
     stop();
     return 0;
   }
@@ -95,7 +93,7 @@ uint8_t EthernetUDP::beginMulticast(IPAddress a, uint16_t p) {
       mreq.imr_interface.s_addr = INADDR_ANY;
       if (setsockopt(udp_server, IPPROTO_IP, IP_ADD_MEMBERSHIP, (const char*)&mreq,
                      sizeof(mreq)) < 0) {
-        log_e("EthernetUDP: could not join igmp: %d", errno);
+        log_e("EthernetUDP: could not join igmp: %d", socketLastError());
         stop();
         return 0;
       }
@@ -145,7 +143,7 @@ int EthernetUDP::beginPacket() {
   if (!tx_buffer) {
     tx_buffer = new char[1460];
     if (!tx_buffer) {
-      log_e("EthernetUDP: could not create tx buffer: %d", errno);
+      log_e("EthernetUDP: could not create tx buffer: %d", socketLastError());
       return 0;
     }
   }
@@ -156,7 +154,7 @@ int EthernetUDP::beginPacket() {
   if (udp_server != INVALID_SOCKET_HANDLE) return 1;
 
   if ((udp_server = socket(AF_INET, SOCK_DGRAM, 0)) == INVALID_SOCKET_HANDLE) {
-    log_e("EthernetUDP: could not create socket: %d", errno);
+    log_e("EthernetUDP: could not create socket: %d", socketLastError());
     return 0;
   }
 
@@ -176,7 +174,7 @@ int EthernetUDP::beginPacket(const char *host, uint16_t port) {
   hints.ai_family = AF_INET;
   addrinfo* info = nullptr;
   if (getaddrinfo(host, nullptr, &hints, &info) != 0 || info == nullptr) {
-    log_e("EthernetUDP: could not get host from dns: %d", errno);
+    log_e("EthernetUDP: could not get host from dns: %d", socketLastError());
     return 0;
   }
   auto* address = reinterpret_cast<sockaddr_in*>(info->ai_addr);
@@ -193,7 +191,7 @@ int EthernetUDP::endPacket() {
   int sent = sendto(udp_server, tx_buffer, tx_buffer_len, 0,
                     (struct sockaddr *)&recipient, sizeof(recipient));
   if (sent < 0) {
-    log_e("EthernetUDP: could not send data: %d", errno);
+    log_e("EthernetUDP: could not send data: %d", socketLastError());
     return 0;
   }
   return 1;
@@ -225,10 +223,11 @@ int EthernetUDP::parsePacket() {
   if ((len = recvfrom(udp_server, buf, 1460, 0,
                       (struct sockaddr *)&si_other, (SocketLength *)&slen)) < 0) {
     delete[] buf;
-    if (socketWouldBlock(socketLastError())) {
+    const int error = socketLastError();
+    if (socketWouldBlock(error) || socketConnectionReset(error)) {
       return 0;
     }
-    log_e("EthernetUDP: could not receive data: %d", errno);
+    log_e("EthernetUDP: could not receive data: %d", error);
     return 0;
   }
   remote_ip = IPAddress(si_other.sin_addr.s_addr);
