@@ -1,6 +1,9 @@
 #pragma once
 
 #include <arpa/inet.h>
+// Collide with existing definitions
+#undef INADDR_NONE
+
 #include <errno.h>
 #include <fcntl.h>
 #include <netdb.h>
