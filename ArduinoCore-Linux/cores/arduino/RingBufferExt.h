@@ -62,11 +62,12 @@ class RingBufferExt {
 
   int read(uint8_t* str, int len) {
     for (int j = 0; j < len; j++) {
-      int current = read();
-      if (current <= 0) {
+      const int current = read();
+      if (current < 0) {
         return j;
       }
-      str[j] = current;
+      // A byte value of 0x00 is valid payload data; only -1 means empty.
+      str[j] = static_cast<uint8_t>(current);
     }
     return len;
   }

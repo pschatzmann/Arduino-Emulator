@@ -167,6 +167,35 @@ void test_udp_loopback() {
   sender.stop();
 }
 
+void test_udp_send_then_receive_on_same_socket() {
+  constexpr uint16_t simulator_port = 45873;
+  constexpr uint16_t backend_port = 45874;
+  EthernetUDP simulator;
+  EthernetUDP backend;
+  TEST_ASSERT_EQUAL_UINT8(1, simulator.begin(simulator_port));
+  TEST_ASSERT_EQUAL_UINT8(1, backend.begin(backend_port));
+
+  const char telemetry[] = "telemetry";
+  TEST_ASSERT_EQUAL(1, simulator.beginPacket(IPAddress(127, 0, 0, 1), backend_port));
+  TEST_ASSERT_EQUAL(sizeof(telemetry) - 1,
+                    simulator.write(reinterpret_cast<const uint8_t*>(telemetry), sizeof(telemetry) - 1));
+  TEST_ASSERT_EQUAL(1, simulator.endPacket());
+  TEST_ASSERT_TRUE(backend.parsePacket() > 0);
+  backend.flush();
+
+  const uint8_t command[] = {'c', 0x00, 'm', 'm', 'a', 'n', 'd'};
+  TEST_ASSERT_EQUAL(1, backend.beginPacket(IPAddress(127, 0, 0, 1), simulator_port));
+  TEST_ASSERT_EQUAL(sizeof(command), backend.write(command, sizeof(command)));
+  TEST_ASSERT_EQUAL(1, backend.endPacket());
+  TEST_ASSERT_TRUE(simulator.parsePacket() > 0);
+  char received[sizeof(command)] = {};
+  TEST_ASSERT_EQUAL(sizeof(command), simulator.read(received, sizeof(received)));
+  TEST_ASSERT_EQUAL_UINT8_ARRAY(command, reinterpret_cast<const uint8_t*>(received), sizeof(command));
+  TEST_ASSERT_EQUAL_UINT16(backend_port, simulator.remotePort());
+  simulator.stop();
+  backend.stop();
+}
+
 void test_tcp_loopback() {
   constexpr uint16_t port = 45872;
   EthernetServer server(port);
@@ -203,6 +232,7 @@ void setup_test() {
   RUN_TEST(test_socket_error_mapping);
   RUN_TEST(test_sd_filesystem);
   RUN_TEST(test_udp_loopback);
+  RUN_TEST(test_udp_send_then_receive_on_same_socket);
   RUN_TEST(test_tcp_loopback);
   UNITY_END();
 }
