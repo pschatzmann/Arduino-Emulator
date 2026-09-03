@@ -12,6 +12,9 @@
 
 #include <algorithm>
 #include <cstring>
+#include <vector>
+
+#include <iphlpapi.h>
 
 #include "ArduinoLogger.h"
 
@@ -112,19 +115,54 @@ const char *SocketImpl::getIPAddress() {
   return getIPAddress(nullptr);
 }
 
-const char *SocketImpl::getIPAddress(const char *[]) {
+const char *SocketImpl::getIPAddress(const char *validEntries[]) {
   static char address[INET_ADDRSTRLEN] = "127.0.0.1";
   ensureSocketRuntime();
 
-  char hostname[256];
-  if (gethostname(hostname, sizeof(hostname)) == 0) {
-    addrinfo hints{};
-    hints.ai_family = AF_INET;
-    addrinfo *resolved = nullptr;
-    if (getaddrinfo(hostname, nullptr, &hints, &resolved) == 0 && resolved) {
-      auto *ipv4 = reinterpret_cast<sockaddr_in *>(resolved->ai_addr);
-      inet_ntop(AF_INET, &ipv4->sin_addr, address, sizeof(address));
-      freeaddrinfo(resolved);
+  ULONG buffer_length = 0;
+  if (GetAdaptersAddresses(AF_INET, GAA_FLAG_INCLUDE_PREFIX, nullptr, nullptr,
+                           &buffer_length) != ERROR_BUFFER_OVERFLOW) {
+    return address;
+  }
+
+  std::vector<unsigned char> buffer(buffer_length);
+  auto *adapters = reinterpret_cast<IP_ADAPTER_ADDRESSES *>(buffer.data());
+  if (GetAdaptersAddresses(AF_INET, GAA_FLAG_INCLUDE_PREFIX, nullptr, adapters,
+                           &buffer_length) != NO_ERROR) {
+    return address;
+  }
+
+  for (auto *adapter = adapters; adapter != nullptr; adapter = adapter->Next) {
+    if (adapter->OperStatus != IfOperStatusUp) continue;
+
+    bool is_valid = validEntries == nullptr;
+    for (size_t i = 0; !is_valid && validEntries[i] != nullptr; ++i) {
+      if (std::strcmp(adapter->AdapterName, validEntries[i]) == 0) {
+        is_valid = true;
+        break;
+      }
+
+      int length = WideCharToMultiByte(CP_UTF8, 0, adapter->FriendlyName, -1,
+                                       nullptr, 0, nullptr, nullptr);
+      if (length <= 0) continue;
+      std::vector<char> friendly_name(length);
+      WideCharToMultiByte(CP_UTF8, 0, adapter->FriendlyName, -1,
+                          friendly_name.data(), length, nullptr, nullptr);
+      if (std::strcmp(friendly_name.data(), validEntries[i]) == 0) {
+        is_valid = true;
+        break;
+      }
+    }
+    if (!is_valid) continue;
+
+    for (auto *entry = adapter->FirstUnicastAddress; entry != nullptr;
+         entry = entry->Next) {
+      if (entry->Address.lpSockaddr->sa_family == AF_INET) {
+        auto *ipv4 = reinterpret_cast<sockaddr_in *>(entry->Address.lpSockaddr);
+        if (inet_ntop(AF_INET, &ipv4->sin_addr, address, sizeof(address))) {
+          return address;
+        }
+      }
     }
   }
   return address;

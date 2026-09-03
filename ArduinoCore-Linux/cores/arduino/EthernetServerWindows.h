@@ -100,6 +100,7 @@ class EthernetServer : public Server {
     }
     if (::listen(server_fd, 10) < 0) {
       _status = wl_status_t::WL_CONNECT_FAILED;
+      Logger.error("listen failed");
       return false;
     }
     _noDelay = false;

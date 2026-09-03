@@ -33,11 +33,7 @@ namespace arduino {
 
 class SerialImpl : public HardwareSerial {
  public:
-#if ARDUINO_EMULATOR_WINDOWS
   SerialImpl(const char* device = nullptr) { this->device = device; }
-#else
-  SerialImpl(const char* device = nullptr) { this->device = device; }
-#endif
 
   // Physical serial is opt-in: the host cannot safely guess a usable COM
   // port. Examples can use SerialImpl serial; serial.setDevice("COM5").
