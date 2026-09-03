@@ -5,7 +5,7 @@ var searchData=
   ['sendrepeatedstart_2',['sendRepeatedStart',['../classarduino_1_1_hardware_i2_c___f_t_d_i.html#ac78c80009921c74f0447c44300eb8136',1,'arduino::HardwareI2C_FTDI']]],
   ['sendstart_3',['sendStart',['../classarduino_1_1_hardware_i2_c___f_t_d_i.html#a5bc8374211506bc957c6944445eef078',1,'arduino::HardwareI2C_FTDI']]],
   ['sendstop_4',['sendStop',['../classarduino_1_1_hardware_i2_c___f_t_d_i.html#accde84d5f37f50537d47152b18d7fc7e',1,'arduino::HardwareI2C_FTDI']]],
-  ['serial1_5',['Serial1',['../namespacearduino.html#a8bf2dfa8621a2fd45f0f69ee06c2d885',1,'arduino']]],
+  ['serial1_5',['Serial1',['../namespacearduino.html#a24da375e4f84790e3cffca750d47e383',1,'arduino']]],
   ['serial2_6',['Serial2',['../namespacearduino.html#aa9b5bb779e9660566ebec490609d5d04',1,'arduino']]],
   ['serialib_7',['serialib',['../classserialib.html#a26166f63ad73013ca7cbcd2ae59edc91',1,'serialib']]],
   ['servo_8',['servo',['../class_servo.html#a3ab761ee77168f18e649676d73a15b77',1,'Servo::Servo(HardwareGPIO_RPI &amp;gpio)'],['../class_servo.html#a70b2b17657cf258cdcb57503bcf62cd2',1,'Servo::Servo()']]],

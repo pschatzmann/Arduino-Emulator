@@ -225,6 +225,8 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classarduino_1_1_socket_impl_secure.html">SocketImplSecure</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">SSL Socket using wolf ssl. For error codes see <a href="https://wolfssl.jp/docs-3/wolfssl-manual/appendix-c">https://wolfssl.jp/docs-3/wolfssl-manual/appendix-c</a>.  <a href="classarduino_1_1_socket_impl_secure.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classarduino_1_1_socket_runtime.html">SocketRuntime</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classarduino_1_1_s_p_i_settings.html">SPISettings</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classarduino_1_1_s_p_i_source.html">SPISource</a></td></tr>
@@ -257,6 +259,12 @@ Typedefs</h2></td></tr>
 <tr class="memitem:a9e28d3b3a205feb676445d6d5e885e6f" id="r_a9e28d3b3a205feb676445d6d5e885e6f"><td class="memItemLeft" align="right" valign="top"><a id="a9e28d3b3a205feb676445d6d5e885e6f" name="a9e28d3b3a205feb676445d6d5e885e6f"></a>
 <a class="el" href="classarduino_1_1_d_m_a_buffer.html">typedef</a> <a class="el" href="classarduino_1_1_ring_buffer_n.html">RingBufferN</a>&lt; <a class="el" href="classarduino_1_1_d_m_a_buffer.html">SERIAL_BUFFER_SIZE</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>RingBuffer</b></td></tr>
 <tr class="separator:a9e28d3b3a205feb676445d6d5e885e6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a35dcc9e59af84daa4a1a7b53a32ad537" id="r_a35dcc9e59af84daa4a1a7b53a32ad537"><td class="memItemLeft" align="right" valign="top"><a id="a35dcc9e59af84daa4a1a7b53a32ad537" name="a35dcc9e59af84daa4a1a7b53a32ad537"></a>
+<a class="el" href="classarduino_1_1_d_m_a_buffer.html">using</a>&#160;</td><td class="memItemRight" valign="bottom"><b>SocketHandle</b> = <a class="el" href="classarduino_1_1_d_m_a_buffer.html">int</a></td></tr>
+<tr class="separator:a35dcc9e59af84daa4a1a7b53a32ad537"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a781213743114949c7e7e49e6b15e3ae8" id="r_a781213743114949c7e7e49e6b15e3ae8"><td class="memItemLeft" align="right" valign="top"><a id="a781213743114949c7e7e49e6b15e3ae8" name="a781213743114949c7e7e49e6b15e3ae8"></a>
+<a class="el" href="classarduino_1_1_d_m_a_buffer.html">using</a>&#160;</td><td class="memItemRight" valign="bottom"><b>SocketLength</b> = <a class="el" href="classarduino_1_1_d_m_a_buffer.html">socklen_t</a></td></tr>
+<tr class="separator:a781213743114949c7e7e49e6b15e3ae8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4da3705df568b4d32466f25eedbd5575" id="r_a4da3705df568b4d32466f25eedbd5575"><td class="memItemLeft" align="right" valign="top"><a id="a4da3705df568b4d32466f25eedbd5575" name="a4da3705df568b4d32466f25eedbd5575"></a>
 <a class="el" href="classarduino_1_1_d_m_a_buffer.html">typedef</a> <a class="el" href="classarduino_1_1_hardware_s_p_i.html">HardwareSPI</a>&#160;</td><td class="memItemRight" valign="bottom"><b>SPIClass</b></td></tr>
 <tr class="separator:a4da3705df568b4d32466f25eedbd5575"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -429,12 +437,18 @@ template&lt;<a class="el" href="classarduino_1_1_d_m_a_buffer.html">typename</a>
 <tr class="memitem:a040e3f81bf9dde911377f25c99ad258c" id="r_a040e3f81bf9dde911377f25c99ad258c"><td class="memItemLeft" align="right" valign="top"><a id="a040e3f81bf9dde911377f25c99ad258c" name="a040e3f81bf9dde911377f25c99ad258c"></a>
 <a class="el" href="classarduino_1_1_d_m_a_buffer.html">uint32_t</a>&#160;</td><td class="memItemRight" valign="bottom"><b>CanStandardId</b> (<a class="el" href="classarduino_1_1_d_m_a_buffer.html">uint32_t</a> <a class="el" href="classarduino_1_1_d_m_a_buffer.html">const</a> id)</td></tr>
 <tr class="separator:a040e3f81bf9dde911377f25c99ad258c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae90abf93d371ead7e29e6626a2efb9a9" id="r_ae90abf93d371ead7e29e6626a2efb9a9"><td class="memItemLeft" align="right" valign="top"><a id="ae90abf93d371ead7e29e6626a2efb9a9" name="ae90abf93d371ead7e29e6626a2efb9a9"></a>
+<a class="el" href="classarduino_1_1_d_m_a_buffer.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><b>closeSocket</b> (SocketHandle <a class="el" href="classarduino_1_1_d_m_a_buffer.html">socket</a>)</td></tr>
+<tr class="separator:ae90abf93d371ead7e29e6626a2efb9a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a590e9f64377b00ff18b85971d1a3faee" id="r_a590e9f64377b00ff18b85971d1a3faee"><td class="memItemLeft" align="right" valign="top"><a id="a590e9f64377b00ff18b85971d1a3faee" name="a590e9f64377b00ff18b85971d1a3faee"></a>
 <a class="el" href="classarduino_1_1_d_m_a_buffer.html">static</a> <a class="el" href="classarduino_1_1_d_m_a_buffer.html">char</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>defaultInterface</b> ()</td></tr>
 <tr class="separator:a590e9f64377b00ff18b85971d1a3faee"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac0ac1b4e747638205670f1efd09ba3c5" id="r_ac0ac1b4e747638205670f1efd09ba3c5"><td class="memItemLeft" align="right" valign="top"><a id="ac0ac1b4e747638205670f1efd09ba3c5" name="ac0ac1b4e747638205670f1efd09ba3c5"></a>
 <a class="el" href="classarduino_1_1_d_m_a_buffer.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><b>digitalWrite</b> (pin_size_t <a class="el" href="classarduino_1_1_d_m_a_buffer.html">pinNumber</a>, <a class="el" href="classarduino_1_1_d_m_a_buffer.html">int</a> status)</td></tr>
 <tr class="separator:ac0ac1b4e747638205670f1efd09ba3c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5c35469db1f9a61fe086da31acccd33e" id="r_a5c35469db1f9a61fe086da31acccd33e"><td class="memItemLeft" align="right" valign="top"><a id="a5c35469db1f9a61fe086da31acccd33e" name="a5c35469db1f9a61fe086da31acccd33e"></a>
+<a class="el" href="classarduino_1_1_d_m_a_buffer.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><b>ensureSocketRuntime</b> ()</td></tr>
+<tr class="separator:a5c35469db1f9a61fe086da31acccd33e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1c3f24375a626fbb945a266f38ff681a" id="r_a1c3f24375a626fbb945a266f38ff681a"><td class="memItemLeft" align="right" valign="top"><a id="a1c3f24375a626fbb945a266f38ff681a" name="a1c3f24375a626fbb945a266f38ff681a"></a>
 <a class="el" href="classarduino_1_1_d_m_a_buffer.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><b>isAlpha</b> (<a class="el" href="classarduino_1_1_d_m_a_buffer.html">int</a> <a class="el" href="classarduino_1_1_d_m_a_buffer.html">c</a>) __attribute__((<a class="el" href="classarduino_1_1_d_m_a_buffer.html">always_inline</a>))</td></tr>
 <tr class="separator:a1c3f24375a626fbb945a266f38ff681a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -513,15 +527,30 @@ template&lt;<a class="el" href="classarduino_1_1_d_m_a_buffer.html">typename</a>
 <tr class="memitem:a0425076f00d9c1f0511c06990383c7cf" id="r_a0425076f00d9c1f0511c06990383c7cf"><td class="memItemLeft" align="right" valign="top"><a id="a0425076f00d9c1f0511c06990383c7cf" name="a0425076f00d9c1f0511c06990383c7cf"></a>
 <a class="el" href="classarduino_1_1_d_m_a_buffer.html">static</a> <a class="el" href="classarduino_1_1_d_m_a_buffer.html">gpiod_line_request</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>requestLine</b> (<a class="el" href="classarduino_1_1_d_m_a_buffer.html">gpiod_chip</a> *<a class="el" href="classarduino_1_1_d_m_a_buffer.html">chip</a>, pin_size_t pin, <a class="el" href="classarduino_1_1_d_m_a_buffer.html">gpiod_line_direction</a> <a class="el" href="classarduino_1_1_d_m_a_buffer.html">direction</a>, <a class="el" href="classarduino_1_1_d_m_a_buffer.html">gpiod_line_value</a> <a class="el" href="classarduino_1_1_d_m_a_buffer.html">initial</a>=<a class="el" href="classarduino_1_1_d_m_a_buffer.html">GPIOD_LINE_VALUE_INACTIVE</a>)</td></tr>
 <tr class="separator:a0425076f00d9c1f0511c06990383c7cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8bf2dfa8621a2fd45f0f69ee06c2d885" id="r_a8bf2dfa8621a2fd45f0f69ee06c2d885"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classarduino_1_1_d_m_a_buffer.html">static</a> <a class="el" href="classarduino_1_1_file_stream.html">FileStream</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacearduino.html#a8bf2dfa8621a2fd45f0f69ee06c2d885">Serial1</a> (&quot;/dev/<a class="el" href="classarduino_1_1_d_m_a_buffer.html">ttyACM0&quot;</a>)</td></tr>
-<tr class="memdesc:a8bf2dfa8621a2fd45f0f69ee06c2d885"><td class="mdescLeft">&#160;</td><td class="mdescRight">Global Serial1 instance for secondary serial communication.  <br /></td></tr>
+<tr class="memitem:a8bf2dfa8621a2fd45f0f69ee06c2d885" id="r_a8bf2dfa8621a2fd45f0f69ee06c2d885"><td class="memItemLeft" align="right" valign="top"><a id="a8bf2dfa8621a2fd45f0f69ee06c2d885" name="a8bf2dfa8621a2fd45f0f69ee06c2d885"></a>
+<a class="el" href="classarduino_1_1_d_m_a_buffer.html">static</a> <a class="el" href="classarduino_1_1_file_stream.html">FileStream</a>&#160;</td><td class="memItemRight" valign="bottom"><b>Serial1</b> (&quot;/dev/<a class="el" href="classarduino_1_1_d_m_a_buffer.html">ttyACM0&quot;</a>)</td></tr>
 <tr class="separator:a8bf2dfa8621a2fd45f0f69ee06c2d885"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a24da375e4f84790e3cffca750d47e383" id="r_a24da375e4f84790e3cffca750d47e383"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classarduino_1_1_d_m_a_buffer.html">static</a> <a class="el" href="classarduino_1_1_file_stream.html">FileStream</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacearduino.html#a24da375e4f84790e3cffca750d47e383">Serial1</a> (<a class="el" href="classarduino_1_1_d_m_a_buffer.html">nullptr</a>, <a class="el" href="classarduino_1_1_d_m_a_buffer.html">nullptr</a>)</td></tr>
+<tr class="memdesc:a24da375e4f84790e3cffca750d47e383"><td class="mdescLeft">&#160;</td><td class="mdescRight">Global Serial1 instance for secondary serial communication.  <br /></td></tr>
+<tr class="separator:a24da375e4f84790e3cffca750d47e383"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa9b5bb779e9660566ebec490609d5d04" id="r_aa9b5bb779e9660566ebec490609d5d04"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classarduino_1_1_d_m_a_buffer.html">static</a> <a class="el" href="classarduino_1_1_file_stream.html">FileStream</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacearduino.html#aa9b5bb779e9660566ebec490609d5d04">Serial2</a> (&quot;/dev/<a class="el" href="classarduino_1_1_d_m_a_buffer.html">serial0&quot;</a>)</td></tr>
 <tr class="memdesc:aa9b5bb779e9660566ebec490609d5d04"><td class="mdescLeft">&#160;</td><td class="mdescRight">Second hardware serial port for Raspberry Pi.  <br /></td></tr>
 <tr class="separator:aa9b5bb779e9660566ebec490609d5d04"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aed6bfbe734ecfa822fef55084d2764af" id="r_aed6bfbe734ecfa822fef55084d2764af"><td class="memItemLeft" align="right" valign="top"><a id="aed6bfbe734ecfa822fef55084d2764af" name="aed6bfbe734ecfa822fef55084d2764af"></a>
 <a class="el" href="classarduino_1_1_d_m_a_buffer.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><b>serialEventRun</b> (<a class="el" href="classarduino_1_1_d_m_a_buffer.html">void</a>) __attribute__((<a class="el" href="classarduino_1_1_d_m_a_buffer.html">weak</a>))</td></tr>
 <tr class="separator:aed6bfbe734ecfa822fef55084d2764af"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9f2a945e98ffa64d9691ba6fb634aec1" id="r_a9f2a945e98ffa64d9691ba6fb634aec1"><td class="memItemLeft" align="right" valign="top"><a id="a9f2a945e98ffa64d9691ba6fb634aec1" name="a9f2a945e98ffa64d9691ba6fb634aec1"></a>
+<a class="el" href="classarduino_1_1_d_m_a_buffer.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><b>setSocketNonBlocking</b> (SocketHandle <a class="el" href="classarduino_1_1_d_m_a_buffer.html">socket</a>, <a class="el" href="classarduino_1_1_d_m_a_buffer.html">bool</a> enabled=<a class="el" href="classarduino_1_1_d_m_a_buffer.html">true</a>)</td></tr>
+<tr class="separator:a9f2a945e98ffa64d9691ba6fb634aec1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2015b0d531cc45f360ab6985dcd06c59" id="r_a2015b0d531cc45f360ab6985dcd06c59"><td class="memItemLeft" align="right" valign="top"><a id="a2015b0d531cc45f360ab6985dcd06c59" name="a2015b0d531cc45f360ab6985dcd06c59"></a>
+<a class="el" href="classarduino_1_1_d_m_a_buffer.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><b>socketConnectionReset</b> (<a class="el" href="classarduino_1_1_d_m_a_buffer.html">int</a> error)</td></tr>
+<tr class="separator:a2015b0d531cc45f360ab6985dcd06c59"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4a5e0cdb4a4fe094a871eea54248aab3" id="r_a4a5e0cdb4a4fe094a871eea54248aab3"><td class="memItemLeft" align="right" valign="top"><a id="a4a5e0cdb4a4fe094a871eea54248aab3" name="a4a5e0cdb4a4fe094a871eea54248aab3"></a>
+<a class="el" href="classarduino_1_1_d_m_a_buffer.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><b>socketLastError</b> ()</td></tr>
+<tr class="separator:a4a5e0cdb4a4fe094a871eea54248aab3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a645e6550600c4ef968237bea372fa403" id="r_a645e6550600c4ef968237bea372fa403"><td class="memItemLeft" align="right" valign="top"><a id="a645e6550600c4ef968237bea372fa403" name="a645e6550600c4ef968237bea372fa403"></a>
+<a class="el" href="classarduino_1_1_d_m_a_buffer.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><b>socketWouldBlock</b> (<a class="el" href="classarduino_1_1_d_m_a_buffer.html">int</a> error)</td></tr>
+<tr class="separator:a645e6550600c4ef968237bea372fa403"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abc43f5cc7fe9d489132ad1630fccb154" id="r_abc43f5cc7fe9d489132ad1630fccb154"><td class="memItemLeft" align="right" valign="top"><a id="abc43f5cc7fe9d489132ad1630fccb154" name="abc43f5cc7fe9d489132ad1630fccb154"></a>
 <a class="el" href="classarduino_1_1_d_m_a_buffer.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><b>toAscii</b> (<a class="el" href="classarduino_1_1_d_m_a_buffer.html">int</a> <a class="el" href="classarduino_1_1_d_m_a_buffer.html">c</a>) __attribute__((<a class="el" href="classarduino_1_1_d_m_a_buffer.html">always_inline</a>))</td></tr>
 <tr class="separator:abc43f5cc7fe9d489132ad1630fccb154"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -610,6 +639,9 @@ Variables</h2></td></tr>
 <tr class="memitem:abb46b4f2d82197c2f0b79579846355ae" id="r_abb46b4f2d82197c2f0b79579846355ae"><td class="memItemLeft" align="right" valign="top"><a id="abb46b4f2d82197c2f0b79579846355ae" name="abb46b4f2d82197c2f0b79579846355ae"></a>
 <a class="el" href="classarduino_1_1_d_m_a_buffer.html">const</a> <a class="el" href="classarduino_1_1_i_p_address.html">IPAddress</a>&#160;</td><td class="memItemRight" valign="bottom"><b>INADDR_NONE</b></td></tr>
 <tr class="separator:abb46b4f2d82197c2f0b79579846355ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a338deab46e6fe4424196192065afc1df" id="r_a338deab46e6fe4424196192065afc1df"><td class="memItemLeft" align="right" valign="top"><a id="a338deab46e6fe4424196192065afc1df" name="a338deab46e6fe4424196192065afc1df"></a>
+<a class="el" href="classarduino_1_1_d_m_a_buffer.html">constexpr</a> SocketHandle&#160;</td><td class="memItemRight" valign="bottom"><b>INVALID_SOCKET_HANDLE</b> = -1</td></tr>
+<tr class="separator:a338deab46e6fe4424196192065afc1df"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acf18469599031c92bbc159f85ba9ebb3" id="r_acf18469599031c92bbc159f85ba9ebb3"><td class="memItemLeft" align="right" valign="top"><a id="acf18469599031c92bbc159f85ba9ebb3" name="acf18469599031c92bbc159f85ba9ebb3"></a>
 <a class="el" href="classarduino_1_1_d_m_a_buffer.html">static</a> <a class="el" href="classarduino_1_1_arduino_logger.html">ArduinoLogger</a>&#160;</td><td class="memItemRight" valign="bottom"><b>Logger</b></td></tr>
 <tr class="separator:acf18469599031c92bbc159f85ba9ebb3"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -637,9 +669,9 @@ Variables</h2></td></tr>
 <tr class="memitem:a45970c24c2e0a72578364ff1e264a07c" id="r_a45970c24c2e0a72578364ff1e264a07c"><td class="memItemLeft" align="right" valign="top"><a id="a45970c24c2e0a72578364ff1e264a07c" name="a45970c24c2e0a72578364ff1e264a07c"></a>
 <a class="el" href="classarduino_1_1_d_m_a_buffer.html">static</a> <a class="el" href="classarduino_1_1_d_m_a_buffer.html">constexpr</a> <a class="el" href="classarduino_1_1_d_m_a_buffer.html">uint8_t</a>&#160;</td><td class="memItemRight" valign="bottom"><b>SET_PIN_MODE</b> = 0xF4</td></tr>
 <tr class="separator:a45970c24c2e0a72578364ff1e264a07c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a22bfc732eb918d62096e799f87d5f72d" id="r_a22bfc732eb918d62096e799f87d5f72d"><td class="memItemLeft" align="right" valign="top"><a id="a22bfc732eb918d62096e799f87d5f72d" name="a22bfc732eb918d62096e799f87d5f72d"></a>
+<tr class="memitem:aed1847678f5af38ef9ba9118a61f1025" id="r_aed1847678f5af38ef9ba9118a61f1025"><td class="memItemLeft" align="right" valign="top"><a id="aed1847678f5af38ef9ba9118a61f1025" name="aed1847678f5af38ef9ba9118a61f1025"></a>
 <a class="el" href="classarduino_1_1_d_m_a_buffer.html">const</a> <a class="el" href="classarduino_1_1_d_m_a_buffer.html">char</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>SOCKET_IMPL</b> = &quot;SocketImpl&quot;</td></tr>
-<tr class="separator:a22bfc732eb918d62096e799f87d5f72d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="separator:aed1847678f5af38ef9ba9118a61f1025"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5cdbe44f12b33daea39c70b62a63fc66" id="r_a5cdbe44f12b33daea39c70b62a63fc66"><td class="memItemLeft" align="right" valign="top"><a id="a5cdbe44f12b33daea39c70b62a63fc66" name="a5cdbe44f12b33daea39c70b62a63fc66"></a>
 <a class="el" href="classarduino_1_1_s_p_i_wrapper.html">SPIWrapper</a>&#160;</td><td class="memItemRight" valign="bottom"><b>SPI</b></td></tr>
 <tr class="memdesc:a5cdbe44f12b33daea39c70b62a63fc66"><td class="mdescLeft">&#160;</td><td class="mdescRight">Global SPI instance used by Arduino API and direct access. <br /></td></tr>
@@ -706,8 +738,8 @@ Variables</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="a8bf2dfa8621a2fd45f0f69ee06c2d885" name="a8bf2dfa8621a2fd45f0f69ee06c2d885"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8bf2dfa8621a2fd45f0f69ee06c2d885">&#9670;&#160;</a></span>Serial1()</h2>
+<a id="a24da375e4f84790e3cffca750d47e383" name="a24da375e4f84790e3cffca750d47e383"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a24da375e4f84790e3cffca750d47e383">&#9670;&#160;</a></span>Serial1()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -718,9 +750,19 @@ Variables</h2></td></tr>
         <tr>
           <td class="memname"><a class="el" href="classarduino_1_1_d_m_a_buffer.html">static</a> <a class="el" href="classarduino_1_1_file_stream.html">FileStream</a> arduino::Serial1 </td>
           <td>(</td>
-          <td class="paramtype">&quot;/dev/<a class="el" href="classarduino_1_1_d_m_a_buffer.html">ttyACM0&quot;</a>&#160;</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype"><a class="el" href="classarduino_1_1_d_m_a_buffer.html">nullptr</a>&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype"><a class="el" href="classarduino_1_1_d_m_a_buffer.html">nullptr</a>&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
