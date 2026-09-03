@@ -99,8 +99,10 @@ Inheritance diagram for arduino::SocketImplSecure:</div>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a0b66af5d3b260d7f1250f4f44d94f5e3" id="r_a0b66af5d3b260d7f1250f4f44d94f5e3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classarduino_1_1_d_m_a_buffer.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classarduino_1_1_socket_impl_secure.html#a0b66af5d3b260d7f1250f4f44d94f5e3">connect</a> (<a class="el" href="classarduino_1_1_d_m_a_buffer.html">const</a> <a class="el" href="classarduino_1_1_d_m_a_buffer.html">char</a> *address, <a class="el" href="classarduino_1_1_d_m_a_buffer.html">uint16_t</a> port) <a class="el" href="classarduino_1_1_d_m_a_buffer.html">override</a></td></tr>
 <tr class="separator:a0b66af5d3b260d7f1250f4f44d94f5e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a10a5afe232ea7006d031ab7f8b7005ab" id="r_a10a5afe232ea7006d031ab7f8b7005ab"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classarduino_1_1_d_m_a_buffer.html">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classarduino_1_1_socket_impl_secure.html#a10a5afe232ea7006d031ab7f8b7005ab">read</a> (<a class="el" href="classarduino_1_1_d_m_a_buffer.html">uint8_t</a> *buffer, <a class="el" href="classarduino_1_1_d_m_a_buffer.html">size_t</a> len)</td></tr>
-<tr class="separator:a10a5afe232ea7006d031ab7f8b7005ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af3ef4a758aa2b36a3ae6bab08c1c872e" id="r_af3ef4a758aa2b36a3ae6bab08c1c872e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classarduino_1_1_d_m_a_buffer.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classarduino_1_1_socket_impl_secure.html#af3ef4a758aa2b36a3ae6bab08c1c872e">connect</a> (<a class="el" href="classarduino_1_1_d_m_a_buffer.html">const</a> <a class="el" href="classarduino_1_1_d_m_a_buffer.html">char</a> *address, <a class="el" href="classarduino_1_1_d_m_a_buffer.html">uint16_t</a> port, <a class="el" href="classarduino_1_1_d_m_a_buffer.html">int32_t</a> timeout_ms) <a class="el" href="classarduino_1_1_d_m_a_buffer.html">override</a></td></tr>
+<tr class="separator:af3ef4a758aa2b36a3ae6bab08c1c872e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a92a0069f90102c2f05ca276a1e077b9f" id="r_a92a0069f90102c2f05ca276a1e077b9f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classarduino_1_1_d_m_a_buffer.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classarduino_1_1_socket_impl_secure.html#a92a0069f90102c2f05ca276a1e077b9f">read</a> (<a class="el" href="classarduino_1_1_d_m_a_buffer.html">uint8_t</a> *buffer, <a class="el" href="classarduino_1_1_d_m_a_buffer.html">size_t</a> len) <a class="el" href="classarduino_1_1_d_m_a_buffer.html">override</a></td></tr>
+<tr class="separator:a92a0069f90102c2f05ca276a1e077b9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae932b55bc7d0a1d8127b7bdc77847d25" id="r_ae932b55bc7d0a1d8127b7bdc77847d25"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classarduino_1_1_d_m_a_buffer.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classarduino_1_1_socket_impl_secure.html#ae932b55bc7d0a1d8127b7bdc77847d25">setCACert</a> (<a class="el" href="classarduino_1_1_d_m_a_buffer.html">const</a> <a class="el" href="classarduino_1_1_d_m_a_buffer.html">char</a> *<a class="el" href="classarduino_1_1_d_m_a_buffer.html">cert</a>) <a class="el" href="classarduino_1_1_d_m_a_buffer.html">override</a></td></tr>
 <tr class="separator:ae932b55bc7d0a1d8127b7bdc77847d25"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0e2c44bd3f4141be024f5b33afc66934" id="r_a0e2c44bd3f4141be024f5b33afc66934"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classarduino_1_1_d_m_a_buffer.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classarduino_1_1_socket_impl_secure.html#a0e2c44bd3f4141be024f5b33afc66934">setInsecure</a> ()</td></tr>
@@ -162,7 +164,7 @@ Protected Attributes</h2></td></tr>
 <div class="textblock"><p>SSL Socket using wolf ssl. For error codes see <a href="https://wolfssl.jp/docs-3/wolfssl-manual/appendix-c">https://wolfssl.jp/docs-3/wolfssl-manual/appendix-c</a>. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a0b66af5d3b260d7f1250f4f44d94f5e3" name="a0b66af5d3b260d7f1250f4f44d94f5e3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0b66af5d3b260d7f1250f4f44d94f5e3">&#9670;&#160;</a></span>connect()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a0b66af5d3b260d7f1250f4f44d94f5e3">&#9670;&#160;</a></span>connect() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -199,8 +201,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a10a5afe232ea7006d031ab7f8b7005ab" name="a10a5afe232ea7006d031ab7f8b7005ab"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a10a5afe232ea7006d031ab7f8b7005ab">&#9670;&#160;</a></span>read()</h2>
+<a id="af3ef4a758aa2b36a3ae6bab08c1c872e" name="af3ef4a758aa2b36a3ae6bab08c1c872e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af3ef4a758aa2b36a3ae6bab08c1c872e">&#9670;&#160;</a></span>connect() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -209,7 +211,51 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classarduino_1_1_d_m_a_buffer.html">size_t</a> arduino::SocketImplSecure::read </td>
+          <td class="memname"><a class="el" href="classarduino_1_1_d_m_a_buffer.html">int</a> arduino::SocketImplSecure::connect </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classarduino_1_1_d_m_a_buffer.html">const</a> <a class="el" href="classarduino_1_1_d_m_a_buffer.html">char</a> *&#160;</td>
+          <td class="paramname"><em>address</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classarduino_1_1_d_m_a_buffer.html">uint16_t</a>&#160;</td>
+          <td class="paramname"><em>port</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classarduino_1_1_d_m_a_buffer.html">int32_t</a>&#160;</td>
+          <td class="paramname"><em>timeout_ms</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="classarduino_1_1_socket_impl.html">arduino::SocketImpl</a>.</p>
+
+</div>
+</div>
+<a id="a92a0069f90102c2f05ca276a1e077b9f" name="a92a0069f90102c2f05ca276a1e077b9f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a92a0069f90102c2f05ca276a1e077b9f">&#9670;&#160;</a></span>read()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classarduino_1_1_d_m_a_buffer.html">int</a> arduino::SocketImplSecure::read </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classarduino_1_1_d_m_a_buffer.html">uint8_t</a> *&#160;</td>
           <td class="paramname"><em>buffer</em>, </td>
@@ -228,7 +274,7 @@ Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
