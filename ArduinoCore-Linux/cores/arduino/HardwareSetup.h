@@ -28,3 +28,5 @@
 #if defined(USE_FIRMATA)
 #  include "../firmata/HardwareSetupFIR.h"
 #endif
+
+void hardwareSetup();

@@ -22,8 +22,14 @@
 #include "HardwareSetup.h"
 
 
-__attribute__((weak)) void setup() {}
-__attribute__((weak)) void loop() {}
+#if defined(__GNUC__)
+#define ARDUINO_EMULATOR_WEAK __attribute__((weak))
+#else
+#define ARDUINO_EMULATOR_WEAK
+#endif
+
+ARDUINO_EMULATOR_WEAK void setup() {}
+ARDUINO_EMULATOR_WEAK void loop() {}
 
 void hardwareSetup(){
 #if !defined(SKIP_HARDWARE_SETUP)
@@ -37,7 +43,7 @@ void hardwareSetup(){
 #endif
 }
 
-__attribute__((weak)) int main () { 
+ARDUINO_EMULATOR_WEAK int main () {
     hardwareSetup();
     setup();
     while(true){

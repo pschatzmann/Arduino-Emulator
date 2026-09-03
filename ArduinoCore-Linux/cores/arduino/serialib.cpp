@@ -14,6 +14,7 @@ This is a licence-free software, it can be used by anyone who try to build a bet
 
 #if PROVIDE_SERIALLIB
 #include "serialib.h"
+#include <stdlib.h>
 
 
 //_____________________________________
@@ -93,7 +94,14 @@ char serialib::openDevice(const char *Device,const unsigned int Bauds)
 {
 #if defined (_WIN32) || defined( _WIN64)
     // Open serial port
-    hSerial = CreateFileA(Device,GENERIC_READ | GENERIC_WRITE,0,0,OPEN_EXISTING,FILE_ATTRIBUTE_NORMAL,0);
+    // Win32 requires the \\\.\\ prefix for COM ports 10 and above.
+    char extendedDevice[64];
+    const char *deviceName = Device;
+    if (Device != NULL && strncmp(Device, "COM", 3) == 0 && atoi(Device + 3) >= 10) {
+        snprintf(extendedDevice, sizeof(extendedDevice), "\\\\.\\%s", Device);
+        deviceName = extendedDevice;
+    }
+    hSerial = CreateFileA(deviceName,GENERIC_READ | GENERIC_WRITE,0,0,OPEN_EXISTING,FILE_ATTRIBUTE_NORMAL,0);
     if(hSerial==INVALID_HANDLE_VALUE) {
         if(GetLastError()==ERROR_FILE_NOT_FOUND)
             return -1; // Device not found

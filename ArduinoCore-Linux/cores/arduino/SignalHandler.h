@@ -26,7 +26,14 @@
 #include <algorithm>
 #include <mutex>
 #include <thread>
+#include "Platform.h"
+#if !ARDUINO_EMULATOR_WINDOWS
 #include <unistd.h>
+#else
+#include <atomic>
+#include <condition_variable>
+#include <cstdlib>
+#endif
 
 #undef INADDR_NONE
 
@@ -78,13 +85,24 @@ class SignalHandler {
     return handlers;
   }
 
+#if ARDUINO_EMULATOR_WINDOWS
+  static std::atomic<int>& pendingSignal() { static std::atomic<int> value{0}; return value; }
+  static std::condition_variable& condition() { static std::condition_variable value; return value; }
+  static std::mutex& conditionMutex() { static std::mutex value; return value; }
+#endif
+
   // Async-signal-safe: writes one byte and returns. No map access, no
   // std::function calls, no exit() - all of that is deferred to the
   // reaper thread, well outside signal-handler context.
   static void dispatch(int signum) {
+#if ARDUINO_EMULATOR_WINDOWS
+    pendingSignal() = signum;
+    condition().notify_one();
+#else
     char sig = (char)signum;
     ssize_t n = write(pipeWriteFd(), &sig, 1);
     (void)n;  // nothing safe to do with a failed write() from a handler
+#endif
   }
 
   static int& pipeWriteFd() {
@@ -101,6 +119,19 @@ class SignalHandler {
   static void ensureReaperThread() {
     static std::once_flag started;
     std::call_once(started, [] {
+#if ARDUINO_EMULATOR_WINDOWS
+      std::thread([] {
+        std::unique_lock<std::mutex> lock(conditionMutex());
+        condition().wait(lock, [] { return pendingSignal() != 0; });
+        int signum = pendingSignal();
+        auto& handlers = getHandlers();
+        auto it = handlers.find(signum);
+        if (it != handlers.end()) {
+          for (auto& func : it->second) func(signum);
+        }
+        std::_Exit(0);
+      }).detach();
+#else
       int fds[2];
       pipe(fds);
       pipeReadFd() = fds[0];
@@ -121,6 +152,7 @@ class SignalHandler {
           _exit(0);
         }
       }).detach();
+#endif
     });
   }
 };

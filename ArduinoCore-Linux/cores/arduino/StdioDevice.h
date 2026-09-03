@@ -19,6 +19,7 @@
 #pragma once
 
 #include <iostream>
+#include <cstring>
 #include <algorithm>
 #include <deque>
 #if defined(__unix__) || defined(__APPLE__)

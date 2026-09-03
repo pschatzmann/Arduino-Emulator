@@ -18,6 +18,7 @@
 */
 
 #pragma once
+#include "DesktopSocket.h"
 #include "api/IPAddress.h"
 #include "api/Udp.h"
 #include <RingBufferExt.h>
@@ -29,7 +30,7 @@ namespace arduino {
 
 class EthernetUDP : public UDP {
  private:
-  int udp_server;
+  SocketHandle udp_server;
   IPAddress multicast_ip;
   IPAddress remote_ip;
   uint16_t server_port;

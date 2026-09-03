@@ -20,6 +20,8 @@
 
 #include "SocketImpl.h"
 
+#if !ARDUINO_EMULATOR_WINDOWS
+
 #include <arpa/inet.h>
 #include <fcntl.h>
 #include <ifaddrs.h>
@@ -268,3 +270,5 @@ const char *SocketImpl::getIPAddress(const char *validEntries[]) {
 }
 
 }  // namespace arduino
+
+#endif  // !ARDUINO_EMULATOR_WINDOWS

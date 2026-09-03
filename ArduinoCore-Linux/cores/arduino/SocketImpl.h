@@ -18,26 +18,30 @@
 */
 
 #pragma once
+#include "DesktopSocket.h"
+#include <cstdint>
+#if !ARDUINO_EMULATOR_WINDOWS
 #include <netinet/in.h>
-#include <string.h>
+#endif
+#include <cstring>
 
 namespace arduino {
 
 class SocketImpl {
  public:
   SocketImpl() = default;
-  SocketImpl(int socket) {
+  SocketImpl(SocketHandle socket) {
     sock = socket;
     is_connected = true;
     memset(&serv_addr, 0, sizeof(serv_addr));
   };
-  SocketImpl(int socket, struct sockaddr_in* address) {
+  SocketImpl(SocketHandle socket, struct sockaddr_in* address) {
     sock = socket;
     is_connected = true;
     serv_addr = *address;
   };
   virtual ~SocketImpl() {
-    if (sock != -1) {
+    if (sock != INVALID_SOCKET_HANDLE) {
       close();
     }
   }
@@ -63,11 +67,12 @@ class SocketImpl {
 
   virtual void setCACert(const char* cert)  {}
   virtual void setInsecure() {}
-  int fd() { return sock; }
+  SocketHandle fd() { return sock; }
 
  protected:
   bool is_connected = false;
-  int sock = -1, valread;
+  SocketHandle sock = INVALID_SOCKET_HANDLE;
+  int valread = 0;
   struct sockaddr_in serv_addr;
 };
 

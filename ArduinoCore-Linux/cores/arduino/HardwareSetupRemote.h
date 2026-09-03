@@ -27,6 +27,7 @@
 #include "RemoteSPI.h"
 #include "SPIWrapper.h"
 #include "UDPStream.h"
+#include <cstring>
 
 namespace arduino {
 
