@@ -1,4 +1,5 @@
 #include <Arduino.h>
+#include <DesktopSocket.h>
 #include <EthernetServer.h>
 #include <SD.h>
 #include <UDP.h>
@@ -218,6 +219,87 @@ void test_tcp_loopback() {
   server.stop();
 }
 
+void test_tcp_connect_refused() {
+  // Nothing listens on this port, so connect() should fail immediately
+  // (ECONNREFUSED) rather than waiting out the timeout.
+  constexpr uint16_t port = 45875;
+  constexpr int32_t timeout_ms = 2000;
+
+  EthernetClient client;
+  unsigned long start = millis();
+  int rc = client.connect(IPAddress(127, 0, 0, 1), port, timeout_ms);
+  unsigned long elapsed = millis() - start;
+
+  TEST_ASSERT_EQUAL(0, rc);
+  TEST_ASSERT_TRUE(elapsed < 500);
+}
+
+#if !defined(_WIN32)
+// Holds a TCP listener whose accept queue is deliberately kept full, so that
+// a further connect() to it has its SYN silently dropped by the kernel. This
+// reliably reproduces a stalled TCP handshake for testing connect() timeouts
+// without needing firewall rules to drop packets. POSIX-only, see
+// test_tcp_connect_timeout() below for why.
+class StalledListener {
+ public:
+  explicit StalledListener(uint16_t port) {
+    ensureSocketRuntime();
+
+    sockaddr_in addr{};
+    addr.sin_family = AF_INET;
+    addr.sin_port = htons(port);
+    ::inet_pton(AF_INET, "127.0.0.1", &addr.sin_addr);
+
+    listener_ = ::socket(AF_INET, SOCK_STREAM, 0);
+    TEST_ASSERT_NOT_EQUAL(INVALID_SOCKET_HANDLE, listener_);
+    int reuse = 1;
+    ::setsockopt(listener_, SOL_SOCKET, SO_REUSEADDR,
+                 reinterpret_cast<const char*>(&reuse), sizeof(reuse));
+    TEST_ASSERT_EQUAL(0, ::bind(listener_, reinterpret_cast<sockaddr*>(&addr),
+                                sizeof(addr)));
+    TEST_ASSERT_EQUAL(0, ::listen(listener_, 0));
+
+    // Fill the (kernel-minimum-sized) accept queue with a connection that is
+    // never accept()-ed.
+    filler_ = ::socket(AF_INET, SOCK_STREAM, 0);
+    TEST_ASSERT_NOT_EQUAL(INVALID_SOCKET_HANDLE, filler_);
+    TEST_ASSERT_EQUAL(0, ::connect(filler_, reinterpret_cast<sockaddr*>(&addr),
+                                   sizeof(addr)));
+  }
+
+  ~StalledListener() {
+    closeSocket(filler_);
+    closeSocket(listener_);
+  }
+
+ private:
+  SocketHandle listener_ = INVALID_SOCKET_HANDLE;
+  SocketHandle filler_ = INVALID_SOCKET_HANDLE;
+};
+
+// Relies on a Linux/BSD-style accept queue, where a connect() past a full
+// backlog has its SYN silently dropped. Winsock's behavior for a saturated
+// accept queue isn't verified (it may e.g. reject with an immediate RST
+// instead), so this is kept POSIX-only rather than risk a flaky/misleading
+// result on the Windows native test target.
+void test_tcp_connect_timeout() {
+  constexpr uint16_t port = 45876;
+  constexpr int32_t timeout_ms = 300;
+  StalledListener stalled(port);
+
+  EthernetClient client;
+  unsigned long start = millis();
+  int rc = client.connect(IPAddress(127, 0, 0, 1), port, timeout_ms);
+  unsigned long elapsed = millis() - start;
+
+  TEST_ASSERT_EQUAL(0, rc);
+  // Should time out close to the requested value, not hang for the kernel's
+  // own (much longer) SYN retransmit schedule, and not return instantly.
+  TEST_ASSERT_TRUE(elapsed >= static_cast<unsigned long>(timeout_ms) - 50);
+  TEST_ASSERT_TRUE(elapsed < static_cast<unsigned long>(timeout_ms) + 2000);
+}
+#endif  // !defined(_WIN32)
+
 }  // namespace
 
 void setUp() {}
@@ -234,6 +316,10 @@ void setup_test() {
   RUN_TEST(test_udp_loopback);
   RUN_TEST(test_udp_send_then_receive_on_same_socket);
   RUN_TEST(test_tcp_loopback);
+  RUN_TEST(test_tcp_connect_refused);
+#if !defined(_WIN32)
+  RUN_TEST(test_tcp_connect_timeout);
+#endif
   UNITY_END();
 }
 

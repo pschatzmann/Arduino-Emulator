@@ -35,6 +35,10 @@ uint8_t SocketImpl::connected() {
 }
 
 int SocketImpl::connect(const char *address, uint16_t port) {
+  return connect(address, port, -1);
+}
+
+int SocketImpl::connect(const char *address, uint16_t port, int32_t timeout_ms) {
   ensureSocketRuntime();
 
   addrinfo hints{};
@@ -60,14 +64,50 @@ int SocketImpl::connect(const char *address, uint16_t port) {
   std::memcpy(&serv_addr, resolved->ai_addr,
               std::min(sizeof(serv_addr),
                        static_cast<size_t>(resolved->ai_addrlen)));
-  int result = ::connect(sock, resolved->ai_addr,
-                         static_cast<SocketLength>(resolved->ai_addrlen));
-  freeaddrinfo(resolved);
 
-  if (result < 0) {
-    close();
-    Logger.error(SOCKET_IMPL, "could not connect");
-    return -3;
+  if (timeout_ms < 0) {
+    int result = ::connect(sock, resolved->ai_addr,
+                           static_cast<SocketLength>(resolved->ai_addrlen));
+    freeaddrinfo(resolved);
+    if (result < 0) {
+      close();
+      Logger.error(SOCKET_IMPL, "could not connect");
+      return -3;
+    }
+  } else {
+    setSocketNonBlocking(sock, true);
+    int result = ::connect(sock, resolved->ai_addr,
+                           static_cast<SocketLength>(resolved->ai_addrlen));
+    freeaddrinfo(resolved);
+
+    if (result < 0 && !socketWouldBlock(socketLastError())) {
+      close();
+      Logger.error(SOCKET_IMPL, "could not connect");
+      return -3;
+    }
+
+    if (result < 0) {
+      fd_set writefds, errorfds;
+      FD_ZERO(&writefds);
+      FD_SET(sock, &writefds);
+      FD_ZERO(&errorfds);
+      FD_SET(sock, &errorfds);
+      timeval timeout{static_cast<long>(timeout_ms / 1000),
+                       static_cast<long>((timeout_ms % 1000) * 1000)};
+
+      result = select(0, nullptr, &writefds, &errorfds, &timeout);
+      int error_code = 0;
+      int error_len = sizeof(error_code);
+      if (result <= 0 ||
+          getsockopt(sock, SOL_SOCKET, SO_ERROR,
+                     reinterpret_cast<char *>(&error_code), &error_len) != 0 ||
+          error_code != 0) {
+        close();
+        Logger.error(SOCKET_IMPL,
+                      result == 0 ? "connect timeout" : "could not connect");
+        return -3;
+      }
+    }
   }
 
   setSocketNonBlocking(sock);
@@ -89,12 +129,28 @@ size_t SocketImpl::available() {
   return bytes;
 }
 
-size_t SocketImpl::read(uint8_t *buffer, size_t length) {
+int SocketImpl::read(uint8_t *buffer, size_t length) {
   ensureSocketRuntime();
+  if (sock == INVALID_SOCKET_HANDLE) {
+    is_connected = false;
+    return -1;
+  }
+
   int result = ::recv(sock, reinterpret_cast<char *>(buffer),
                       static_cast<int>(length), 0);
-  if (result < 0 && socketWouldBlock(socketLastError())) return 0;
-  return result > 0 ? static_cast<size_t>(result) : 0;
+  if (result == 0) {
+    Logger.info(SOCKET_IMPL, "read EOF");
+    close();
+    return -1;
+  }
+
+  if (result < 0) {
+    if (socketWouldBlock(socketLastError())) return 0;
+    close();
+    return -1;
+  }
+
+  return result;
 }
 
 int SocketImpl::peek() {

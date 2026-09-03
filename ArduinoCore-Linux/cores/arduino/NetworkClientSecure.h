@@ -20,6 +20,7 @@
 #pragma once
 #if defined(USE_HTTPS)
 #include <errno.h>
+#include <sys/select.h>
 #include <wolfssl/options.h>
 #include <wolfssl/ssl.h>
 
@@ -63,7 +64,7 @@ class SocketImplSecure : public SocketImpl {
     }
   }
   // direct read
-  size_t read(uint8_t* buffer, size_t len) {
+  int read(uint8_t* buffer, size_t len) override {
     // size_t result = ::recv(sock, buffer, len, MSG_DONTWAIT );
     if (ssl == nullptr) {
       wolfSSL_set_fd(ssl, sock);
@@ -71,8 +72,20 @@ class SocketImplSecure : public SocketImpl {
     int result = ::wolfSSL_read(ssl, buffer, len);
 
     if (result < 0) {
-      result = 0;
+      int error = wolfSSL_get_error(ssl, result);
+      if (error == SSL_ERROR_WANT_READ || error == SSL_ERROR_WANT_WRITE) {
+        return 0;
+      }
+
+      is_connected = false;
+      return -1;
     }
+
+    if (result == 0) {
+      is_connected = false;
+      return -1;
+    }
+
     // 
     char lenStr[80];
     sprintf(lenStr, "%ld -> %d", len, result);
@@ -82,6 +95,13 @@ class SocketImplSecure : public SocketImpl {
   }
 
   int connect(const char* address, uint16_t port) override {
+    return connect(address, port, -1);
+  }
+
+  // opens a connection with a timeout in milliseconds for the TCP handshake.
+  // The TLS handshake below still runs to completion without its own
+  // timeout, matching the previous (2-arg) behavior.
+  int connect(const char* address, uint16_t port, int32_t timeout_ms) override {
     // Create socket
     sock = ::socket(AF_INET, SOCK_STREAM, 0);
     if (sock < 0) {
@@ -100,12 +120,51 @@ class SocketImplSecure : public SocketImpl {
       return -1;
     }
 
-    // Connect to server
-    if (::connect(sock, (struct sockaddr*)&serv_addr, sizeof(serv_addr)) < 0) {
-      Logger.error(SOCKET_IMPL_SEC, "Connection failed");
-      ::close(sock);
-      sock = -1;
-      return -1;
+    // Connect to server, honoring timeout_ms when >= 0
+    if (timeout_ms < 0) {
+      if (::connect(sock, (struct sockaddr*)&serv_addr, sizeof(serv_addr)) < 0) {
+        Logger.error(SOCKET_IMPL_SEC, "Connection failed");
+        ::close(sock);
+        sock = -1;
+        return -1;
+      }
+    } else {
+      setSocketNonBlocking(sock, true);
+
+      int result = ::connect(sock, (struct sockaddr*)&serv_addr, sizeof(serv_addr));
+      if (result < 0 && errno != EINPROGRESS && errno != EWOULDBLOCK) {
+        Logger.error(SOCKET_IMPL_SEC, "Connection failed");
+        setSocketNonBlocking(sock, false);
+        ::close(sock);
+        sock = -1;
+        return -1;
+      }
+
+      if (result < 0) {
+        fd_set writefds, errorfds;
+        FD_ZERO(&writefds);
+        FD_SET(sock, &writefds);
+        FD_ZERO(&errorfds);
+        FD_SET(sock, &errorfds);
+        timeval timeout{.tv_sec = timeout_ms / 1000,
+                         .tv_usec = (timeout_ms % 1000) * 1000};
+
+        result = select(sock + 1, nullptr, &writefds, &errorfds, &timeout);
+        int error_code = 0;
+        socklen_t error_len = sizeof(error_code);
+        if (result <= 0 ||
+            getsockopt(sock, SOL_SOCKET, SO_ERROR, &error_code, &error_len) != 0 ||
+            error_code != 0) {
+          Logger.error(SOCKET_IMPL_SEC,
+                        result == 0 ? "Connection timeout" : "Connection failed");
+          setSocketNonBlocking(sock, false);
+          ::close(sock);
+          sock = -1;
+          return -1;
+        }
+      }
+
+      setSocketNonBlocking(sock, false);
     }
 
     // Reset the TLS session for this connection - reusing ssl as-is
