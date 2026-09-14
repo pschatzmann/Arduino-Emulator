@@ -45,14 +45,29 @@
 #define SPI_EIGHTH_SPEED SD_SCK_MHZ(1)
 #define SPI_SIXTEENTH_SPEED SD_SCK_HZ(500000)
 
+// These reuse POSIX's O_* names for unrelated std::ios::openmode values, so
+// they must win over <fcntl.h>'s real O_* macros (already pulled in
+// transitively by this point on some platforms, e.g. via std::fstream/
+// networking headers included before this file) - #undef first rather
+// than #ifndef-guarding, since guarding would leave the real POSIX values
+// in effect and silently break File::open().
+#undef O_RDONLY
 #define O_RDONLY ios::in           ///< Open for reading only.
+#undef O_WRONLY
 #define O_WRONLY ios::out          ///< Open for writing only.
+#undef O_RDWR
 #define O_RDWR ios::in | ios::out  ///< Open for reading and writing.
+#undef O_AT_END
 #define O_AT_END ios::ate          ///< Open at EOF.
+#undef O_APPEND
 #define O_APPEND ios::ate          ///< Set append mode.
+#undef O_CREAT
 #define O_CREAT ios::trunc         ///< Create file if it does not exist.
+#undef O_TRUNC
 #define O_TRUNC ios::trunc         ///< Truncate file to zero length.
+#undef O_EXCL
 #define O_EXCL 0                   ///< Fail if the file exists.
+#undef O_SYNC
 #define O_SYNC 0                   ///< Synchronized write I/O operations.
 #define O_READ O_RDONLY
 #define O_WRITE O_WRONLY
