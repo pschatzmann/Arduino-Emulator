@@ -8,6 +8,8 @@
 #include <array>
 #include <cstring>
 #include <filesystem>
+#include <iostream>
+#include <sstream>
 
 #if defined(_WIN32)
 #include <windows.h>
@@ -300,6 +302,25 @@ void test_tcp_connect_timeout() {
 }
 #endif  // !defined(_WIN32)
 
+// StdioDevice (Serial) declares its own print()/println() overloads; they
+// must not hide Print's other overloads (double, long, unsigned, ...).
+void test_stdio_device_print_overloads() {
+  std::ostringstream out;
+  std::streambuf* original = std::cout.rdbuf(out.rdbuf());
+  StdioDevice dev;
+  dev.print(29.94, 2);
+  dev.print(' ');
+  dev.print(0.07f, 2);
+  dev.print(' ');
+  dev.print(3000000000UL);
+  dev.print(' ');
+  dev.print(42, HEX);
+  dev.print(' ');
+  dev.print("text");
+  std::cout.rdbuf(original);
+  TEST_ASSERT_EQUAL_STRING("29.94 0.07 3000000000 2A text", out.str().c_str());
+}
+
 }  // namespace
 
 void setUp() {}
@@ -310,6 +331,7 @@ void setup_test() {
   RUN_TEST(test_timing);
   RUN_TEST(test_gpio_delegation);
   RUN_TEST(test_arduino_types);
+  RUN_TEST(test_stdio_device_print_overloads);
   RUN_TEST(test_ethernet_configuration);
   RUN_TEST(test_socket_error_mapping);
   RUN_TEST(test_sd_filesystem);

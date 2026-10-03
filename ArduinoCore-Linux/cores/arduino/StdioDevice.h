@@ -62,13 +62,21 @@ class StdioDevice : public Stream {
     // nothing to be done
   }
 
+  // Keep all of Print's overloads (double, long, unsigned, char, ...)
+  // visible: declaring print()/println() here would otherwise hide them,
+  // silently routing e.g. print(3.14, 2) to print(int, radix).
+  using Stream::print;
+  using Stream::println;
+
   virtual size_t print(const char* str) {
     std::cout << str;
     if (auto_flush) flush();
     return strlen(str);
   }
 
-  virtual size_t println(const char* str = "") {
+  virtual size_t println() { return println(""); }
+
+  virtual size_t println(const char* str) {
     std::cout << str << "\n";
     if (auto_flush) flush();
     return strlen(str) + 1;
