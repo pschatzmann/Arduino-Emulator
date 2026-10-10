@@ -344,6 +344,20 @@ class EthernetClient : public Client {
 
   IPAddress remoteIP() { return address; }
 
+  // provides the local IP address of the connection (0.0.0.0 if not connected)
+  IPAddress localIP() {
+    struct sockaddr_in addr;
+    if (!localAddress(addr)) return IPAddress(0, 0, 0, 0);
+    return IPAddress(addr.sin_addr.s_addr);
+  }
+
+  // provides the local port of the connection (0 if not connected)
+  uint16_t localPort() {
+    struct sockaddr_in addr;
+    if (!localAddress(addr)) return 0;
+    return ntohs(addr.sin_port);
+  }
+
   virtual void setCACert(const char* cert) {
     Logger.error(WIFICLIENT, "setCACert not supported");
   }
@@ -459,6 +473,16 @@ class EthernetClient : public Client {
     Logger.debug(WIFICLIENT, "read->", lenStr);
 
     return result;
+  }
+
+  // determines the local socket address
+  bool localAddress(struct sockaddr_in& addr) {
+    memset(&addr, 0, sizeof(addr));
+    if (!p_sock || p_sock->fd() == INVALID_SOCKET_HANDLE) return false;
+    SocketLength len = sizeof(addr);
+    if (::getsockname(p_sock->fd(), (struct sockaddr*)&addr, &len) != 0)
+      return false;
+    return addr.sin_family == AF_INET;
   }
 
   bool connectedFast() { return is_connected; }
