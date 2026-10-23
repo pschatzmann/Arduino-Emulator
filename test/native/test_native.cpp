@@ -298,6 +298,10 @@ void test_tcp_loopback() {
   TEST_ASSERT_EQUAL(1, client.connect(IPAddress(127, 0, 0, 1), port));
   EthernetClient accepted = server.available();
   TEST_ASSERT_TRUE(accepted);
+  TEST_ASSERT_EQUAL_STRING("127.0.0.1", accepted.localIP().toString().c_str());
+  TEST_ASSERT_EQUAL_UINT16(port, accepted.localPort());
+  TEST_ASSERT_EQUAL_STRING("127.0.0.1", client.localIP().toString().c_str());
+  TEST_ASSERT_TRUE(client.localPort() != 0);
 
   const char payload[] = "tcp-loopback";
   TEST_ASSERT_EQUAL(sizeof(payload) - 1, client.write(reinterpret_cast<const uint8_t*>(payload), sizeof(payload) - 1));
@@ -308,6 +312,12 @@ void test_tcp_loopback() {
   accepted.stop();
   client.stop();
   server.stop();
+}
+
+void test_client_local_ip_unconnected() {
+  EthernetClient client;
+  TEST_ASSERT_EQUAL_STRING("0.0.0.0", client.localIP().toString().c_str());
+  TEST_ASSERT_EQUAL_UINT16(0, client.localPort());
 }
 
 void test_tcp_connect_refused() {
@@ -430,6 +440,7 @@ void setup_test() {
   RUN_TEST(test_udp_single_byte_read_of_high_values);
   RUN_TEST(test_udp_parse_packet_discards_unread_data);
   RUN_TEST(test_tcp_loopback);
+  RUN_TEST(test_client_local_ip_unconnected);
   RUN_TEST(test_tcp_connect_refused);
 #if !defined(_WIN32)
   RUN_TEST(test_tcp_connect_timeout);
