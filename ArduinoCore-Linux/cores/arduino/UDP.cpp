@@ -18,6 +18,8 @@
 */
 #include "EthernetUdp.h"
 #include "DesktopSocket.h"
+#include <algorithm>
+#include <cstring>
 #undef write
 #undef read
 
@@ -51,7 +53,7 @@ uint8_t EthernetUDP::begin(IPAddress address, uint16_t port) {
 
   server_port = port;
 
-  tx_buffer = new char[1460];
+  tx_buffer = new char[kMaxPacketSize];
   if (!tx_buffer) {
     log_e("EthernetUDP: could not create tx buffer: %d", socketLastError());
     return 0;
@@ -141,7 +143,7 @@ int EthernetUDP::beginPacket() {
 
   // allocate tx_buffer if is necessary
   if (!tx_buffer) {
-    tx_buffer = new char[1460];
+    tx_buffer = new char[kMaxPacketSize];
     if (!tx_buffer) {
       log_e("EthernetUDP: could not create tx buffer: %d", socketLastError());
       return 0;
@@ -197,32 +199,33 @@ int EthernetUDP::endPacket() {
   return 1;
 }
 
-size_t EthernetUDP::write(uint8_t data) {
-  if (tx_buffer_len == 1460) {
-    endPacket();
-    tx_buffer_len = 0;
-  }
-  tx_buffer[tx_buffer_len++] = data;
-  return 1;
-}
+size_t EthernetUDP::write(uint8_t data) { return write(&data, 1); }
 
+// The whole packet is sent as one datagram by endPacket(): data which does
+// not fit into a datagram is rejected (and not sent as a separate datagram,
+// which would break the message boundaries)
 size_t EthernetUDP::write(const uint8_t *buffer, size_t size) {
-  size_t i;
-  for (i = 0; i < size; i++) write(buffer[i]);
-  return i;
+  if (!tx_buffer) return 0;
+  size_t len = std::min(size, kMaxPacketSize - tx_buffer_len);
+  if (len < size) {
+    log_e("EthernetUDP: packet exceeds max UDP payload: %d",
+          (int)(tx_buffer_len + size));
+  }
+  memcpy(tx_buffer + tx_buffer_len, buffer, len);
+  tx_buffer_len += len;
+  return len;
 }
 
 int EthernetUDP::parsePacket() {
-  if (rx_buffer) return 0;
+  // Arduino API: the unread rest of the current packet is discarded
+  flush();
+  if (udp_server == INVALID_SOCKET_HANDLE) return 0;
   struct sockaddr_in si_other;
   int slen = sizeof(si_other), len;
-  char *buf = new char[1460];
-  if (!buf) {
-    return 0;
-  }
-  if ((len = recvfrom(udp_server, buf, 1460, 0,
+  if (rx_temp.size() < kMaxPacketSize) rx_temp.resize(kMaxPacketSize);
+  char *buf = rx_temp.data();
+  if ((len = recvfrom(udp_server, buf, kMaxPacketSize, 0,
                       (struct sockaddr *)&si_other, (SocketLength *)&slen)) < 0) {
-    delete[] buf;
     const int error = socketLastError();
     if (socketWouldBlock(error) || socketConnectionReset(error)) {
       return 0;
@@ -236,7 +239,6 @@ int EthernetUDP::parsePacket() {
     rx_buffer = new RingBufferExt(len);
     rx_buffer->write(buf, len);
   }
-  delete[] buf;
   return len;
 }
 

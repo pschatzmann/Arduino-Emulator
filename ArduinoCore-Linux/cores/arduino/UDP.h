@@ -38,6 +38,8 @@ class EthernetUDP : public UDP {
   char* tx_buffer;
   size_t tx_buffer_len;
   RingBufferExt* rx_buffer;
+  // receive buffer for recvfrom(), allocated on first use
+  std::vector<char> rx_temp;
   void log_e(const char* msg, int errorNo);
 
   static std::vector<EthernetUDP*>& active_udp() {
@@ -53,6 +55,9 @@ class EthernetUDP : public UDP {
   }
 
  public:
+  /// Maximum payload of a UDP datagram (IPv4)
+  static constexpr size_t kMaxPacketSize = 65507;
+
   EthernetUDP();
   ~EthernetUDP();
   uint8_t begin(IPAddress a, uint16_t p);

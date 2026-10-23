@@ -10,6 +10,7 @@
 #include <filesystem>
 #include <iostream>
 #include <sstream>
+#include <vector>
 
 #if defined(_WIN32)
 #include <windows.h>
@@ -166,6 +167,94 @@ void test_udp_loopback() {
   TEST_ASSERT_EQUAL(sizeof(payload) - 1, receiver.read(received, sizeof(received) - 1));
   TEST_ASSERT_EQUAL_STRING(payload, received);
   TEST_ASSERT_EQUAL_UINT16(port + 1, receiver.remotePort());
+  receiver.stop();
+  sender.stop();
+}
+
+void test_udp_large_binary_datagram() {
+  // datagrams larger than an ethernet frame must stay one datagram, and all
+  // byte values (incl. 0x00 and >= 0x80) must be preserved
+  constexpr uint16_t port = 45875;
+  EthernetUDP receiver;
+  EthernetUDP sender;
+  TEST_ASSERT_EQUAL_UINT8(1, receiver.begin(port));
+  TEST_ASSERT_EQUAL_UINT8(1, sender.begin(port + 1));
+
+  std::vector<uint8_t> payload(4000);
+  for (size_t i = 0; i < payload.size(); i++) payload[i] = (uint8_t)(i * 7);
+  TEST_ASSERT_EQUAL(1, sender.beginPacket(IPAddress(127, 0, 0, 1), port));
+  TEST_ASSERT_EQUAL(payload.size(), sender.write(payload.data(), payload.size()));
+  TEST_ASSERT_EQUAL(1, sender.endPacket());
+
+  int len = 0;
+  for (int j = 0; j < 100 && len == 0; j++) {
+    len = receiver.parsePacket();
+    if (len == 0) delay(1);
+  }
+  TEST_ASSERT_EQUAL((int)payload.size(), len);
+  std::vector<uint8_t> received(payload.size());
+  TEST_ASSERT_EQUAL((int)payload.size(), receiver.read(received.data(), received.size()));
+  TEST_ASSERT_EQUAL_UINT8_ARRAY(payload.data(), received.data(), payload.size());
+  // no second datagram
+  TEST_ASSERT_EQUAL(0, receiver.parsePacket());
+  receiver.stop();
+  sender.stop();
+}
+
+void test_udp_single_byte_read_of_high_values() {
+  constexpr uint16_t port = 45877;
+  EthernetUDP receiver;
+  EthernetUDP sender;
+  TEST_ASSERT_EQUAL_UINT8(1, receiver.begin(port));
+  TEST_ASSERT_EQUAL_UINT8(1, sender.begin(port + 1));
+  const uint8_t payload[] = {0x90, 0xFF, 0x00, 0x80, 0x01};
+  sender.beginPacket(IPAddress(127, 0, 0, 1), port);
+  sender.write(payload, sizeof(payload));
+  sender.endPacket();
+  int len = 0;
+  for (int j = 0; j < 100 && len == 0; j++) {
+    len = receiver.parsePacket();
+    if (len == 0) delay(1);
+  }
+  TEST_ASSERT_EQUAL((int)sizeof(payload), len);
+  for (size_t i = 0; i < sizeof(payload); i++) {
+    TEST_ASSERT_EQUAL(payload[i], receiver.peek());
+    TEST_ASSERT_EQUAL(payload[i], receiver.read());
+  }
+  TEST_ASSERT_EQUAL(-1, receiver.read());
+  receiver.stop();
+  sender.stop();
+}
+
+void test_udp_parse_packet_discards_unread_data() {
+  constexpr uint16_t port = 45879;
+  EthernetUDP receiver;
+  EthernetUDP sender;
+  TEST_ASSERT_EQUAL_UINT8(1, receiver.begin(port));
+  TEST_ASSERT_EQUAL_UINT8(1, sender.begin(port + 1));
+  const char first[] = "first packet";
+  const char second[] = "second";
+  for (const char *text : {first, second}) {
+    sender.beginPacket(IPAddress(127, 0, 0, 1), port);
+    sender.write(reinterpret_cast<const uint8_t *>(text), strlen(text));
+    sender.endPacket();
+  }
+  int len = 0;
+  for (int j = 0; j < 100 && len == 0; j++) {
+    len = receiver.parsePacket();
+    if (len == 0) delay(1);
+  }
+  TEST_ASSERT_EQUAL((int)strlen(first), len);
+  TEST_ASSERT_EQUAL('f', receiver.read());  // read only part of it
+  len = 0;
+  for (int j = 0; j < 100 && len == 0; j++) {
+    len = receiver.parsePacket();
+    if (len == 0) delay(1);
+  }
+  TEST_ASSERT_EQUAL((int)strlen(second), len);
+  char received[sizeof(second)] = {};
+  TEST_ASSERT_EQUAL((int)strlen(second), receiver.read(received, strlen(second)));
+  TEST_ASSERT_EQUAL_STRING(second, received);
   receiver.stop();
   sender.stop();
 }
@@ -337,6 +426,9 @@ void setup_test() {
   RUN_TEST(test_sd_filesystem);
   RUN_TEST(test_udp_loopback);
   RUN_TEST(test_udp_send_then_receive_on_same_socket);
+  RUN_TEST(test_udp_large_binary_datagram);
+  RUN_TEST(test_udp_single_byte_read_of_high_values);
+  RUN_TEST(test_udp_parse_packet_discards_unread_data);
   RUN_TEST(test_tcp_loopback);
   RUN_TEST(test_tcp_connect_refused);
 #if !defined(_WIN32)
