@@ -8,7 +8,7 @@ var searchData=
   ['clearrts_5',['clearRTS',['../classserialib.html#ab0b5882339240002fccf7701f5321e0a',1,'serialib']]],
   ['client_6',['Client',['../classarduino_1_1_client.html',1,'arduino']]],
   ['closedevice_7',['closeDevice',['../classserialib.html#a8a1c8803c8df1a19222d6006328534b8',1,'serialib']]],
-  ['configurempsse_8',['configurempsse',['../classarduino_1_1_hardware_i2_c___f_t_d_i.html#a5223b8710369e5297fea584892012fa3',1,'arduino::HardwareI2C_FTDI::configureMPSSE()'],['../classarduino_1_1_hardware_s_p_i___f_t_d_i.html#a542c3777f1af964075842a59eeb9913a',1,'arduino::HardwareSPI_FTDI::configureMPSSE()']]],
-  ['contributions_9',['Contributions',['..//home/runner/work/Arduino-Emulator/Arduino-Emulator/ArduinoCore-API/README.md#autotoc_md9',1,'']]],
-  ['credits_10',['License and credits',['..//home/runner/work/Arduino-Emulator/Arduino-Emulator/ArduinoCore-API/README.md#autotoc_md14',1,'']]]
+  ['configurempsse_8',['configureMPSSE',['../classarduino_1_1_hardware_i2_c___f_t_d_i.html#a5223b8710369e5297fea584892012fa3',1,'arduino::HardwareI2C_FTDI::configureMPSSE()'],['../classarduino_1_1_hardware_s_p_i___f_t_d_i.html#a542c3777f1af964075842a59eeb9913a',1,'arduino::HardwareSPI_FTDI::configureMPSSE()']]],
+  ['contributions_9',['Contributions',['../dir_b074d1b1aa70f3c10763fb8f33d8f4cb.html#autotoc_md9',1,'']]],
+  ['credits_10',['License and credits',['../dir_b074d1b1aa70f3c10763fb8f33d8f4cb.html#autotoc_md14',1,'']]]
 ];

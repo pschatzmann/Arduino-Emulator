@@ -1,10 +1,14 @@
 var searchData=
 [
-  ['_7ehardwaregpio_5fftdi_0',['~HardwareGPIO_FTDI',['../classarduino_1_1_hardware_g_p_i_o___f_t_d_i.html#a5f2aae5a652c0fec089d9c6a92f02667',1,'arduino::HardwareGPIO_FTDI']]],
-  ['_7ehardwaregpio_5frpi_1',['~HardwareGPIO_RPI',['../classarduino_1_1_hardware_g_p_i_o___r_p_i.html#a79579e723138b5f682269b99d60b6fdd',1,'arduino::HardwareGPIO_RPI']]],
-  ['_7ehardwarei2c_5fftdi_2',['~HardwareI2C_FTDI',['../classarduino_1_1_hardware_i2_c___f_t_d_i.html#a850e6fac4e02d4b6a4746b38a7caa8b0',1,'arduino::HardwareI2C_FTDI']]],
-  ['_7ehardwaresetupftdi_3',['~HardwareSetupFTDI',['../classarduino_1_1_hardware_setup_f_t_d_i.html#abe3e0bad04dfd5425b5c3bdff8a589b5',1,'arduino::HardwareSetupFTDI']]],
-  ['_7ehardwaresetuprpi_4',['~HardwareSetupRPI',['../classarduino_1_1_hardware_setup_r_p_i.html#a3b162b1537ba1028d925a4d30a9f06e0',1,'arduino::HardwareSetupRPI']]],
-  ['_7ehardwarespi_5fftdi_5',['~HardwareSPI_FTDI',['../classarduino_1_1_hardware_s_p_i___f_t_d_i.html#ae5185a3e003b58d98287d26ed648959f',1,'arduino::HardwareSPI_FTDI']]],
-  ['_7eserialib_6',['~serialib',['../classserialib.html#ac44215001ae198f2c196bb7993327a4b',1,'serialib']]]
+  ['wificlient_0',['WiFiClient',['../namespacearduino.html#abd3fcc52522534316c7351e196bbe995',1,'arduino']]],
+  ['wificlientsecure_1',['WiFiClientSecure',['../namespacearduino.html#a98312dd9dff89cd3bff4af779acaf381',1,'arduino']]],
+  ['wifimock_2',['WifiMock',['../classarduino_1_1_wifi_mock.html',1,'arduino']]],
+  ['wifiserver_3',['WiFiServer',['../namespacearduino.html#a21aec18485c05cd05ed5d204a405c4e5',1,'arduino']]],
+  ['wifiudp_4',['WiFiUDP',['../namespacearduino.html#a23dd4cb5a25b62a8d572997636b7b080',1,'arduino']]],
+  ['wire_5',['Wire',['../namespacearduino.html#a438e0b6e21770efe4a3aba702b818c4d',1,'arduino']]],
+  ['write_6',['write',['../classarduino_1_1_hardware_c_a_n.html#ac22cd733cb28a1408e79e98667d23b57',1,'arduino::HardwareCAN::write()'],['../classarduino_1_1_u_d_p_stream.html#ab572660ad7d72cae3bcde8719dcd71cb',1,'arduino::UDPStream::write()'],['../classarduino_1_1_hardware_i2_c___f_t_d_i.html#abd37b42ecb72af90aabd162c7164fdba',1,'arduino::HardwareI2C_FTDI::write(uint8_t data) override'],['../classarduino_1_1_hardware_i2_c___f_t_d_i.html#af32e14ec1472c43f8b42d79bff550a64',1,'arduino::HardwareI2C_FTDI::write(const uint8_t *data, size_t len) override'],['../class_servo.html#a72b4b546912eada96a6ef705168ceb8a',1,'Servo::write()']]],
+  ['writebytes_7',['writeBytes',['../classserialib.html#aa14196b6f422584bf5eebc4ddb71d483',1,'serialib::writeBytes()'],['../classarduino_1_1_firmata_transport.html#aedc85bffcdc8dd40cfb131fc3565594f',1,'arduino::FirmataTransport::writeBytes()']]],
+  ['writechar_8',['writeChar',['../classserialib.html#aa6d231cb99664a613bcb503830f73497',1,'serialib']]],
+  ['writemicroseconds_9',['writeMicroseconds',['../class_servo.html#af2d4fe8296f9b0184c1a939d792937ae',1,'Servo']]],
+  ['writestring_10',['writeString',['../classserialib.html#a6a32655c718b998e5b63d8cdc483ac6d',1,'serialib']]]
 ];

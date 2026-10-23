@@ -14,12 +14,12 @@ var searchData=
   ['spisettings_11',['SPISettings',['../classarduino_1_1_s_p_i_settings.html',1,'arduino']]],
   ['spisource_12',['SPISource',['../classarduino_1_1_s_p_i_source.html',1,'arduino']]],
   ['spiwrapper_13',['SPIWrapper',['../classarduino_1_1_s_p_i_wrapper.html',1,'arduino']]],
-  ['spscqueue_14',['SPSCQueue',['../classarduino_1_1_s_p_s_c_queue.html',1,'arduino']]],
+  ['spscqueue_14',['SPSCQueue',['../classarduino_1_1_s_p_s_c_queue.html',1,'arduino::SPSCQueue&lt; T &gt;'],['../class_s_p_s_c_queue.html',1,'SPSCQueue&lt; T &gt;']]],
   ['spscqueue_3c_20arduino_3a_3admabuffer_3c_20t_20_3e_20_2a_20_3e_15',['SPSCQueue&lt; arduino::DMABuffer&lt; T &gt; * &gt;',['../classarduino_1_1_s_p_s_c_queue.html',1,'arduino']]],
   ['stdiodevice_16',['StdioDevice',['../classarduino_1_1_stdio_device.html',1,'arduino']]],
   ['stream_17',['Stream',['../classarduino_1_1_stream.html',1,'arduino']]],
   ['streammock_18',['StreamMock',['../class_stream_mock.html',1,'']]],
-  ['string_19',['String',['../classarduino_1_1_string.html',1,'arduino']]],
+  ['string_19',['String',['../classarduino_1_1_string.html',1,'arduino::String'],['../class_string.html',1,'String']]],
   ['stringmaker_3c_20arduino_3a_3astring_20_3e_20',['StringMaker&lt; arduino::String &gt;',['../struct_catch_1_1_string_maker_3_01arduino_1_1_string_01_4.html',1,'Catch']]],
   ['stringsumhelper_21',['StringSumHelper',['../classarduino_1_1_string_sum_helper.html',1,'arduino']]]
 ];

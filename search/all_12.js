@@ -1,11 +1,14 @@
 var searchData=
 [
-  ['udp_0',['UDP',['../classarduino_1_1_u_d_p.html',1,'arduino']]],
-  ['udpstream_1',['udpstream',['../classarduino_1_1_u_d_p_stream.html',1,'arduino::UDPStream'],['../classarduino_1_1_u_d_p_stream.html#a7c0e8f695bc0566b91d4a2fbe92ab7fc',1,'arduino::UDPStream::UDPStream()=default'],['../classarduino_1_1_u_d_p_stream.html#abf3bb68b453a2af59f6c943470daab60',1,'arduino::UDPStream::UDPStream(IPAddress a, uint16_t port)']]],
-  ['unit_20testing_2',['Unit testing',['..//home/runner/work/Arduino-Emulator/Arduino-Emulator/ArduinoCore-API/README.md#autotoc_md10',1,'']]],
-  ['unit_20tests_3',['To build and run unit tests',['..//home/runner/work/Arduino-Emulator/Arduino-Emulator/ArduinoCore-API/README.md#autotoc_md11',1,'']]],
-  ['updategpiostate_4',['updateGPIOState',['../classarduino_1_1_hardware_g_p_i_o___f_t_d_i.html#aa1d1c444cb88887b74a160a51c3042d5',1,'arduino::HardwareGPIO_FTDI']]],
-  ['updatepwmpin_5',['updatePWMPin',['../classarduino_1_1_hardware_g_p_i_o___f_t_d_i.html#aac6c31c7150967878c87e39747585aa1',1,'arduino::HardwareGPIO_FTDI']]],
-  ['usedsize_6',['usedSize',['../class_sd_fat.html#a2477b9f4f1b856b451408830140422cb',1,'SdFat']]],
-  ['usinginterrupt_7',['usingInterrupt',['../classarduino_1_1_hardware_s_p_i___f_t_d_i.html#aa2c06dc801e9849324290a83662f214a',1,'arduino::HardwareSPI_FTDI']]]
+  ['testing_0',['Unit testing',['../dir_b074d1b1aa70f3c10763fb8f33d8f4cb.html#autotoc_md10',1,'']]],
+  ['tests_1',['To build and run unit tests',['../dir_b074d1b1aa70f3c10763fb8f33d8f4cb.html#autotoc_md11',1,'']]],
+  ['timeout_2',['timeOut',['../classtime_out.html',1,'timeOut'],['../classtime_out.html#a2cffa89f7b90e4501e07e8cb7ccb3117',1,'timeOut::timeOut()']]],
+  ['to_20build_20and_20run_20unit_20tests_3',['To build and run unit tests',['../dir_b074d1b1aa70f3c10763fb8f33d8f4cb.html#autotoc_md11',1,'']]],
+  ['todo_20list_4',['Todo List',['../todo.html',1,'']]],
+  ['tofirmatapinmode_5',['toFirmataPinMode',['../classarduino_1_1_hardware_g_p_i_o___f_i_r_m_a_t_a.html#aca730e6165d3359df44d30f3f1e9a02d',1,'arduino::HardwareGPIO_FIRMATA']]],
+  ['tone_6',['tone',['../classarduino_1_1_g_p_i_o_wrapper.html#a4eefb039ba6a8b29f2cce5d2ebf86697',1,'arduino::GPIOWrapper::tone()'],['../classarduino_1_1_hardware_g_p_i_o.html#a9af7c209aa41bc66819441981994cbda',1,'arduino::HardwareGPIO::tone()'],['../classarduino_1_1_remote_g_p_i_o.html#a7feee2166c833a0c349fdf0e57737f65',1,'arduino::RemoteGPIO::tone()'],['../classarduino_1_1_hardware_g_p_i_o___f_i_r_m_a_t_a.html#aa0f1aff1e7bd60244072fab4becb4654',1,'arduino::HardwareGPIO_FIRMATA::tone()'],['../classarduino_1_1_hardware_g_p_i_o___f_t_d_i.html#ad50a55a3eddbe0ba8271a9c5a1ca321e',1,'arduino::HardwareGPIO_FTDI::tone()'],['../classarduino_1_1_hardware_g_p_i_o___r_p_i.html#a2f12263cb33cfe15f116fc5137785067',1,'arduino::HardwareGPIO_RPI::tone()']]],
+  ['totalsize_7',['totalSize',['../class_sd_fat.html#a944c388d964c029680f9a94552653627',1,'SdFat']]],
+  ['transfer_8',['transfer',['../classarduino_1_1_hardware_s_p_i___f_t_d_i.html#a7da8f98d8e501be09759007f575a93ac',1,'arduino::HardwareSPI_FTDI::transfer(uint8_t data) override'],['../classarduino_1_1_hardware_s_p_i___f_t_d_i.html#ac8562c53a48d7f7cc160e592cbc8ad88',1,'arduino::HardwareSPI_FTDI::transfer(void *buf, size_t count) override']]],
+  ['transfer16_9',['transfer16',['../classarduino_1_1_hardware_s_p_i___f_t_d_i.html#a3c717296528871f2dc756efb235a492d',1,'arduino::HardwareSPI_FTDI']]],
+  ['twowire_10',['TwoWire',['../namespacearduino.html#a628770b6af2b6024cfdf9e63a77d1f75',1,'arduino']]]
 ];

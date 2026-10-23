@@ -5,5 +5,6 @@ var searchData=
   ['remoteserialclass_2',['RemoteSerialClass',['../classarduino_1_1_remote_serial_class.html',1,'arduino']]],
   ['remotespi_3',['RemoteSPI',['../classarduino_1_1_remote_s_p_i.html',1,'arduino']]],
   ['ringbufferext_4',['RingBufferExt',['../classarduino_1_1_ring_buffer_ext.html',1,'arduino']]],
-  ['ringbuffern_5',['RingBufferN',['../classarduino_1_1_ring_buffer_n.html',1,'arduino']]]
+  ['ringbuffern_5',['RingBufferN',['../classarduino_1_1_ring_buffer_n.html',1,'arduino']]],
+  ['ringbuffern_3c_20serial_5fbuffer_5fsize_20_3e_6',['RingBufferN&lt; SERIAL_BUFFER_SIZE &gt;',['../classarduino_1_1_ring_buffer_n.html',1,'arduino']]]
 ];
