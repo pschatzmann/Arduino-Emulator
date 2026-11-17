@@ -1,4 +1,26 @@
 var searchData=
 [
-  ['timeout_0',['timeOut',['../classtime_out.html',1,'']]]
+  ['sdfat_0',['SdFat',['../class_sd_fat.html',1,'']]],
+  ['sdfile_1',['SdFile',['../class_sd_file.html',1,'']]],
+  ['sdmmcfs_2',['SDMMCFS',['../class_s_d_m_m_c_f_s.html',1,'']]],
+  ['sdspiconfig_3',['SdSpiConfig',['../class_sd_spi_config.html',1,'']]],
+  ['serialib_4',['serialib',['../classserialib.html',1,'']]],
+  ['serialimpl_5',['SerialImpl',['../classarduino_1_1_serial_impl.html',1,'arduino']]],
+  ['server_6',['Server',['../classarduino_1_1_server.html',1,'arduino']]],
+  ['servo_7',['Servo',['../class_servo.html',1,'']]],
+  ['signalhandler_8',['SignalHandler',['../class_signal_handler.html',1,'']]],
+  ['socketimpl_9',['SocketImpl',['../classarduino_1_1_socket_impl.html',1,'arduino']]],
+  ['socketimplsecure_10',['SocketImplSecure',['../classarduino_1_1_socket_impl_secure.html',1,'arduino']]],
+  ['socketruntime_11',['SocketRuntime',['../classarduino_1_1_socket_runtime.html',1,'arduino']]],
+  ['spisettings_12',['SPISettings',['../classarduino_1_1_s_p_i_settings.html',1,'arduino']]],
+  ['spisource_13',['SPISource',['../classarduino_1_1_s_p_i_source.html',1,'arduino']]],
+  ['spiwrapper_14',['SPIWrapper',['../classarduino_1_1_s_p_i_wrapper.html',1,'arduino']]],
+  ['spscqueue_15',['SPSCQueue',['../classarduino_1_1_s_p_s_c_queue.html',1,'arduino::SPSCQueue&lt; T &gt;'],['../class_s_p_s_c_queue.html',1,'SPSCQueue&lt; T &gt;']]],
+  ['spscqueue_3c_20arduino_3a_3admabuffer_3c_20t_20_3e_20_2a_20_3e_16',['SPSCQueue&lt; arduino::DMABuffer&lt; T &gt; * &gt;',['../classarduino_1_1_s_p_s_c_queue.html',1,'arduino']]],
+  ['stdiodevice_17',['StdioDevice',['../classarduino_1_1_stdio_device.html',1,'arduino']]],
+  ['stream_18',['Stream',['../classarduino_1_1_stream.html',1,'arduino']]],
+  ['streammock_19',['StreamMock',['../class_stream_mock.html',1,'']]],
+  ['string_20',['String',['../classarduino_1_1_string.html',1,'arduino::String'],['../class_string.html',1,'String']]],
+  ['stringmaker_3c_20arduino_3a_3astring_20_3e_21',['StringMaker&lt; arduino::String &gt;',['../struct_catch_1_1_string_maker_3_01arduino_1_1_string_01_4.html',1,'Catch']]],
+  ['stringsumhelper_22',['StringSumHelper',['../classarduino_1_1_string_sum_helper.html',1,'arduino']]]
 ];

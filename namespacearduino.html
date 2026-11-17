@@ -94,6 +94,8 @@ Classes</h2></td></tr>
 <tr class="memitem:Client" id="r_Client"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classarduino_1_1_client.html">Client</a></td></tr>
 <tr class="memitem:DMABuffer" id="r_DMABuffer"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classarduino_1_1_d_m_a_buffer.html">DMABuffer</a></td></tr>
 <tr class="memitem:DMAPool" id="r_DMAPool"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classarduino_1_1_d_m_a_pool.html">DMAPool</a></td></tr>
+<tr class="memitem:EspClass" id="r_EspClass"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classarduino_1_1_esp_class.html">EspClass</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">ESP32 compatible ESP object (ESP.getFreeHeap() ...), so that ESP32 sketches also run on the desktop. The heap is the memory of the computer; there is no PSRAM: the psram functions return 0.  <a href="classarduino_1_1_esp_class.html#details">More...</a><br /></td></tr>
 <tr class="memitem:EthernetClient" id="r_EthernetClient"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classarduino_1_1_ethernet_client.html">EthernetClient</a></td></tr>
 <tr class="memitem:EthernetImpl" id="r_EthernetImpl"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classarduino_1_1_ethernet_impl.html">EthernetImpl</a></td></tr>
 <tr class="memitem:EthernetServer" id="r_EthernetServer"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classarduino_1_1_ethernet_server.html">EthernetServer</a></td></tr>
@@ -356,6 +358,9 @@ static char *&#160;</td><td class="memItemRight" valign="bottom"><b>defaultInter
 void&#160;</td><td class="memItemRight" valign="bottom"><b>digitalWrite</b> (pin_size_t pinNumber, int status)</td></tr>
 <tr class="memitem:a5c35469db1f9a61fe086da31acccd33e" id="r_a5c35469db1f9a61fe086da31acccd33e"><td class="memItemLeft" align="right" valign="top"><a id="a5c35469db1f9a61fe086da31acccd33e" name="a5c35469db1f9a61fe086da31acccd33e"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>ensureSocketRuntime</b> ()</td></tr>
+<tr class="memitem:a143b669188835dc4a7af261868abc865" id="r_a143b669188835dc4a7af261868abc865"><td class="memItemLeft" align="right" valign="top"><a id="a143b669188835dc4a7af261868abc865" name="a143b669188835dc4a7af261868abc865"></a>
+uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>getCpuFrequencyMhz</b> ()</td></tr>
+<tr class="memdesc:a143b669188835dc4a7af261868abc865"><td class="mdescLeft">&#160;</td><td class="mdescRight">ESP32: cpu frequency in MHz. <br /></td></tr>
 <tr class="memitem:a1c3f24375a626fbb945a266f38ff681a" id="r_a1c3f24375a626fbb945a266f38ff681a"><td class="memItemLeft" align="right" valign="top"><a id="a1c3f24375a626fbb945a266f38ff681a" name="a1c3f24375a626fbb945a266f38ff681a"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>isAlpha</b> (int c) __attribute__((always_inline))</td></tr>
 <tr class="memitem:aa3aab999e1d9d55e6c55e1c5b8f14b39" id="r_aa3aab999e1d9d55e6c55e1c5b8f14b39"><td class="memItemLeft" align="right" valign="top"><a id="aa3aab999e1d9d55e6c55e1c5b8f14b39" name="aa3aab999e1d9d55e6c55e1c5b8f14b39"></a>
@@ -447,6 +452,8 @@ static constexpr uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>D
 enum arduino:: { ... } &#160;</td><td class="memItemRight" valign="bottom"><b>DMABufferFlags</b></td></tr>
 <tr class="memitem:af00f17a32f1ee598446d6d5a0146a83c" id="r_af00f17a32f1ee598446d6d5a0146a83c"><td class="memItemLeft" align="right" valign="top"><a id="af00f17a32f1ee598446d6d5a0146a83c" name="af00f17a32f1ee598446d6d5a0146a83c"></a>
 static constexpr uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>END_SYSEX</b> = 0xF7</td></tr>
+<tr class="memitem:afddb84a221cdc28bd419f802c50d99c6" id="r_afddb84a221cdc28bd419f802c50d99c6"><td class="memItemLeft" align="right" valign="top"><a id="afddb84a221cdc28bd419f802c50d99c6" name="afddb84a221cdc28bd419f802c50d99c6"></a>
+<a class="el" href="classarduino_1_1_esp_class.html">EspClass</a>&#160;</td><td class="memItemRight" valign="bottom"><b>ESP</b></td></tr>
 <tr class="memitem:aefb27191f81a97c93f4a0b0e3c96bc8d" id="r_aefb27191f81a97c93f4a0b0e3c96bc8d"><td class="memItemLeft" align="right" valign="top"><a id="aefb27191f81a97c93f4a0b0e3c96bc8d" name="aefb27191f81a97c93f4a0b0e3c96bc8d"></a>
 <a class="el" href="classarduino_1_1_ethernet_impl.html">EthernetImpl</a>&#160;</td><td class="memItemRight" valign="bottom"><b>Ethernet</b></td></tr>
 <tr class="memitem:a7c6ba811f09c5b339a44b5cf738ca6d2" id="r_a7c6ba811f09c5b339a44b5cf738ca6d2"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classarduino_1_1_hardware_setup_f_i_r_m_a_t_a.html">HardwareSetupFIRMATA</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7c6ba811f09c5b339a44b5cf738ca6d2">FIRMATA</a></td></tr>

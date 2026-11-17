@@ -19,5 +19,6 @@ var searchData=
   ['hardwarespi_5ffirmata_16',['HardwareSPI_FIRMATA',['../classarduino_1_1_hardware_s_p_i___f_i_r_m_a_t_a.html',1,'arduino::HardwareSPI_FIRMATA'],['../classarduino_1_1_hardware_s_p_i___f_i_r_m_a_t_a.html#a94a03c21fa0dd529c5f9e0824ef313a2',1,'arduino::HardwareSPI_FIRMATA::HardwareSPI_FIRMATA()']]],
   ['hardwarespi_5fftdi_17',['HardwareSPI_FTDI',['../classarduino_1_1_hardware_s_p_i___f_t_d_i.html',1,'arduino::HardwareSPI_FTDI'],['../classarduino_1_1_hardware_s_p_i___f_t_d_i.html#ab3f6ac2b78cce349c3f55084d354e25a',1,'arduino::HardwareSPI_FTDI::HardwareSPI_FTDI()']]],
   ['hardwarespi_5frpi_18',['HardwareSPI_RPI',['../classarduino_1_1_hardware_s_p_i___r_p_i.html',1,'arduino']]],
-  ['hwcalls_19',['HWCalls',['../namespacearduino.html#a7e2d951f5b63a78013908f24b079292d',1,'arduino']]]
+  ['hostbyname_19',['hostByName',['../classarduino_1_1_wifi_mock.html#a517aa03c654a2af2af2f480d76de8e36',1,'arduino::WifiMock']]],
+  ['hwcalls_20',['HWCalls',['../namespacearduino.html#a7e2d951f5b63a78013908f24b079292d',1,'arduino']]]
 ];

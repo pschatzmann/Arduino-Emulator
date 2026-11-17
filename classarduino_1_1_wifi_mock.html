@@ -89,6 +89,9 @@ Public Member Functions</h2></td></tr>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>begin</b> (const char *name, const char *pwd)</td></tr>
 <tr class="memitem:a4a8484e944d941ef9d6ce5743fe69c16" id="r_a4a8484e944d941ef9d6ce5743fe69c16"><td class="memItemLeft" align="right" valign="top"><a id="a4a8484e944d941ef9d6ce5743fe69c16" name="a4a8484e944d941ef9d6ce5743fe69c16"></a>
 WiFiMode_t&#160;</td><td class="memItemRight" valign="bottom"><b>getMode</b> ()</td></tr>
+<tr class="memitem:a517aa03c654a2af2af2f480d76de8e36" id="r_a517aa03c654a2af2af2f480d76de8e36"><td class="memItemLeft" align="right" valign="top"><a id="a517aa03c654a2af2af2f480d76de8e36" name="a517aa03c654a2af2af2f480d76de8e36"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>hostByName</b> (const char *host, <a class="el" href="class_i_p_address.html">IPAddress</a> &amp;result)</td></tr>
+<tr class="memdesc:a517aa03c654a2af2af2f480d76de8e36"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resolves a host name (or an IP address in text form) to an IPv4 address. <br /></td></tr>
 <tr class="memitem:a98a0e5c0f808e37ea94d5c03243f1fd8" id="r_a98a0e5c0f808e37ea94d5c03243f1fd8"><td class="memItemLeft" align="right" valign="top"><a id="a98a0e5c0f808e37ea94d5c03243f1fd8" name="a98a0e5c0f808e37ea94d5c03243f1fd8"></a>
 <a class="el" href="class_i_p_address.html">IPAddress</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>localIP</b> ()</td></tr>
 <tr class="memitem:afefa8f2aa1ba762af7d96c92a650b527" id="r_afefa8f2aa1ba762af7d96c92a650b527"><td class="memItemLeft" align="right" valign="top"><a id="afefa8f2aa1ba762af7d96c92a650b527" name="afefa8f2aa1ba762af7d96c92a650b527"></a>
@@ -101,6 +104,11 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>setClientInsecure</b>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setSleep</b> (bool)</td></tr>
 <tr class="memitem:ae165b4df80b31728aaa97198c45eb3b9" id="r_ae165b4df80b31728aaa97198c45eb3b9"><td class="memItemLeft" align="right" valign="top"><a id="ae165b4df80b31728aaa97198c45eb3b9" name="ae165b4df80b31728aaa97198c45eb3b9"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setSleep</b> (wifi_ps_type_t)</td></tr>
+<tr class="memitem:a7aa8e203a8165ada46afb1383a799cec" id="r_a7aa8e203a8165ada46afb1383a799cec"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7aa8e203a8165ada46afb1383a799cec">softAP</a> (const char *ssid, const char *passphrase=nullptr, int channel=1, int ssid_hidden=0, int max_connection=4)</td></tr>
+<tr class="memitem:ad509553cffa4c2c8f90734224784b02f" id="r_ad509553cffa4c2c8f90734224784b02f"><td class="memItemLeft" align="right" valign="top"><a id="ad509553cffa4c2c8f90734224784b02f" name="ad509553cffa4c2c8f90734224784b02f"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>softAPdisconnect</b> (bool wifioff=false)</td></tr>
+<tr class="memitem:a836046fd70ffa7e611b41b1d04b2f62e" id="r_a836046fd70ffa7e611b41b1d04b2f62e"><td class="memItemLeft" align="right" valign="top"><a id="a836046fd70ffa7e611b41b1d04b2f62e" name="a836046fd70ffa7e611b41b1d04b2f62e"></a>
+<a class="el" href="class_i_p_address.html">IPAddress</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>softAPIP</b> ()</td></tr>
 <tr class="memitem:a025e9887ea776e04bfc17a6481c701c4" id="r_a025e9887ea776e04bfc17a6481c701c4"><td class="memItemLeft" align="right" valign="top"><a id="a025e9887ea776e04bfc17a6481c701c4" name="a025e9887ea776e04bfc17a6481c701c4"></a>
 wl_status_t&#160;</td><td class="memItemRight" valign="bottom"><b>status</b> ()</td></tr>
 </table><table class="memberdecls">
@@ -110,7 +118,55 @@ Protected Attributes</h2></td></tr>
 <a class="el" href="class_i_p_address.html">IPAddress</a>&#160;</td><td class="memItemRight" valign="bottom"><b>adress</b></td></tr>
 <tr class="memitem:ad59fbf395f91eb87356870551b3ae4f0" id="r_ad59fbf395f91eb87356870551b3ae4f0"><td class="memItemLeft" align="right" valign="top"><a id="ad59fbf395f91eb87356870551b3ae4f0" name="ad59fbf395f91eb87356870551b3ae4f0"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>mac</b> = 0</td></tr>
+<tr class="memitem:a2505ac7a0357a4df61d9ceceb6599000" id="r_a2505ac7a0357a4df61d9ceceb6599000"><td class="memItemLeft" align="right" valign="top"><a id="a2505ac7a0357a4df61d9ceceb6599000" name="a2505ac7a0357a4df61d9ceceb6599000"></a>
+WiFiMode_t&#160;</td><td class="memItemRight" valign="bottom"><b>wifi_mode</b> = WIFI_STA</td></tr>
 </table>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
+<a id="a7aa8e203a8165ada46afb1383a799cec" name="a7aa8e203a8165ada46afb1383a799cec"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7aa8e203a8165ada46afb1383a799cec">&#9670;&#160;</a></span>softAP()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool arduino::WifiMock::softAP </td>
+          <td>(</td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>ssid</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>passphrase</em></span><span class="paramdefsep"> = </span><span class="paramdefval">nullptr</span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>channel</em></span><span class="paramdefsep"> = </span><span class="paramdefval">1</span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>ssid_hidden</em></span><span class="paramdefsep"> = </span><span class="paramdefval">0</span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>max_connection</em></span><span class="paramdefsep"> = </span><span class="paramdefval">4</span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Access point (ESP32): the computer is already in the network, so this only changes the mode; softAPIP() is the address of the computer </p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>ArduinoCore-Linux/cores/arduino/<a class="el" href="_wi_fi_8h_source.html">WiFi.h</a></li>
 </ul>

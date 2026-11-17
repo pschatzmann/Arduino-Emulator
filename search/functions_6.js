@@ -1,7 +1,5 @@
 var searchData=
 [
-  ['getbitposition_0',['getBitPosition',['../classarduino_1_1_hardware_g_p_i_o___f_t_d_i.html#a399c4a2ffd3b8d5cf6230f8ff37bfd8c',1,'arduino::HardwareGPIO_FTDI']]],
-  ['getchannel_1',['getChannel',['../classarduino_1_1_hardware_g_p_i_o___f_t_d_i.html#abb4bcfebfcc349ba1ccf2cc2596e9c32',1,'arduino::HardwareGPIO_FTDI']]],
-  ['getmpssecommand_2',['getMPSSECommand',['../classarduino_1_1_hardware_s_p_i___f_t_d_i.html#a002325b497ddfb8670076706a85150fa',1,'arduino::HardwareSPI_FTDI']]],
-  ['getpwmstatistics_3',['getPWMStatistics',['../classarduino_1_1_hardware_g_p_i_o___f_t_d_i.html#a1406a34d57feee1ff6a3237e0e04af27',1,'arduino::HardwareGPIO_FTDI']]]
+  ['flush_0',['flush',['../classarduino_1_1_hardware_i2_c___f_t_d_i.html#acc39b9a515e1ea2c686ec7cefbadcb5a',1,'arduino::HardwareI2C_FTDI']]],
+  ['flushreceiver_1',['flushReceiver',['../classserialib.html#a572dd8d208511ec81d848de72cb05c7a',1,'serialib']]]
 ];

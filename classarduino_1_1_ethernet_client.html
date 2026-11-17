@@ -116,6 +116,8 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>fd</b> ()</td></tr>
 <tr class="memitem:a476bb166c65ff29864f2019a6fde5667" id="r_a476bb166c65ff29864f2019a6fde5667"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a476bb166c65ff29864f2019a6fde5667">flush</a> () override</td></tr>
 <tr class="memitem:a1a800bae334b5efc042ad5274f4b00e1" id="r_a1a800bae334b5efc042ad5274f4b00e1"><td class="memItemLeft" align="right" valign="top"><a id="a1a800bae334b5efc042ad5274f4b00e1" name="a1a800bae334b5efc042ad5274f4b00e1"></a>
 int32_t&#160;</td><td class="memItemRight" valign="bottom"><b>getConnectionTimeout</b> ()</td></tr>
+<tr class="memitem:a77519e4dca8d6ba9bd0c484cf5d0019d" id="r_a77519e4dca8d6ba9bd0c484cf5d0019d"><td class="memItemLeft" align="right" valign="top"><a id="a77519e4dca8d6ba9bd0c484cf5d0019d" name="a77519e4dca8d6ba9bd0c484cf5d0019d"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>getNoDelay</b> ()</td></tr>
 <tr class="memitem:a2a8c48157d919c974e7a47eb74d61f42" id="r_a2a8c48157d919c974e7a47eb74d61f42"><td class="memItemLeft" align="right" valign="top"><a id="a2a8c48157d919c974e7a47eb74d61f42" name="a2a8c48157d919c974e7a47eb74d61f42"></a>
 <a class="el" href="class_i_p_address.html">IPAddress</a>&#160;</td><td class="memItemRight" valign="bottom"><b>localIP</b> ()</td></tr>
 <tr class="memitem:adf97b1e7d1bf1433ec59ecd9d5020b27" id="r_adf97b1e7d1bf1433ec59ecd9d5020b27"><td class="memItemLeft" align="right" valign="top"><a id="adf97b1e7d1bf1433ec59ecd9d5020b27" name="adf97b1e7d1bf1433ec59ecd9d5020b27"></a>
@@ -127,6 +129,7 @@ virtual int&#160;</td><td class="memItemRight" valign="bottom"><b>print</b> (con
 <tr class="memitem:a432520502ba520e3524aa1cb34fc4a1a" id="r_a432520502ba520e3524aa1cb34fc4a1a"><td class="memItemLeft" align="right" valign="top"><a id="a432520502ba520e3524aa1cb34fc4a1a" name="a432520502ba520e3524aa1cb34fc4a1a"></a>
 virtual int&#160;</td><td class="memItemRight" valign="bottom"><b>println</b> (const char *str=&quot;&quot;)</td></tr>
 <tr class="memitem:ab5c8fdb78db2b26a004d9bc4c4b973e0" id="r_ab5c8fdb78db2b26a004d9bc4c4b973e0"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab5c8fdb78db2b26a004d9bc4c4b973e0">read</a> () override</td></tr>
+<tr class="memitem:a882525894cd943d4e809a2755c228d87" id="r_a882525894cd943d4e809a2755c228d87"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a882525894cd943d4e809a2755c228d87">read</a> (uint8_t *buffer, size_t len) override</td></tr>
 <tr class="memitem:ad2905c61425f991f1e69957b3e2e4783" id="r_ad2905c61425f991f1e69957b3e2e4783"><td class="memItemLeft" align="right" valign="top"><a id="ad2905c61425f991f1e69957b3e2e4783" name="ad2905c61425f991f1e69957b3e2e4783"></a>
 virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><b>readBytes</b> (char *buffer, size_t len)</td></tr>
 <tr class="memitem:aa3061627bd0ecea57b32d12c57a6b4a9" id="r_aa3061627bd0ecea57b32d12c57a6b4a9"><td class="memItemLeft" align="right" valign="top"><a id="aa3061627bd0ecea57b32d12c57a6b4a9" name="aa3061627bd0ecea57b32d12c57a6b4a9"></a>
@@ -141,6 +144,9 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>setCACert</b>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setConnectionTimeout</b> (int32_t timeout)</td></tr>
 <tr class="memitem:a3c55ea9264c7165baa9b22e176f1a589" id="r_a3c55ea9264c7165baa9b22e176f1a589"><td class="memItemLeft" align="right" valign="top"><a id="a3c55ea9264c7165baa9b22e176f1a589" name="a3c55ea9264c7165baa9b22e176f1a589"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>setInsecure</b> ()</td></tr>
+<tr class="memitem:a3312abfedfb9c431898c514f13d30035" id="r_a3312abfedfb9c431898c514f13d30035"><td class="memItemLeft" align="right" valign="top"><a id="a3312abfedfb9c431898c514f13d30035" name="a3312abfedfb9c431898c514f13d30035"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>setNoDelay</b> (bool noDelay)</td></tr>
+<tr class="memdesc:a3312abfedfb9c431898c514f13d30035"><td class="mdescLeft">&#160;</td><td class="mdescRight">Disables (true) or enables the Nagle algorithm (TCP_NODELAY). <br /></td></tr>
 <tr class="memitem:abd0b0b04917f16e1da2e70870133c97a" id="r_abd0b0b04917f16e1da2e70870133c97a"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abd0b0b04917f16e1da2e70870133c97a">stop</a> () override</td></tr>
 <tr class="memitem:aa4ea88a1a1b523302d452977002f5b80" id="r_aa4ea88a1a1b523302d452977002f5b80"><td class="memItemLeft" align="right" valign="top"><a id="aa4ea88a1a1b523302d452977002f5b80" name="aa4ea88a1a1b523302d452977002f5b80"></a>
 virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><b>write</b> (char c)</td></tr>
@@ -258,7 +264,6 @@ Protected Member Functions</h2></td></tr>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>connectedFast</b> ()</td></tr>
 <tr class="memitem:ac46cdeedbc8d338e4e6228a1d268b0c9" id="r_ac46cdeedbc8d338e4e6228a1d268b0c9"><td class="memItemLeft" align="right" valign="top"><a id="ac46cdeedbc8d338e4e6228a1d268b0c9" name="ac46cdeedbc8d338e4e6228a1d268b0c9"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>localAddress</b> (struct sockaddr_in &amp;addr)</td></tr>
-<tr class="memitem:a882525894cd943d4e809a2755c228d87" id="r_a882525894cd943d4e809a2755c228d87"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a882525894cd943d4e809a2755c228d87">read</a> (uint8_t *buffer, size_t len) override</td></tr>
 <tr class="memitem:a9a3f148716045d9f06957e7350e0a300" id="r_a9a3f148716045d9f06957e7350e0a300"><td class="memItemLeft" align="right" valign="top"><a id="a9a3f148716045d9f06957e7350e0a300" name="a9a3f148716045d9f06957e7350e0a300"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>registerCleanup</b> ()</td></tr>
 <tr class="memitem:afd064f4b9d86ea195f02361fd778ea33" id="r_afd064f4b9d86ea195f02361fd778ea33"><td class="memItemLeft" align="right" valign="top"><a id="afd064f4b9d86ea195f02361fd778ea33" name="afd064f4b9d86ea195f02361fd778ea33"></a>
@@ -563,7 +568,7 @@ unsigned long&#160;</td><td class="memItemRight" valign="bottom"><b>_timeout</b>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel override">override</span><span class="mlabel protected">protected</span><span class="mlabel virtual">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel override">override</span><span class="mlabel virtual">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">

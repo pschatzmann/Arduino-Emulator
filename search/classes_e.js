@@ -1,25 +1,10 @@
 var searchData=
 [
-  ['sdfat_0',['SdFat',['../class_sd_fat.html',1,'']]],
-  ['sdfile_1',['SdFile',['../class_sd_file.html',1,'']]],
-  ['sdspiconfig_2',['SdSpiConfig',['../class_sd_spi_config.html',1,'']]],
-  ['serialib_3',['serialib',['../classserialib.html',1,'']]],
-  ['serialimpl_4',['SerialImpl',['../classarduino_1_1_serial_impl.html',1,'arduino']]],
-  ['server_5',['Server',['../classarduino_1_1_server.html',1,'arduino']]],
-  ['servo_6',['Servo',['../class_servo.html',1,'']]],
-  ['signalhandler_7',['SignalHandler',['../class_signal_handler.html',1,'']]],
-  ['socketimpl_8',['SocketImpl',['../classarduino_1_1_socket_impl.html',1,'arduino']]],
-  ['socketimplsecure_9',['SocketImplSecure',['../classarduino_1_1_socket_impl_secure.html',1,'arduino']]],
-  ['socketruntime_10',['SocketRuntime',['../classarduino_1_1_socket_runtime.html',1,'arduino']]],
-  ['spisettings_11',['SPISettings',['../classarduino_1_1_s_p_i_settings.html',1,'arduino']]],
-  ['spisource_12',['SPISource',['../classarduino_1_1_s_p_i_source.html',1,'arduino']]],
-  ['spiwrapper_13',['SPIWrapper',['../classarduino_1_1_s_p_i_wrapper.html',1,'arduino']]],
-  ['spscqueue_14',['SPSCQueue',['../classarduino_1_1_s_p_s_c_queue.html',1,'arduino::SPSCQueue&lt; T &gt;'],['../class_s_p_s_c_queue.html',1,'SPSCQueue&lt; T &gt;']]],
-  ['spscqueue_3c_20arduino_3a_3admabuffer_3c_20t_20_3e_20_2a_20_3e_15',['SPSCQueue&lt; arduino::DMABuffer&lt; T &gt; * &gt;',['../classarduino_1_1_s_p_s_c_queue.html',1,'arduino']]],
-  ['stdiodevice_16',['StdioDevice',['../classarduino_1_1_stdio_device.html',1,'arduino']]],
-  ['stream_17',['Stream',['../classarduino_1_1_stream.html',1,'arduino']]],
-  ['streammock_18',['StreamMock',['../class_stream_mock.html',1,'']]],
-  ['string_19',['String',['../classarduino_1_1_string.html',1,'arduino::String'],['../class_string.html',1,'String']]],
-  ['stringmaker_3c_20arduino_3a_3astring_20_3e_20',['StringMaker&lt; arduino::String &gt;',['../struct_catch_1_1_string_maker_3_01arduino_1_1_string_01_4.html',1,'Catch']]],
-  ['stringsumhelper_21',['StringSumHelper',['../classarduino_1_1_string_sum_helper.html',1,'arduino']]]
+  ['remotegpio_0',['RemoteGPIO',['../classarduino_1_1_remote_g_p_i_o.html',1,'arduino']]],
+  ['remotei2c_1',['RemoteI2C',['../classarduino_1_1_remote_i2_c.html',1,'arduino']]],
+  ['remoteserialclass_2',['RemoteSerialClass',['../classarduino_1_1_remote_serial_class.html',1,'arduino']]],
+  ['remotespi_3',['RemoteSPI',['../classarduino_1_1_remote_s_p_i.html',1,'arduino']]],
+  ['ringbufferext_4',['RingBufferExt',['../classarduino_1_1_ring_buffer_ext.html',1,'arduino']]],
+  ['ringbuffern_5',['RingBufferN',['../classarduino_1_1_ring_buffer_n.html',1,'arduino']]],
+  ['ringbuffern_3c_20serial_5fbuffer_5fsize_20_3e_6',['RingBufferN&lt; SERIAL_BUFFER_SIZE &gt;',['../classarduino_1_1_ring_buffer_n.html',1,'arduino']]]
 ];
