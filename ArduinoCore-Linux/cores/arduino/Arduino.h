@@ -47,6 +47,7 @@
 #include "RemoteSerial.h"
 #include "HardwareSetup.h"
 #include "FileStream.h"
+#include "Esp.h"
 
 using namespace arduino;
 

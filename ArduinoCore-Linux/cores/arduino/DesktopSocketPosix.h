@@ -7,6 +7,8 @@
 #include <errno.h>
 #include <fcntl.h>
 #include <netdb.h>
+#include <netinet/in.h>
+#include <netinet/tcp.h>  // TCP_NODELAY
 #include <poll.h>
 #include <sys/ioctl.h>
 #include <sys/socket.h>

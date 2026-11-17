@@ -362,6 +362,40 @@ class EthernetClient : public Client {
     Logger.error(WIFICLIENT, "setCACert not supported");
   }
 
+  int read(uint8_t* buffer, size_t len) override {
+    Logger.debug(WIFICLIENT, "read");
+    int result = 0;
+    long timeout = millis() + getTimeout();
+    result = p_sock->read(buffer, len);
+    while (result == 0 && millis() < timeout) {
+      delay(200);
+      result = p_sock->read(buffer, len);
+    }
+
+    char lenStr[16];
+    sprintf(lenStr, "%d", result);
+    Logger.debug(WIFICLIENT, "read->", lenStr);
+
+    return result;
+  }
+
+  /// Disables (true) or enables the Nagle algorithm (TCP_NODELAY)
+  bool setNoDelay(bool noDelay) {
+    if (!p_sock || p_sock->fd() == INVALID_SOCKET_HANDLE) return false;
+    int flag = noDelay ? 1 : 0;
+    return ::setsockopt(p_sock->fd(), IPPROTO_TCP, TCP_NODELAY, (const char*)&flag,
+                        sizeof(flag)) == 0;
+  }
+
+  bool getNoDelay() {
+    if (!p_sock || p_sock->fd() == INVALID_SOCKET_HANDLE) return false;
+    int flag = 0;
+    SocketLength len = sizeof(flag);
+    if (::getsockopt(p_sock->fd(), IPPROTO_TCP, TCP_NODELAY, (char*)&flag, &len) != 0)
+      return false;
+    return flag != 0;
+  }
+
   void setConnectionTimeout(int32_t timeout) {
     connectTimeout = timeout;
   }
@@ -456,23 +490,6 @@ class EthernetClient : public Client {
       SignalHandler::registerHandler(SIGTERM, cleanupAll);
       signal_registered = true;
     }
-  }
-
-  int read(uint8_t* buffer, size_t len) override {
-    Logger.debug(WIFICLIENT, "read");
-    int result = 0;
-    long timeout = millis() + getTimeout();
-    result = p_sock->read(buffer, len);
-    while (result == 0 && millis() < timeout) {
-      delay(200);
-      result = p_sock->read(buffer, len);
-    }
-
-    char lenStr[16];
-    sprintf(lenStr, "%d", result);
-    Logger.debug(WIFICLIENT, "read->", lenStr);
-
-    return result;
   }
 
   // determines the local socket address

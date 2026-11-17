@@ -27,7 +27,11 @@
 #include <unistd.h>
 #endif
 #include <streambuf>
+#include <cstdarg>
+#include <cstdio>
+#include <string>
 #include "api/Stream.h"
+#include "api/HardwareSerial.h"  // SERIAL_8N1 ...
 #include "api/Printable.h"
 
 namespace arduino {
@@ -60,6 +64,31 @@ class StdioDevice : public Stream {
 
   virtual void begin(int speed) {
     // nothing to be done
+  }
+
+  /// ESP32 compatible begin with the configuration (e.g. SERIAL_8N1) and the
+  /// pins: they are ignored
+  virtual void begin(unsigned long speed, uint32_t config, int8_t rxPin = -1,
+                     int8_t txPin = -1, bool invert = false,
+                     unsigned long timeoutMs = 20000UL) {
+    begin(static_cast<int>(speed));
+  }
+
+  /// printf (ESP32, RP2040 ...)
+  __attribute__((format(printf, 2, 3))) size_t printf(const char* format, ...) {
+    char buffer[256];
+    va_list args;
+    va_start(args, format);
+    int len = vsnprintf(buffer, sizeof(buffer), format, args);
+    va_end(args);
+    if (len < 0) return 0;
+    if (len < static_cast<int>(sizeof(buffer))) return print(buffer);
+    // longer output
+    std::string text(len + 1, '\0');
+    va_start(args, format);
+    vsnprintf(&text[0], text.size(), format, args);
+    va_end(args);
+    return print(text.c_str());
   }
 
   // Keep all of Print's overloads (double, long, unsigned, char, ...)
