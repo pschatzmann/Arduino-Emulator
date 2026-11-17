@@ -247,8 +247,8 @@ $(function() {
 <div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span> </div>
 <div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>  uint16_t blockingRead(<span class="keywordtype">void</span>* data, <span class="keywordtype">int</span> len, <span class="keywordtype">int</span> timeout = 1000) {</div>
 <div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>    <span class="keywordtype">int</span> offset = 0;</div>
-<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>    <span class="keywordtype">long</span> start = millis();</div>
-<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>    <span class="keywordflow">while</span> (offset &lt; len &amp;&amp; (millis() - start) &lt; timeout) {</div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>    <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> start = millis();</div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>    <span class="keywordflow">while</span> (offset &lt; len &amp;&amp; (millis() - start) &lt; (<span class="keywordtype">unsigned</span> <span class="keywordtype">long</span>)timeout) {</div>
 <div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>      <span class="keywordtype">int</span> n = io-&gt;readBytes((<span class="keywordtype">char</span>*)data + offset, len - offset);</div>
 <div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>      offset += n;</div>
 <div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>    }</div>

@@ -193,6 +193,10 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-typedef-members" class="groupheader"><a id="typedef-members" name="typedef-members"></a>
 Typedefs</h2></td></tr>
+<tr class="memitem:aba75e8fa55031605b52cb22dd03ff33f" id="r_aba75e8fa55031605b52cb22dd03ff33f"><td class="memItemLeft" align="right" valign="top"><a id="aba75e8fa55031605b52cb22dd03ff33f" name="aba75e8fa55031605b52cb22dd03ff33f"></a>
+typedef int&#160;</td><td class="memItemRight" valign="bottom"><b>esp_err_t</b></td></tr>
+<tr class="memitem:a926fb3d182d6cdb5830ab19b91bc0aee" id="r_a926fb3d182d6cdb5830ab19b91bc0aee"><td class="memItemLeft" align="right" valign="top"><a id="a926fb3d182d6cdb5830ab19b91bc0aee" name="a926fb3d182d6cdb5830ab19b91bc0aee"></a>
+typedef int&#160;</td><td class="memItemRight" valign="bottom"><b>gpio_num_t</b></td></tr>
 <tr class="memitem:a9e28d3b3a205feb676445d6d5e885e6f" id="r_a9e28d3b3a205feb676445d6d5e885e6f"><td class="memItemLeft" align="right" valign="top"><a id="a9e28d3b3a205feb676445d6d5e885e6f" name="a9e28d3b3a205feb676445d6d5e885e6f"></a>
 typedef <a class="el" href="classarduino_1_1_ring_buffer_n.html">RingBufferN</a>&lt; SERIAL_BUFFER_SIZE &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>RingBuffer</b></td></tr>
 <tr class="memitem:ab4f32c49dd28d7530b87223b4d158e13" id="r_ab4f32c49dd28d7530b87223b4d158e13"><td class="memItemLeft" align="right" valign="top"><a id="ab4f32c49dd28d7530b87223b4d158e13" name="ab4f32c49dd28d7530b87223b4d158e13"></a>
@@ -358,9 +362,20 @@ static char *&#160;</td><td class="memItemRight" valign="bottom"><b>defaultInter
 void&#160;</td><td class="memItemRight" valign="bottom"><b>digitalWrite</b> (pin_size_t pinNumber, int status)</td></tr>
 <tr class="memitem:a5c35469db1f9a61fe086da31acccd33e" id="r_a5c35469db1f9a61fe086da31acccd33e"><td class="memItemLeft" align="right" valign="top"><a id="a5c35469db1f9a61fe086da31acccd33e" name="a5c35469db1f9a61fe086da31acccd33e"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>ensureSocketRuntime</b> ()</td></tr>
+<tr class="memitem:a55ee01ceac6c9ecb9141a8225a85f64b" id="r_a55ee01ceac6c9ecb9141a8225a85f64b"><td class="memItemLeft" align="right" valign="top"><a id="a55ee01ceac6c9ecb9141a8225a85f64b" name="a55ee01ceac6c9ecb9141a8225a85f64b"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>esp_deep_sleep_start</b> ()</td></tr>
+<tr class="memdesc:a55ee01ceac6c9ecb9141a8225a85f64b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deep sleep without wake-up source: ends the program. <br /></td></tr>
 <tr class="memitem:a143b669188835dc4a7af261868abc865" id="r_a143b669188835dc4a7af261868abc865"><td class="memItemLeft" align="right" valign="top"><a id="a143b669188835dc4a7af261868abc865" name="a143b669188835dc4a7af261868abc865"></a>
 uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>getCpuFrequencyMhz</b> ()</td></tr>
 <tr class="memdesc:a143b669188835dc4a7af261868abc865"><td class="mdescLeft">&#160;</td><td class="mdescRight">ESP32: cpu frequency in MHz. <br /></td></tr>
+<tr class="memitem:a7c5f5a599635a7697a96e4c617b4a786" id="r_a7c5f5a599635a7697a96e4c617b4a786"><td class="memItemLeft" align="right" valign="top"><a id="a7c5f5a599635a7697a96e4c617b4a786" name="a7c5f5a599635a7697a96e4c617b4a786"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>gpio_deep_sleep_hold_dis</b> ()</td></tr>
+<tr class="memitem:aaee21086a670627fa88227529dc51512" id="r_aaee21086a670627fa88227529dc51512"><td class="memItemLeft" align="right" valign="top"><a id="aaee21086a670627fa88227529dc51512" name="aaee21086a670627fa88227529dc51512"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>gpio_deep_sleep_hold_en</b> ()</td></tr>
+<tr class="memitem:af839e5ad5713a8d8fa0e51379ba25c75" id="r_af839e5ad5713a8d8fa0e51379ba25c75"><td class="memItemLeft" align="right" valign="top"><a id="af839e5ad5713a8d8fa0e51379ba25c75" name="af839e5ad5713a8d8fa0e51379ba25c75"></a>
+esp_err_t&#160;</td><td class="memItemRight" valign="bottom"><b>gpio_hold_dis</b> (gpio_num_t pin)</td></tr>
+<tr class="memitem:a21c300f696edf34f83482a342fcf0cfd" id="r_a21c300f696edf34f83482a342fcf0cfd"><td class="memItemLeft" align="right" valign="top"><a id="a21c300f696edf34f83482a342fcf0cfd" name="a21c300f696edf34f83482a342fcf0cfd"></a>
+esp_err_t&#160;</td><td class="memItemRight" valign="bottom"><b>gpio_hold_en</b> (gpio_num_t pin)</td></tr>
 <tr class="memitem:a1c3f24375a626fbb945a266f38ff681a" id="r_a1c3f24375a626fbb945a266f38ff681a"><td class="memItemLeft" align="right" valign="top"><a id="a1c3f24375a626fbb945a266f38ff681a" name="a1c3f24375a626fbb945a266f38ff681a"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>isAlpha</b> (int c) __attribute__((always_inline))</td></tr>
 <tr class="memitem:aa3aab999e1d9d55e6c55e1c5b8f14b39" id="r_aa3aab999e1d9d55e6c55e1c5b8f14b39"><td class="memItemLeft" align="right" valign="top"><a id="aa3aab999e1d9d55e6c55e1c5b8f14b39" name="aa3aab999e1d9d55e6c55e1c5b8f14b39"></a>

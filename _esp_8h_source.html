@@ -164,12 +164,28 @@ $(function() {
 <div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span></div>
 <div class="line"><a id="l00091" name="l00091"></a><span class="lineno"><a class="line" href="namespacearduino.html#a143b669188835dc4a7af261868abc865">   91</a></span><span class="keyword">inline</span> uint32_t <a class="code hl_function" href="namespacearduino.html#a143b669188835dc4a7af261868abc865">getCpuFrequencyMhz</a>() { <span class="keywordflow">return</span> ESP.getCpuFreqMHz(); }</div>
 <div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span> </div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>}  <span class="comment">// namespace arduino</span></div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span><span class="comment">// ESP32 (ESP-IDF) deep sleep and GPIO hold: on the desktop the deep sleep</span></div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span><span class="comment">// ends the program and the GPIO hold does nothing</span></div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span><span class="keyword">typedef</span> <span class="keywordtype">int</span> esp_err_t;</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span><span class="preprocessor">#ifndef ESP_OK</span></div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span><span class="preprocessor">#  define ESP_OK 0</span></div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span><span class="keyword">typedef</span> <span class="keywordtype">int</span> gpio_num_t;</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span> </div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span><span class="keyword">inline</span> esp_err_t gpio_hold_en(gpio_num_t pin) { <span class="keywordflow">return</span> ESP_OK; }</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span><span class="keyword">inline</span> esp_err_t gpio_hold_dis(gpio_num_t pin) { <span class="keywordflow">return</span> ESP_OK; }</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span><span class="keyword">inline</span> <span class="keywordtype">void</span> gpio_deep_sleep_hold_en() {}</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span><span class="keyword">inline</span> <span class="keywordtype">void</span> gpio_deep_sleep_hold_dis() {}</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span></div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno"><a class="line" href="namespacearduino.html#a55ee01ceac6c9ecb9141a8225a85f64b">  107</a></span>[[noreturn]] <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="namespacearduino.html#a55ee01ceac6c9ecb9141a8225a85f64b">esp_deep_sleep_start</a>() { exit(0); }</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span> </div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>}  <span class="comment">// namespace arduino</span></div>
 <div class="ttc" id="aclassarduino_1_1_esp_class_html"><div class="ttname"><a href="classarduino_1_1_esp_class.html">arduino::EspClass</a></div><div class="ttdoc">ESP32 compatible ESP object (ESP.getFreeHeap() ...), so that ESP32 sketches also run on the desktop....</div><div class="ttdef"><b>Definition</b> Esp.h:35</div></div>
 <div class="ttc" id="aclassarduino_1_1_esp_class_html_a6a080bbfa131a13085e2c7dd5adb6d26"><div class="ttname"><a href="classarduino_1_1_esp_class.html#a6a080bbfa131a13085e2c7dd5adb6d26">arduino::EspClass::getFreeHeap</a></div><div class="ttdeci">uint32_t getFreeHeap()</div><div class="ttdoc">Available physical memory of the computer.</div><div class="ttdef"><b>Definition</b> Esp.h:40</div></div>
 <div class="ttc" id="aclassarduino_1_1_esp_class_html_a7a60f0329c38f6949ba144339bcde868"><div class="ttname"><a href="classarduino_1_1_esp_class.html#a7a60f0329c38f6949ba144339bcde868">arduino::EspClass::getHeapSize</a></div><div class="ttdeci">uint32_t getHeapSize()</div><div class="ttdoc">Physical memory of the computer.</div><div class="ttdef"><b>Definition</b> Esp.h:38</div></div>
 <div class="ttc" id="anamespacearduino_html"><div class="ttname"><a href="namespacearduino.html">arduino</a></div><div class="ttdoc">We provide the WiFi class to simulate the Arduino WIFI. In in Linux we can expect that networking is ...</div><div class="ttdef"><b>Definition</b> CanMsg.cpp:31</div></div>
 <div class="ttc" id="anamespacearduino_html_a143b669188835dc4a7af261868abc865"><div class="ttname"><a href="namespacearduino.html#a143b669188835dc4a7af261868abc865">arduino::getCpuFrequencyMhz</a></div><div class="ttdeci">uint32_t getCpuFrequencyMhz()</div><div class="ttdoc">ESP32: cpu frequency in MHz.</div><div class="ttdef"><b>Definition</b> Esp.h:91</div></div>
+<div class="ttc" id="anamespacearduino_html_a55ee01ceac6c9ecb9141a8225a85f64b"><div class="ttname"><a href="namespacearduino.html#a55ee01ceac6c9ecb9141a8225a85f64b">arduino::esp_deep_sleep_start</a></div><div class="ttdeci">void esp_deep_sleep_start()</div><div class="ttdoc">Deep sleep without wake-up source: ends the program.</div><div class="ttdef"><b>Definition</b> Esp.h:107</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
