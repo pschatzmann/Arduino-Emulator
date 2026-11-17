@@ -143,7 +143,7 @@ class UDPStream : public Stream {
   UDP* p_udp = &default_udp;
   uint16_t remote_port_ext = 0;
   IPAddress remote_address_ext;
-  int write_buffer_size = 256;
+  size_t write_buffer_size = 256;
   std::vector<uint8_t> write_buffer;
 };
 

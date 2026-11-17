@@ -72,7 +72,7 @@ class RemoteSPI : public HardwareSPI {
     service.send((uint32_t)count);
     service.send(buf, count);
     service.flush();
-    for (int j=0; j<count; j++) {
+    for (size_t j=0; j<count; j++) {
       ((uint8_t*)buf)[j] = service.receive8();
     }
   }

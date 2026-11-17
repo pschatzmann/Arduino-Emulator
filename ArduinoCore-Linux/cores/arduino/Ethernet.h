@@ -298,7 +298,7 @@ class EthernetClient : public Client {
     if (readBuffer.available() > 0) {
       return readBuffer.available();
     }
-    long timeout = millis() + getTimeout();
+    unsigned long timeout = millis() + getTimeout();
     int result = p_sock->available();
     while (result <= 0 && millis() < timeout) {
       delay(200);
@@ -365,7 +365,7 @@ class EthernetClient : public Client {
   int read(uint8_t* buffer, size_t len) override {
     Logger.debug(WIFICLIENT, "read");
     int result = 0;
-    long timeout = millis() + getTimeout();
+    unsigned long timeout = millis() + getTimeout();
     result = p_sock->read(buffer, len);
     while (result == 0 && millis() < timeout) {
       delay(200);

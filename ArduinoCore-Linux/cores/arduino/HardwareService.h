@@ -192,8 +192,8 @@ class HardwareService {
 
   uint16_t blockingRead(void* data, int len, int timeout = 1000) {
     int offset = 0;
-    long start = millis();
-    while (offset < len && (millis() - start) < timeout) {
+    unsigned long start = millis();
+    while (offset < len && (millis() - start) < (unsigned long)timeout) {
       int n = io->readBytes((char*)data + offset, len - offset);
       offset += n;
     }

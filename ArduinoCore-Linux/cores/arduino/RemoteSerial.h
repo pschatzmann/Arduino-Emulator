@@ -127,12 +127,12 @@ class RemoteSerialClass : public Stream {
     return write_buffer.write(c);
   }
 
-  virtual size_t write(uint8_t* str, size_t len) {
+  size_t write(const uint8_t* str, size_t len) override {
     flush();
     service.send(SerialWrite);
     service.send(no);
     service.send((uint64_t)len);
-    service.send(str, len);
+    service.send((void*)str, len);
     service.flush();
     return service.receive16();
   }

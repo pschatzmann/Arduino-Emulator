@@ -81,6 +81,11 @@ class FileStream : public Stream {
     out.write((const char*)str, len);
   }
 
+  size_t write(const uint8_t* str, size_t len) override {
+    out.write((const char*)str, len);
+    return len;
+  }
+
   virtual size_t write(int32_t value) {
     out.put(value);
     return 1;

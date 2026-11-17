@@ -90,4 +90,20 @@ inline EspClass ESP;
 /// ESP32: cpu frequency in MHz
 inline uint32_t getCpuFrequencyMhz() { return ESP.getCpuFreqMHz(); }
 
+// ESP32 (ESP-IDF) deep sleep and GPIO hold: on the desktop the deep sleep
+// ends the program and the GPIO hold does nothing
+typedef int esp_err_t;
+#ifndef ESP_OK
+#  define ESP_OK 0
+#endif
+typedef int gpio_num_t;
+
+inline esp_err_t gpio_hold_en(gpio_num_t pin) { return ESP_OK; }
+inline esp_err_t gpio_hold_dis(gpio_num_t pin) { return ESP_OK; }
+inline void gpio_deep_sleep_hold_en() {}
+inline void gpio_deep_sleep_hold_dis() {}
+
+/// Deep sleep without wake-up source: ends the program
+[[noreturn]] inline void esp_deep_sleep_start() { exit(0); }
+
 }  // namespace arduino
