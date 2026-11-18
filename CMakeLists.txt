@@ -5,24 +5,38 @@ cmake_minimum_required(VERSION 3.11...3.19)
 project(arduino_emulator VERSION 0.1 DESCRIPTION "Desktop Arduino Emulator" LANGUAGES C CXX)
 
 # Https takes quite some time and is not always neede
-option(USE_HTTPS "Https Support" OFF)
+option(USE_HTTPS "Https Support" ON)
 option(USE_RPI "Raspberry Pi Support" OFF)
 option(USE_REMOTE "Remote API Support" OFF)
 option(USE_FIRMATA "Firmata GPIO Support" OFF)
 option(BUILD_SHARED_LIBS "Build with shared libraries" OFF)
 option(BUILD_EXAMPLES "Build with examples" OFF)
 option(USE_FTDI "FTDI hardware support" OFF)
+# Https backend: TinyTLS (default) or wolfssl (USE_WOLFSSL=ON). Requires USE_HTTPS.
+option(USE_WOLFSSL "Use wolfssl instead of TinyTLS for Https support" OFF)
 
-# Https support: Build with wolfssl 
+# Https support: Build with TinyTLS (default) or wolfssl
 if(USE_HTTPS)
     include(FetchContent)
-    FetchContent_Declare(wolfssl GIT_REPOSITORY "https://github.com/wolfSSL/wolfssl.git" GIT_TAG v5.8.2-stable )
-    FetchContent_GetProperties(wolfssl)
-    if(NOT wolfssl)
-        FetchContent_Populate(wolfssl)
-        add_subdirectory(${wolfssl_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR}/wolfssl)
+    if(USE_WOLFSSL)
+        FetchContent_Declare(wolfssl GIT_REPOSITORY "https://github.com/wolfSSL/wolfssl.git" GIT_TAG v5.8.2-stable )
+        FetchContent_GetProperties(wolfssl)
+        if(NOT wolfssl)
+            FetchContent_Populate(wolfssl)
+            add_subdirectory(${wolfssl_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR}/wolfssl)
+        endif()
+        add_definitions(-DUSE_HTTPS -DUSE_WOLFSSL -DDEBUG_WOLFSSL)
+    else()
+        # TinyTLS is header-only; tests are not needed for the emulator build.
+        # Use -DFETCHCONTENT_SOURCE_DIR_TINYTLS=<path> to build a local checkout.
+        set(TINYTLS_BUILD_TESTS OFF CACHE BOOL "" FORCE)
+        FetchContent_Declare(tinytls GIT_REPOSITORY "https://github.com/pschatzmann/TinyTLS.git" GIT_TAG v0.1.0)
+        FetchContent_GetProperties(tinytls)
+        if(NOT tinytls_POPULATED)
+            FetchContent_Populate(tinytls)
+        endif()
+        add_definitions(-DUSE_HTTPS)
     endif()
-    add_definitions(-DUSE_HTTPS -DDEBUG_WOLFSSL)
 endif()
 
 # FTDI support: Build with libftdi1
@@ -171,9 +185,21 @@ if (USE_REMOTE)
 endif(USE_REMOTE)
 
 if(USE_HTTPS)
-    message(STATUS "USE_HTTPS=${USE_HTTPS}")
-    # Add external libraries
-    target_link_libraries(arduino_emulator wolfssl)
+    if(USE_WOLFSSL)
+        message(STATUS "USE_HTTPS=${USE_HTTPS} (wolfssl)")
+        # Add external libraries
+        target_link_libraries(arduino_emulator wolfssl)
+    else()
+        message(STATUS "USE_HTTPS=${USE_HTTPS} (TinyTLS)")
+        # TinyTLS is header-only: add its include directory and install the headers
+        # next to the Arduino headers, since NetworkClientSecure.h includes them.
+        target_include_directories(arduino_emulator PUBLIC "${tinytls_SOURCE_DIR}/src")
+        install(DIRECTORY "${tinytls_SOURCE_DIR}/src/" # source directory
+            DESTINATION "include/arduino" # target directory
+            FILES_MATCHING
+            PATTERN "*.h"
+        )
+    endif()
 endif(USE_HTTPS)
 
 if(USE_FTDI)

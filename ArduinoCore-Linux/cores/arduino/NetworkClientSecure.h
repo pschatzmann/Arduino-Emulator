@@ -20,16 +20,32 @@
 #pragma once
 #if defined(USE_HTTPS)
 #include <errno.h>
+#include <sys/ioctl.h>
 #include <sys/select.h>
-#include <wolfssl/options.h>
-#include <wolfssl/ssl.h>
+#include <sys/socket.h>
+#include <sys/types.h>
+
+#include <cstring>
+#include <ctime>
+#include <memory>
+#include <string>
 
 #include "Ethernet.h"
 #include "SocketImpl.h"
 
+// Two TLS backends: TinyTLS (default) or wolfSSL (USE_WOLFSSL).
+#if defined(USE_WOLFSSL)
+#include <wolfssl/options.h>
+#include <wolfssl/ssl.h>
+#else
+#include "TinyTLS.h"
+#endif
+
 namespace arduino {
 
 #define SOCKET_IMPL_SEC "SocketImplSecure"
+
+#if defined(USE_WOLFSSL)
 
 static int wolf_ssl_counter = 0;
 static WOLFSSL_CTX* wolf_ctx = nullptr;
@@ -242,13 +258,192 @@ class SocketImplSecure : public SocketImpl {
   bool is_insecure = false;
 };
 
+#else  // TinyTLS (default)
+
+namespace tls_detail {
+// TinyTLS callbacks: monotonic clock (ms), wall clock (s) and idle wait
+static uint32_t clockMs() { return static_cast<uint32_t>(millis()); }
+static int64_t wallTime() { return static_cast<int64_t>(::time(nullptr)); }
+static void idleWait() { delay(1); }
+}  // namespace tls_detail
+
 /**
- * @brief NetworkClientSecure based on wolf ssl
+ * @brief SSL Socket using TinyTLS (TLS 1.3 client). The TLS session runs over
+ * the plain TCP connection of this socket.
+ */
+class SocketImplSecure : public SocketImpl {
+ public:
+  static constexpr uint32_t DEFAULT_HANDSHAKE_TIMEOUT_MS = 15000;
+
+  SocketImplSecure() {
+    tls_.attach(transport_);
+    tls_.setClock(tls_detail::clockMs);
+    tls_.setTimeSource(tls_detail::wallTime);
+    tls_.setIdleCallback(tls_detail::idleWait);
+  }
+
+  ~SocketImplSecure() { tls_.stop(); }
+
+  // opens a TCP connection and performs the TLS handshake
+  int connect(const char* address, uint16_t port) override {
+    return connect(address, port, -1);
+  }
+
+  int connect(const char* address, uint16_t port, int32_t timeout_ms) override {
+    tcp_timeout_ms_ = timeout_ms;
+    tls_.setTimeout(timeout_ms >= 0 ? static_cast<uint32_t>(timeout_ms)
+                                    : DEFAULT_HANDSHAKE_TIMEOUT_MS);
+    // use the host name (not the resolved IP) for SNI and certificate checks
+    const char* name = hostname_.empty() ? address : hostname_.c_str();
+    if (!tls_.connect(name, port)) {
+      char msg[160];
+      snprintf(msg, sizeof(msg), "TLS connect to %s failed: %s", name,
+               tls_.errorText());
+      Logger.error(SOCKET_IMPL_SEC, msg);
+      return -1;
+    }
+    return 1;
+  }
+
+  // name used for SNI and certificate verification
+  void setHostname(const char* name) override {
+    hostname_ = name ? name : "";
+  }
+
+  uint8_t connected() override { return tls_.connected(); }
+
+  // number of decrypted bytes that can be read without blocking
+  size_t available() override {
+    int n = tls_.available();
+    return (n > 0 ? static_cast<size_t>(n) : 0) + (has_peek_ ? 1 : 0);
+  }
+
+  // returns the decrypted bytes; 0 if none is available yet, -1 if closed
+  int read(uint8_t* buffer, size_t len) override {
+    if (len == 0) return 0;
+    if (has_peek_) {
+      buffer[0] = peek_byte_;
+      has_peek_ = false;
+      return 1;
+    }
+    int result = tls_.read(buffer, len);
+    if (result > 0) return result;
+    return tls_.connected() ? 0 : -1;
+  }
+
+  int peek() override {
+    if (!has_peek_) {
+      if (read(&peek_byte_, 1) != 1) return -1;
+      has_peek_ = true;
+    }
+    return peek_byte_;
+  }
+
+  size_t write(const uint8_t* str, size_t len) override {
+    return tls_.write(str, len);
+  }
+
+  void close() override { tls_.stop(); }
+
+  void setCACert(const char* cert) override {
+    if (cert == nullptr) return;
+    if (!roots_) roots_.reset(new tinytls::CertificateStore());
+    tinytls::Error rc = roots_->addPem(reinterpret_cast<const uint8_t*>(cert),
+                                       strlen(cert));
+    if (rc != tinytls::Error::Ok) {
+      Logger.error(SOCKET_IMPL_SEC, "Failed to load CA certificate");
+    }
+    tls_.setTrustStore(roots_.get());
+  }
+
+  // disables certificate verification (encryption only)
+  void setInsecure() override {
+    tls_.setVerifyMode(tinytls::VerifyMode::None);
+  }
+
+ private:
+  // Plain TCP operations used by the TLS session. They use the non-virtual
+  // SocketImpl methods, so base class callbacks cannot re-enter the TLS session.
+  class SocketTransport : public tinytls::Transport {
+   public:
+    explicit SocketTransport(SocketImplSecure& owner) : owner_(owner) {}
+
+    bool connect(const char* host, uint16_t port) override {
+      return owner_.SocketImpl::connect(host, port, owner_.tcp_timeout_ms_) > 0;
+    }
+
+    size_t write(const uint8_t* buf, size_t len) override {
+      if (owner_.sock < 0) return 0;
+      ssize_t n = ::send(owner_.sock, buf, len, MSG_NOSIGNAL);
+      if (n >= 0) return static_cast<size_t>(n);
+      if (errno == EAGAIN || errno == EWOULDBLOCK) return 0;
+      owner_.SocketImpl::close();
+      return 0;
+    }
+
+    int read(uint8_t* buf, size_t len) override {
+      if (owner_.sock < 0) return -1;
+      ssize_t n = ::recv(owner_.sock, buf, len, MSG_DONTWAIT);
+      if (n > 0) return static_cast<int>(n);
+      if (n < 0 && (errno == EAGAIN || errno == EWOULDBLOCK)) return -1;
+      owner_.SocketImpl::close();  // peer closed or error
+      return -1;
+    }
+
+    int available() override {
+      if (owner_.sock < 0) return 0;
+      int bytes = 0;
+      if (ioctl(owner_.sock, FIONREAD, &bytes) != 0) return 0;
+      return bytes > 0 ? bytes : 0;
+    }
+
+    bool connected() override {
+      if (owner_.sock < 0) return false;
+      char c;
+      ssize_t n = ::recv(owner_.sock, &c, 1, MSG_PEEK | MSG_DONTWAIT);
+      if (n > 0 || (n < 0 && (errno == EAGAIN || errno == EWOULDBLOCK))) return true;
+      owner_.SocketImpl::close();
+      return false;
+    }
+
+    void stop() override { owner_.SocketImpl::close(); }
+
+   private:
+    SocketImplSecure& owner_;
+  };
+
+  std::unique_ptr<tinytls::CertificateStore> roots_;  // declared before tls_
+  SocketTransport transport_{*this};                  // declared before tls_
+  TinyTLS tls_;
+  std::string hostname_;
+  int32_t tcp_timeout_ms_ = -1;
+  bool has_peek_ = false;
+  uint8_t peek_byte_ = 0;
+};
+
+#endif  // USE_WOLFSSL
+
+/**
+ * @brief NetworkClientSecure based on TinyTLS (default) or wolf ssl
  */
 class NetworkClientSecure : public EthernetClient {
  public:
   NetworkClientSecure(int bufferSize = 256, long timeout = 2000)
       : EthernetClient(std::make_shared<SocketImplSecure>(), bufferSize, timeout) {}
+
+  using EthernetClient::connect;
+
+  // remember the host name so that TLS uses it for SNI and certificate checks
+  int connect(const char* host, uint16_t port) override {
+    p_sock->setHostname(host);
+    return EthernetClient::connect(host, port);
+  }
+
+  int connect(const char* host, uint16_t port, int32_t timeout_ms) {
+    p_sock->setHostname(host);
+    return EthernetClient::connect(host, port, timeout_ms);
+  }
+
   void setCACert(const char* cert) override { p_sock->setCACert(cert); }
   void setInsecure() override { p_sock->setInsecure(); }
 };

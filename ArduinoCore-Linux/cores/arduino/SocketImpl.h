@@ -69,6 +69,8 @@ class SocketImpl {
 
   virtual void setCACert(const char* cert)  {}
   virtual void setInsecure() {}
+  // host name used for TLS (SNI and certificate checks); ignored by plain sockets
+  virtual void setHostname(const char* /*name*/) {}
   SocketHandle fd() { return sock; }
 
  protected:
