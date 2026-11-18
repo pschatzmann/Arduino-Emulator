@@ -19,6 +19,16 @@ We provide some alternative implementations:
 - Support of Firmata
 
 
+## Build and Test
+
+The library is built with CMake. Native unit tests are opt-in and use Unity, which is fetched automatically:
+
+```bash
+cmake -S . -B build -DBUILD_TESTS=ON
+cmake --build build
+ctest --test-dir build --output-on-failure
+```
+
 ## Documentation
 
 - The documentation can be found in the [Wiki](https://github.com/pschatzmann/Arduino-Emulator/wiki)
