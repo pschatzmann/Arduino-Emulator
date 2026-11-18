@@ -82,7 +82,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p><a class="el" href="classarduino_1_1_network_client_secure.html" title="NetworkClientSecure based on wolf ssl.">NetworkClientSecure</a> based on wolf ssl.  
+<p><a class="el" href="classarduino_1_1_network_client_secure.html" title="NetworkClientSecure based on TinyTLS (default) or wolf ssl.">NetworkClientSecure</a> based on TinyTLS (default) or wolf ssl.  
  <a href="#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_network_client_secure_8h_source.html">NetworkClientSecure.h</a>&gt;</code></p>
@@ -103,6 +103,12 @@ Inheritance diagram for arduino::NetworkClientSecure:</div>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:abb849c8d60fdec820a2d4812466709b6" id="r_abb849c8d60fdec820a2d4812466709b6"><td class="memItemLeft" align="right" valign="top"><a id="abb849c8d60fdec820a2d4812466709b6" name="abb849c8d60fdec820a2d4812466709b6"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>NetworkClientSecure</b> (int bufferSize=256, long timeout=2000)</td></tr>
+<tr class="memitem:a58f6e8d4a683d9456481c35f1e52e1a4" id="r_a58f6e8d4a683d9456481c35f1e52e1a4"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a58f6e8d4a683d9456481c35f1e52e1a4">connect</a> (const char *host, uint16_t port) override</td></tr>
+<tr class="memitem:a9664e8b2ec9d6fae24cf74615b06e7c1" id="r_a9664e8b2ec9d6fae24cf74615b06e7c1"><td class="memItemLeft" align="right" valign="top"><a id="a9664e8b2ec9d6fae24cf74615b06e7c1" name="a9664e8b2ec9d6fae24cf74615b06e7c1"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>connect</b> (const char *host, uint16_t port, int32_t timeout_ms)</td></tr>
+<tr class="memitem:a5766d101474078268c9432266185f601" id="r_a5766d101474078268c9432266185f601"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5766d101474078268c9432266185f601">connect</a> (<a class="el" href="class_i_p_address.html">IPAddress</a> ipAddress, uint16_t port) override</td></tr>
+<tr class="memitem:ad42bbaf1bc45fe64a7f6ba8c6d363c4f" id="r_ad42bbaf1bc45fe64a7f6ba8c6d363c4f"><td class="memItemLeft" align="right" valign="top"><a id="ad42bbaf1bc45fe64a7f6ba8c6d363c4f" name="ad42bbaf1bc45fe64a7f6ba8c6d363c4f"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>connect</b> (<a class="el" href="class_i_p_address.html">IPAddress</a> ipAddress, uint16_t port, int32_t timeout_ms)</td></tr>
 <tr class="memitem:a556738b8134a75a1a1146ff3e5ea694b" id="r_a556738b8134a75a1a1146ff3e5ea694b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a556738b8134a75a1a1146ff3e5ea694b">setCACert</a> (const char *cert) override</td></tr>
 <tr class="memitem:a083b88728bea0d6a888bf9deceb886a9" id="r_a083b88728bea0d6a888bf9deceb886a9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a083b88728bea0d6a888bf9deceb886a9">setInsecure</a> () override</td></tr>
 <tr class="inherit_header pub_methods_classarduino_1_1_ethernet_client"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_classarduino_1_1_ethernet_client')"><span class="dynarrow"><span class="arrowhead closed"></span></span>Public Member Functions inherited from <a class="el" href="classarduino_1_1_ethernet_client.html">arduino::EthernetClient</a></td></tr>
@@ -111,10 +117,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a32e355876d629572c48f660f01416ac3 inherit pub_methods_classarduino_1_1_ethernet_client" id="r_a32e355876d629572c48f660f01416ac3"><td class="memItemLeft" align="right" valign="top">
 &#160;</td><td class="memItemRight" valign="bottom"><b>EthernetClient</b> (std::shared_ptr&lt; <a class="el" href="classarduino_1_1_socket_impl.html">SocketImpl</a> &gt; sock, int bufferSize=256, long timeout=ETHERNET_DEFAULT_READ_TIMEOUT)</td></tr>
 <tr class="memitem:aa7304d155e95c321a5e493fbc8ce534d inherit pub_methods_classarduino_1_1_ethernet_client" id="r_aa7304d155e95c321a5e493fbc8ce534d"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classarduino_1_1_ethernet_client.html#aa7304d155e95c321a5e493fbc8ce534d">available</a> () override</td></tr>
-<tr class="memitem:a53cc81dd7b606a091b0b431d3800dc32 inherit pub_methods_classarduino_1_1_ethernet_client" id="r_a53cc81dd7b606a091b0b431d3800dc32"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classarduino_1_1_ethernet_client.html#a53cc81dd7b606a091b0b431d3800dc32">connect</a> (const char *address, uint16_t port) override</td></tr>
 <tr class="memitem:acfd72fb62530e14298086c4cbc208a82 inherit pub_methods_classarduino_1_1_ethernet_client" id="r_acfd72fb62530e14298086c4cbc208a82"><td class="memItemLeft" align="right" valign="top">
 int&#160;</td><td class="memItemRight" valign="bottom"><b>connect</b> (const char *address, uint16_t port, int32_t timeout_ms)</td></tr>
-<tr class="memitem:a5766d101474078268c9432266185f601 inherit pub_methods_classarduino_1_1_ethernet_client" id="r_a5766d101474078268c9432266185f601"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classarduino_1_1_ethernet_client.html#a5766d101474078268c9432266185f601">connect</a> (<a class="el" href="class_i_p_address.html">IPAddress</a> ipAddress, uint16_t port) override</td></tr>
 <tr class="memitem:ad42bbaf1bc45fe64a7f6ba8c6d363c4f inherit pub_methods_classarduino_1_1_ethernet_client" id="r_ad42bbaf1bc45fe64a7f6ba8c6d363c4f"><td class="memItemLeft" align="right" valign="top">
 int&#160;</td><td class="memItemRight" valign="bottom"><b>connect</b> (<a class="el" href="class_i_p_address.html">IPAddress</a> ipAddress, uint16_t port, int32_t timeout_ms)</td></tr>
 <tr class="memitem:aebb5e51fa6257b703c6ae9bdd542d101 inherit pub_methods_classarduino_1_1_ethernet_client" id="r_aebb5e51fa6257b703c6ae9bdd542d101"><td class="memItemLeft" align="right" valign="top">virtual uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classarduino_1_1_ethernet_client.html#aebb5e51fa6257b703c6ae9bdd542d101">connected</a> () override</td></tr>
@@ -322,8 +326,70 @@ unsigned long&#160;</td><td class="memItemRight" valign="bottom"><b>_startMillis
 unsigned long&#160;</td><td class="memItemRight" valign="bottom"><b>_timeout</b></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><p><a class="el" href="classarduino_1_1_network_client_secure.html" title="NetworkClientSecure based on wolf ssl.">NetworkClientSecure</a> based on wolf ssl. </p>
+<div class="textblock"><p><a class="el" href="classarduino_1_1_network_client_secure.html" title="NetworkClientSecure based on TinyTLS (default) or wolf ssl.">NetworkClientSecure</a> based on TinyTLS (default) or wolf ssl. </p>
 </div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
+<a id="a58f6e8d4a683d9456481c35f1e52e1a4" name="a58f6e8d4a683d9456481c35f1e52e1a4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a58f6e8d4a683d9456481c35f1e52e1a4">&#9670;&#160;</a></span>connect() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int arduino::NetworkClientSecure::connect </td>
+          <td>(</td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>host</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t</td>          <td class="paramname"><span class="paramname"><em>port</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel override">override</span><span class="mlabel virtual">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="classarduino_1_1_ethernet_client.html">arduino::EthernetClient</a>.</p>
+
+</div>
+</div>
+<a id="a5766d101474078268c9432266185f601" name="a5766d101474078268c9432266185f601"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5766d101474078268c9432266185f601">&#9670;&#160;</a></span>connect() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual int arduino::EthernetClient::connect </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_i_p_address.html">IPAddress</a></td>          <td class="paramname"><span class="paramname"><em>ipAddress</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t</td>          <td class="paramname"><span class="paramname"><em>port</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel override">override</span><span class="mlabel virtual">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="classarduino_1_1_ethernet_client.html">arduino::EthernetClient</a>.</p>
+
+</div>
+</div>
 <a id="a556738b8134a75a1a1146ff3e5ea694b" name="a556738b8134a75a1a1146ff3e5ea694b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a556738b8134a75a1a1146ff3e5ea694b">&#9670;&#160;</a></span>setCACert()</h2>
 
