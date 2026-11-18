@@ -32,8 +32,11 @@ jobs:
         # run: echo 'add_compile_options(-Wno-unused-function)' >> ArduinoCore-API/test/CMakeLists.txt
         # run: echo 'add_compile_options(-Wno-error=all)' >> ArduinoCore-API/test/CMakeLists.txt
         # run: echo 'add_compile_options(-Wno-error=unused-function)' >> ArduinoCore-API/test/CMakeLists.txt
-        run: sed -i 's/-Werror//g' ArduinoCore-API/test/CMakeLists.txt
-        
+        # CMake 4.x (default on ubuntu-latest) rejects cmake_minimum_required(VERSION 2.8)
+        run: |
+          sed -i 's/-Werror//g' ArduinoCore-API/test/CMakeLists.txt
+          sed -i 's/cmake_minimum_required(VERSION 2.8)/cmake_minimum_required(VERSION 3.10)/' ArduinoCore-API/test/CMakeLists.txt
+
 
       # See: https://github.com/arduino/cpp-test-action/blob/main/README.md
       - uses: arduino/cpp-test-action@main
