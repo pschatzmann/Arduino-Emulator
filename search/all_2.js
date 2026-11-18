@@ -7,6 +7,7 @@ var searchData=
   ['beginroot_4',['beginRoot',['../class_directory_f_s.html#a8d329fc0bf74e0fb423051281090cf50',1,'DirectoryFS']]],
   ['begintransaction_5',['beginTransaction',['../classarduino_1_1_hardware_s_p_i___f_t_d_i.html#a70ddd08cf63a47c719511b14b5bceab9',1,'arduino::HardwareSPI_FTDI']]],
   ['begintransmission_6',['beginTransmission',['../classarduino_1_1_hardware_i2_c___f_t_d_i.html#ad3b51b2c4db2bf6a62f36b959cf65e21',1,'arduino::HardwareI2C_FTDI']]],
-  ['bugs_20issues_7',['Bugs &amp;amp; Issues',['../dir_b074d1b1aa70f3c10763fb8f33d8f4cb.html#autotoc_md8',1,'']]],
-  ['build_20and_20run_20unit_20tests_8',['To build and run unit tests',['../dir_b074d1b1aa70f3c10763fb8f33d8f4cb.html#autotoc_md11',1,'']]]
+  ['bugs_20issues_7',['Bugs &amp;amp; Issues',['../dir_b074d1b1aa70f3c10763fb8f33d8f4cb.html#autotoc_md9',1,'']]],
+  ['build_20and_20run_20unit_20tests_8',['To build and run unit tests',['../dir_b074d1b1aa70f3c10763fb8f33d8f4cb.html#autotoc_md12',1,'']]],
+  ['build_20and_20test_9',['Build and Test',['../index.html#autotoc_md3',1,'']]]
 ];

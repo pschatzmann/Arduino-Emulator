@@ -90,6 +90,12 @@ GPIO/SPI/I2C</h1>
 <li>Support of Firmata</li>
 </ul>
 <h1 class="doxsection"><a class="anchor" id="autotoc_md3"></a>
+Build and Test</h1>
+<p>The library is built with CMake. Native unit tests are opt-in and use Unity, which is fetched automatically:</p>
+<div class="fragment"><div class="line">cmake -S . -B build -DBUILD_TESTS=ON</div>
+<div class="line">cmake --build build</div>
+<div class="line">ctest --test-dir build --output-on-failure</div>
+</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md4"></a>
 Documentation</h1>
 <ul>
 <li>The documentation can be found in the <a href="https://github.com/pschatzmann/Arduino-Emulator/wiki">Wiki</a> </li>

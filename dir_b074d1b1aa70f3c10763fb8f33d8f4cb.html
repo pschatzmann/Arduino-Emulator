@@ -84,7 +84,7 @@ Directories</h2></td></tr>
 <tr class="memitem:api" id="r_api"><td class="memItemLeft" align="right" valign="top"><span class="iconfolder"><div class="folder-icon"></div></span>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dir_b6f1a12a6c71929bbf113e74a9b81305.html">api</a></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md4"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md5"></a>
 ArduinoCore-API</h1>
 <p><a href="https://github.com/arduino/ArduinoCore-API/actions?workflow=Unit+Tests"><img src="https://github.com/arduino/ArduinoCore-API/workflows/Unit%20Tests/badge.svg" alt="Unit Tests" style="pointer-events: none;" class="inline"/></a> <a href="https://codecov.io/gh/arduino/ArduinoCore-API"><img src="https://codecov.io/gh/arduino/ArduinoCore-API/branch/master/graph/badge.svg" alt="codecov" style="pointer-events: none;" class="inline"/></a> <a href="https://github.com/arduino/ArduinoCore-API/actions/workflows/spell-check.yml"><img src="https://github.com/arduino/ArduinoCore-API/actions/workflows/spell-check.yml/badge.svg" alt="Spell Check status" style="pointer-events: none;" class="inline"/></a></p>
 <p>This repository hosts the hardware independent layer of Arduino core. In other words it contains the abstract definition of the Arduino core API, consisting of hardware-independent header files that are then included and implemented by the various platform-specific cores.</p>
@@ -97,15 +97,15 @@ ArduinoCore-API</h1>
 <li><a href="https://github.com/arduino/ArduinoCore-renesas">renesas</a></li>
 </ul>
 <p>There's an ongoing effort to port the others, while maintainers of third-party cores are strongly invited to follow the same route in order to stay up-to-date with the new language features. For backwards compatibility, every revision of this repo will increase the <span class="tt">ARDUINO_API_VERSION</span> define.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md5"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md6"></a>
 Documentation</h1>
 <p>The Arduino API is documented in the official <a href="https://www.arduino.cc/reference/en/">language reference</a>, whose sources are located in <a href="https://github.com/arduino/reference-en">this repository</a> and are open to contributions from the community.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md6"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md7"></a>
 Support</h1>
 <p>This repository is not directly usable by final users. If you need assistance with Arduino, see the <a href="https://support.arduino.cc/">Help Center</a> and browse the <a href="https://forum.arduino.cc">forum</a>.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md7"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md8"></a>
 Development</h1>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md8"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md9"></a>
 Bugs &amp; Issues</h2>
 <p>If you want to report an issue with this core, you can submit it to the <a href="https://github.com/arduino/ArduinoCore-API/issues">issue tracker</a> of this repository. Some rules apply:</p>
 <ul>
@@ -113,14 +113,14 @@ Bugs &amp; Issues</h2>
 <li>Before posting, please check if the same problem has been already reported by someone else to avoid duplicates.</li>
 <li>Remember to include as much detail as you can about your hardware set-up, code and steps for reproducing the issue. Make sure you're using an original Arduino board.</li>
 </ul>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md9"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md10"></a>
 Contributions</h2>
 <p>Contributions are always welcome! You can submit them directly to this repository as Pull Requests. Please provide a detailed description of the problem you're trying to solve. We also appreciate any help in testing issues and patches contributed by other users.</p>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md10"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md11"></a>
 Unit testing</h2>
 <p>This repository includes a test suite that covers most of the API and that is designed to run on generic hardware, thus not requiring a development board. We call this <em>host-based unit-testing</em>. In order to test the features that are only defined but not implemented in this repository, mock implementations are included.</p>
 <p>Please help us improve the coverage of the test suite!</p>
-<h3 class="doxsection"><a class="anchor" id="autotoc_md11"></a>
+<h3 class="doxsection"><a class="anchor" id="autotoc_md12"></a>
 To build and run unit tests</h3>
 <p>The unit tests are automatically built by GitHub as part of pull request checks (in <span class="tt">.github/workflows/unit-tests.yml</span>).</p>
 <p>To build and run locally:</p>
@@ -135,7 +135,7 @@ To build and run unit tests</h3>
 <div class="fragment"><div class="line">cd test &amp;&amp; mkdir build &amp;&amp; cd build</div>
 <div class="line">cmake ..</div>
 <div class="line">make &amp;&amp; bin/test-ArduinoCore-API</div>
-</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md12"></a>
+</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md13"></a>
 Implementing ArduinoCore-API</h2>
 <p>In order to compile a core which is implementing ArduinoCore-API you'll need to copy/symlink the <span class="tt">api</span> directory to the target's <span class="tt">cores/arduino</span> directory as part of your development and release workflow. The most elegant and effective solution is to develop your core with <span class="tt">api</span> symlinked and produce the distributable archive by telling <span class="tt">tar</span> to follow symlinks. Example:</p>
 <div class="fragment"><div class="line">tar --exclude=&#39;*.git*&#39; -cjhvf $yourcore-$version.tar.bz2 $yourcore/</div>
@@ -145,10 +145,10 @@ Implementing ArduinoCore-API</h2>
 <li><a href="https://github.com/arduino/ArduinoCore-mbed#clone-the-repository-in-sketchbookhardwarearduino-git">ArduinoCore-mbed</a></li>
 <li><a href="https://github.com/arduino/ArduinoCore-samd/#developing">ArduinoCore-samd</a></li>
 </ul>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md13"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md14"></a>
 Donations</h1>
 <p>This open source code is maintained by Arduino with the help of the community. We invest a considerable amount of time in testing code, optimizing it and introducing new features. Please consider <a href="https://www.arduino.cc/en/donate/">donating</a> or <a href="https://github.com/sponsors/arduino">sponsoring</a> to support our work, as well as <a href="https://store.arduino.cc">buying original Arduino boards</a> which is the best way to make sure our effort can continue in the long term.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md14"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md15"></a>
 License and credits</h1>
 <p>This code is licensed under the terms of the GNU LGPL 2.1. If you have questions about licensing please contact us at <a href="#" onclick="location.href='mai'+'lto:'+'lic'+'en'+'se@'+'ar'+'dui'+'no'+'.cc'; return false;">license@arduino.cc</a>. </p>
 </div><!-- contents -->

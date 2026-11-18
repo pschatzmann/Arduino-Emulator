@@ -52,7 +52,7 @@ var searchData=
   ['string_49',['String',['../classarduino_1_1_string.html',1,'arduino::String'],['../class_string.html',1,'String']]],
   ['stringmaker_3c_20arduino_3a_3astring_20_3e_50',['StringMaker&lt; arduino::String &gt;',['../struct_catch_1_1_string_maker_3_01arduino_1_1_string_01_4.html',1,'Catch']]],
   ['stringsumhelper_51',['StringSumHelper',['../classarduino_1_1_string_sum_helper.html',1,'arduino']]],
-  ['support_52',['Support',['../dir_b074d1b1aa70f3c10763fb8f33d8f4cb.html#autotoc_md6',1,'']]],
+  ['support_52',['Support',['../dir_b074d1b1aa70f3c10763fb8f33d8f4cb.html#autotoc_md7',1,'']]],
   ['swap_5fint16_53',['swap_int16',['../classarduino_1_1_hardware_service.html#abac939cf64aa5544b0747da2cf356392',1,'arduino::HardwareService']]],
   ['swap_5fint32_54',['swap_int32',['../classarduino_1_1_hardware_service.html#a088293bf035a3f094a84484db2905688',1,'arduino::HardwareService']]],
   ['swap_5fuint16_55',['swap_uint16',['../classarduino_1_1_hardware_service.html#a2b4a50d915c1796e2af32dcabe87369e',1,'arduino::HardwareService']]],

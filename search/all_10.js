@@ -21,5 +21,5 @@ var searchData=
   ['ringbuffern_3c_20serial_5fbuffer_5fsize_20_3e_18',['RingBufferN&lt; SERIAL_BUFFER_SIZE &gt;',['../classarduino_1_1_ring_buffer_n.html',1,'arduino']]],
   ['rpi_19',['RPI',['../namespacearduino.html#aaf600ce0d5135956db45dd53f2d9cdab',1,'arduino']]],
   ['rts_20',['RTS',['../classserialib.html#a5a73f159762fa4d5c252f36acfe7ab47',1,'serialib']]],
-  ['run_20unit_20tests_21',['To build and run unit tests',['../dir_b074d1b1aa70f3c10763fb8f33d8f4cb.html#autotoc_md11',1,'']]]
+  ['run_20unit_20tests_21',['To build and run unit tests',['../dir_b074d1b1aa70f3c10763fb8f33d8f4cb.html#autotoc_md12',1,'']]]
 ];
