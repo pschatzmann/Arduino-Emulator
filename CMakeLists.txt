@@ -73,6 +73,16 @@ endif()
 # Make an dynamic library 
 add_library(arduino_emulator ${SRC_LIST} ${HEADER_LIST})
 
+# The https options must reach the targets that link the emulator, not only this
+# directory (add_definitions() is directory scoped): WiFiClientSecure is compiled
+# without TLS otherwise.
+if(USE_HTTPS)
+    target_compile_definitions(arduino_emulator PUBLIC USE_HTTPS)
+    if(USE_WOLFSSL)
+        target_compile_definitions(arduino_emulator PUBLIC USE_WOLFSSL)
+    endif()
+endif()
+
 # Define the directories with the h files
 target_include_directories (arduino_emulator PUBLIC 
     "${CMAKE_CURRENT_SOURCE_DIR}/ArduinoCore-API"
